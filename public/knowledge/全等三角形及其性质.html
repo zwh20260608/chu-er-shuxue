@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>全等三角形及其性质 · 初二数学预习</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', system-ui, sans-serif;
+            background: #f5f9fe;
+            color: #1e293b;
+            padding: 1rem;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 60px rgba(0, 20, 40, 0.06);
+            padding: 1.8rem 2rem 2.8rem;
+            transition: 0.2s;
+        }
+        @media (max-width: 640px) {
+            .container {
+                padding: 1rem 1rem 2rem;
+                border-radius: 20px;
+            }
+        }
+
+        .page-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 3px solid #e6f0fa;
+            padding-bottom: 0.8rem;
+            margin-bottom: 1.6rem;
+        }
+        .page-header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1a4b8c, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .page-header h1 small {
+            font-size: 0.9rem;
+            font-weight: 400;
+            -webkit-text-fill-color: #5f7d9c;
+            color: #5f7d9c;
+            background: none;
+        }
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem 0.5rem;
+        }
+        .nav-links a {
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            background: #f1f5f9;
+            color: #2c3e50;
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: 0.2s;
+            border: 1px solid transparent;
+        }
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: #2563eb;
+            color: #fff;
+            border-color: #2563eb;
+        }
+        @media (max-width: 600px) {
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.4rem;
+            }
+            .page-header h1 {
+                font-size: 1.4rem;
+            }
+            .nav-links a {
+                font-size: 0.65rem;
+                padding: 0.1rem 0.6rem;
+            }
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 1.8rem;
+            align-items: start;
+        }
+        @media (max-width: 920px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 1rem 1.2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+            border: 1px solid #edf2f7;
+            margin-bottom: 1rem;
+            transition: 0.2s;
+        }
+        .card-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #0b2b4a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 0.5rem;
+            border-left: 5px solid #3b82f6;
+            padding-left: 12px;
+        }
+        .card-title .badge {
+            font-size: 0.6rem;
+            background: #dbeafe;
+            color: #1e4b8a;
+            padding: 0.05rem 0.7rem;
+            border-radius: 40px;
+            font-weight: 500;
+        }
+
+        /* ===== 图形展示 ===== */
+        .tri-display {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 0.8rem 1.2rem;
+            padding: 0.3rem 0;
+        }
+        .tri-item {
+            text-align: center;
+            background: #fafcff;
+            border-radius: 14px;
+            padding: 0.4rem 0.6rem 0.2rem;
+            border: 1px solid #e9edf4;
+            min-width: 70px;
+            transition: 0.2s;
+        }
+        .tri-item:hover {
+            border-color: #b3cef0;
+        }
+        .tri-item svg {
+            display: block;
+            margin: 0 auto;
+            width: 70px;
+            height: 52px;
+        }
+        .tri-item .label {
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #1f3a5f;
+            margin-top: 2px;
+        }
+        .tri-item .sub {
+            font-size: 0.55rem;
+            color: #6b7f96;
+        }
+
+        .formula-box {
+            background: #f0f7fe;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border-left: 4px solid #3b82f6;
+            margin: 0.3rem 0;
+            font-size: 0.85rem;
+        }
+        .tip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.4rem;
+        }
+        .tip-item {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 0.35rem 0.6rem;
+            border: 1px solid #e2eaf2;
+            font-size: 0.76rem;
+        }
+        .tip-item strong {
+            color: #1e4b8a;
+        }
+
+        .example-box {
+            background: #fcf9f0;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border-left: 4px solid #eab308;
+            margin: 0.3rem 0;
+            font-size: 0.86rem;
+        }
+        .example-box .ex-title {
+            font-weight: 700;
+            color: #8a6d1b;
+        }
+        .example-box .highlight {
+            background: #fef9e7;
+            padding: 0.05rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .error-box {
+            background: #fef2f2;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border-left: 4px solid #ef4444;
+            margin: 0.3rem 0;
+            font-size: 0.85rem;
+        }
+        .error-box .err-title {
+            font-weight: 700;
+            color: #b91c1c;
+        }
+        .highlight {
+            background: #fef9e7;
+            padding: 0.05rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .tag {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e4b8a;
+            padding: 0.05rem 0.6rem;
+            border-radius: 40px;
+            font-size: 0.65rem;
+            font-weight: 500;
+        }
+
+        /* ===== 全等符号展示 ===== */
+        .congruent-symbol {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #2563eb;
+            letter-spacing: 2px;
+            font-family: 'Times New Roman', serif;
+        }
+
+        /* ===== 游戏区 ===== */
+        .game-area {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .game-card {
+            background: #fafcff;
+            border-radius: 18px;
+            padding: 0.8rem 1rem 1rem;
+            border: 1px solid #e2ecf9;
+        }
+        .game-card .game-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #0b2b4a;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 0.3rem;
+        }
+        .game-card .game-title .g-badge {
+            font-size: 0.55rem;
+            background: #dbeafe;
+            padding: 0.05rem 0.6rem;
+            border-radius: 40px;
+            font-weight: 500;
+            color: #1e4b8a;
+        }
+        .game-card .game-desc {
+            font-size: 0.75rem;
+            color: #4a617c;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ===== 游戏1：超市购物车分类 ===== */
+        .cart-area {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+        .cart-bins {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 6px;
+        }
+        .cart-bin {
+            background: #f5f9ff;
+            border: 2px dashed #b7cee8;
+            border-radius: 14px;
+            padding: 0.4rem 0.2rem;
+            min-height: 80px;
+            text-align: center;
+            transition: 0.2s;
+            position: relative;
+        }
+        .cart-bin.drag-over {
+            border-color: #2563eb;
+            background: #e5effa;
+        }
+        .cart-bin.correct-highlight {
+            border-color: #22c55e;
+            background: #e8f8ee;
+        }
+        .cart-bin.wrong-highlight {
+            border-color: #ef4444;
+            background: #fde8e8;
+        }
+        .cart-bin .bin-title {
+            font-weight: 700;
+            font-size: 0.7rem;
+            color: #1f3a5f;
+            margin-bottom: 2px;
+        }
+        .cart-bin .bin-items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 4px;
+            min-height: 26px;
+            padding: 2px 0;
+        }
+        .cart-item {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 4px 6px;
+            border: 2px solid #dbeafe;
+            cursor: grab;
+            transition: 0.15s;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+            font-size: 0.7rem;
+            font-weight: 500;
+            user-select: none;
+            touch-action: none;
+            text-align: center;
+            min-height: 34px;
+            justify-content: center;
+        }
+        .cart-item svg {
+            width: 30px;
+            height: 22px;
+            display: block;
+            margin: 0 auto 1px;
+        }
+        .cart-item .item-label {
+            font-size: 0.5rem;
+            color: #4a617c;
+        }
+        .cart-item.dragging {
+            opacity: 0.5;
+            transform: scale(0.92);
+        }
+        .cart-item.placed {
+            opacity: 0.6;
+            pointer-events: none;
+            border-color: #94a3b8;
+            transform: scale(0.94);
+        }
+        .cart-pool {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px;
+            padding: 0.4rem 0;
+            background: #f8fafc;
+            border-radius: 14px;
+            min-height: 44px;
+            border: 1px solid #e2eaf2;
+        }
+        .cart-pool .cart-item {
+            cursor: grab;
+        }
+        .cart-feedback {
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.78rem;
+            min-height: 22px;
+            margin-top: 2px;
+        }
+        .btn-reset {
+            background: #eef4fa;
+            border: none;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.7rem;
+            margin: 2px 3px;
+        }
+        .btn-reset:hover {
+            background: #dbeafe;
+        }
+        .btn-check {
+            background: #dbeafe;
+            border: none;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.7rem;
+            margin: 2px 3px;
+        }
+        .btn-check:hover {
+            background: #b7d6f7;
+        }
+        @media (max-width: 600px) {
+            .cart-bins {
+                grid-template-columns: 1fr 1fr;
+                gap: 6px;
+            }
+        }
+        @media (max-width: 400px) {
+            .cart-bins {
+                grid-template-columns: 1fr;
+                gap: 6px;
+            }
+            .cart-item {
+                font-size: 0.6rem;
+                padding: 2px 4px;
+            }
+            .cart-item svg {
+                width: 24px;
+                height: 18px;
+            }
+        }
+
+        /* ===== 游戏2：抓娃娃机 ===== */
+        .claw-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .claw-machine {
+            background: #f0f7fe;
+            border-radius: 20px;
+            border: 3px solid #b7cee8;
+            padding: 0.6rem;
+            width: 100%;
+            max-width: 420px;
+            min-height: 140px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            position: relative;
+            touch-action: none;
+        }
+        .claw-slot {
+            background: #ffffff;
+            border: 2px solid #dbeafe;
+            border-radius: 14px;
+            padding: 0.3rem 0.4rem;
+            min-width: 60px;
+            flex: 1 0 auto;
+            max-width: 120px;
+            text-align: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #1f3a5f;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            cursor: default;
+            user-select: none;
+            transition: 0.2s;
+            min-height: 48px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1px;
+        }
+        .claw-slot .slot-icon {
+            font-size: 0.9rem;
+        }
+        .claw-slot .slot-label {
+            font-size: 0.5rem;
+            color: #4a617c;
+        }
+        .claw-slot.correct-catch {
+            border-color: #22c55e;
+            background: #e8f8ee;
+            transform: scale(1.04);
+            box-shadow: 0 4px 16px rgba(34, 197, 94, 0.2);
+        }
+        .claw-slot.wrong-catch {
+            border-color: #ef4444;
+            background: #fde8e8;
+            animation: shake 0.4s ease;
+        }
+        .claw-slot.caught {
+            opacity: 0.5;
+            pointer-events: none;
+            filter: grayscale(0.6);
+            transform: scale(0.92);
+        }
+        .claw-pool {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px;
+            padding: 0.4rem 0;
+            background: #f8fafc;
+            border-radius: 14px;
+            min-height: 44px;
+            border: 1px solid #e2eaf2;
+            width: 100%;
+            max-width: 420px;
+        }
+        .claw-pool .claw-draggable {
+            background: #ffffff;
+            border: 2px solid #dbeafe;
+            border-radius: 12px;
+            padding: 0.3rem 0.5rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: grab;
+            user-select: none;
+            touch-action: none;
+            transition: 0.15s;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+            min-width: 40px;
+            text-align: center;
+            min-height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            font-family: 'Times New Roman', serif;
+        }
+        .claw-pool .claw-draggable svg {
+            width: 26px;
+            height: 18px;
+            display: block;
+        }
+        .claw-pool .claw-draggable .c-label {
+            font-size: 0.55rem;
+            color: #4a617c;
+        }
+        .claw-pool .claw-draggable.dragging {
+            opacity: 0.5;
+            transform: scale(0.92);
+        }
+        .claw-pool .claw-draggable.placed {
+            opacity: 0.4;
+            pointer-events: none;
+            border-color: #94a3b8;
+            transform: scale(0.92);
+        }
+        .claw-feedback {
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.78rem;
+            min-height: 22px;
+            margin-top: 2px;
+        }
+        .claw-score {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #4a617c;
+            margin-top: 2px;
+        }
+        @media (max-width: 480px) {
+            .claw-machine {
+                min-height: 110px;
+                padding: 0.4rem;
+            }
+            .claw-slot {
+                min-width: 40px;
+                font-size: 0.6rem;
+                padding: 0.2rem 0.3rem;
+                min-height: 38px;
+            }
+            .claw-pool .claw-draggable {
+                font-size: 0.6rem;
+                padding: 0.2rem 0.4rem;
+                min-width: 32px;
+                min-height: 28px;
+            }
+            .claw-pool .claw-draggable svg {
+                width: 20px;
+                height: 14px;
+            }
+        }
+
+        /* ===== 复习题 ===== */
+        .quiz-item {
+            background: #fafcff;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border: 1px solid #e9eff6;
+            margin-bottom: 0.5rem;
+        }
+        .quiz-item .q {
+            font-weight: 600;
+            color: #0b2b4a;
+            font-size: 0.88rem;
+        }
+        .quiz-item .a {
+            color: #1f4b7a;
+            margin-top: 2px;
+            padding-left: 0.6rem;
+            border-left: 3px solid #b3cef0;
+            font-size: 0.84rem;
+        }
+        .quiz-item .a .highlight {
+            background: #fef9e7;
+            padding: 0.05rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .quiz-item .answer-btn {
+            background: #eef4fa;
+            border: none;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.7rem;
+            margin-top: 4px;
+        }
+        .quiz-item .answer-btn:hover {
+            background: #dbeafe;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #8ba0b8;
+            border-top: 1px solid #e9eff6;
+            padding-top: 0.8rem;
+            margin-top: 1rem;
+        }
+        @media (max-width: 480px) {
+            .card {
+                padding: 0.7rem;
+            }
+            .card-title {
+                font-size: 0.95rem;
+            }
+            .formula-box {
+                font-size: 0.78rem;
+                padding: 0.4rem 0.7rem;
+            }
+            .tri-item svg {
+                width: 50px;
+                height: 36px;
+            }
+            .congruent-symbol {
+                font-size: 1.2rem;
+            }
+        }
+
+        .drag-ghost {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.9;
+            transform: scale(1.05);
+            background: #ffffff;
+            border-radius: 12px;
+            border: 2px solid #2563eb;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+            padding: 4px 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #0b2b4a;
+        }
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
+        }
+
+        .concept-graphics {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.2rem 0.6rem;
+            padding: 0.2rem 0;
+        }
+        .concept-graphics .cg-item {
+            text-align: center;
+            background: #f8faff;
+            border-radius: 10px;
+            padding: 0.2rem 0.4rem 0.1rem;
+            border: 1px solid #e9edf4;
+            min-width: 50px;
+        }
+        .concept-graphics .cg-item svg {
+            width: 48px;
+            height: 34px;
+            display: block;
+            margin: 0 auto;
+        }
+        .concept-graphics .cg-item .cg-label {
+            font-size: 0.5rem;
+            color: #4a617c;
+            font-weight: 500;
+        }
+
+        /* 全等三角形配对图 */
+        .pair-figure {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.3rem 0;
+            flex-wrap: wrap;
+        }
+        .pair-figure svg {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            background: #fafcff;
+            border: 1px solid #e2ecf9;
+            padding: 0.2rem;
+        }
+        .pair-figure .pair-label {
+            font-size: 0.75rem;
+            color: #4a617c;
+            text-align: center;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .correspondence-table {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+            font-size: 0.75rem;
+            background: #f0f7fe;
+            border-radius: 10px;
+            padding: 0.3rem 0.5rem;
+            border: 1px solid #dbeafe;
+            margin-top: 0.2rem;
+        }
+        .correspondence-table .ct-item {
+            padding: 0.1rem 0.3rem;
+            border-bottom: 1px dashed #dbeafe;
+        }
+        .correspondence-table .ct-item:last-child,
+        .correspondence-table .ct-item:nth-last-child(2) {
+            border-bottom: none;
+        }
+        .correspondence-table .ct-label {
+            font-weight: 600;
+            color: #1e4b8a;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- ===== 头部 ===== -->
+    <header class="page-header">
+        <h1>
+            📐 全等三角形及其性质
+            <small>八年级 · 上册</small>
+        </h1>
+        <div class="nav-links">
+            <a href="#concept">核心概念</a>
+            <a href="#formula">锦囊</a>
+            <a href="#examples">举例</a>
+            <a href="#errors">易错</a>
+            <a href="#games">🎮 游戏</a>
+            <a href="#quiz">复习</a>
+        </div>
+    </header>
+
+    <!-- ============================================================ -->
+    <div class="main-grid">
+
+        <!-- ===== 左侧：知识点 ===== -->
+        <div class="knowledge-area">
+
+            <!-- 核心概念 -->
+            <div class="card" id="concept">
+                <div class="card-title">
+                    🔍 核心概念大解析
+                    <span class="badge">全等形 · 全等三角形 · 对应元素</span>
+                </div>
+
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.4rem; align-items:start;">
+                    <div>
+                        <div style="background:#f0f7fe; border-radius:10px; padding:0.3rem 0.6rem; margin-bottom:0.3rem;">
+                            <strong style="color:#1e4b8a; font-size:0.82rem;">📌 全等形</strong>
+                            <p style="font-size:0.82rem; margin:0;">形状、大小相同的图形放在一起能够 <strong>完全重合</strong>。</p>
+                        </div>
+                        <div style="background:#f0f7fe; border-radius:10px; padding:0.3rem 0.6rem; margin-bottom:0.3rem;">
+                            <strong style="color:#1e4b8a; font-size:0.82rem;">📌 全等三角形</strong>
+                            <p style="font-size:0.82rem; margin:0;">能够完全重合的两个三角形。</p>
+                            <p style="font-size:0.82rem; margin:0;font-family:'Times New Roman',serif;font-weight:700;color:#2563eb;">△ABC ≌ △DEF</p>
+                            <p style="font-size:0.7rem; color:#4a617c; margin:0;">读作“三角形ABC全等于三角形DEF”</p>
+                        </div>
+                        <div style="background:#f0f7fe; border-radius:10px; padding:0.3rem 0.6rem;">
+                            <strong style="color:#1e4b8a; font-size:0.82rem;">📌 对应元素</strong>
+                            <p style="font-size:0.82rem; margin:0;">🔹 对应顶点：A↔D，B↔E，C↔F</p>
+                            <p style="font-size:0.82rem; margin:0;">🔹 对应边：AB↔DE，BC↔EF，AC↔DF</p>
+                            <p style="font-size:0.82rem; margin:0;">🔹 对应角：∠A↔∠D，∠B↔∠E，∠C↔∠F</p>
+                        </div>
+                    </div>
+                    <div>
+                        <!-- 全等三角形配对图 -->
+                        <div class="pair-figure">
+                            <svg viewBox="0 0 140 80" width="130" height="74">
+                                <!-- 第一个三角形 -->
+                                <polygon points="20,4 2,74 38,74" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+                                <text x="12" y="16" font-size="8" fill="#1f3a5f" font-weight="600">A</text>
+                                <text x="2" y="72" font-size="8" fill="#1f3a5f" font-weight="600">B</text>
+                                <text x="34" y="72" font-size="8" fill="#1f3a5f" font-weight="600">C</text>
+                                <!-- 全等符号 -->
+                                <text x="50" y="42" font-size="16" fill="#2563eb" font-weight="700" font-family="Times New Roman,serif">≌</text>
+                                <!-- 第二个三角形 -->
+                                <polygon points="72,4 54,74 90,74" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+                                <text x="64" y="16" font-size="8" fill="#1f3a5f" font-weight="600">D</text>
+                                <text x="54" y="72" font-size="8" fill="#1f3a5f" font-weight="600">E</text>
+                                <text x="86" y="72" font-size="8" fill="#1f3a5f" font-weight="600">F</text>
+                            </svg>
+                        </div>
+
+                        <!-- 对应关系表 -->
+                        <div class="correspondence-table">
+                            <div class="ct-item"><span class="ct-label">对应顶点</span> A↔D，B↔E，C↔F</div>
+                            <div class="ct-item"><span class="ct-label">对应边</span> AB↔DE，BC↔EF，AC↔DF</div>
+                            <div class="ct-item"><span class="ct-label">对应角</span> ∠A↔∠D，∠B↔∠E，∠C↔∠F</div>
+                            <div class="ct-item"><span class="ct-label">全等性质</span> 对应边 <strong>相等</strong>，对应角 <strong>相等</strong></div>
+                        </div>
+
+                        <!-- 性质总结 -->
+                        <div style="margin-top:0.3rem; background:#f8faff; border-radius:10px; padding:0.3rem 0.5rem; border:1px solid #e2ecf9; text-align:center; font-size:0.8rem;">
+                            <span style="font-weight:700;color:#dc2626;">全等三角形性质：</span>
+                            对应边相等，对应角相等
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 平移、翻折、旋转 -->
+                <div style="margin-top:0.4rem; background:#f0f7fe; border-radius:12px; padding:0.3rem 0.6rem; border:1px solid #dbeafe;">
+                    <div style="font-size:0.7rem; font-weight:600; color:#1e4b8a; text-align:center; margin-bottom:0.1rem;">📌 图形变化与全等</div>
+                    <div style="display:flex; justify-content:center; gap:0.8rem; flex-wrap:wrap; font-size:0.7rem; color:#4a617c;">
+                        <span>🔄 <strong>平移</strong> → 全等</span>
+                        <span>🔄 <strong>翻折</strong> → 全等</span>
+                        <span>🔄 <strong>旋转</strong> → 全等</span>
+                        <span style="color:#16a34a;font-weight:600;">形状、大小不变</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 锦囊 -->
+            <div class="card" id="formula">
+                <div class="card-title">
+                    🧠 数学锦囊 · 公式
+                    <span class="badge">核心结论</span>
+                </div>
+                <div class="tip-grid">
+                    <div class="tip-item"><strong>全等符号</strong><br>△ABC ≌ △DEF</div>
+                    <div class="tip-item"><strong>对应顶点</strong><br>A↔D，B↔E，C↔F</div>
+                    <div class="tip-item"><strong>对应边相等</strong><br>AB=DE，BC=EF，AC=DF</div>
+                    <div class="tip-item"><strong>对应角相等</strong><br>∠A=∠D，∠B=∠E，∠C=∠F</div>
+                    <div class="tip-item"><strong>全等性质</strong><br>对应边相等，对应角相等</div>
+                    <div class="tip-item"><strong>图形变化</strong><br>平移、翻折、旋转 → 全等</div>
+                </div>
+                <div class="formula-box" style="margin-top:0.3rem;">
+                    💡 <strong>口诀：</strong>全等三角形，对应顶点要写对；对应边角都相等，性质记心间。
+                </div>
+            </div>
+
+            <!-- 举例 -->
+            <div class="card" id="examples">
+                <div class="card-title">
+                    ✏️ 典型举例
+                    <span class="badge">步骤演示</span>
+                </div>
+                <div class="example-box">
+                    <div class="ex-title">例1 如图，△ABC ≌ △BAD，点A和点B，点C和点D是对应顶点，∠BAC=65°，∠ABC=26°，求∠CBD。</div>
+                    <p style="margin-top:2px; font-size:0.85rem;">
+                        <strong>解：</strong>∵ △ABC ≌ △BAD<br>
+                        ∴ ∠ABD = ∠BAC = <span class="highlight">65°</span>（对应角相等）<br>
+                        ∠CBD = ∠ABD − ∠ABC = 65° − 26° = <span class="highlight">39°</span>
+                    </p>
+                    <svg viewBox="0 0 120 48" width="100" height="40" style="margin-top:2px;"><polygon points="60,4 12,44 108,44" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><text x="52" y="18" font-size="8" fill="#1f3a5f">65°</text><text x="14" y="40" font-size="8" fill="#1f3a5f">26°</text><text x="88" y="40" font-size="8" fill="#1f3a5f">?</text><text x="36" y="16" font-size="8" fill="#6b7f96">A</text><text x="8" y="42" font-size="8" fill="#6b7f96">B</text><text x="98" y="42" font-size="8" fill="#6b7f96">D</text></svg>
+                </div>
+                <div class="example-box" style="border-left-color:#8b5cf6;">
+                    <div class="ex-title">例2 如图，△ABC ≌ △DEF，AB=5，BC=7，∠A=40°，求DE、EF和∠D。</div>
+                    <p style="margin-top:2px; font-size:0.85rem;">
+                        <strong>解：</strong>∵ 全等三角形对应边相等，对应角相等<br>
+                        ∴ DE = AB = <span class="highlight">5</span>，EF = BC = <span class="highlight">7</span>，∠D = ∠A = <span class="highlight">40°</span>
+                    </p>
+                    <svg viewBox="0 0 120 44" width="100" height="38" style="margin-top:2px;"><polygon points="30,3 6,41 54,41" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><text x="22" y="16" font-size="8" fill="#1f3a5f">40°</text><text x="8" y="38" font-size="8" fill="#1f3a5f">5</text><text x="40" y="38" font-size="8" fill="#1f3a5f">7</text><polygon points="90,3 66,41 114,41" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><text x="82" y="16" font-size="8" fill="#1f3a5f">40°</text><text x="68" y="38" font-size="8" fill="#1f3a5f">5</text><text x="100" y="38" font-size="8" fill="#1f3a5f">7</text></svg>
+                </div>
+            </div>
+
+            <!-- 易错 -->
+            <div class="card" id="errors">
+                <div class="card-title">
+                    ⚠️ 易错题型
+                    <span class="badge">避坑指南</span>
+                </div>
+                <div class="error-box">
+                    <div class="err-title">❌ 易错1：对应顶点写错位置</div>
+                    <p style="font-size:0.85rem;">△ABC ≌ △DEF 表示 A↔D，B↔E，C↔F。<br>
+                    <span style="color:#b91c1c;">常见错误：</span>把 △ABC ≌ △DEF 写成 △ABC ≌ △DFE（对应顶点错位）。</p>
+                    <svg viewBox="0 0 120 30" width="100" height="26" style="margin-top:2px;"><text x="4" y="12" font-size="7" fill="#b91c1c">✗ △ABC ≌ △DFE</text><text x="60" y="12" font-size="7" fill="#16a34a">✓ △ABC ≌ △DEF</text></svg>
+                </div>
+                <div class="error-box" style="border-left-color:#eab308;">
+                    <div class="err-title">❌ 易错2：认为全等三角形面积相等但周长不一定相等</div>
+                    <p style="font-size:0.85rem;">全等三角形 <strong>完全重合</strong>，所以 <span style="color:#16a34a;">周长相等</span>，面积也相等。</p>
+                    <svg viewBox="0 0 120 30" width="100" height="26" style="margin-top:2px;"><polygon points="20,4 4,26 36,26" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><text x="10" y="22" font-size="6" fill="#1f3a5f">周长=15</text><polygon points="80,4 64,26 96,26" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><text x="70" y="22" font-size="6" fill="#1f3a5f">周长=15</text></svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== 右侧：游戏 ===== -->
+        <div class="game-area" id="games">
+
+            <!-- 游戏1：超市购物车分类 -->
+            <div class="game-card">
+                <div class="game-title">
+                    🛒 购物车 · 全等知识分类
+                    <span class="g-badge">拖拽归类</span>
+                </div>
+                <div class="game-desc">将下方的 <strong>知识卡片</strong> 拖拽到对应的购物车中（定义 / 性质 / 对应元素）。</div>
+                <div class="cart-area">
+                    <div class="cart-bins" id="cartBins">
+                        <div class="cart-bin" data-category="definition">
+                            <div class="bin-title">📖 定义</div>
+                            <div class="bin-items" id="bin-definition"></div>
+                        </div>
+                        <div class="cart-bin" data-category="property">
+                            <div class="bin-title">📐 性质</div>
+                            <div class="bin-items" id="bin-property"></div>
+                        </div>
+                        <div class="cart-bin" data-category="correspondence">
+                            <div class="bin-title">🔗 对应元素</div>
+                            <div class="bin-items" id="bin-correspondence"></div>
+                        </div>
+                    </div>
+                    <div class="cart-pool" id="cartPool"></div>
+                    <div class="cart-feedback" id="cartFeedback">💡 拖拽卡片到对应的购物车</div>
+                    <div style="display:flex; justify-content:center; gap:0.3rem; flex-wrap:wrap;">
+                        <button class="btn-reset" onclick="resetCart()">🔄 重新分类</button>
+                        <button class="btn-check" onclick="checkCart()">✅ 检查答案</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 游戏2：抓娃娃机（配对） -->
+            <div class="game-card">
+                <div class="game-title">
+                    🧸 抓娃娃机 · 对应元素配对
+                    <span class="g-badge">拖拽匹配</span>
+                </div>
+                <div class="game-desc">将下方的 <strong>对应元素</strong> 拖拽到对应的 <strong>配对槽</strong> 中。</div>
+                <div class="claw-area">
+                    <div class="claw-machine" id="clawMachine">
+                        <div class="claw-slot" data-target="vertex">
+                            <span class="slot-icon">📍</span>
+                            <span>对应顶点</span>
+                            <span class="slot-label">⬇ 拖拽到这里</span>
+                        </div>
+                        <div class="claw-slot" data-target="side">
+                            <span class="slot-icon">📏</span>
+                            <span>对应边</span>
+                            <span class="slot-label">⬇ 拖拽到这里</span>
+                        </div>
+                        <div class="claw-slot" data-target="angle">
+                            <span class="slot-icon">📐</span>
+                            <span>对应角</span>
+                            <span class="slot-label">⬇ 拖拽到这里</span>
+                        </div>
+                    </div>
+                    <div class="claw-pool" id="clawPool"></div>
+                    <div class="claw-feedback" id="clawFeedback">💡 拖拽卡片到对应的配对槽</div>
+                    <div class="claw-score" id="clawScore">🏆 已配对：0 / 6</div>
+                    <div style="display:flex; justify-content:center; gap:0.3rem; flex-wrap:wrap;">
+                        <button class="btn-reset" onclick="resetClaw()">🔄 重新开始</button>
+                        <button class="btn-check" onclick="checkClaw()">✅ 检查答案</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 复习巩固题 -->
+    <section id="quiz" style="margin-top:1.2rem;">
+        <div class="card">
+            <div class="card-title">
+                📝 复习巩固题
+                <span class="badge">小测验</span>
+            </div>
+
+            <div class="quiz-item">
+                <div class="q">1. 如图，△ABC ≌ △DEF，∠A = 50°，∠B = 70°，AB = 4，DF = 6，求∠F 和 AC 的长。</div>
+                <button class="answer-btn" onclick="toggleAnswer('ans1')">显示答案</button>
+                <div class="a" id="ans1" style="display:none;">
+                    ∠C = 180° − 50° − 70° = 60°<br>
+                    ∵ △ABC ≌ △DEF ∴ ∠F = ∠C = <span class="highlight">60°</span><br>
+                    AC = DF = <span class="highlight">6</span>
+                </div>
+                <svg viewBox="0 0 120 44" width="100" height="38" style="margin-top:4px;"><polygon points="30,3 6,41 54,41" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><text x="22" y="16" font-size="8" fill="#1f3a5f">50°</text><text x="8" y="38" font-size="8" fill="#1f3a5f">70°</text><text x="36" y="38" font-size="8" fill="#1f3a5f">4</text><polygon points="90,3 66,41 114,41" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><text x="82" y="16" font-size="8" fill="#1f3a5f">?°</text><text x="76" y="38" font-size="8" fill="#1f3a5f">6</text></svg>
+            </div>
+
+            <div class="quiz-item">
+                <div class="q">2. 如图，△ABC ≌ △BAD，∠BAC = 40°，∠ABC = 60°，求∠ABD 和 ∠ADB。</div>
+                <button class="answer-btn" onclick="toggleAnswer('ans2')">显示答案</button>
+                <div class="a" id="ans2" style="display:none;">
+                    ∵ △ABC ≌ △BAD，A↔B，C↔D<br>
+                    ∴ ∠ABD = ∠BAC = <span class="highlight">40°</span><br>
+                    ∠ADB = ∠ACB = 180° − 40° − 60° = <span class="highlight">80°</span>
+                </div>
+                <svg viewBox="0 0 120 44" width="100" height="38" style="margin-top:4px;"><polygon points="50,3 12,41 88,41" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><text x="42" y="16" font-size="8" fill="#1f3a5f">40°</text><text x="14" y="38" font-size="8" fill="#1f3a5f">60°</text><text x="74" y="38" font-size="8" fill="#1f3a5f">?</text><text x="30" y="14" font-size="7" fill="#6b7f96">A</text><text x="6" y="38" font-size="7" fill="#6b7f96">B</text><text x="80" y="38" font-size="7" fill="#6b7f96">D</text></svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 底部 ===== -->
+    <div class="footer">
+        📚 八年级数学 · 全等三角形及其性质 &nbsp;|&nbsp; 预习课程 · 互动学习
+    </div>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- JavaScript -->
+<script>
+    // =============================================================
+    // 工具函数
+    function shuffleArray(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+    }
+
+    // =============================================================
+    // 游戏1：超市购物车分类
+    // =============================================================
+    const cartData = [
+        { id: 'r1', category: 'definition', label: '能够完全重合的两个三角形', icon: '📖' },
+        { id: 'r2', category: 'definition', label: '形状、大小相同的图形', icon: '📖' },
+        { id: 'r3', category: 'property', label: '对应边相等', icon: '📐' },
+        { id: 'r4', category: 'property', label: '对应角相等', icon: '📐' },
+        { id: 'r5', category: 'correspondence', label: 'A↔D，B↔E，C↔F', icon: '🔗' },
+        { id: 'r6', category: 'correspondence', label: 'AB=DE，BC=EF，AC=DF', icon: '🔗' },
+        { id: 'r7', category: 'property', label: '周长相等，面积相等', icon: '📐' },
+        { id: 'r8', category: 'correspondence', label: '∠A=∠D，∠B=∠E，∠C=∠F', icon: '🔗' }
+    ];
+
+    let cartItems = [];
+    let cartGhost = null;
+    let cartDragEl = null;
+    let cartDragId = null;
+    let cartDragOffsetX = 0, cartDragOffsetY = 0;
+
+    function buildCart() {
+        cartItems = cartData.map(item => ({ ...item, placed: false, placedIn: null }));
+        renderCart();
+        document.getElementById('cartFeedback').textContent = '💡 拖拽卡片到对应的购物车';
+        document.getElementById('cartFeedback').style.color = '#1f3a5f';
+        document.querySelectorAll('.cart-bin').forEach(b => b.classList.remove('correct-highlight', 'wrong-highlight'));
+    }
+
+    function renderCart() {
+        document.querySelectorAll('.bin-items').forEach(el => el.innerHTML = '');
+        const pool = document.getElementById('cartPool');
+        pool.innerHTML = '';
+        const unplaced = cartItems.filter(item => !item.placed);
+        unplaced.forEach(item => {
+            const el = createCartItemElement(item, false);
+            pool.appendChild(el);
+        });
+        cartItems.filter(item => item.placed).forEach(item => {
+            const bin = document.getElementById(`bin-${item.placedIn}`);
+            if (bin) {
+                const el = createCartItemElement(item, true);
+                bin.appendChild(el);
+            }
+        });
+    }
+
+    function createCartItemElement(item, placed) {
+        const div = document.createElement('div');
+        div.className = `cart-item ${placed ? 'placed' : ''}`;
+        div.dataset.id = item.id;
+        div.dataset.category = item.category;
+        div.innerHTML = `<span style="font-size:0.8rem;">${item.icon}</span> ${item.label}`;
+        if (!placed) {
+            div.draggable = false;
+            div.addEventListener('mousedown', (e) => onCartItemMouseDown(e, div, item.id));
+            div.addEventListener('touchstart', (e) => onCartItemTouchStart(e, div, item.id), { passive: false });
+        }
+        return div;
+    }
+
+    function onCartItemMouseDown(e, el, id) {
+        if (el.classList.contains('placed')) return;
+        e.preventDefault();
+        const item = cartItems.find(i => i.id === id);
+        if (!item || item.placed) return;
+        cartDragId = id;
+        startCartDrag(el, e.clientX, e.clientY);
+        document.addEventListener('mousemove', onCartMouseMove);
+        document.addEventListener('mouseup', onCartMouseUp);
+    }
+    function onCartMouseMove(e) { e.preventDefault(); moveCartDrag(e.clientX, e.clientY); }
+    function onCartMouseUp(e) { document.removeEventListener('mousemove', onCartMouseMove); document.removeEventListener('mouseup', onCartMouseUp); endCartDrag(e.clientX, e.clientY); }
+
+    function onCartItemTouchStart(e, el, id) {
+        if (el.classList.contains('placed')) return;
+        e.preventDefault();
+        const touch = e.touches[0];
+        const item = cartItems.find(i => i.id === id);
+        if (!item || item.placed) return;
+        cartDragId = id;
+        startCartDrag(el, touch.clientX, touch.clientY);
+        document.addEventListener('touchmove', onCartTouchMove, { passive: false });
+        document.addEventListener('touchend', onCartTouchEnd, { passive: false });
+    }
+    function onCartTouchMove(e) { e.preventDefault(); const touch = e.touches[0]; moveCartDrag(touch.clientX, touch.clientY); }
+    function onCartTouchEnd(e) { document.removeEventListener('touchmove', onCartTouchMove); document.removeEventListener('touchend', onCartTouchEnd); const touch = e.changedTouches[0]; endCartDrag(touch.clientX, touch.clientY); }
+
+    function startCartDrag(el, clientX, clientY) {
+        const rect = el.getBoundingClientRect();
+        cartDragOffsetX = clientX - rect.left;
+        cartDragOffsetY = clientY - rect.top;
+        cartDragEl = el;
+        el.classList.add('dragging');
+        cartGhost = document.createElement('div');
+        cartGhost.className = 'drag-ghost';
+        cartGhost.innerHTML = el.innerHTML;
+        cartGhost.style.left = (clientX - cartDragOffsetX) + 'px';
+        cartGhost.style.top = (clientY - cartDragOffsetY) + 'px';
+        document.body.appendChild(cartGhost);
+        document.querySelectorAll('.cart-bin').forEach(b => b.classList.add('drag-over'));
+    }
+    function moveCartDrag(clientX, clientY) {
+        if (cartGhost) {
+            cartGhost.style.left = (clientX - cartDragOffsetX) + 'px';
+            cartGhost.style.top = (clientY - cartDragOffsetY) + 'px';
+        }
+        document.querySelectorAll('.cart-bin').forEach(b => {
+            const rect = b.getBoundingClientRect();
+            if (clientX >= rect.left && clientX <= rect.right && clientY >= rect.top && clientY <= rect.bottom) {
+                b.classList.add('drag-over');
+            } else {
+                b.classList.remove('drag-over');
+            }
+        });
+    }
+    function endCartDrag(clientX, clientY) {
+        if (cartGhost) { cartGhost.remove(); cartGhost = null; }
+        document.querySelectorAll('.cart-bin').forEach(b => b.classList.remove('drag-over'));
+        if (cartDragEl) cartDragEl.classList.remove('dragging');
+        let targetBin = null;
+        document.querySelectorAll('.cart-bin').forEach(b => {
+            const rect = b.getBoundingClientRect();
+            if (clientX >= rect.left && clientX <= rect.right && clientY >= rect.top && clientY <= rect.bottom) {
+                targetBin = b;
+            }
+        });
+        if (targetBin && cartDragId !== null) {
+            const category = targetBin.dataset.category;
+            const item = cartItems.find(i => i.id === cartDragId);
+            if (item && !item.placed) {
+                const correct = (item.category === category);
+                if (correct) {
+                    item.placed = true; item.placedIn = category;
+                    targetBin.classList.add('correct-highlight');
+                    setTimeout(() => targetBin.classList.remove('correct-highlight'), 500);
+                    document.getElementById('cartFeedback').textContent = `✅ 正确！“${item.label}” 放入 “${getCartCategoryLabel(category)}”`;
+                    document.getElementById('cartFeedback').style.color = '#16a34a';
+                } else {
+                    targetBin.classList.add('wrong-highlight');
+                    setTimeout(() => targetBin.classList.remove('wrong-highlight'), 500);
+                    document.getElementById('cartFeedback').textContent = `❌ 再想想！“${item.label}” 不属于 “${getCartCategoryLabel(category)}”`;
+                    document.getElementById('cartFeedback').style.color = '#b91c1c';
+                }
+                renderCart();
+                checkAllCartPlaced();
+            }
+        }
+        cartDragId = null; cartDragEl = null;
+    }
+
+    function getCartCategoryLabel(cat) {
+        const map = { definition: '定义', property: '性质', correspondence: '对应元素' };
+        return map[cat] || cat;
+    }
+    function checkAllCartPlaced() {
+        if (cartItems.every(item => item.placed)) {
+            document.getElementById('cartFeedback').textContent = '🎉 所有卡片已分类！点击“检查答案”查看正确率。';
+            document.getElementById('cartFeedback').style.color = '#2563eb';
+        }
+    }
+    function checkCart() {
+        const total = cartItems.length;
+        let correct = 0;
+        cartItems.forEach(item => { if (item.placed && item.category === item.placedIn) correct++; });
+        document.getElementById('cartFeedback').textContent = `📊 正确率：${correct} / ${total}  (${Math.round(correct/total*100)}%)`;
+        document.getElementById('cartFeedback').style.color = '#1f3a5f';
+        document.querySelectorAll('.cart-bin').forEach(bin => {
+            bin.classList.remove('correct-highlight', 'wrong-highlight');
+            const cat = bin.dataset.category;
+            const itemsInBin = cartItems.filter(item => item.placed && item.placedIn === cat);
+            if (itemsInBin.length > 0 && itemsInBin.every(item => item.category === cat)) {
+                bin.classList.add('correct-highlight');
+            } else if (itemsInBin.length > 0) {
+                bin.classList.add('wrong-highlight');
+            }
+        });
+    }
+    function resetCart() { buildCart(); }
+
+    // =============================================================
+    // 游戏2：抓娃娃机（对应元素配对）
+    // =============================================================
+    const clawData = [
+        { id: 'c1', target: 'vertex', label: 'A ↔ D', icon: '📍' },
+        { id: 'c2', target: 'vertex', label: 'B ↔ E', icon: '📍' },
+        { id: 'c3', target: 'side', label: 'AB ↔ DE', icon: '📏' },
+        { id: 'c4', target: 'side', label: 'BC ↔ EF', icon: '📏' },
+        { id: 'c5', target: 'angle', label: '∠A ↔ ∠D', icon: '📐' },
+        { id: 'c6', target: 'angle', label: '∠B ↔ ∠E', icon: '📐' }
+    ];
+
+    let clawItems = [];
+    let clawGhost = null;
+    let clawDragEl = null;
+    let clawDragId = null;
+    let clawDragOffsetX = 0, clawDragOffsetY = 0;
+    let clawCaughtCount = 0;
+
+    function buildClaw() {
+        const machine = document.getElementById('clawMachine');
+        machine.innerHTML = `
+            <div class="claw-slot" data-target="vertex">
+                <span class="slot-icon">📍</span>
+                <span>对应顶点</span>
+                <span class="slot-label">⬇ 拖拽到这里</span>
+            </div>
+            <div class="claw-slot" data-target="side">
+                <span class="slot-icon">📏</span>
+                <span>对应边</span>
+                <span class="slot-label">⬇ 拖拽到这里</span>
+            </div>
+            <div class="claw-slot" data-target="angle">
+                <span class="slot-icon">📐</span>
+                <span>对应角</span>
+                <span class="slot-label">⬇ 拖拽到这里</span>
+            </div>
+        `;
+        clawItems = clawData.map(item => ({ ...item, caught: false, caughtIn: null }));
+        clawCaughtCount = 0;
+        renderClawPool();
+        document.getElementById('clawFeedback').textContent = '💡 拖拽卡片到对应的配对槽';
+        document.getElementById('clawFeedback').style.color = '#1f3a5f';
+        document.getElementById('clawScore').textContent = `🏆 已配对：${clawCaughtCount} / ${clawData.length}`;
+        document.querySelectorAll('.claw-slot').forEach(el => el.classList.remove('correct-catch', 'wrong-catch', 'caught'));
+    }
+
+    function renderClawPool() {
+        const pool = document.getElementById('clawPool');
+        pool.innerHTML = '';
+        const uncaught = clawItems.filter(item => !item.caught);
+        uncaught.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'claw-draggable';
+            div.dataset.id = item.id;
+            div.dataset.target = item.target;
+            div.innerHTML = `${item.icon} ${item.label}`;
+            div.draggable = false;
+            div.addEventListener('mousedown', (e) => onClawItemMouseDown(e, div, item.id));
+            div.addEventListener('touchstart', (e) => onClawItemTouchStart(e, div, item.id), { passive: false });
+            pool.appendChild(div);
+        });
+    }
+
+    function onClawItemMouseDown(e, el, id) {
+        if (el.classList.contains('placed')) return;
+        e.preventDefault();
+        const item = clawItems.find(i => i.id === id);
+        if (!item || item.caught) return;
+        clawDragId = id;
+        startClawDrag(el, e.clientX, e.clientY);
+        document.addEventListener('mousemove', onClawMouseMove);
+        document.addEventListener('mouseup', onClawMouseUp);
+    }
+    function onClawMouseMove(e) { e.preventDefault(); moveClawDrag(e.clientX, e.clientY); }
+    function onClawMouseUp(e) { document.removeEventListener('mousemove', onClawMouseMove); document.removeEventListener('mouseup', onClawMouseUp); endClawDrag(e.clientX, e.clientY); }
+
+    function onClawItemTouchStart(e, el, id) {
+        if (el.classList.contains('placed')) return;
+        e.preventDefault();
+        const touch = e.touches[0];
+        const item = clawItems.find(i => i.id === id);
+        if (!item || item.caught) return;
+        clawDragId = id;
+        startClawDrag(el, touch.clientX, touch.clientY);
+        document.addEventListener('touchmove', onClawTouchMove, { passive: false });
+        document.addEventListener('touchend', onClawTouchEnd, { passive: false });
+    }
+    function onClawTouchMove(e) { e.preventDefault(); const touch = e.touches[0]; moveClawDrag(touch.clientX, touch.clientY); }
+    function onClawTouchEnd(e) { document.removeEventListener('touchmove', onClawTouchMove); document.removeEventListener('touchend', onClawTouchEnd); const touch = e.changedTouches[0]; endClawDrag(touch.clientX, touch.clientY); }
+
+    function startClawDrag(el, clientX, clientY) {
+        const rect = el.getBoundingClientRect();
+        clawDragOffsetX = clientX - rect.left;
+        clawDragOffsetY = clientY - rect.top;
+        clawDragEl = el;
+        el.classList.add('dragging');
+        clawGhost = document.createElement('div');
+        clawGhost.className = 'drag-ghost';
+        clawGhost.innerHTML = el.innerHTML;
+        clawGhost.style.left = (clientX - clawDragOffsetX) + 'px';
+        clawGhost.style.top = (clientY - clawDragOffsetY) + 'px';
+        document.body.appendChild(clawGhost);
+        document.querySelectorAll('.claw-slot:not(.caught)').forEach(el => { el.style.borderColor = '#3b82f6'; el.style.background = '#e5effa'; });
+    }
+    function moveClawDrag(clientX, clientY) { if (clawGhost) { clawGhost.style.left = (clientX - clawDragOffsetX) + 'px'; clawGhost.style.top = (clientY - clawDragOffsetY) + 'px'; } }
+    function endClawDrag(clientX, clientY) {
+        if (clawGhost) { clawGhost.remove(); clawGhost = null; }
+        document.querySelectorAll('.claw-slot').forEach(el => { el.style.borderColor = ''; el.style.background = ''; });
+        if (clawDragEl) clawDragEl.classList.remove('dragging');
+        let targetEl = null;
+        document.querySelectorAll('.claw-slot:not(.caught)').forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (clientX >= rect.left && clientX <= rect.right && clientY >= rect.top && clientY <= rect.bottom) {
+                targetEl = el;
+            }
+        });
+        if (targetEl && clawDragId !== null) {
+            const target = targetEl.dataset.target;
+            const item = clawItems.find(i => i.id === clawDragId);
+            if (item && !item.caught) {
+                if (item.target === target) {
+                    item.caught = true; item.caughtIn = target;
+                    targetEl.classList.add('correct-catch');
+                    clawCaughtCount++;
+                    document.getElementById('clawFeedback').textContent = `✅ 正确！${item.label} 配对成功！`;
+                    document.getElementById('clawFeedback').style.color = '#16a34a';
+                    targetEl.classList.add('caught');
+                    document.getElementById('clawScore').textContent = `🏆 已配对：${clawCaughtCount} / ${clawData.length}`;
+                    renderClawPool();
+                    if (clawCaughtCount === clawData.length) {
+                        document.getElementById('clawFeedback').textContent = '🎉 全部配对完成！太棒啦！';
+                        document.getElementById('clawFeedback').style.color = '#2563eb';
+                    }
+                } else {
+                    targetEl.classList.add('wrong-catch');
+                    setTimeout(() => targetEl.classList.remove('wrong-catch'), 500);
+                    document.getElementById('clawFeedback').textContent = `❌ 配对错误！${item.label} 不对应这个槽`;
+                    document.getElementById('clawFeedback').style.color = '#b91c1c';
+                }
+            }
+        }
+        clawDragId = null; clawDragEl = null;
+    }
+    function checkClaw() {
+        const total = clawData.length;
+        const caught = clawItems.filter(item => item.caught).length;
+        document.getElementById('clawFeedback').textContent = `📊 已配对 ${caught} / ${total}`;
+        document.getElementById('clawFeedback').style.color = '#1f3a5f';
+        document.getElementById('clawScore').textContent = `🏆 已配对：${caught} / ${total}`;
+    }
+    function resetClaw() { buildClaw(); }
+
+    // =============================================================
+    // 显示答案
+    // =============================================================
+    function toggleAnswer(id) {
+        const el = document.getElementById(id);
+        if (el.style.display === 'none' || el.style.display === '') {
+            el.style.display = 'block';
+        } else {
+            el.style.display = 'none';
+        }
+    }
+
+    // =============================================================
+    // 导航
+    // =============================================================
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+    // =============================================================
+    // 初始化
+    // =============================================================
+    buildCart();
+    buildClaw();
+    console.log('📐 全等三角形及其性质 课程已加载！');
+</script>
+</body>
+</html>

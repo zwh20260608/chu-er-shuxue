@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>分式的基本性质 · 初二数学预习</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', system-ui, sans-serif;
+            background: #f5f9fe;
+            color: #1e293b;
+            padding: 1rem;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 60px rgba(0, 20, 40, 0.06);
+            padding: 1.8rem 2rem 2.8rem;
+            transition: 0.2s;
+        }
+        @media (max-width: 640px) {
+            .container {
+                padding: 1rem 1rem 2rem;
+                border-radius: 20px;
+            }
+        }
+        .page-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 3px solid #e6f0fa;
+            padding-bottom: 0.8rem;
+            margin-bottom: 1.6rem;
+        }
+        .page-header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1a4b8c, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .page-header h1 small {
+            font-size: 0.9rem;
+            font-weight: 400;
+            -webkit-text-fill-color: #5f7d9c;
+            color: #5f7d9c;
+            background: none;
+        }
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem 0.5rem;
+        }
+        .nav-links a {
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            background: #f1f5f9;
+            color: #2c3e50;
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: 0.2s;
+            border: 1px solid transparent;
+        }
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: #2563eb;
+            color: #fff;
+            border-color: #2563eb;
+        }
+        @media (max-width: 600px) {
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.4rem;
+            }
+            .page-header h1 {
+                font-size: 1.4rem;
+            }
+            .nav-links a {
+                font-size: 0.65rem;
+                padding: 0.1rem 0.6rem;
+            }
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 1.8rem;
+            align-items: start;
+        }
+        @media (max-width: 920px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 1rem 1.2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+            border: 1px solid #edf2f7;
+            margin-bottom: 1rem;
+            transition: 0.2s;
+        }
+        .card-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #0b2b4a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 0.5rem;
+            border-left: 5px solid #3b82f6;
+            padding-left: 12px;
+        }
+        .card-title .badge {
+            font-size: 0.6rem;
+            background: #dbeafe;
+            color: #1e4b8a;
+            padding: 0.05rem 0.7rem;
+            border-radius: 40px;
+            font-weight: 500;
+        }
+
+        /* ===== 公式展示 ===== */
+        .formula-hero {
+            background: linear-gradient(135deg, #eef4fa, #dbeafe);
+            border-radius: 16px;
+            padding: 0.8rem 1rem;
+            text-align: center;
+            border: 2px solid #3b82f6;
+            margin: 0.3rem 0;
+        }
+        .formula-hero .formula-main {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1e4b8a;
+            line-height: 1.8;
+        }
+        .formula-hero .formula-main .hl-red {
+            color: #dc2626;
+        }
+        .formula-hero .formula-main .hl-green {
+            color: #16a34a;
+        }
+        .formula-hero .formula-desc {
+            font-size: 0.82rem;
+            color: #4a617c;
+            margin-top: 0.2rem;
+        }
+
+        .rule-display {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            padding: 0.2rem 0;
+        }
+        .rule-item {
+            background: #f8faff;
+            border-radius: 12px;
+            padding: 0.5rem 0.8rem;
+            border: 1px solid #e2ecf9;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 0.3rem 0.6rem;
+        }
+        .rule-item .rule-math {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1e4b8a;
+        }
+        .rule-item .rule-desc {
+            font-size: 0.75rem;
+            color: #4a617c;
+            background: #dbeafe;
+            padding: 0.05rem 0.6rem;
+            border-radius: 20px;
+        }
+
+        .formula-box {
+            background: #f0f7fe;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border-left: 4px solid #3b82f6;
+            margin: 0.3rem 0;
+            font-size: 0.85rem;
+        }
+        .tip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.5rem;
+        }
+        .tip-item {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 0.4rem 0.7rem;
+            border: 1px solid #e2eaf2;
+            font-size: 0.78rem;
+        }
+        .tip-item strong {
+            color: #1e4b8a;
+        }
+        .tip-item .math-example {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #0b2b4a;
+            margin-top: 2px;
+        }
+
+        .example-box {
+            background: #fcf9f0;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border-left: 4px solid #eab308;
+            margin: 0.3rem 0;
+            font-size: 0.88rem;
+        }
+        .example-box .ex-title {
+            font-weight: 700;
+            color: #8a6d1b;
+        }
+        .example-box .step {
+            display: inline-block;
+            background: #fef9e7;
+            padding: 0.05rem 0.5rem;
+            border-radius: 12px;
+            margin: 2px 2px;
+            font-size: 0.8rem;
+        }
+        .error-box {
+            background: #fef2f2;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border-left: 4px solid #ef4444;
+            margin: 0.3rem 0;
+            font-size: 0.85rem;
+        }
+        .error-box .err-title {
+            font-weight: 700;
+            color: #b91c1c;
+        }
+        .highlight {
+            background: #fef9e7;
+            padding: 0.05rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .tag {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e4b8a;
+            padding: 0.05rem 0.6rem;
+            border-radius: 40px;
+            font-size: 0.65rem;
+            font-weight: 500;
+        }
+
+        /* ===== 游戏区 ===== */
+        .game-area {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .game-card {
+            background: #fafcff;
+            border-radius: 18px;
+            padding: 0.8rem 1rem 1rem;
+            border: 1px solid #e2ecf9;
+        }
+        .game-card .game-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #0b2b4a;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 0.3rem;
+        }
+        .game-card .game-title .g-badge {
+            font-size: 0.55rem;
+            background: #dbeafe;
+            padding: 0.05rem 0.6rem;
+            border-radius: 40px;
+            font-weight: 500;
+            color: #1e4b8a;
+        }
+        .game-card .game-desc {
+            font-size: 0.75rem;
+            color: #4a617c;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ===== 游戏1：拖拽配对（约分与通分） ===== */
+        .pair-area {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+        .pair-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: stretch;
+            gap: 0.3rem 0.6rem;
+        }
+        .pair-col {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            flex: 1;
+            min-width: 80px;
+        }
+        .pair-col-title {
+            font-size: 0.68rem;
+            font-weight: 600;
+            color: #4a617c;
+            text-align: center;
+            padding: 0.1rem 0;
+            border-bottom: 2px solid #e2ecf9;
+        }
+        .pair-item {
+            background: #ffffff;
+            border: 2px solid #dbeafe;
+            border-radius: 12px;
+            padding: 0.3rem 0.5rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: grab;
+            transition: 0.2s;
+            user-select: none;
+            text-align: center;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+            touch-action: none;
+            gap: 4px;
+            font-family: 'Times New Roman', serif;
+        }
+        .pair-item .frac {
+            display: inline-block;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 0.85rem;
+        }
+        .pair-item .frac .num {
+            display: block;
+            border-bottom: 2px solid #1e293b;
+            padding: 0 0.2rem;
+        }
+        .pair-item .frac .den {
+            display: block;
+            padding: 0 0.2rem;
+        }
+        .pair-item .math {
+            font-size: 0.95rem;
+        }
+        .pair-item .sup {
+            font-size: 0.65rem;
+            vertical-align: super;
+            color: #dc2626;
+        }
+        .pair-item.dragging {
+            opacity: 0.5;
+            transform: scale(0.95);
+        }
+        .pair-item.drop-target {
+            border-color: #3b82f6;
+            background: #e5effa;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+        .pair-item.matched {
+            border-color: #22c55e;
+            background: #e8f8ee;
+            opacity: 0.8;
+            cursor: default;
+            pointer-events: none;
+            transform: scale(0.96);
+        }
+        .pair-item.wrong {
+            border-color: #ef4444;
+            background: #fde8e8;
+            animation: shake 0.4s ease;
+        }
+        .pair-arrow {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            font-weight: 300;
+            display: flex;
+            align-items: center;
+            padding: 0 0.2rem;
+        }
+        @keyframes shake {
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-6px);
+            }
+            75% {
+                transform: translateX(6px);
+            }
+        }
+        .pair-feedback {
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.78rem;
+            min-height: 22px;
+            margin-top: 0.2rem;
+        }
+        .btn-reset {
+            background: #eef4fa;
+            border: none;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.7rem;
+            margin: 2px 3px;
+        }
+        .btn-reset:hover {
+            background: #dbeafe;
+        }
+        .btn-check {
+            background: #dbeafe;
+            border: none;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.7rem;
+            margin: 2px 3px;
+        }
+        .btn-check:hover {
+            background: #b7d6f7;
+        }
+        @media (max-width: 480px) {
+            .pair-item {
+                font-size: 0.7rem;
+                padding: 0.2rem 0.3rem;
+                min-height: 36px;
+            }
+            .pair-item .math {
+                font-size: 0.8rem;
+            }
+            .pair-col {
+                min-width: 60px;
+            }
+            .pair-item .frac {
+                font-size: 0.7rem;
+            }
+        }
+
+        /* ===== 游戏2：扭蛋机 ===== */
+        .gacha-area {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            align-items: center;
+        }
+        .gacha-machine {
+            background: #f0f7fe;
+            border-radius: 20px;
+            border: 3px solid #b7cee8;
+            padding: 1rem;
+            width: 100%;
+            max-width: 400px;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .gacha-display {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            padding: 0.4rem;
+            width: 100%;
+        }
+        .gacha-ball {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #fcd34d, #f59e0b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #fff;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+            user-select: none;
+            touch-action: manipulation;
+            border: 2px solid #d97706;
+        }
+        .gacha-ball:hover {
+            transform: scale(1.06);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+        }
+        .gacha-ball:active {
+            transform: scale(0.94);
+        }
+        .gacha-ball.used {
+            opacity: 0.3;
+            cursor: default;
+            transform: scale(0.85);
+            pointer-events: none;
+            filter: grayscale(0.6);
+        }
+        .gacha-ball .ball-number {
+            font-size: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .gacha-result {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 0.6rem 1rem;
+            margin-top: 0.4rem;
+            min-height: 60px;
+            width: 100%;
+            max-width: 360px;
+            border: 2px solid #dbeafe;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            transition: 0.2s;
+        }
+        .gacha-result .result-question {
+            font-weight: 600;
+            color: #0b2b4a;
+            font-size: 0.95rem;
+        }
+        .gacha-result .result-question .math {
+            font-size: 1.05rem;
+        }
+        .gacha-result .result-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 4px;
+        }
+        .gacha-result .result-options button {
+            background: #eef4fa;
+            border: 2px solid #dbeafe;
+            border-radius: 30px;
+            padding: 0.2rem 1rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: pointer;
+            transition: 0.2s;
+            touch-action: manipulation;
+            font-family: 'Times New Roman', serif;
+        }
+        .gacha-result .result-options button:hover {
+            background: #dbeafe;
+            border-color: #3b82f6;
+        }
+        .gacha-result .result-options button.correct-answer {
+            background: #e8f8ee;
+            border-color: #22c55e;
+            color: #16a34a;
+        }
+        .gacha-result .result-options button.wrong-answer {
+            background: #fde8e8;
+            border-color: #ef4444;
+            color: #b91c1c;
+        }
+        .gacha-result .result-options button:disabled {
+            opacity: 0.6;
+            cursor: default;
+        }
+        .gacha-score {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #4a617c;
+            margin-top: 2px;
+        }
+        .gacha-feedback {
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.78rem;
+            min-height: 22px;
+            margin-top: 2px;
+        }
+        @media (max-width: 480px) {
+            .gacha-ball {
+                width: 52px;
+                height: 52px;
+                font-size: 1.2rem;
+            }
+            .gacha-machine {
+                min-height: 150px;
+                padding: 0.6rem;
+            }
+            .gacha-result {
+                font-size: 0.78rem;
+                padding: 0.4rem 0.6rem;
+                min-height: 50px;
+            }
+            .gacha-result .result-options button {
+                font-size: 0.7rem;
+                padding: 0.15rem 0.7rem;
+            }
+        }
+
+        /* ===== 复习题 ===== */
+        .quiz-item {
+            background: #fafcff;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border: 1px solid #e9eff6;
+            margin-bottom: 0.5rem;
+        }
+        .quiz-item .q {
+            font-weight: 600;
+            color: #0b2b4a;
+            font-size: 0.9rem;
+        }
+        .quiz-item .q .math {
+            font-size: 1rem;
+        }
+        .quiz-item .a {
+            color: #1f4b7a;
+            margin-top: 2px;
+            padding-left: 0.6rem;
+            border-left: 3px solid #b3cef0;
+            font-size: 0.85rem;
+        }
+        .quiz-item .a .highlight {
+            background: #fef9e7;
+            padding: 0.05rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .quiz-item .answer-btn {
+            background: #eef4fa;
+            border: none;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.7rem;
+            margin-top: 4px;
+        }
+        .quiz-item .answer-btn:hover {
+            background: #dbeafe;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #8ba0b8;
+            border-top: 1px solid #e9eff6;
+            padding-top: 0.8rem;
+            margin-top: 1rem;
+        }
+        @media (max-width: 480px) {
+            .card {
+                padding: 0.7rem;
+            }
+            .card-title {
+                font-size: 0.95rem;
+            }
+            .formula-box {
+                font-size: 0.78rem;
+                padding: 0.4rem 0.7rem;
+            }
+            .formula-hero .formula-main {
+                font-size: 1rem;
+            }
+        }
+
+        .drag-ghost {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.9;
+            transform: scale(1.05);
+            background: #ffffff;
+            border-radius: 12px;
+            border: 2px solid #2563eb;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+            padding: 4px 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #0b2b4a;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .sup {
+            font-size: 0.7em;
+            vertical-align: super;
+            color: #dc2626;
+            font-weight: 600;
+        }
+        .sup-green {
+            font-size: 0.7em;
+            vertical-align: super;
+            color: #16a34a;
+            font-weight: 600;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .mt-1 {
+            margin-top: 0.4rem;
+        }
+        .mb-1 {
+            margin-bottom: 0.4rem;
+        }
+        .flex-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.3rem;
+            flex-wrap: wrap;
+        }
+        .frac {
+            display: inline-block;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 0.9rem;
+        }
+        .frac .num {
+            display: block;
+            border-bottom: 2px solid #1e293b;
+            padding: 0 0.3rem;
+        }
+        .frac .den {
+            display: block;
+            padding: 0 0.3rem;
+        }
+        .frac-sm {
+            font-size: 0.75rem;
+        }
+        .frac-sm .num,
+        .frac-sm .den {
+            padding: 0 0.15rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- ===== 头部 ===== -->
+        <header class="page-header">
+            <h1>
+                📐 分式的基本性质
+                <small>八年级 · 上册</small>
+            </h1>
+            <div class="nav-links">
+                <a href="#concept">核心概念</a>
+                <a href="#formula">锦囊</a>
+                <a href="#examples">举例</a>
+                <a href="#errors">易错</a>
+                <a href="#games">🎮 游戏</a>
+                <a href="#quiz">复习</a>
+            </div>
+        </header>
+
+        <!-- ============================================================ -->
+        <div class="main-grid">
+
+            <!-- ===== 左侧：知识点 ===== -->
+            <div class="knowledge-area">
+
+                <!-- 核心概念 -->
+                <div class="card" id="concept">
+                    <div class="card-title">
+                        🔍 核心概念大解析
+                        <span class="badge">基本性质 · 约分 · 通分</span>
+                    </div>
+
+                    <!-- 公式展示 -->
+                    <div class="formula-hero">
+                        <div class="formula-main">
+                            <span style="font-size:1rem;">分式的分子与分母乘（或除以）同一个</span><br>
+                            <span class="hl-red">不等于0</span><span style="font-size:1rem;">的整式，分式的值</span><span class="hl-green">不变</span>
+                        </div>
+                        <div class="formula-desc">
+                            <span style="font-size:1.1rem;font-weight:700;">
+                                <span class="frac"><span class="num">A</span><span class="den">B</span></span>
+                                =
+                                <span class="frac"><span class="num">A·C</span><span class="den">B·C</span></span>
+                                =
+                                <span class="frac"><span class="num">A÷C</span><span class="den">B÷C</span></span>
+                                &nbsp;&nbsp;(C ≠ 0)
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="rule-display">
+                        <div class="rule-item">
+                            <span class="rule-math">🔹 约分</span>
+                            <span class="rule-desc">约去分子分母的 <strong>公因式</strong></span>
+                            <span style="font-size:0.82rem;color:#1e4b8a;font-weight:600;">
+                                <span class="frac frac-sm"><span class="num">x³</span><span class="den">x²y</span></span>
+                                 =
+                                <span class="frac frac-sm"><span class="num">x</span><span class="den">y</span></span>
+                            </span>
+                        </div>
+                        <div class="rule-item">
+                            <span class="rule-math">🔹 通分</span>
+                            <span class="rule-desc">化为 <strong>同分母</strong> 分式</span>
+                            <span style="font-size:0.82rem;color:#1e4b8a;font-weight:600;">
+                                <span class="frac frac-sm"><span class="num">1</span><span class="den">ab</span></span>
+                                 →
+                                <span class="frac frac-sm"><span class="num">a</span><span class="den">a²b</span></span>
+                                &nbsp;,&nbsp;
+                                <span class="frac frac-sm"><span class="num">2a−b</span><span class="den">a²</span></span>
+                                 →
+                                <span class="frac frac-sm"><span class="num">2ab−b²</span><span class="den">a²b</span></span>
+                            </span>
+                        </div>
+                        <div class="rule-item">
+                            <span class="rule-math">🔹 最简分式</span>
+                            <span class="rule-desc">分子分母 <strong>没有公因式</strong></span>
+                            <span style="font-size:0.82rem;color:#1e4b8a;font-weight:600;">
+                                <span class="frac frac-sm"><span class="num">x</span><span class="den">y</span></span>
+                                 ,
+                                <span class="frac frac-sm"><span class="num">x+y</span><span class="den">2x</span></span>
+                                为最简分式
+                            </span>
+                        </div>
+                    </div>
+
+                    <div style="margin-top:0.4rem; background:#f8faff; border-radius:12px; padding:0.3rem 0.7rem; border:1px solid #e2ecf9; font-size:0.75rem; display:flex; flex-wrap:wrap; gap:0.1rem 0.6rem;">
+                        <span>🔹 约分 → 化简分式</span>
+                        <span>🔹 通分 → 统一分母</span>
+                        <span>🔹 最简分式：分子分母 <strong>无公因式</strong></span>
+                    </div>
+                </div>
+
+                <!-- 锦囊 -->
+                <div class="card" id="formula">
+                    <div class="card-title">
+                        🧠 数学锦囊 · 公式
+                        <span class="badge">核心法则</span>
+                    </div>
+                    <div class="tip-grid">
+                        <div class="tip-item">
+                            <strong>基本性质</strong>
+                            <div class="math-example">
+                                <span class="frac frac-sm"><span class="num">A</span><span class="den">B</span></span>
+                                =
+                                <span class="frac frac-sm"><span class="num">A·C</span><span class="den">B·C</span></span>
+                                (C≠0)
+                            </div>
+                        </div>
+                        <div class="tip-item">
+                            <strong>约分</strong>
+                            <div class="math-example">找公因式 → 约去</div>
+                            <div class="math-example" style="font-size:0.78rem;font-weight:400;">结果是最简分式</div>
+                        </div>
+                        <div class="tip-item">
+                            <strong>通分</strong>
+                            <div class="math-example">找最简公分母</div>
+                            <div class="math-example" style="font-size:0.78rem;font-weight:400;">各分母因式最高次幂的积</div>
+                        </div>
+                        <div class="tip-item">
+                            <strong>最简公分母</strong>
+                            <div class="math-example">各分母所有因式</div>
+                            <div class="math-example" style="font-size:0.78rem;font-weight:400;">最高次幂的积</div>
+                        </div>
+                    </div>
+                    <div class="formula-box" style="margin-top:0.3rem;">
+                        💡 <strong>口诀：</strong>分式基本性质，同乘同除值不变；约分找公因式，通分找公分母。
+                    </div>
+                </div>
+
+                <!-- 举例 -->
+                <div class="card" id="examples">
+                    <div class="card-title">
+                        ✏️ 典型举例
+                        <span class="badge">步骤演示</span>
+                    </div>
+                    <div class="example-box">
+                        <div class="ex-title">例1 约分：<span class="frac frac-sm"><span class="num">−25a²bc³</span><span class="den">15ab²c</span></span></div>
+                        <p style="margin-top:2px; font-size:0.88rem;">
+                            <strong>解：</strong> 公因式 = 5abc<br>
+                            <span class="frac frac-sm"><span class="num">−25a²bc³</span><span class="den">15ab²c</span></span>
+                            =
+                            <span class="frac frac-sm"><span class="num">−5a c²</span><span class="den">3b</span></span>
+                            =
+                            <span class="highlight">−<span class="frac frac-sm"><span class="num">5ac²</span><span class="den">3b</span></span></span>
+                        </p>
+                        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center;padding:0.2rem 0;">
+                            <span class="step">系数 25和15 → 最大公约数5</span>
+                            <span class="step">a：最低次 a¹</span>
+                            <span class="step">b：最低次 b¹</span>
+                            <span class="step">c：最低次 c¹</span>
+                        </div>
+                    </div>
+                    <div class="example-box" style="border-left-color:#8b5cf6;">
+                        <div class="ex-title">例2 约分：<span class="frac frac-sm"><span class="num">x²−9</span><span class="den">x²+6x+9</span></span></div>
+                        <p style="margin-top:2px; font-size:0.88rem;">
+                            <strong>解：</strong> 分子 = (x+3)(x−3)，分母 = (x+3)²<br>
+                            <span class="frac frac-sm"><span class="num">x²−9</span><span class="den">x²+6x+9</span></span>
+                            =
+                            <span class="frac frac-sm"><span class="num">(x+3)(x−3)</span><span class="den">(x+3)²</span></span>
+                            =
+                            <span class="highlight"><span class="frac frac-sm"><span class="num">x−3</span><span class="den">x+3</span></span></span>
+                        </p>
+                        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center;padding:0.2rem 0;">
+                            <span class="step">分解因式</span>
+                            <span class="step">约去公因式 (x+3)</span>
+                        </div>
+                    </div>
+                    <div class="example-box" style="border-left-color:#3b82f6;">
+                        <div class="ex-title">例3 通分：<span class="frac frac-sm"><span class="num">3</span><span class="den">2a²b</span></span> 和 <span class="frac frac-sm"><span class="num">a−b</span><span class="den">3ab²c</span></span></div>
+                        <p style="margin-top:2px; font-size:0.88rem;">
+                            <strong>解：</strong> 最简公分母 = 6a²b²c<br>
+                            <span class="frac frac-sm"><span class="num">3</span><span class="den">2a²b</span></span>
+                            =
+                            <span class="frac frac-sm"><span class="num">9bc</span><span class="den">6a²b²c</span></span>
+                            &nbsp;,&nbsp;
+                            <span class="frac frac-sm"><span class="num">a−b</span><span class="den">3ab²c</span></span>
+                            =
+                            <span class="frac frac-sm"><span class="num">2a²−2ab</span><span class="den">6a²b²c</span></span>
+                        </p>
+                        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center;padding:0.2rem 0;">
+                            <span class="step">最简公分母：6a²b²c</span>
+                            <span class="step">第一个乘 3bc</span>
+                            <span class="step">第二个乘 2a</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 易错 -->
+                <div class="card" id="errors">
+                    <div class="card-title">
+                        ⚠️ 易错题型
+                        <span class="badge">避坑指南</span>
+                    </div>
+                    <div class="error-box">
+                        <div class="err-title">❌ 易错1：约分时漏掉公因式</div>
+                        <p style="font-size:0.85rem;">
+                            例：<span class="frac frac-sm"><span class="num">6x²y³</span><span class="den">8x³y²</span></span>
+                            只约去 2x²y²，剩 <span class="frac frac-sm"><span class="num">3y</span><span class="den">4x</span></span><br>
+                            <span style="color:#b91c1c;">正确：</span>应约去 <strong>2x²y²</strong>，结果 <span class="frac frac-sm"><span class="num">3y</span><span class="den">4x</span></span>
+                        </p>
+                        <div style="background:#fef2f2;padding:0.2rem 0.6rem;border-radius:8px;font-size:0.8rem;display:inline-block;margin-top:4px;">
+                            ✗ 只约 2x² &nbsp;&nbsp; ✓ 约 2x²y²
+                        </div>
+                    </div>
+                    <div class="error-box" style="border-left-color:#eab308;">
+                        <div class="err-title">❌ 易错2：通分时最简公分母找错</div>
+                        <p style="font-size:0.85rem;">
+                            例：<span class="frac frac-sm"><span class="num">1</span><span class="den">x²−4</span></span> 和 <span class="frac frac-sm"><span class="num">x</span><span class="den">x²−4x+4</span></span><br>
+                            分母分解：x²−4=(x+2)(x−2)，x²−4x+4=(x−2)²<br>
+                            最简公分母 = <span style="color:#16a34a;">(x+2)(x−2)²</span>
+                        </p>
+                        <div style="background:#fef2f2;padding:0.2rem 0.6rem;border-radius:8px;font-size:0.8rem;display:inline-block;margin-top:4px;">
+                            ✓ (x+2)(x−2)² &nbsp;&nbsp; ✗ (x+2)(x−2)
+                        </div>
+                    </div>
+                    <div class="error-box" style="border-left-color:#8b5cf6;">
+                        <div class="err-title">❌ 易错3：符号处理错误</div>
+                        <p style="font-size:0.85rem;">
+                            例：<span class="frac frac-sm"><span class="num">x−y</span><span class="den">y−x</span></span>
+                            = <span class="frac frac-sm"><span class="num">x−y</span><span class="den">−(x−y)</span></span>
+                            = <span style="color:#b91c1c;">−1</span><br>
+                            <span style="color:#16a34a;">注意</span>：y−x = −(x−y)
+                        </p>
+                        <div style="background:#fef2f2;padding:0.2rem 0.6rem;border-radius:8px;font-size:0.8rem;display:inline-block;margin-top:4px;">
+                            ✓ <span class="frac frac-sm"><span class="num">x−y</span><span class="den">y−x</span></span> = −1
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== 右侧：游戏 ===== -->
+            <div class="game-area" id="games">
+
+                <!-- 游戏1：拖拽配对（约分与通分） -->
+                <div class="game-card">
+                    <div class="game-title">
+                        🧩 拖拽配对 · 约分与通分
+                        <span class="g-badge">拖拽匹配</span>
+                    </div>
+                    <div class="game-desc">将左侧的 <strong>分式</strong> 拖拽到右侧对应的 <strong>化简/通分结果</strong> 位置。</div>
+                    <div class="pair-area">
+                        <div class="pair-row" id="pairRow">
+                            <div class="pair-col" id="pairLeft">
+                                <div class="pair-col-title">📝 原分式</div>
+                            </div>
+                            <div class="pair-arrow">⟷</div>
+                            <div class="pair-col" id="pairRight">
+                                <div class="pair-col-title">✅ 约分/通分结果</div>
+                            </div>
+                        </div>
+                        <div class="pair-feedback" id="pairFeedback">💡 拖拽左侧卡片到右侧匹配</div>
+                        <div style="display:flex; justify-content:center; gap:0.3rem; flex-wrap:wrap;">
+                            <button class="btn-reset" onclick="resetPair()">🔄 重新配对</button>
+                            <button class="btn-check" onclick="checkPair()">✅ 检查答案</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 游戏2：扭蛋机 -->
+                <div class="game-card">
+                    <div class="game-title">
+                        🥚 扭蛋机 · 分式性质挑战
+                        <span class="g-badge">点击抽题</span>
+                    </div>
+                    <div class="game-desc">点击扭蛋抽取题目，选择正确答案，答对积1分！</div>
+                    <div class="gacha-area">
+                        <div class="gacha-machine" id="gachaMachine">
+                            <div class="gacha-display" id="gachaDisplay"></div>
+                            <div class="gacha-result" id="gachaResult">
+                                <div class="result-question">💡 点击扭蛋开始答题！</div>
+                            </div>
+                            <div class="gacha-score" id="gachaScore">🏆 得分：0</div>
+                        </div>
+                        <div class="gacha-feedback" id="gachaFeedback"></div>
+                        <div style="display:flex; justify-content:center; gap:0.3rem; flex-wrap:wrap;">
+                            <button class="btn-reset" onclick="resetGacha()">🔄 重新开始</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 复习巩固题 -->
+        <section id="quiz" style="margin-top:1.2rem;">
+            <div class="card">
+                <div class="card-title">
+                    📝 复习巩固题
+                    <span class="badge">小测验</span>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="q">1. 约分：<span style="font-size:1rem;font-weight:600;"><span class="frac frac-sm"><span class="num">6a²b³</span><span class="den">9a³b²</span></span></span></div>
+                    <button class="answer-btn" onclick="toggleAnswer('ans1')">显示答案</button>
+                    <div class="a" id="ans1" style="display:none;">
+                        公因式 = 3a²b²<br>
+                        <span class="frac frac-sm"><span class="num">6a²b³</span><span class="den">9a³b²</span></span>
+                        =
+                        <span class="frac frac-sm"><span class="num">2b</span><span class="den">3a</span></span>
+                        = <span class="highlight"><span class="frac frac-sm"><span class="num">2b</span><span class="den">3a</span></span></span>
+                    </div>
+                    <div style="display:flex;gap:0.3rem;flex-wrap:wrap;margin-top:2px;">
+                        <span style="background:#f0f7fe;padding:0.05rem 0.6rem;border-radius:12px;font-size:0.75rem;">系数 6和9 → 3</span>
+                        <span style="background:#f0f7fe;padding:0.05rem 0.6rem;border-radius:12px;font-size:0.75rem;">a最低次 a²</span>
+                        <span style="background:#f0f7fe;padding:0.05rem 0.6rem;border-radius:12px;font-size:0.75rem;">b最低次 b²</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="q">2. 通分：<span style="font-size:1rem;font-weight:600;"><span class="frac frac-sm"><span class="num">x</span><span class="den">ab</span></span></span> 和 <span style="font-size:1rem;font-weight:600;"><span class="frac frac-sm"><span class="num">y</span><span class="den">bc</span></span></span></div>
+                    <button class="answer-btn" onclick="toggleAnswer('ans2')">显示答案</button>
+                    <div class="a" id="ans2" style="display:none;">
+                        最简公分母 = abc<br>
+                        <span class="frac frac-sm"><span class="num">x</span><span class="den">ab</span></span>
+                        =
+                        <span class="frac frac-sm"><span class="num">xc</span><span class="den">abc</span></span>
+                        &nbsp;，
+                        <span class="frac frac-sm"><span class="num">y</span><span class="den">bc</span></span>
+                        =
+                        <span class="frac frac-sm"><span class="num">ya</span><span class="den">abc</span></span>
+                        <br>
+                        答案：<span class="highlight"><span class="frac frac-sm"><span class="num">xc</span><span class="den">abc</span></span></span> 和 <span class="highlight"><span class="frac frac-sm"><span class="num">ya</span><span class="den">abc</span></span></span>
+                    </div>
+                    <div style="display:flex;gap:0.3rem;flex-wrap:wrap;margin-top:2px;">
+                        <span style="background:#f0f7fe;padding:0.05rem 0.6rem;border-radius:12px;font-size:0.75rem;">最简公分母 abc</span>
+                        <span style="background:#f0f7fe;padding:0.05rem 0.6rem;border-radius:12px;font-size:0.75rem;">第一个乘 c</span>
+                        <span style="background:#f0f7fe;padding:0.05rem 0.6rem;border-radius:12px;font-size:0.75rem;">第二个乘 a</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 底部 ===== -->
+        <div class="footer">
+            📚 八年级数学 · 分式的基本性质 &nbsp;|&nbsp; 预习课程 · 互动学习
+        </div>
+
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- JavaScript -->
+    <script>
+        // =============================================================
+        // 工具函数
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+        }
+
+        // =============================================================
+        // 游戏1：拖拽配对
+        // =============================================================
+        const pairData = [
+            { id: 'p1', left: 'x³/(x²y)', right: 'x/y', pairId: 0 },
+            { id: 'p2', left: '(x²−4)/(x²−4x+4)', right: '(x+2)/(x−2)', pairId: 1 },
+            { id: 'p3', left: '1/(ab) 和 1/(bc)', right: 'c/(abc) 和 a/(abc)', pairId: 2 },
+            { id: 'p4', left: '3/(2a²b) 和 (a−b)/(3ab²c)', right: '9bc/(6a²b²c) 和 (2a²−2ab)/(6a²b²c)', pairId: 3 }
+        ];
+
+        // 显示映射（带分数格式）
+        const pairDisplay = {
+            'x³/(x²y)': '<span class="frac"><span class="num">x³</span><span class="den">x²y</span></span>',
+            'x/y': '<span class="frac"><span class="num">x</span><span class="den">y</span></span>',
+            '(x²−4)/(x²−4x+4)': '<span class="frac"><span class="num">x²−4</span><span class="den">x²−4x+4</span></span>',
+            '(x+2)/(x−2)': '<span class="frac"><span class="num">x+2</span><span class="den">x−2</span></span>',
+            '1/(ab) 和 1/(bc)': '<span class="frac"><span class="num">1</span><span class="den">ab</span></span> 和 <span class="frac"><span class="num">1</span><span class="den">bc</span></span>',
+            'c/(abc) 和 a/(abc)': '<span class="frac"><span class="num">c</span><span class="den">abc</span></span> 和 <span class="frac"><span class="num">a</span><span class="den">abc</span></span>',
+            '3/(2a²b) 和 (a−b)/(3ab²c)': '<span class="frac"><span class="num">3</span><span class="den">2a²b</span></span> 和 <span class="frac"><span class="num">a−b</span><span class="den">3ab²c</span></span>',
+            '9bc/(6a²b²c) 和 (2a²−2ab)/(6a²b²c)': '<span class="frac"><span class="num">9bc</span><span class="den">6a²b²c</span></span> 和 <span class="frac"><span class="num">2a²−2ab</span><span class="den">6a²b²c</span></span>'
+        };
+
+        let pairState = {};
+        let pairGhost = null;
+        let pairDragEl = null;
+        let pairDragId = null;
+        let pairDragOffsetX = 0,
+            pairDragOffsetY = 0;
+        let pairMatches = 0;
+
+        function buildPair() {
+            const leftCol = document.getElementById('pairLeft');
+            const rightCol = document.getElementById('pairRight');
+            leftCol.innerHTML = '<div class="pair-col-title">📝 原分式</div>';
+            rightCol.innerHTML = '<div class="pair-col-title">✅ 约分/通分结果</div>';
+
+            pairState = {};
+            pairMatches = 0;
+            pairDragId = null;
+
+            const leftItems = [...pairData];
+            const rightItems = [...pairData];
+            shuffleArray(leftItems);
+            shuffleArray(rightItems);
+
+            leftItems.forEach((item, idx) => {
+                const div = document.createElement('div');
+                div.className = 'pair-item';
+                div.dataset.id = item.id;
+                div.dataset.pairId = item.pairId;
+                div.dataset.type = 'left';
+                div.innerHTML = `<span class="math">${pairDisplay[item.left] || item.left}</span>`;
+                div.draggable = false;
+                div.addEventListener('mousedown', (e) => onPairItemMouseDown(e, div, item.id));
+                div.addEventListener('touchstart', (e) => onPairItemTouchStart(e, div, item.id), { passive: false });
+                leftCol.appendChild(div);
+                pairState[item.id] = { left: div, right: null, matched: false, pairId: item.pairId };
+            });
+
+            rightItems.forEach((item) => {
+                const div = document.createElement('div');
+                div.className = 'pair-item';
+                div.dataset.id = item.id;
+                div.dataset.pairId = item.pairId;
+                div.dataset.type = 'right';
+                div.innerHTML = `<span class="math">${pairDisplay[item.right] || item.right}</span>`;
+                div.draggable = false;
+                rightCol.appendChild(div);
+                if (pairState[item.id]) {
+                    pairState[item.id].right = div;
+                }
+            });
+
+            document.getElementById('pairFeedback').textContent = '💡 拖拽左侧卡片到右侧匹配';
+            document.getElementById('pairFeedback').style.color = '#1f3a5f';
+            document.querySelectorAll('.pair-item').forEach(el => {
+                el.classList.remove('matched', 'wrong', 'drop-target');
+            });
+        }
+
+        function onPairItemMouseDown(e, el, id) {
+            if (el.classList.contains('matched')) return;
+            e.preventDefault();
+            const item = pairState[id];
+            if (!item || item.matched) return;
+            pairDragId = id;
+            startPairDrag(el, e.clientX, e.clientY);
+            document.addEventListener('mousemove', onPairMouseMove);
+            document.addEventListener('mouseup', onPairMouseUp);
+        }
+
+        function onPairMouseMove(e) {
+            e.preventDefault();
+            movePairDrag(e.clientX, e.clientY);
+        }
+
+        function onPairMouseUp(e) {
+            document.removeEventListener('mousemove', onPairMouseMove);
+            document.removeEventListener('mouseup', onPairMouseUp);
+            endPairDrag(e.clientX, e.clientY);
+        }
+
+        function onPairItemTouchStart(e, el, id) {
+            if (el.classList.contains('matched')) return;
+            e.preventDefault();
+            const touch = e.touches[0];
+            const item = pairState[id];
+            if (!item || item.matched) return;
+            pairDragId = id;
+            startPairDrag(el, touch.clientX, touch.clientY);
+            document.addEventListener('touchmove', onPairTouchMove, { passive: false });
+            document.addEventListener('touchend', onPairTouchEnd, { passive: false });
+        }
+
+        function onPairTouchMove(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            movePairDrag(touch.clientX, touch.clientY);
+        }
+
+        function onPairTouchEnd(e) {
+            document.removeEventListener('touchmove', onPairTouchMove);
+            document.removeEventListener('touchend', onPairTouchEnd);
+            const touch = e.changedTouches[0];
+            endPairDrag(touch.clientX, touch.clientY);
+        }
+
+        function startPairDrag(el, clientX, clientY) {
+            const rect = el.getBoundingClientRect();
+            pairDragOffsetX = clientX - rect.left;
+            pairDragOffsetY = clientY - rect.top;
+            pairDragEl = el;
+            el.classList.add('dragging');
+            pairGhost = document.createElement('div');
+            pairGhost.className = 'drag-ghost';
+            pairGhost.innerHTML = el.innerHTML;
+            pairGhost.style.left = (clientX - pairDragOffsetX) + 'px';
+            pairGhost.style.top = (clientY - pairDragOffsetY) + 'px';
+            document.body.appendChild(pairGhost);
+            document.querySelectorAll('#pairRight .pair-item:not(.matched)').forEach(el => {
+                el.classList.add('drop-target');
+            });
+        }
+
+        function movePairDrag(clientX, clientY) {
+            if (pairGhost) {
+                pairGhost.style.left = (clientX - pairDragOffsetX) + 'px';
+                pairGhost.style.top = (clientY - pairDragOffsetY) + 'px';
+            }
+        }
+
+        function endPairDrag(clientX, clientY) {
+            if (pairGhost) {
+                pairGhost.remove();
+                pairGhost = null;
+            }
+            document.querySelectorAll('#pairRight .pair-item').forEach(el => {
+                el.classList.remove('drop-target');
+            });
+            if (pairDragEl) {
+                pairDragEl.classList.remove('dragging');
+            }
+
+            let targetEl = null;
+            document.querySelectorAll('#pairRight .pair-item:not(.matched)').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (clientX >= rect.left && clientX <= rect.right &&
+                    clientY >= rect.top && clientY <= rect.bottom) {
+                    targetEl = el;
+                }
+            });
+
+            if (targetEl && pairDragId !== null) {
+                const leftId = pairDragId;
+                const rightId = targetEl.dataset.id;
+                const leftItem = pairState[leftId];
+                const rightItem = pairState[rightId];
+                if (leftItem && rightItem && !leftItem.matched && !rightItem.matched) {
+                    if (leftItem.pairId === rightItem.pairId) {
+                        leftItem.matched = true;
+                        rightItem.matched = true;
+                        leftItem.left.classList.add('matched');
+                        rightItem.right.classList.add('matched');
+                        pairMatches++;
+                        document.getElementById('pairFeedback').textContent =
+                            `✅ 配对成功！${pairData.find(d=>d.id===leftId).left} = ${pairData.find(d=>d.id===rightId).right}`;
+                        document.getElementById('pairFeedback').style.color = '#16a34a';
+                        if (pairMatches === pairData.length) {
+                            document.getElementById('pairFeedback').textContent = '🎉 全部配对完成！太棒啦！';
+                            document.getElementById('pairFeedback').style.color = '#2563eb';
+                        }
+                    } else {
+                        targetEl.classList.add('wrong');
+                        setTimeout(() => targetEl.classList.remove('wrong'), 500);
+                        document.getElementById('pairFeedback').textContent =
+                            `❌ 配对错误！请再试试`;
+                        document.getElementById('pairFeedback').style.color = '#b91c1c';
+                    }
+                }
+            }
+            pairDragId = null;
+            pairDragEl = null;
+        }
+
+        function checkPair() {
+            const total = pairData.length;
+            const matched = Object.values(pairState).filter(s => s.matched).length / 2;
+            document.getElementById('pairFeedback').textContent = `📊 已配对 ${matched} / ${total}`;
+            document.getElementById('pairFeedback').style.color = '#1f3a5f';
+        }
+
+        function resetPair() {
+            buildPair();
+        }
+
+        // =============================================================
+        // 游戏2：扭蛋机
+        // =============================================================
+        const gachaQuestions = [{
+            id: 0,
+            question: '分式的基本性质是：分子分母同乘（或除以）同一个______的整式，分式的值不变。',
+            options: ['不等于0', '不等于1', '任意', '不等于−1'],
+            correct: 0
+        }, {
+            id: 1,
+            question: '约分：<span class="frac"><span class="num">x³</span><span class="den">x²y</span></span> = ？',
+            options: ['<span class="frac"><span class="num">x</span><span class="den">y</span></span>', '<span class="frac"><span class="num">x²</span><span class="den">y</span></span>',
+                '<span class="frac"><span class="num">x</span><span class="den">x²y</span></span>', '<span class="frac"><span class="num">1</span><span class="den">xy</span></span>'
+            ],
+            correct: 0
+        }, {
+            id: 2,
+            question: '约分：<span class="frac"><span class="num">x²−4</span><span class="den">x²−4x+4</span></span> = ？',
+            options: ['<span class="frac"><span class="num">x+2</span><span class="den">x−2</span></span>',
+                '<span class="frac"><span class="num">x−2</span><span class="den">x+2</span></span>',
+                '<span class="frac"><span class="num">x+2</span><span class="den">x+2</span></span>', '1'
+            ],
+            correct: 0
+        }, {
+            id: 3,
+            question: '通分时，最简公分母取各分母因式的______次幂的积。',
+            options: ['最高', '最低', '相同', '任意'],
+            correct: 0
+        }, {
+            id: 4,
+            question: '<span class="frac"><span class="num">1</span><span class="den">ab</span></span> 和 <span class="frac"><span class="num">1</span><span class="den">bc</span></span> 的最简公分母是？',
+            options: ['abc', 'ab²c', 'a²bc', 'a²b²c'],
+            correct: 0
+        }, {
+            id: 5,
+            question: '约分：<span class="frac"><span class="num">6a²b³</span><span class="den">9a³b²</span></span> = ？',
+            options: ['<span class="frac"><span class="num">2b</span><span class="den">3a</span></span>',
+                '<span class="frac"><span class="num">2b²</span><span class="den">3a²</span></span>',
+                '<span class="frac"><span class="num">3a</span><span class="den">2b</span></span>',
+                '<span class="frac"><span class="num">2a</span><span class="den">3b</span></span>'
+            ],
+            correct: 0
+        }, {
+            id: 6,
+            question: '下列哪个是<strong>最简分式</strong>？',
+            options: ['<span class="frac"><span class="num">x</span><span class="den">y</span></span>',
+                '<span class="frac"><span class="num">x²</span><span class="den">xy</span></span>',
+                '<span class="frac"><span class="num">x²−y²</span><span class="den">x−y</span></span>',
+                '<span class="frac"><span class="num">x²−1</span><span class="den">x²−2x+1</span></span>'
+            ],
+            correct: 0
+        }, {
+            id: 7,
+            question: '分式 <span class="frac"><span class="num">x−y</span><span class="den">y−x</span></span> 约分后等于？',
+            options: ['−1', '1', '0', '<span class="frac"><span class="num">x−y</span><span class="den">y−x</span></span>'],
+            correct: 0
+        }];
+
+        // 显示映射（用于选项显示）
+        const gachaDisplay = {
+            '不等于0': '不等于0',
+            '不等于1': '不等于1',
+            '任意': '任意',
+            '不等于−1': '不等于−1',
+            '<span class="frac"><span class="num">x</span><span class="den">y</span></span>': '<span class="frac"><span class="num">x</span><span class="den">y</span></span>',
+            '<span class="frac"><span class="num">x²</span><span class="den">y</span></span>': '<span class="frac"><span class="num">x²</span><span class="den">y</span></span>',
+            '<span class="frac"><span class="num">x</span><span class="den">x²y</span></span>': '<span class="frac"><span class="num">x</span><span class="den">x²y</span></span>',
+            '<span class="frac"><span class="num">1</span><span class="den">xy</span></span>': '<span class="frac"><span class="num">1</span><span class="den">xy</span></span>',
+            '<span class="frac"><span class="num">x+2</span><span class="den">x−2</span></span>': '<span class="frac"><span class="num">x+2</span><span class="den">x−2</span></span>',
+            '<span class="frac"><span class="num">x−2</span><span class="den">x+2</span></span>': '<span class="frac"><span class="num">x−2</span><span class="den">x+2</span></span>',
+            '<span class="frac"><span class="num">x+2</span><span class="den">x+2</span></span>': '<span class="frac"><span class="num">x+2</span><span class="den">x+2</span></span>',
+            '1': '1',
+            '最高': '最高',
+            '最低': '最低',
+            '相同': '相同',
+            '任意': '任意',
+            'abc': 'abc',
+            'ab²c': 'ab²c',
+            'a²bc': 'a²bc',
+            'a²b²c': 'a²b²c',
+            '<span class="frac"><span class="num">2b</span><span class="den">3a</span></span>': '<span class="frac"><span class="num">2b</span><span class="den">3a</span></span>',
+            '<span class="frac"><span class="num">2b²</span><span class="den">3a²</span></span>': '<span class="frac"><span class="num">2b²</span><span class="den">3a²</span></span>',
+            '<span class="frac"><span class="num">3a</span><span class="den">2b</span></span>': '<span class="frac"><span class="num">3a</span><span class="den">2b</span></span>',
+            '<span class="frac"><span class="num">2a</span><span class="den">3b</span></span>': '<span class="frac"><span class="num">2a</span><span class="den">3b</span></span>',
+            '<span class="frac"><span class="num">x</span><span class="den">y</span></span>': '<span class="frac"><span class="num">x</span><span class="den">y</span></span>',
+            '<span class="frac"><span class="num">x²</span><span class="den">xy</span></span>': '<span class="frac"><span class="num">x²</span><span class="den">xy</span></span>',
+            '<span class="frac"><span class="num">x²−y²</span><span class="den">x−y</span></span>': '<span class="frac"><span class="num">x²−y²</span><span class="den">x−y</span></span>',
+            '<span class="frac"><span class="num">x²−1</span><span class="den">x²−2x+1</span></span>': '<span class="frac"><span class="num">x²−1</span><span class="den">x²−2x+1</span></span>',
+            '−1': '−1',
+            '1': '1',
+            '0': '0',
+            '<span class="frac"><span class="num">x−y</span><span class="den">y−x</span></span>': '<span class="frac"><span class="num">x−y</span><span class="den">y−x</span></span>'
+        };
+
+        let gachaState = [];
+        let gachaScore = 0;
+        let gachaAnswered = false;
+        let gachaUsed = [];
+
+        function buildGacha() {
+            const display = document.getElementById('gachaDisplay');
+            display.innerHTML = '';
+            gachaState = gachaQuestions.map((q, idx) => ({
+                ...q,
+                used: false,
+                index: idx
+            }));
+            gachaUsed = [];
+            gachaScore = 0;
+            gachaAnswered = false;
+            document.getElementById('gachaScore').textContent = '🏆 得分：0';
+            document.getElementById('gachaResult').innerHTML = '<div class="result-question">💡 点击扭蛋开始答题！</div>';
+            document.getElementById('gachaFeedback').textContent = '';
+
+            for (let i = 0; i < 8; i++) {
+                const ball = document.createElement('div');
+                ball.className = 'gacha-ball';
+                ball.dataset.index = i;
+                ball.innerHTML = `<span class="ball-number">${i+1}</span>`;
+                ball.addEventListener('click', () => onGachaClick(i));
+                display.appendChild(ball);
+            }
+        }
+
+        function onGachaClick(index) {
+            if (gachaUsed.includes(index)) return;
+            if (gachaAnswered) return;
+
+            const q = gachaState[index];
+            if (!q || q.used) return;
+
+            q.used = true;
+            gachaUsed.push(index);
+            const balls = document.querySelectorAll('.gacha-ball');
+            balls[index].classList.add('used');
+
+            const result = document.getElementById('gachaResult');
+            let html = `<div class="result-question">🎯 ${q.question}</div>`;
+            html += `<div class="result-options">`;
+            q.options.forEach((opt, oi) => {
+                const displayText = gachaDisplay[opt] || opt;
+                html += `<button data-optindex="${oi}" data-qid="${index}" onclick="answerGacha(${index}, ${oi})">${displayText}</button>`;
+            });
+            html += `</div>`;
+            result.innerHTML = html;
+            gachaAnswered = false;
+            document.getElementById('gachaFeedback').textContent = '🤔 选择一个选项...';
+            document.getElementById('gachaFeedback').style.color = '#1f3a5f';
+        }
+
+        function answerGacha(qIndex, optIndex) {
+            if (gachaAnswered) return;
+            gachaAnswered = true;
+
+            const q = gachaState[qIndex];
+            const isCorrect = (optIndex === q.correct);
+            const buttons = document.querySelectorAll('#gachaResult .result-options button');
+            buttons.forEach((btn, idx) => {
+                btn.disabled = true;
+                if (idx === q.correct) btn.classList.add('correct-answer');
+                if (idx === optIndex && !isCorrect) btn.classList.add('wrong-answer');
+            });
+
+            if (isCorrect) {
+                gachaScore++;
+                document.getElementById('gachaScore').textContent = `🏆 得分：${gachaScore}`;
+                document.getElementById('gachaFeedback').textContent = '✅ 回答正确！继续点击其他扭蛋吧！';
+                document.getElementById('gachaFeedback').style.color = '#16a34a';
+            } else {
+                document.getElementById('gachaFeedback').textContent = '❌ 再想想哦！继续学习吧！';
+                document.getElementById('gachaFeedback').style.color = '#b91c1c';
+            }
+
+            if (gachaUsed.length === gachaState.length) {
+                document.getElementById('gachaFeedback').textContent = `🎉 全部完成！最终得分：${gachaScore} / ${gachaState.length}`;
+                document.getElementById('gachaFeedback').style.color = '#2563eb';
+            }
+        }
+
+        function resetGacha() {
+            buildGacha();
+        }
+
+        // =============================================================
+        // 显示答案
+        // =============================================================
+        function toggleAnswer(id) {
+            const el = document.getElementById(id);
+            if (el.style.display === 'none' || el.style.display === '') {
+                el.style.display = 'block';
+            } else {
+                el.style.display = 'none';
+            }
+        }
+
+        // =============================================================
+        // 导航
+        // =============================================================
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // =============================================================
+        // 初始化
+        // =============================================================
+        buildPair();
+        buildGacha();
+        console.log('📐 分式的基本性质 课程已加载！');
+    </script>
+</body>
+</html>

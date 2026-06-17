@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>整数指数幂 · 初二数学预习</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', system-ui, sans-serif;
+            background: #f5f9fe;
+            color: #1e293b;
+            padding: 1rem;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 60px rgba(0, 20, 40, 0.06);
+            padding: 1.8rem 2rem 2.8rem;
+            transition: 0.2s;
+        }
+        @media (max-width: 640px) {
+            .container {
+                padding: 1rem 1rem 2rem;
+                border-radius: 20px;
+            }
+        }
+        .page-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 3px solid #e6f0fa;
+            padding-bottom: 0.8rem;
+            margin-bottom: 1.6rem;
+        }
+        .page-header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1a4b8c, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .page-header h1 small {
+            font-size: 0.9rem;
+            font-weight: 400;
+            -webkit-text-fill-color: #5f7d9c;
+            color: #5f7d9c;
+            background: none;
+        }
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem 0.5rem;
+        }
+        .nav-links a {
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            background: #f1f5f9;
+            color: #2c3e50;
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: 0.2s;
+            border: 1px solid transparent;
+        }
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: #2563eb;
+            color: #fff;
+            border-color: #2563eb;
+        }
+        @media (max-width: 600px) {
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.4rem;
+            }
+            .page-header h1 {
+                font-size: 1.4rem;
+            }
+            .nav-links a {
+                font-size: 0.65rem;
+                padding: 0.1rem 0.6rem;
+            }
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 1.8rem;
+            align-items: start;
+        }
+        @media (max-width: 920px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 1rem 1.2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+            border: 1px solid #edf2f7;
+            margin-bottom: 1rem;
+            transition: 0.2s;
+        }
+        .card-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #0b2b4a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 0.5rem;
+            border-left: 5px solid #3b82f6;
+            padding-left: 12px;
+        }
+        .card-title .badge {
+            font-size: 0.6rem;
+            background: #dbeafe;
+            color: #1e4b8a;
+            padding: 0.05rem 0.7rem;
+            border-radius: 40px;
+            font-weight: 500;
+        }
+
+        /* ===== 幂的显示 ===== */
+        .power {
+            display: inline-block;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-family: 'Times New Roman', serif;
+        }
+        .power .base {
+            display: inline-block;
+        }
+        .power .exp {
+            display: inline-block;
+            font-size: 0.7em;
+            vertical-align: super;
+            color: #dc2626;
+            margin-left: -0.05em;
+        }
+        .power .exp-neg {
+            color: #8b5cf6;
+        }
+        .frac {
+            display: inline-block;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .frac .num {
+            display: block;
+            border-bottom: 2px solid #1e293b;
+            padding: 0 0.25rem;
+        }
+        .frac .den {
+            display: block;
+            padding: 0 0.25rem;
+        }
+        .frac-sm {
+            font-size: 0.75rem;
+        }
+
+        .formula-hero {
+            background: linear-gradient(135deg, #eef4fa, #dbeafe);
+            border-radius: 16px;
+            padding: 0.8rem 1rem;
+            text-align: center;
+            border: 2px solid #3b82f6;
+            margin: 0.3rem 0;
+        }
+        .formula-hero .formula-main {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #1e4b8a;
+            line-height: 2;
+        }
+        .formula-hero .formula-main .hl-red {
+            color: #dc2626;
+        }
+        .formula-hero .formula-main .hl-green {
+            color: #16a34a;
+        }
+        .formula-hero .formula-main .hl-purple {
+            color: #8b5cf6;
+        }
+        .formula-hero .formula-desc {
+            font-size: 0.82rem;
+            color: #4a617c;
+            margin-top: 0.2rem;
+        }
+
+        .rule-display {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            padding: 0.2rem 0;
+        }
+        .rule-item {
+            background: #f8faff;
+            border-radius: 12px;
+            padding: 0.5rem 0.8rem;
+            border: 1px solid #e2ecf9;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 0.3rem 0.6rem;
+        }
+        .rule-item .rule-math {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1e4b8a;
+            font-family: 'Times New Roman', serif;
+        }
+        .rule-item .rule-desc {
+            font-size: 0.75rem;
+            color: #4a617c;
+            background: #dbeafe;
+            padding: 0.05rem 0.6rem;
+            border-radius: 20px;
+        }
+
+        .formula-box {
+            background: #f0f7fe;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border-left: 4px solid #3b82f6;
+            margin: 0.3rem 0;
+            font-size: 0.85rem;
+        }
+        .tip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.5rem;
+        }
+        .tip-item {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 0.4rem 0.7rem;
+            border: 1px solid #e2eaf2;
+            font-size: 0.78rem;
+        }
+        .tip-item strong {
+            color: #1e4b8a;
+        }
+        .tip-item .math-example {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #0b2b4a;
+            margin-top: 2px;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .example-box {
+            background: #fcf9f0;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border-left: 4px solid #eab308;
+            margin: 0.3rem 0;
+            font-size: 0.88rem;
+        }
+        .example-box .ex-title {
+            font-weight: 700;
+            color: #8a6d1b;
+        }
+        .example-box .step {
+            display: inline-block;
+            background: #fef9e7;
+            padding: 0.05rem 0.5rem;
+            border-radius: 12px;
+            margin: 2px 2px;
+            font-size: 0.8rem;
+        }
+        .error-box {
+            background: #fef2f2;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border-left: 4px solid #ef4444;
+            margin: 0.3rem 0;
+            font-size: 0.85rem;
+        }
+        .error-box .err-title {
+            font-weight: 700;
+            color: #b91c1c;
+        }
+        .highlight {
+            background: #fef9e7;
+            padding: 0.05rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .tag {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e4b8a;
+            padding: 0.05rem 0.6rem;
+            border-radius: 40px;
+            font-size: 0.65rem;
+            font-weight: 500;
+        }
+
+        /* ===== 指数扩展图 ===== */
+        .expo-chart {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.2rem;
+            padding: 0.3rem 0;
+            flex-wrap: wrap;
+        }
+        .expo-chart .ec-item {
+            background: #f0f7fe;
+            border-radius: 10px;
+            padding: 0.3rem 0.6rem;
+            border: 1px solid #dbeafe;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #1e4b8a;
+            text-align: center;
+            min-width: 44px;
+        }
+        .expo-chart .ec-item .ec-sup {
+            font-size: 0.7em;
+            vertical-align: super;
+        }
+        .expo-chart .ec-arrow {
+            color: #94a3b8;
+            font-size: 1.2rem;
+        }
+        .expo-chart .ec-item.highlight {
+            background: #dbeafe;
+            border-color: #3b82f6;
+        }
+
+        /* ===== 游戏区 ===== */
+        .game-area {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .game-card {
+            background: #fafcff;
+            border-radius: 18px;
+            padding: 0.8rem 1rem 1rem;
+            border: 1px solid #e2ecf9;
+        }
+        .game-card .game-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #0b2b4a;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 0.3rem;
+        }
+        .game-card .game-title .g-badge {
+            font-size: 0.55rem;
+            background: #dbeafe;
+            padding: 0.05rem 0.6rem;
+            border-radius: 40px;
+            font-weight: 500;
+            color: #1e4b8a;
+        }
+        .game-card .game-desc {
+            font-size: 0.75rem;
+            color: #4a617c;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ===== 游戏1：拖拽配对 ===== */
+        .pair-area {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+        .pair-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: stretch;
+            gap: 0.3rem 0.6rem;
+        }
+        .pair-col {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            flex: 1;
+            min-width: 80px;
+        }
+        .pair-col-title {
+            font-size: 0.68rem;
+            font-weight: 600;
+            color: #4a617c;
+            text-align: center;
+            padding: 0.1rem 0;
+            border-bottom: 2px solid #e2ecf9;
+        }
+        .pair-item {
+            background: #ffffff;
+            border: 2px solid #dbeafe;
+            border-radius: 12px;
+            padding: 0.3rem 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: grab;
+            transition: 0.2s;
+            user-select: none;
+            text-align: center;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+            touch-action: none;
+            gap: 4px;
+            font-family: 'Times New Roman', serif;
+        }
+        .pair-item .math {
+            font-size: 0.95rem;
+        }
+        .pair-item.dragging {
+            opacity: 0.5;
+            transform: scale(0.95);
+        }
+        .pair-item.drop-target {
+            border-color: #3b82f6;
+            background: #e5effa;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+        .pair-item.matched {
+            border-color: #22c55e;
+            background: #e8f8ee;
+            opacity: 0.8;
+            cursor: default;
+            pointer-events: none;
+            transform: scale(0.96);
+        }
+        .pair-item.wrong {
+            border-color: #ef4444;
+            background: #fde8e8;
+            animation: shake 0.4s ease;
+        }
+        .pair-arrow {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            font-weight: 300;
+            display: flex;
+            align-items: center;
+            padding: 0 0.2rem;
+        }
+        @keyframes shake {
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-6px);
+            }
+            75% {
+                transform: translateX(6px);
+            }
+        }
+        .pair-feedback {
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.78rem;
+            min-height: 22px;
+            margin-top: 0.2rem;
+        }
+        .btn-reset {
+            background: #eef4fa;
+            border: none;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.7rem;
+            margin: 2px 3px;
+        }
+        .btn-reset:hover {
+            background: #dbeafe;
+        }
+        .btn-check {
+            background: #dbeafe;
+            border: none;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.7rem;
+            margin: 2px 3px;
+        }
+        .btn-check:hover {
+            background: #b7d6f7;
+        }
+        @media (max-width: 480px) {
+            .pair-item {
+                font-size: 0.75rem;
+                padding: 0.2rem 0.3rem;
+                min-height: 42px;
+            }
+            .pair-item .math {
+                font-size: 0.8rem;
+            }
+            .pair-col {
+                min-width: 60px;
+            }
+        }
+
+        /* ===== 游戏2：抓娃娃机（分类） ===== */
+        .claw-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .claw-machine {
+            background: #f0f7fe;
+            border-radius: 20px;
+            border: 3px solid #b7cee8;
+            padding: 0.6rem;
+            width: 100%;
+            max-width: 420px;
+            min-height: 120px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            position: relative;
+            touch-action: none;
+        }
+        .claw-slot {
+            background: #ffffff;
+            border: 2px solid #dbeafe;
+            border-radius: 14px;
+            padding: 0.3rem 0.4rem;
+            min-width: 56px;
+            flex: 1 0 auto;
+            max-width: 110px;
+            text-align: center;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #1f3a5f;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            cursor: default;
+            user-select: none;
+            transition: 0.2s;
+            min-height: 44px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1px;
+            font-family: 'Times New Roman', serif;
+        }
+        .claw-slot .slot-icon {
+            font-size: 0.9rem;
+        }
+        .claw-slot .slot-label {
+            font-size: 0.55rem;
+            color: #4a617c;
+        }
+        .claw-slot .slot-expr {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #1e4b8a;
+        }
+        .claw-slot.correct-catch {
+            border-color: #22c55e;
+            background: #e8f8ee;
+            transform: scale(1.04);
+            box-shadow: 0 4px 16px rgba(34, 197, 94, 0.2);
+        }
+        .claw-slot.wrong-catch {
+            border-color: #ef4444;
+            background: #fde8e8;
+            animation: shake 0.4s ease;
+        }
+        .claw-slot.caught {
+            opacity: 0.5;
+            pointer-events: none;
+            filter: grayscale(0.6);
+            transform: scale(0.92);
+        }
+        .claw-pool {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px;
+            padding: 0.4rem 0;
+            background: #f8fafc;
+            border-radius: 14px;
+            min-height: 44px;
+            border: 1px solid #e2eaf2;
+            width: 100%;
+            max-width: 420px;
+        }
+        .claw-pool .claw-draggable {
+            background: #ffffff;
+            border: 2px solid #dbeafe;
+            border-radius: 12px;
+            padding: 0.3rem 0.6rem;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: grab;
+            user-select: none;
+            touch-action: none;
+            transition: 0.15s;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+            min-width: 44px;
+            text-align: center;
+            font-family: 'Times New Roman', serif;
+            min-height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .claw-pool .claw-draggable.dragging {
+            opacity: 0.5;
+            transform: scale(0.92);
+        }
+        .claw-pool .claw-draggable.placed {
+            opacity: 0.4;
+            pointer-events: none;
+            border-color: #94a3b8;
+            transform: scale(0.92);
+        }
+        .claw-feedback {
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.78rem;
+            min-height: 22px;
+            margin-top: 2px;
+        }
+        @media (max-width: 480px) {
+            .claw-machine {
+                min-height: 100px;
+                padding: 0.4rem;
+            }
+            .claw-slot {
+                min-width: 40px;
+                font-size: 0.55rem;
+                padding: 0.2rem 0.3rem;
+                min-height: 36px;
+            }
+            .claw-pool .claw-draggable {
+                font-size: 0.62rem;
+                padding: 0.2rem 0.4rem;
+                min-width: 34px;
+                min-height: 28px;
+            }
+        }
+
+        /* ===== 复习题 ===== */
+        .quiz-item {
+            background: #fafcff;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border: 1px solid #e9eff6;
+            margin-bottom: 0.5rem;
+        }
+        .quiz-item .q {
+            font-weight: 600;
+            color: #0b2b4a;
+            font-size: 0.9rem;
+        }
+        .quiz-item .q .math {
+            font-size: 1rem;
+        }
+        .quiz-item .a {
+            color: #1f4b7a;
+            margin-top: 2px;
+            padding-left: 0.6rem;
+            border-left: 3px solid #b3cef0;
+            font-size: 0.85rem;
+        }
+        .quiz-item .a .highlight {
+            background: #fef9e7;
+            padding: 0.05rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .quiz-item .answer-btn {
+            background: #eef4fa;
+            border: none;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.7rem;
+            margin-top: 4px;
+        }
+        .quiz-item .answer-btn:hover {
+            background: #dbeafe;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #8ba0b8;
+            border-top: 1px solid #e9eff6;
+            padding-top: 0.8rem;
+            margin-top: 1rem;
+        }
+        @media (max-width: 480px) {
+            .card {
+                padding: 0.7rem;
+            }
+            .card-title {
+                font-size: 0.95rem;
+            }
+            .formula-box {
+                font-size: 0.78rem;
+                padding: 0.4rem 0.7rem;
+            }
+            .formula-hero .formula-main {
+                font-size: 0.9rem;
+            }
+            .power {
+                font-size: 0.95rem;
+            }
+            .frac {
+                font-size: 0.8rem;
+            }
+        }
+
+        .drag-ghost {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.9;
+            transform: scale(1.05);
+            background: #ffffff;
+            border-radius: 12px;
+            border: 2px solid #2563eb;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+            padding: 4px 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #0b2b4a;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .mt-1 {
+            margin-top: 0.4rem;
+        }
+        .mb-1 {
+            margin-bottom: 0.4rem;
+        }
+        .flex-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.3rem;
+            flex-wrap: wrap;
+        }
+        .power-display {
+            font-size: 1.2rem;
+            font-weight: 700;
+            font-family: 'Times New Roman', serif;
+        }
+        .power-display .exp {
+            font-size: 0.7em;
+            vertical-align: super;
+            color: #dc2626;
+        }
+        .power-display .exp-neg {
+            color: #8b5cf6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- ===== 头部 ===== -->
+        <header class="page-header">
+            <h1>
+                📐 整数指数幂
+                <small>八年级 · 上册</small>
+            </h1>
+            <div class="nav-links">
+                <a href="#concept">核心概念</a>
+                <a href="#formula">锦囊</a>
+                <a href="#examples">举例</a>
+                <a href="#errors">易错</a>
+                <a href="#games">🎮 游戏</a>
+                <a href="#quiz">复习</a>
+            </div>
+        </header>
+
+        <!-- ============================================================ -->
+        <div class="main-grid">
+
+            <!-- ===== 左侧：知识点 ===== -->
+            <div class="knowledge-area">
+
+                <!-- 核心概念 -->
+                <div class="card" id="concept">
+                    <div class="card-title">
+                        🔍 核心概念大解析
+                        <span class="badge">负指数 · 零指数 · 运算性质</span>
+                    </div>
+
+                    <!-- 指数扩展图 -->
+                    <div style="margin:0.3rem 0;background:#f8faff;border-radius:12px;padding:0.4rem 0.6rem;border:1px solid #e2ecf9;">
+                        <div style="font-size:0.75rem;color:#4a617c;text-align:center;margin-bottom:0.2rem;">指数从正整数扩展到0和负整数</div>
+                        <div class="expo-chart">
+                            <span class="ec-item">…</span>
+                            <span class="ec-item">a<sup class="ec-sup">-3</sup></span>
+                            <span class="ec-item">a<sup class="ec-sup">-2</sup></span>
+                            <span class="ec-item">a<sup class="ec-sup">-1</sup></span>
+                            <span class="ec-item highlight">a<sup class="ec-sup" style="color:#16a34a;">0</sup></span>
+                            <span class="ec-item">a<sup class="ec-sup">1</sup></span>
+                            <span class="ec-item">a<sup class="ec-sup">2</sup></span>
+                            <span class="ec-item">a<sup class="ec-sup">3</sup></span>
+                            <span class="ec-item">…</span>
+                        </div>
+                        <div style="font-size:0.65rem;color:#4a617c;text-align:center;display:flex;justify-content:center;gap:0.8rem;flex-wrap:wrap;padding-top:0.1rem;">
+                            <span>🔹 负指数：<span style="color:#8b5cf6;font-weight:600;">a<sup>-n</sup> = 1/a<sup>n</sup></span> (a≠0)</span>
+                            <span>🔹 零指数：<span style="color:#16a34a;font-weight:600;">a<sup>0</sup> = 1</span> (a≠0)</span>
+                        </div>
+                    </div>
+
+                    <div class="formula-hero">
+                        <div class="formula-main">
+                            <span style="font-size:0.9rem;">负整数指数幂：</span>
+                            <span style="font-size:1.1rem;color:#8b5cf6;font-weight:700;">a<sup>−n</sup></span>
+                            <span style="color:#94a3b8;"> = </span>
+                            <span class="frac frac-lg"><span class="num">1</span><span class="den">a<sup>n</sup></span></span>
+                            <span style="font-size:0.9rem;color:#4a617c;display:block;margin-top:0.1rem;">(a ≠ 0，n 为正整数)</span>
+                            <hr style="border:1px dashed #dbeafe;margin:0.3rem 0;">
+                            <span style="font-size:0.9rem;">零指数幂：</span>
+                            <span style="font-size:1.1rem;color:#16a34a;font-weight:700;">a<sup>0</sup></span>
+                            <span style="color:#94a3b8;"> = </span>
+                            <span style="font-size:1.1rem;color:#16a34a;font-weight:700;">1</span>
+                            <span style="font-size:0.9rem;color:#4a617c;display:block;margin-top:0.1rem;">(a ≠ 0)</span>
+                        </div>
+                        <div class="formula-desc">
+                            负指数表示<strong>倒数</strong>，零指数表示<strong>1</strong>
+                        </div>
+                    </div>
+
+                    <div class="rule-display">
+                        <div class="rule-item">
+                            <span class="rule-math">🔹 同底数幂相乘</span>
+                            <span class="rule-desc">a<sup>m</sup> · a<sup>n</sup> = a<sup>m+n</sup></span>
+                        </div>
+                        <div class="rule-item">
+                            <span class="rule-math">🔹 幂的乘方</span>
+                            <span class="rule-desc">(a<sup>m</sup>)<sup>n</sup> = a<sup>mn</sup></span>
+                        </div>
+                        <div class="rule-item">
+                            <span class="rule-math">🔹 积的乘方</span>
+                            <span class="rule-desc">(ab)<sup>n</sup> = a<sup>n</sup>b<sup>n</sup></span>
+                        </div>
+                        <div class="rule-item">
+                            <span class="rule-math">🔹 同底数幂相除</span>
+                            <span class="rule-desc">a<sup>m</sup> ÷ a<sup>n</sup> = a<sup>m−n</sup></span>
+                        </div>
+                        <div class="rule-item">
+                            <span class="rule-math">🔹 商的乘方</span>
+                            <span class="rule-desc">(a/b)<sup>n</sup> = a<sup>n</sup>/b<sup>n</sup></span>
+                        </div>
+                    </div>
+
+                    <div style="margin-top:0.4rem; background:#f8faff; border-radius:12px; padding:0.3rem 0.7rem; border:1px solid #e2ecf9; font-size:0.75rem; display:flex; flex-wrap:wrap; gap:0.1rem 0.6rem;">
+                        <span>🔹 负指数 <strong>a<sup>−n</sup></strong> 是 <strong>a<sup>n</sup></strong> 的倒数</span>
+                        <span>🔹 底数 <strong>a ≠ 0</strong></span>
+                        <span>🔹 所有运算性质对 <strong>全体整数</strong> 指数成立</span>
+                    </div>
+                </div>
+
+                <!-- 锦囊 -->
+                <div class="card" id="formula">
+                    <div class="card-title">
+                        🧠 数学锦囊 · 公式
+                        <span class="badge">核心结论</span>
+                    </div>
+                    <div class="tip-grid">
+                        <div class="tip-item">
+                            <strong>负指数定义</strong>
+                            <div class="math-example">a<sup>−n</sup> = 1/a<sup>n</sup> (a≠0)</div>
+                        </div>
+                        <div class="tip-item">
+                            <strong>零指数</strong>
+                            <div class="math-example">a<sup>0</sup> = 1 (a≠0)</div>
+                        </div>
+                        <div class="tip-item">
+                            <strong>运算法则</strong>
+                            <div class="math-example">a<sup>m</sup>·a<sup>n</sup> = a<sup>m+n</sup></div>
+                            <div class="math-example">(a<sup>m</sup>)<sup>n</sup> = a<sup>mn</sup></div>
+                        </div>
+                        <div class="tip-item">
+                            <strong>注意</strong>
+                            <div class="math-example">底数 <strong>不能为0</strong></div>
+                            <div class="math-example">负指数 → <strong>倒数</strong></div>
+                        </div>
+                    </div>
+                    <div class="formula-box" style="margin-top:0.3rem;">
+                        💡 <strong>口诀：</strong>负指数，取倒数；零指数，等于1；运算性质全适用，底数不为零。
+                    </div>
+                </div>
+
+                <!-- 举例 -->
+                <div class="card" id="examples">
+                    <div class="card-title">
+                        ✏️ 典型举例
+                        <span class="badge">步骤演示</span>
+                    </div>
+                    <div class="example-box">
+                        <div class="ex-title">例1 计算：a<sup>−2</sup> ÷ a<sup>5</sup></div>
+                        <p style="margin-top:2px; font-size:0.88rem;">
+                            <strong>解：</strong> a<sup>−2</sup> ÷ a<sup>5</sup> = a<sup>−2−5</sup> = a<sup>−7</sup> = <span class="highlight">1/a<sup>7</sup></span>
+                        </p>
+                        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center;padding:0.2rem 0;">
+                            <span class="step">同底数幂相除，指数相减</span>
+                            <span class="step">−2−5 = −7</span>
+                            <span class="step">a<sup>−7</sup> = 1/a<sup>7</sup></span>
+                        </div>
+                    </div>
+                    <div class="example-box" style="border-left-color:#8b5cf6;">
+                        <div class="ex-title">例2 计算：(b<sup>3</sup>/a<sup>2</sup>)<sup>−2</sup></div>
+                        <p style="margin-top:2px; font-size:0.88rem;">
+                            <strong>解：</strong> (b<sup>3</sup>/a<sup>2</sup>)<sup>−2</sup> = b<sup>−6</sup>/a<sup>−4</sup> = a<sup>4</sup>b<sup>−6</sup> = <span class="highlight">a<sup>4</sup>/b<sup>6</sup></span>
+                        </p>
+                        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center;padding:0.2rem 0;">
+                            <span class="step">商的乘方，分子分母分别乘方</span>
+                            <span class="step">负指数变正：a<sup>−4</sup>→a<sup>4</sup>，b<sup>6</sup>在分母</span>
+                        </div>
+                    </div>
+                    <div class="example-box" style="border-left-color:#3b82f6;">
+                        <div class="ex-title">例3 计算：(a<sup>−1</sup>b<sup>2</sup>)<sup>3</sup></div>
+                        <p style="margin-top:2px; font-size:0.88rem;">
+                            <strong>解：</strong> (a<sup>−1</sup>b<sup>2</sup>)<sup>3</sup> = a<sup>−3</sup>b<sup>6</sup> = <span class="highlight">b<sup>6</sup>/a<sup>3</sup></span>
+                        </p>
+                        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center;padding:0.2rem 0;">
+                            <span class="step">积的乘方，各因式分别乘方</span>
+                            <span class="step">(a<sup>−1</sup>)<sup>3</sup> = a<sup>−3</sup></span>
+                            <span class="step">(b<sup>2</sup>)<sup>3</sup> = b<sup>6</sup></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 易错 -->
+                <div class="card" id="errors">
+                    <div class="card-title">
+                        ⚠️ 易错题型
+                        <span class="badge">避坑指南</span>
+                    </div>
+                    <div class="error-box">
+                        <div class="err-title">❌ 易错1：负指数与负数混淆</div>
+                        <p style="font-size:0.85rem;">
+                            a<sup>−n</sup> 表示 <span style="color:#b91c1c;">倒数</span>，不是负数。<br>
+                            例：2<sup>−3</sup> = 1/8 = 0.125，<span style="color:#b91c1c;">不是</span> −8
+                        </p>
+                        <div style="background:#fef2f2;padding:0.2rem 0.6rem;border-radius:8px;font-size:0.8rem;display:inline-block;margin-top:4px;">
+                            ✗ 2<sup>−3</sup> = −8 &nbsp;&nbsp; ✓ 2<sup>−3</sup> = 1/8
+                        </div>
+                    </div>
+                    <div class="error-box" style="border-left-color:#eab308;">
+                        <div class="err-title">❌ 易错2：底数为0的情况</div>
+                        <p style="font-size:0.85rem;">
+                            0 的负指数和0指数都 <span style="color:#b91c1c;">无意义</span>。<br>
+                            0<sup>−2</sup> = 1/0² = 1/0，分母为0，无意义。
+                        </p>
+                        <div style="background:#fef2f2;padding:0.2rem 0.6rem;border-radius:8px;font-size:0.8rem;display:inline-block;margin-top:4px;">
+                            ✓ 2<sup>0</sup> = 1 &nbsp;|&nbsp; ✗ 0<sup>0</sup> 无意义 &nbsp;|&nbsp; ✗ 0<sup>−2</sup> 无意义
+                        </div>
+                    </div>
+                    <div class="error-box" style="border-left-color:#8b5cf6;">
+                        <div class="err-title">❌ 易错3：运算性质使用错误</div>
+                        <p style="font-size:0.85rem;">
+                            负指数也要遵循运算性质。<br>
+                            例：a<sup>−2</sup> · a<sup>−3</sup> = a<sup>−5</sup> = 1/a<sup>5</sup>，<span style="color:#b91c1c;">不是</span> a<sup>6</sup>
+                        </p>
+                        <div style="background:#fef2f2;padding:0.2rem 0.6rem;border-radius:8px;font-size:0.8rem;display:inline-block;margin-top:4px;">
+                            ✗ a<sup>−2</sup>·a<sup>−3</sup> = a<sup>6</sup> &nbsp;&nbsp; ✓ a<sup>−5</sup> = 1/a<sup>5</sup>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== 右侧：游戏 ===== -->
+            <div class="game-area" id="games">
+
+                <!-- 游戏1：拖拽配对 -->
+                <div class="game-card">
+                    <div class="game-title">
+                        🧩 拖拽配对 · 指数配对
+                        <span class="g-badge">拖拽匹配</span>
+                    </div>
+                    <div class="game-desc">将左侧的 <strong>负指数表达式</strong> 拖拽到右侧对应的 <strong>分数形式</strong> 位置。</div>
+                    <div class="pair-area">
+                        <div class="pair-row" id="pairRow">
+                            <div class="pair-col" id="pairLeft">
+                                <div class="pair-col-title">📝 负指数表达式</div>
+                            </div>
+                            <div class="pair-arrow">⟷</div>
+                            <div class="pair-col" id="pairRight">
+                                <div class="pair-col-title">✅ 分数形式</div>
+                            </div>
+                        </div>
+                        <div class="pair-feedback" id="pairFeedback">💡 拖拽左侧卡片到右侧匹配</div>
+                        <div style="display:flex; justify-content:center; gap:0.3rem; flex-wrap:wrap;">
+                            <button class="btn-reset" onclick="resetPair()">🔄 重新配对</button>
+                            <button class="btn-check" onclick="checkPair()">✅ 检查答案</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 游戏2：抓娃娃机（分类） -->
+                <div class="game-card">
+                    <div class="game-title">
+                        🧸 抓娃娃机 · 性质归类
+                        <span class="g-badge">拖拽归类</span>
+                    </div>
+                    <div class="game-desc">将下方的 <strong>幂运算</strong> 拖拽到对应的 <strong>运算性质</strong> 槽中。</div>
+                    <div class="claw-area">
+                        <div class="claw-machine" id="clawMachine">
+                            <div class="claw-slot" data-target="multiply">
+                                <span class="slot-icon">✖️</span>
+                                <span>同底数<br>相乘</span>
+                                <span class="slot-label">a<sup>m</sup>·a<sup>n</sup></span>
+                            </div>
+                            <div class="claw-slot" data-target="power">
+                                <span class="slot-icon">⬆️</span>
+                                <span>幂的<br>乘方</span>
+                                <span class="slot-label">(a<sup>m</sup>)<sup>n</sup></span>
+                            </div>
+                            <div class="claw-slot" data-target="product">
+                                <span class="slot-icon">📦</span>
+                                <span>积的<br>乘方</span>
+                                <span class="slot-label">(ab)<sup>n</sup></span>
+                            </div>
+                            <div class="claw-slot" data-target="divide">
+                                <span class="slot-icon">➗</span>
+                                <span>同底数<br>相除</span>
+                                <span class="slot-label">a<sup>m</sup>÷a<sup>n</sup></span>
+                            </div>
+                        </div>
+                        <div class="claw-pool" id="clawPool"></div>
+                        <div class="claw-feedback" id="clawFeedback">💡 拖拽卡片到对应的性质槽</div>
+                        <div style="display:flex; justify-content:center; gap:0.3rem; flex-wrap:wrap;">
+                            <button class="btn-reset" onclick="resetClaw()">🔄 重新开始</button>
+                            <button class="btn-check" onclick="checkClaw()">✅ 检查答案</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 复习巩固题 -->
+        <section id="quiz" style="margin-top:1.2rem;">
+            <div class="card">
+                <div class="card-title">
+                    📝 复习巩固题
+                    <span class="badge">小测验</span>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="q">1. 计算：3<sup>−2</sup> + (−2)<sup>0</sup></div>
+                    <button class="answer-btn" onclick="toggleAnswer('ans1')">显示答案</button>
+                    <div class="a" id="ans1" style="display:none;">
+                        3<sup>−2</sup> = 1/3² = 1/9，(−2)<sup>0</sup> = 1<br>
+                        1/9 + 1 = <span class="highlight">10/9</span>
+                    </div>
+                    <div style="display:flex;gap:0.3rem;flex-wrap:wrap;margin-top:2px;">
+                        <span style="background:#f0f7fe;padding:0.05rem 0.6rem;border-radius:12px;font-size:0.75rem;">3<sup>−2</sup>=1/9</span>
+                        <span style="background:#f0f7fe;padding:0.05rem 0.6rem;border-radius:12px;font-size:0.75rem;">(−2)<sup>0</sup>=1</span>
+                        <span style="background:#f0f7fe;padding:0.05rem 0.6rem;border-radius:12px;font-size:0.75rem;">1/9+1=10/9</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="q">2. 计算：a<sup>−2</sup>b<sup>2</sup> · (a<sup>2</sup>b<sup>−2</sup>)<sup>−3</sup></div>
+                    <button class="answer-btn" onclick="toggleAnswer('ans2')">显示答案</button>
+                    <div class="a" id="ans2" style="display:none;">
+                        (a<sup>2</sup>b<sup>−2</sup>)<sup>−3</sup> = a<sup>−6</sup>b<sup>6</sup><br>
+                        a<sup>−2</sup>b<sup>2</sup> · a<sup>−6</sup>b<sup>6</sup> = a<sup>−8</sup>b<sup>8</sup> = <span class="highlight">b<sup>8</sup>/a<sup>8</sup></span>
+                    </div>
+                    <div style="display:flex;gap:0.3rem;flex-wrap:wrap;margin-top:2px;">
+                        <span style="background:#f0f7fe;padding:0.05rem 0.6rem;border-radius:12px;font-size:0.75rem;">先算乘方</span>
+                        <span style="background:#f0f7fe;padding:0.05rem 0.6rem;border-radius:12px;font-size:0.75rem;">同底数幂相乘</span>
+                        <span style="background:#f0f7fe;padding:0.05rem 0.6rem;border-radius:12px;font-size:0.75rem;">负指数化正</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 底部 ===== -->
+        <div class="footer">
+            📚 八年级数学 · 整数指数幂 &nbsp;|&nbsp; 预习课程 · 互动学习
+        </div>
+
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- JavaScript -->
+    <script>
+        // =============================================================
+        // 工具函数
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+        }
+
+        // =============================================================
+        // 游戏1：拖拽配对
+        // =============================================================
+        const pairData = [
+            { id: 'p1', left: 'a<sup>−2</sup>', right: '1/a<sup>2</sup>', pairId: 0 },
+            { id: 'p2', left: 'a<sup>−3</sup>', right: '1/a<sup>3</sup>', pairId: 1 },
+            { id: 'p3', left: '2<sup>−3</sup>', right: '1/8', pairId: 2 },
+            { id: 'p4', left: '10<sup>−2</sup>', right: '1/100', pairId: 3 },
+            { id: 'p5', left: '(−3)<sup>−2</sup>', right: '1/9', pairId: 4 }
+        ];
+
+        // 显示映射
+        const pairDisplay = {
+            'a<sup>−2</sup>': 'a<sup>−2</sup>',
+            '1/a<sup>2</sup>': '1/a<sup>2</sup>',
+            'a<sup>−3</sup>': 'a<sup>−3</sup>',
+            '1/a<sup>3</sup>': '1/a<sup>3</sup>',
+            '2<sup>−3</sup>': '2<sup>−3</sup>',
+            '1/8': '1/8',
+            '10<sup>−2</sup>': '10<sup>−2</sup>',
+            '1/100': '1/100',
+            '(−3)<sup>−2</sup>': '(−3)<sup>−2</sup>',
+            '1/9': '1/9'
+        };
+
+        let pairState = {};
+        let pairGhost = null;
+        let pairDragEl = null;
+        let pairDragId = null;
+        let pairDragOffsetX = 0,
+            pairDragOffsetY = 0;
+        let pairMatches = 0;
+
+        function buildPair() {
+            const leftCol = document.getElementById('pairLeft');
+            const rightCol = document.getElementById('pairRight');
+            leftCol.innerHTML = '<div class="pair-col-title">📝 负指数表达式</div>';
+            rightCol.innerHTML = '<div class="pair-col-title">✅ 分数形式</div>';
+
+            pairState = {};
+            pairMatches = 0;
+            pairDragId = null;
+
+            const leftItems = [...pairData];
+            const rightItems = [...pairData];
+            shuffleArray(leftItems);
+            shuffleArray(rightItems);
+
+            leftItems.forEach((item, idx) => {
+                const div = document.createElement('div');
+                div.className = 'pair-item';
+                div.dataset.id = item.id;
+                div.dataset.pairId = item.pairId;
+                div.dataset.type = 'left';
+                div.innerHTML = `<span class="math">${pairDisplay[item.left] || item.left}</span>`;
+                div.draggable = false;
+                div.addEventListener('mousedown', (e) => onPairItemMouseDown(e, div, item.id));
+                div.addEventListener('touchstart', (e) => onPairItemTouchStart(e, div, item.id), { passive: false });
+                leftCol.appendChild(div);
+                pairState[item.id] = { left: div, right: null, matched: false, pairId: item.pairId };
+            });
+
+            rightItems.forEach((item) => {
+                const div = document.createElement('div');
+                div.className = 'pair-item';
+                div.dataset.id = item.id;
+                div.dataset.pairId = item.pairId;
+                div.dataset.type = 'right';
+                div.innerHTML = `<span class="math">${pairDisplay[item.right] || item.right}</span>`;
+                div.draggable = false;
+                rightCol.appendChild(div);
+                if (pairState[item.id]) {
+                    pairState[item.id].right = div;
+                }
+            });
+
+            document.getElementById('pairFeedback').textContent = '💡 拖拽左侧卡片到右侧匹配';
+            document.getElementById('pairFeedback').style.color = '#1f3a5f';
+            document.querySelectorAll('.pair-item').forEach(el => {
+                el.classList.remove('matched', 'wrong', 'drop-target');
+            });
+        }
+
+        function onPairItemMouseDown(e, el, id) {
+            if (el.classList.contains('matched')) return;
+            e.preventDefault();
+            const item = pairState[id];
+            if (!item || item.matched) return;
+            pairDragId = id;
+            startPairDrag(el, e.clientX, e.clientY);
+            document.addEventListener('mousemove', onPairMouseMove);
+            document.addEventListener('mouseup', onPairMouseUp);
+        }
+
+        function onPairMouseMove(e) {
+            e.preventDefault();
+            movePairDrag(e.clientX, e.clientY);
+        }
+
+        function onPairMouseUp(e) {
+            document.removeEventListener('mousemove', onPairMouseMove);
+            document.removeEventListener('mouseup', onPairMouseUp);
+            endPairDrag(e.clientX, e.clientY);
+        }
+
+        function onPairItemTouchStart(e, el, id) {
+            if (el.classList.contains('matched')) return;
+            e.preventDefault();
+            const touch = e.touches[0];
+            const item = pairState[id];
+            if (!item || item.matched) return;
+            pairDragId = id;
+            startPairDrag(el, touch.clientX, touch.clientY);
+            document.addEventListener('touchmove', onPairTouchMove, { passive: false });
+            document.addEventListener('touchend', onPairTouchEnd, { passive: false });
+        }
+
+        function onPairTouchMove(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            movePairDrag(touch.clientX, touch.clientY);
+        }
+
+        function onPairTouchEnd(e) {
+            document.removeEventListener('touchmove', onPairTouchMove);
+            document.removeEventListener('touchend', onPairTouchEnd);
+            const touch = e.changedTouches[0];
+            endPairDrag(touch.clientX, touch.clientY);
+        }
+
+        function startPairDrag(el, clientX, clientY) {
+            const rect = el.getBoundingClientRect();
+            pairDragOffsetX = clientX - rect.left;
+            pairDragOffsetY = clientY - rect.top;
+            pairDragEl = el;
+            el.classList.add('dragging');
+            pairGhost = document.createElement('div');
+            pairGhost.className = 'drag-ghost';
+            pairGhost.innerHTML = el.innerHTML;
+            pairGhost.style.left = (clientX - pairDragOffsetX) + 'px';
+            pairGhost.style.top = (clientY - pairDragOffsetY) + 'px';
+            document.body.appendChild(pairGhost);
+            document.querySelectorAll('#pairRight .pair-item:not(.matched)').forEach(el => {
+                el.classList.add('drop-target');
+            });
+        }
+
+        function movePairDrag(clientX, clientY) {
+            if (pairGhost) {
+                pairGhost.style.left = (clientX - pairDragOffsetX) + 'px';
+                pairGhost.style.top = (clientY - pairDragOffsetY) + 'px';
+            }
+        }
+
+        function endPairDrag(clientX, clientY) {
+            if (pairGhost) {
+                pairGhost.remove();
+                pairGhost = null;
+            }
+            document.querySelectorAll('#pairRight .pair-item').forEach(el => {
+                el.classList.remove('drop-target');
+            });
+            if (pairDragEl) {
+                pairDragEl.classList.remove('dragging');
+            }
+
+            let targetEl = null;
+            document.querySelectorAll('#pairRight .pair-item:not(.matched)').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (clientX >= rect.left && clientX <= rect.right &&
+                    clientY >= rect.top && clientY <= rect.bottom) {
+                    targetEl = el;
+                }
+            });
+
+            if (targetEl && pairDragId !== null) {
+                const leftId = pairDragId;
+                const rightId = targetEl.dataset.id;
+                const leftItem = pairState[leftId];
+                const rightItem = pairState[rightId];
+                if (leftItem && rightItem && !leftItem.matched && !rightItem.matched) {
+                    if (leftItem.pairId === rightItem.pairId) {
+                        leftItem.matched = true;
+                        rightItem.matched = true;
+                        leftItem.left.classList.add('matched');
+                        rightItem.right.classList.add('matched');
+                        pairMatches++;
+                        document.getElementById('pairFeedback').textContent =
+                            `✅ 配对成功！${pairData.find(d=>d.id===leftId).left} = ${pairData.find(d=>d.id===rightId).right}`;
+                        document.getElementById('pairFeedback').style.color = '#16a34a';
+                        if (pairMatches === pairData.length) {
+                            document.getElementById('pairFeedback').textContent = '🎉 全部配对完成！太棒啦！';
+                            document.getElementById('pairFeedback').style.color = '#2563eb';
+                        }
+                    } else {
+                        targetEl.classList.add('wrong');
+                        setTimeout(() => targetEl.classList.remove('wrong'), 500);
+                        document.getElementById('pairFeedback').textContent =
+                            `❌ 配对错误！请再试试`;
+                        document.getElementById('pairFeedback').style.color = '#b91c1c';
+                    }
+                }
+            }
+            pairDragId = null;
+            pairDragEl = null;
+        }
+
+        function checkPair() {
+            const total = pairData.length;
+            const matched = Object.values(pairState).filter(s => s.matched).length / 2;
+            document.getElementById('pairFeedback').textContent = `📊 已配对 ${matched} / ${total}`;
+            document.getElementById('pairFeedback').style.color = '#1f3a5f';
+        }
+
+        function resetPair() {
+            buildPair();
+        }
+
+        // =============================================================
+        // 游戏2：抓娃娃机（分类）
+        // =============================================================
+        const clawData = [
+            { id: 'c1', target: 'multiply', label: 'a<sup>2</sup>·a<sup>3</sup>', short: 'a<sup>2</sup>·a<sup>3</sup>' },
+            { id: 'c2', target: 'power', label: '(a<sup>2</sup>)<sup>3</sup>', short: '(a<sup>2</sup>)<sup>3</sup>' },
+            { id: 'c3', target: 'product', label: '(ab)<sup>3</sup>', short: '(ab)<sup>3</sup>' },
+            { id: 'c4', target: 'divide', label: 'a<sup>5</sup>÷a<sup>2</sup>', short: 'a<sup>5</sup>÷a<sup>2</sup>' },
+            { id: 'c5', target: 'multiply', label: 'x<sup>−2</sup>·x<sup>4</sup>', short: 'x<sup>−2</sup>·x<sup>4</sup>' },
+            { id: 'c6', target: 'power', label: '(b<sup>3</sup>)<sup>−2</sup>', short: '(b<sup>3</sup>)<sup>−2</sup>' },
+            { id: 'c7', target: 'product', label: '(−2x)<sup>3</sup>', short: '(−2x)<sup>3</sup>' },
+            { id: 'c8', target: 'divide', label: 'a<sup>−3</sup>÷a<sup>−5</sup>', short: 'a<sup>−3</sup>÷a<sup>−5</sup>' }
+        ];
+
+        let clawItems = [];
+        let clawGhost = null;
+        let clawDragEl = null;
+        let clawDragId = null;
+        let clawDragOffsetX = 0,
+            clawDragOffsetY = 0;
+        let clawCaughtCount = 0;
+
+        function buildClaw() {
+            const machine = document.getElementById('clawMachine');
+            machine.innerHTML = `
+                <div class="claw-slot" data-target="multiply">
+                    <span class="slot-icon">✖️</span>
+                    <span>同底数<br>相乘</span>
+                    <span class="slot-label">a<sup>m</sup>·a<sup>n</sup></span>
+                </div>
+                <div class="claw-slot" data-target="power">
+                    <span class="slot-icon">⬆️</span>
+                    <span>幂的<br>乘方</span>
+                    <span class="slot-label">(a<sup>m</sup>)<sup>n</sup></span>
+                </div>
+                <div class="claw-slot" data-target="product">
+                    <span class="slot-icon">📦</span>
+                    <span>积的<br>乘方</span>
+                    <span class="slot-label">(ab)<sup>n</sup></span>
+                </div>
+                <div class="claw-slot" data-target="divide">
+                    <span class="slot-icon">➗</span>
+                    <span>同底数<br>相除</span>
+                    <span class="slot-label">a<sup>m</sup>÷a<sup>n</sup></span>
+                </div>
+            `;
+
+            clawItems = clawData.map(item => ({
+                ...item,
+                caught: false,
+                caughtIn: null
+            }));
+            clawCaughtCount = 0;
+
+            renderClawPool();
+            document.getElementById('clawFeedback').textContent = '💡 拖拽卡片到对应的性质槽';
+            document.getElementById('clawFeedback').style.color = '#1f3a5f';
+            document.querySelectorAll('.claw-slot').forEach(el => {
+                el.classList.remove('correct-catch', 'wrong-catch', 'caught');
+            });
+        }
+
+        function renderClawPool() {
+            const pool = document.getElementById('clawPool');
+            pool.innerHTML = '';
+            const uncaught = clawItems.filter(item => !item.caught);
+            uncaught.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'claw-draggable';
+                div.dataset.id = item.id;
+                div.dataset.target = item.target;
+                div.innerHTML = item.short;
+                div.draggable = false;
+                div.addEventListener('mousedown', (e) => onClawItemMouseDown(e, div, item.id));
+                div.addEventListener('touchstart', (e) => onClawItemTouchStart(e, div, item.id), { passive: false });
+                pool.appendChild(div);
+            });
+        }
+
+        function onClawItemMouseDown(e, el, id) {
+            if (el.classList.contains('placed')) return;
+            e.preventDefault();
+            const item = clawItems.find(i => i.id === id);
+            if (!item || item.caught) return;
+            clawDragId = id;
+            startClawDrag(el, e.clientX, e.clientY);
+            document.addEventListener('mousemove', onClawMouseMove);
+            document.addEventListener('mouseup', onClawMouseUp);
+        }
+
+        function onClawMouseMove(e) {
+            e.preventDefault();
+            moveClawDrag(e.clientX, e.clientY);
+        }
+
+        function onClawMouseUp(e) {
+            document.removeEventListener('mousemove', onClawMouseMove);
+            document.removeEventListener('mouseup', onClawMouseUp);
+            endClawDrag(e.clientX, e.clientY);
+        }
+
+        function onClawItemTouchStart(e, el, id) {
+            if (el.classList.contains('placed')) return;
+            e.preventDefault();
+            const touch = e.touches[0];
+            const item = clawItems.find(i => i.id === id);
+            if (!item || item.caught) return;
+            clawDragId = id;
+            startClawDrag(el, touch.clientX, touch.clientY);
+            document.addEventListener('touchmove', onClawTouchMove, { passive: false });
+            document.addEventListener('touchend', onClawTouchEnd, { passive: false });
+        }
+
+        function onClawTouchMove(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            moveClawDrag(touch.clientX, touch.clientY);
+        }
+
+        function onClawTouchEnd(e) {
+            document.removeEventListener('touchmove', onClawTouchMove);
+            document.removeEventListener('touchend', onClawTouchEnd);
+            const touch = e.changedTouches[0];
+            endClawDrag(touch.clientX, touch.clientY);
+        }
+
+        function startClawDrag(el, clientX, clientY) {
+            const rect = el.getBoundingClientRect();
+            clawDragOffsetX = clientX - rect.left;
+            clawDragOffsetY = clientY - rect.top;
+            clawDragEl = el;
+            el.classList.add('dragging');
+            clawGhost = document.createElement('div');
+            clawGhost.className = 'drag-ghost';
+            clawGhost.innerHTML = el.innerHTML;
+            clawGhost.style.left = (clientX - clawDragOffsetX) + 'px';
+            clawGhost.style.top = (clientY - clawDragOffsetY) + 'px';
+            document.body.appendChild(clawGhost);
+            document.querySelectorAll('.claw-slot:not(.caught)').forEach(el => {
+                el.style.borderColor = '#3b82f6';
+                el.style.background = '#e5effa';
+            });
+        }
+
+        function moveClawDrag(clientX, clientY) {
+            if (clawGhost) {
+                clawGhost.style.left = (clientX - clawDragOffsetX) + 'px';
+                clawGhost.style.top = (clientY - clawDragOffsetY) + 'px';
+            }
+        }
+
+        function endClawDrag(clientX, clientY) {
+            if (clawGhost) {
+                clawGhost.remove();
+                clawGhost = null;
+            }
+            document.querySelectorAll('.claw-slot').forEach(el => {
+                el.style.borderColor = '';
+                el.style.background = '';
+            });
+            if (clawDragEl) {
+                clawDragEl.classList.remove('dragging');
+            }
+
+            let targetEl = null;
+            document.querySelectorAll('.claw-slot:not(.caught)').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (clientX >= rect.left && clientX <= rect.right &&
+                    clientY >= rect.top && clientY <= rect.bottom) {
+                    targetEl = el;
+                }
+            });
+
+            if (targetEl && clawDragId !== null) {
+                const target = targetEl.dataset.target;
+                const item = clawItems.find(i => i.id === clawDragId);
+                if (item && !item.caught) {
+                    if (item.target === target) {
+                        item.caught = true;
+                        item.caughtIn = target;
+                        targetEl.classList.add('correct-catch');
+                        clawCaughtCount++;
+                        document.getElementById('clawFeedback').textContent =
+                            `✅ 正确！${item.short} → ${targetEl.querySelector('span:nth-child(2)')?.textContent?.trim() || target}`;
+                        document.getElementById('clawFeedback').style.color = '#16a34a';
+                        targetEl.classList.add('caught');
+                        renderClawPool();
+                        if (clawCaughtCount === clawData.length) {
+                            document.getElementById('clawFeedback').textContent = '🎉 全部抓取完成！太棒啦！';
+                            document.getElementById('clawFeedback').style.color = '#2563eb';
+                        }
+                    } else {
+                        targetEl.classList.add('wrong-catch');
+                        setTimeout(() => targetEl.classList.remove('wrong-catch'), 500);
+                        document.getElementById('clawFeedback').textContent =
+                            `❌ 抓取错误！${item.short} 不属于 ${targetEl.querySelector('span:nth-child(2)')?.textContent?.trim() || target}`;
+                        document.getElementById('clawFeedback').style.color = '#b91c1c';
+                    }
+                }
+            }
+            clawDragId = null;
+            clawDragEl = null;
+        }
+
+        function checkClaw() {
+            const total = clawData.length;
+            const caught = clawItems.filter(item => item.caught).length;
+            document.getElementById('clawFeedback').textContent = `📊 已抓取 ${caught} / ${total}`;
+            document.getElementById('clawFeedback').style.color = '#1f3a5f';
+        }
+
+        function resetClaw() {
+            buildClaw();
+        }
+
+        // =============================================================
+        // 显示答案
+        // =============================================================
+        function toggleAnswer(id) {
+            const el = document.getElementById(id);
+            if (el.style.display === 'none' || el.style.display === '') {
+                el.style.display = 'block';
+            } else {
+                el.style.display = 'none';
+            }
+        }
+
+        // =============================================================
+        // 导航
+        // =============================================================
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // =============================================================
+        // 初始化
+        // =============================================================
+        buildPair();
+        buildClaw();
+        console.log('📐 整数指数幂 课程已加载！');
+    </script>
+</body>
+</html>

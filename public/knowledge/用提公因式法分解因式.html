@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>提公因式法 · 初二数学预习</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', system-ui, sans-serif;
+            background: #f5f9fe;
+            color: #1e293b;
+            padding: 1rem;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 60px rgba(0, 20, 40, 0.06);
+            padding: 1.8rem 2rem 2.8rem;
+            transition: 0.2s;
+        }
+        @media (max-width: 640px) {
+            .container {
+                padding: 1rem 1rem 2rem;
+                border-radius: 20px;
+            }
+        }
+        .page-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 3px solid #e6f0fa;
+            padding-bottom: 0.8rem;
+            margin-bottom: 1.6rem;
+        }
+        .page-header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1a4b8c, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .page-header h1 small {
+            font-size: 0.9rem;
+            font-weight: 400;
+            -webkit-text-fill-color: #5f7d9c;
+            color: #5f7d9c;
+            background: none;
+        }
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem 0.5rem;
+        }
+        .nav-links a {
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            background: #f1f5f9;
+            color: #2c3e50;
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: 0.2s;
+            border: 1px solid transparent;
+        }
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: #2563eb;
+            color: #fff;
+            border-color: #2563eb;
+        }
+        @media (max-width: 600px) {
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.4rem;
+            }
+            .page-header h1 {
+                font-size: 1.4rem;
+            }
+            .nav-links a {
+                font-size: 0.65rem;
+                padding: 0.1rem 0.6rem;
+            }
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 1.8rem;
+            align-items: start;
+        }
+        @media (max-width: 920px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 1rem 1.2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+            border: 1px solid #edf2f7;
+            margin-bottom: 1rem;
+            transition: 0.2s;
+        }
+        .card-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #0b2b4a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 0.5rem;
+            border-left: 5px solid #3b82f6;
+            padding-left: 12px;
+        }
+        .card-title .badge {
+            font-size: 0.6rem;
+            background: #dbeafe;
+            color: #1e4b8a;
+            padding: 0.05rem 0.7rem;
+            border-radius: 40px;
+            font-weight: 500;
+        }
+
+        /* ===== 公式展示 ===== */
+        .formula-hero {
+            background: linear-gradient(135deg, #eef4fa, #dbeafe);
+            border-radius: 16px;
+            padding: 0.8rem 1rem;
+            text-align: center;
+            border: 2px solid #3b82f6;
+            margin: 0.3rem 0;
+        }
+        .formula-hero .formula-main {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e4b8a;
+            line-height: 1.8;
+        }
+        .formula-hero .formula-main .hl-red {
+            color: #dc2626;
+        }
+        .formula-hero .formula-main .hl-green {
+            color: #16a34a;
+        }
+        .formula-hero .formula-desc {
+            font-size: 0.85rem;
+            color: #4a617c;
+            margin-top: 0.2rem;
+        }
+
+        .rule-display {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            padding: 0.2rem 0;
+        }
+        .rule-item {
+            background: #f8faff;
+            border-radius: 12px;
+            padding: 0.5rem 0.8rem;
+            border: 1px solid #e2ecf9;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 0.3rem 0.6rem;
+        }
+        .rule-item .rule-math {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1e4b8a;
+        }
+        .rule-item .rule-desc {
+            font-size: 0.78rem;
+            color: #4a617c;
+            background: #dbeafe;
+            padding: 0.05rem 0.6rem;
+            border-radius: 20px;
+        }
+
+        .formula-box {
+            background: #f0f7fe;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border-left: 4px solid #3b82f6;
+            margin: 0.3rem 0;
+            font-size: 0.85rem;
+        }
+        .tip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.5rem;
+        }
+        .tip-item {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 0.4rem 0.7rem;
+            border: 1px solid #e2eaf2;
+            font-size: 0.8rem;
+        }
+        .tip-item strong {
+            color: #1e4b8a;
+        }
+        .tip-item .math-example {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #0b2b4a;
+            margin-top: 2px;
+        }
+
+        .example-box {
+            background: #fcf9f0;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border-left: 4px solid #eab308;
+            margin: 0.3rem 0;
+            font-size: 0.88rem;
+        }
+        .example-box .ex-title {
+            font-weight: 700;
+            color: #8a6d1b;
+        }
+        .example-box .step {
+            display: inline-block;
+            background: #fef9e7;
+            padding: 0.05rem 0.5rem;
+            border-radius: 12px;
+            margin: 2px 2px;
+            font-size: 0.8rem;
+        }
+        .error-box {
+            background: #fef2f2;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border-left: 4px solid #ef4444;
+            margin: 0.3rem 0;
+            font-size: 0.85rem;
+        }
+        .error-box .err-title {
+            font-weight: 700;
+            color: #b91c1c;
+        }
+        .highlight {
+            background: #fef9e7;
+            padding: 0.05rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .tag {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e4b8a;
+            padding: 0.05rem 0.6rem;
+            border-radius: 40px;
+            font-size: 0.65rem;
+            font-weight: 500;
+        }
+
+        /* ===== 游戏区 ===== */
+        .game-area {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .game-card {
+            background: #fafcff;
+            border-radius: 18px;
+            padding: 0.8rem 1rem 1rem;
+            border: 1px solid #e2ecf9;
+        }
+        .game-card .game-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #0b2b4a;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 0.3rem;
+        }
+        .game-card .game-title .g-badge {
+            font-size: 0.55rem;
+            background: #dbeafe;
+            padding: 0.05rem 0.6rem;
+            border-radius: 40px;
+            font-weight: 500;
+            color: #1e4b8a;
+        }
+        .game-card .game-desc {
+            font-size: 0.75rem;
+            color: #4a617c;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ===== 游戏1：拖拽配对 ===== */
+        .pair-area {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+        .pair-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: stretch;
+            gap: 0.3rem 0.6rem;
+        }
+        .pair-col {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            flex: 1;
+            min-width: 80px;
+        }
+        .pair-col-title {
+            font-size: 0.68rem;
+            font-weight: 600;
+            color: #4a617c;
+            text-align: center;
+            padding: 0.1rem 0;
+            border-bottom: 2px solid #e2ecf9;
+        }
+        .pair-item {
+            background: #ffffff;
+            border: 2px solid #dbeafe;
+            border-radius: 12px;
+            padding: 0.3rem 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: grab;
+            transition: 0.2s;
+            user-select: none;
+            text-align: center;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+            touch-action: none;
+            gap: 4px;
+        }
+        .pair-item .math {
+            font-size: 1rem;
+        }
+        .pair-item .sup {
+            font-size: 0.7rem;
+            vertical-align: super;
+            color: #dc2626;
+        }
+        .pair-item.dragging {
+            opacity: 0.5;
+            transform: scale(0.95);
+        }
+        .pair-item.drop-target {
+            border-color: #3b82f6;
+            background: #e5effa;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+        .pair-item.matched {
+            border-color: #22c55e;
+            background: #e8f8ee;
+            opacity: 0.8;
+            cursor: default;
+            pointer-events: none;
+            transform: scale(0.96);
+        }
+        .pair-item.wrong {
+            border-color: #ef4444;
+            background: #fde8e8;
+            animation: shake 0.4s ease;
+        }
+        .pair-arrow {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            font-weight: 300;
+            display: flex;
+            align-items: center;
+            padding: 0 0.2rem;
+        }
+        @keyframes shake {
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-6px);
+            }
+            75% {
+                transform: translateX(6px);
+            }
+        }
+        .pair-feedback {
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.78rem;
+            min-height: 22px;
+            margin-top: 0.2rem;
+        }
+        .btn-reset {
+            background: #eef4fa;
+            border: none;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.7rem;
+            margin: 2px 3px;
+        }
+        .btn-reset:hover {
+            background: #dbeafe;
+        }
+        .btn-check {
+            background: #dbeafe;
+            border: none;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.7rem;
+            margin: 2px 3px;
+        }
+        .btn-check:hover {
+            background: #b7d6f7;
+        }
+        @media (max-width: 480px) {
+            .pair-item {
+                font-size: 0.75rem;
+                padding: 0.2rem 0.3rem;
+                min-height: 36px;
+            }
+            .pair-item .math {
+                font-size: 0.85rem;
+            }
+            .pair-col {
+                min-width: 60px;
+            }
+        }
+
+        /* ===== 游戏2：超市购物车分类 ===== */
+        .cart-area {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+        .cart-bins {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+        .cart-bin {
+            background: #f5f9ff;
+            border: 2px dashed #b7cee8;
+            border-radius: 14px;
+            padding: 0.4rem 0.2rem;
+            min-height: 70px;
+            text-align: center;
+            transition: 0.2s;
+            position: relative;
+        }
+        .cart-bin.drag-over {
+            border-color: #2563eb;
+            background: #e5effa;
+        }
+        .cart-bin.correct-highlight {
+            border-color: #22c55e;
+            background: #e8f8ee;
+        }
+        .cart-bin.wrong-highlight {
+            border-color: #ef4444;
+            background: #fde8e8;
+        }
+        .cart-bin .bin-title {
+            font-weight: 700;
+            font-size: 0.75rem;
+            color: #1f3a5f;
+            margin-bottom: 3px;
+        }
+        .cart-bin .bin-title .emoji {
+            font-size: 0.9rem;
+        }
+        .cart-bin .bin-items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 4px;
+            min-height: 26px;
+        }
+        .cart-item {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 3px 8px;
+            border: 2px solid #dbeafe;
+            cursor: grab;
+            transition: 0.15s;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+            font-size: 0.7rem;
+            font-weight: 500;
+            user-select: none;
+            touch-action: none;
+            text-align: center;
+            min-height: 34px;
+            justify-content: center;
+        }
+        .cart-item .item-icon {
+            font-size: 0.8rem;
+            margin-right: 2px;
+        }
+        .cart-item.dragging {
+            opacity: 0.5;
+            transform: scale(0.92);
+        }
+        .cart-item.placed {
+            opacity: 0.6;
+            pointer-events: none;
+            border-color: #94a3b8;
+            transform: scale(0.94);
+        }
+        .cart-pool {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px;
+            padding: 0.4rem 0;
+            background: #f8fafc;
+            border-radius: 14px;
+            min-height: 44px;
+            border: 1px solid #e2eaf2;
+        }
+        .cart-pool .cart-item {
+            cursor: grab;
+        }
+        .cart-feedback {
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.78rem;
+            min-height: 22px;
+            margin-top: 2px;
+        }
+        @media (max-width: 600px) {
+            .cart-bins {
+                grid-template-columns: 1fr 1fr;
+                gap: 6px;
+            }
+        }
+        @media (max-width: 400px) {
+            .cart-bins {
+                grid-template-columns: 1fr;
+                gap: 6px;
+            }
+            .cart-item {
+                font-size: 0.62rem;
+                padding: 2px 5px;
+            }
+        }
+
+        /* ===== 复习题 ===== */
+        .quiz-item {
+            background: #fafcff;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border: 1px solid #e9eff6;
+            margin-bottom: 0.5rem;
+        }
+        .quiz-item .q {
+            font-weight: 600;
+            color: #0b2b4a;
+            font-size: 0.9rem;
+        }
+        .quiz-item .q .math {
+            font-size: 1rem;
+        }
+        .quiz-item .a {
+            color: #1f4b7a;
+            margin-top: 2px;
+            padding-left: 0.6rem;
+            border-left: 3px solid #b3cef0;
+            font-size: 0.85rem;
+        }
+        .quiz-item .a .highlight {
+            background: #fef9e7;
+            padding: 0.05rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .quiz-item .answer-btn {
+            background: #eef4fa;
+            border: none;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.7rem;
+            margin-top: 4px;
+        }
+        .quiz-item .answer-btn:hover {
+            background: #dbeafe;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #8ba0b8;
+            border-top: 1px solid #e9eff6;
+            padding-top: 0.8rem;
+            margin-top: 1rem;
+        }
+        @media (max-width: 480px) {
+            .card {
+                padding: 0.7rem;
+            }
+            .card-title {
+                font-size: 0.95rem;
+            }
+            .formula-box {
+                font-size: 0.78rem;
+                padding: 0.4rem 0.7rem;
+            }
+            .formula-hero .formula-main {
+                font-size: 1.05rem;
+            }
+        }
+
+        .drag-ghost {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.9;
+            transform: scale(1.05);
+            background: #ffffff;
+            border-radius: 12px;
+            border: 2px solid #2563eb;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+            padding: 4px 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #0b2b4a;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .sup {
+            font-size: 0.7em;
+            vertical-align: super;
+            color: #dc2626;
+            font-weight: 600;
+        }
+        .sup-green {
+            font-size: 0.7em;
+            vertical-align: super;
+            color: #16a34a;
+            font-weight: 600;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .mt-1 {
+            margin-top: 0.4rem;
+        }
+        .mb-1 {
+            margin-bottom: 0.4rem;
+        }
+        .flex-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.3rem;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- ===== 头部 ===== -->
+        <header class="page-header">
+            <h1>
+                📐 提公因式法
+                <small>八年级 · 上册</small>
+            </h1>
+            <div class="nav-links">
+                <a href="#concept">核心概念</a>
+                <a href="#formula">锦囊</a>
+                <a href="#examples">举例</a>
+                <a href="#errors">易错</a>
+                <a href="#games">🎮 游戏</a>
+                <a href="#quiz">复习</a>
+            </div>
+        </header>
+
+        <!-- ============================================================ -->
+        <div class="main-grid">
+
+            <!-- ===== 左侧：知识点 ===== -->
+            <div class="knowledge-area">
+
+                <!-- 核心概念 -->
+                <div class="card" id="concept">
+                    <div class="card-title">
+                        🔍 核心概念大解析
+                        <span class="badge">公因式 · 提公因式法</span>
+                    </div>
+
+                    <!-- 公式展示 -->
+                    <div class="formula-hero">
+                        <div class="formula-main">
+                            <span class="hl-red">p</span>a + <span class="hl-red">p</span>b + <span class="hl-red">p</span>c
+                            <span style="color:#94a3b8;font-weight:400;"> = </span>
+                            <span class="hl-red">p</span>(a + b + c)
+                        </div>
+                        <div class="formula-desc">
+                            把多项式各项的 <strong>公因式</strong> 提取出来，写成公因式与另一个因式乘积的形式
+                        </div>
+                    </div>
+
+                    <div class="rule-display">
+                        <div class="rule-item">
+                            <span class="rule-math">🔹 公因式</span>
+                            <span class="rule-desc">多项式各项都含有的 <strong>公共</strong> 因式</span>
+                            <span style="font-size:0.85rem;color:#1e4b8a;font-weight:600;">系数取最大公约数 · 字母取最低次幂</span>
+                        </div>
+                        <div class="rule-item">
+                            <span class="rule-math">🔹 提公因式法</span>
+                            <span class="rule-desc">将公因式提到括号外面，多项式除以公因式得到另一个因式</span>
+                        </div>
+                    </div>
+
+                    <div style="margin-top:0.4rem; background:#f8faff; border-radius:12px; padding:0.3rem 0.7rem; border:1px solid #e2ecf9; font-size:0.78rem; display:flex; flex-wrap:wrap; gap:0.1rem 0.6rem;">
+                        <span>🔹 因式分解与整式乘法是 <strong>互逆</strong> 变形</span>
+                        <span>🔹 要分解到 <strong>不能再分解</strong> 为止</span>
+                    </div>
+                </div>
+
+                <!-- 锦囊 -->
+                <div class="card" id="formula">
+                    <div class="card-title">
+                        🧠 数学锦囊 · 公式
+                        <span class="badge">核心法则</span>
+                    </div>
+                    <div class="tip-grid">
+                        <div class="tip-item">
+                            <strong>提公因式法</strong>
+                            <div class="math-example">pa + pb + pc = p(a+b+c)</div>
+                        </div>
+                        <div class="tip-item">
+                            <strong>找公因式</strong>
+                            <div class="math-example">系数：最大公约数</div>
+                            <div class="math-example">字母：相同字母最低次幂</div>
+                        </div>
+                        <div class="tip-item">
+                            <strong>注意</strong>
+                            <div class="math-example">提取公因式后，括号内</div>
+                            <div class="math-example">项数 <strong>不变</strong></div>
+                        </div>
+                        <div class="tip-item">
+                            <strong>检验</strong>
+                            <div class="math-example">用整式乘法验证</div>
+                            <div class="math-example">结果是否等于原多项式</div>
+                        </div>
+                    </div>
+                    <div class="formula-box" style="margin-top:0.3rem;">
+                        💡 <strong>口诀：</strong>公因式，要提净；系数最大公约数，字母最低次幂；提出公因剩因式，乘法验证保正确。
+                    </div>
+                </div>
+
+                <!-- 举例 -->
+                <div class="card" id="examples">
+                    <div class="card-title">
+                        ✏️ 典型举例
+                        <span class="badge">步骤演示</span>
+                    </div>
+                    <div class="example-box">
+                        <div class="ex-title">例1 分解因式：8a³b² + 12ab³c</div>
+                        <p style="margin-top:2px; font-size:0.88rem;"><strong>解：</strong> 公因式 = 4ab²<br>
+                            8a³b² + 12ab³c = 4ab²·(2a²) + 4ab²·(3bc) = <span class="highlight">4ab²(2a² + 3bc)</span></p>
+                        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center;padding:0.2rem 0;">
+                            <span class="step">系数 8和12 → 最大公约数 4</span>
+                            <span class="step">a：最低次 a¹</span>
+                            <span class="step">b：最低次 b²</span>
+                        </div>
+                    </div>
+                    <div class="example-box" style="border-left-color:#8b5cf6;">
+                        <div class="ex-title">例2 分解因式：2a(b+c) − 3(b+c)</div>
+                        <p style="margin-top:2px; font-size:0.88rem;"><strong>解：</strong> 公因式 = (b+c)<br>
+                            2a(b+c) − 3(b+c) = (b+c)(2a − 3) = <span class="highlight">(b+c)(2a−3)</span></p>
+                        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center;padding:0.2rem 0;">
+                            <span class="step">公因式是 (b+c)</span>
+                            <span class="step">提取后剩 2a 和 −3</span>
+                        </div>
+                    </div>
+                    <div class="example-box" style="border-left-color:#3b82f6;">
+                        <div class="ex-title">例3 分解因式：4(a−b)³ + 8(b−a)²</div>
+                        <p style="margin-top:2px; font-size:0.88rem;"><strong>解：</strong> (b−a)² = (a−b)²<br>
+                            4(a−b)³ + 8(a−b)² = 4(a−b)²·(a−b) + 4(a−b)²·2<br>
+                            = <span class="highlight">4(a−b)²(a−b+2)</span></p>
+                        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center;padding:0.2rem 0;">
+                            <span class="step">公因式 4(a−b)²</span>
+                            <span class="step">注意 (b−a)² = (a−b)²</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 易错 -->
+                <div class="card" id="errors">
+                    <div class="card-title">
+                        ⚠️ 易错题型
+                        <span class="badge">避坑指南</span>
+                    </div>
+                    <div class="error-box">
+                        <div class="err-title">❌ 易错1：漏提公因式或提不彻底</div>
+                        <p style="font-size:0.85rem;">例：8a³b² + 12ab³c 只提 4ab，剩下 2a²b + 3b²c 还有公因式 b。<br><span style="color:#b91c1c;">正确：</span>应提 <strong>4ab²</strong>。</p>
+                        <div style="background:#fef2f2;padding:0.2rem 0.6rem;border-radius:8px;font-size:0.8rem;display:inline-block;margin-top:4px;">
+                            ✗ 4ab(2a²b+3b²c) &nbsp;&nbsp; ✓ 4ab²(2a²+3bc)
+                        </div>
+                    </div>
+                    <div class="error-box" style="border-left-color:#eab308;">
+                        <div class="err-title">❌ 易错2：括号内漏项</div>
+                        <p style="font-size:0.85rem;">提取公因式后，括号内的<strong>项数</strong>应与原多项式<strong>相同</strong>。<br>例：3x² − 4xy² + x 提 x 后，<span style="color:#b91c1c;">不能</span>写成 x(3x − 4y²)。</p>
+                        <div style="background:#fef2f2;padding:0.2rem 0.6rem;border-radius:8px;font-size:0.8rem;display:inline-block;margin-top:4px;">
+                            ✗ x(3x − 4y²) &nbsp;&nbsp; ✓ x(3x − 4y² + 1)
+                        </div>
+                    </div>
+                    <div class="error-box" style="border-left-color:#8b5cf6;">
+                        <div class="err-title">❌ 易错3：符号处理错误</div>
+                        <p style="font-size:0.85rem;">当首项系数为负时，提公因式要注意<strong>符号</strong>。<br>例：−2x + 3x² 提 x 得 x(−2 + 3x)，<span style="color:#b91c1c;">不能</span>写成 −x(2 − 3x) 虽然等价，但要注意统一。</p>
+                        <div style="display:flex;gap:0.4rem;flex-wrap:wrap;margin-top:4px;">
+                            <span style="background:#fef2f2;padding:0.1rem 0.6rem;border-radius:12px;font-size:0.75rem;">−2x+3x² = x(−2+3x) ✓</span>
+                            <span style="background:#fef2f2;padding:0.1rem 0.6rem;border-radius:12px;font-size:0.75rem;">= −x(2−3x) ✓ 等价</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== 右侧：游戏 ===== -->
+            <div class="game-area" id="games">
+
+                <!-- 游戏1：拖拽配对 -->
+                <div class="game-card">
+                    <div class="game-title">
+                        🧩 拖拽配对 · 提公因式
+                        <span class="g-badge">拖拽匹配</span>
+                    </div>
+                    <div class="game-desc">将左侧的 <strong>多项式</strong> 拖拽到右侧对应的 <strong>分解结果</strong> 位置。</div>
+                    <div class="pair-area">
+                        <div class="pair-row" id="pairRow">
+                            <div class="pair-col" id="pairLeft">
+                                <div class="pair-col-title">📝 多项式</div>
+                            </div>
+                            <div class="pair-arrow">⟷</div>
+                            <div class="pair-col" id="pairRight">
+                                <div class="pair-col-title">✅ 因式分解结果</div>
+                            </div>
+                        </div>
+                        <div class="pair-feedback" id="pairFeedback">💡 拖拽左侧卡片到右侧匹配</div>
+                        <div style="display:flex; justify-content:center; gap:0.3rem; flex-wrap:wrap;">
+                            <button class="btn-reset" onclick="resetPair()">🔄 重新配对</button>
+                            <button class="btn-check" onclick="checkPair()">✅ 检查答案</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 游戏2：超市购物车分类 -->
+                <div class="game-card">
+                    <div class="game-title">
+                        🛒 超市购物车 · 公因式分类
+                        <span class="g-badge">拖拽归类</span>
+                    </div>
+                    <div class="game-desc">将下方的 <strong>多项式</strong> 拖拽到对应的 <strong>公因式</strong> 购物车中。</div>
+                    <div class="cart-area">
+                        <div class="cart-bins" id="cartBins">
+                            <div class="cart-bin" data-category="x">
+                                <div class="bin-title"><span class="emoji">📦</span> 公因式 = x</div>
+                                <div class="bin-items" id="bin-x"></div>
+                            </div>
+                            <div class="cart-bin" data-category="2x">
+                                <div class="bin-title"><span class="emoji">📦</span> 公因式 = 2x</div>
+                                <div class="bin-items" id="bin-2x"></div>
+                            </div>
+                            <div class="cart-bin" data-category="3y">
+                                <div class="bin-title"><span class="emoji">📦</span> 公因式 = 3y</div>
+                                <div class="bin-items" id="bin-3y"></div>
+                            </div>
+                            <div class="cart-bin" data-category="ab">
+                                <div class="bin-title"><span class="emoji">📦</span> 公因式 = ab</div>
+                                <div class="bin-items" id="bin-ab"></div>
+                            </div>
+                        </div>
+                        <div class="cart-pool" id="cartPool"></div>
+                        <div class="cart-feedback" id="cartFeedback">💡 拖拽多项式到对应的公因式购物车</div>
+                        <div style="display:flex; justify-content:center; gap:0.3rem; flex-wrap:wrap;">
+                            <button class="btn-reset" onclick="resetCart()">🔄 重新分类</button>
+                            <button class="btn-check" onclick="checkCart()">✅ 检查答案</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 复习巩固题 -->
+        <section id="quiz" style="margin-top:1.2rem;">
+            <div class="card">
+                <div class="card-title">
+                    📝 复习巩固题
+                    <span class="badge">小测验</span>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="q">1. 分解因式：6a²b + 9ab² − 15ab</div>
+                    <button class="answer-btn" onclick="toggleAnswer('ans1')">显示答案</button>
+                    <div class="a" id="ans1" style="display:none;">公因式 = 3ab<br>6a²b + 9ab² − 15ab = 3ab(2a + 3b − 5)<br>答案：<span class="highlight">3ab(2a+3b−5)</span></div>
+                    <div style="display:flex;gap:0.3rem;flex-wrap:wrap;margin-top:2px;">
+                        <span style="background:#f0f7fe;padding:0.05rem 0.6rem;border-radius:12px;font-size:0.75rem;">系数最大公约数 3</span>
+                        <span style="background:#f0f7fe;padding:0.05rem 0.6rem;border-radius:12px;font-size:0.75rem;">a最低次 a¹</span>
+                        <span style="background:#f0f7fe;padding:0.05rem 0.6rem;border-radius:12px;font-size:0.75rem;">b最低次 b¹</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="q">2. 分解因式：2m(x−y) − 3n(x−y)</div>
+                    <button class="answer-btn" onclick="toggleAnswer('ans2')">显示答案</button>
+                    <div class="a" id="ans2" style="display:none;">公因式 = (x−y)<br>2m(x−y) − 3n(x−y) = (x−y)(2m − 3n)<br>答案：<span class="highlight">(x−y)(2m−3n)</span></div>
+                    <div style="display:flex;gap:0.3rem;flex-wrap:wrap;margin-top:2px;">
+                        <span style="background:#f0f7fe;padding:0.05rem 0.6rem;border-radius:12px;font-size:0.75rem;">公因式是 (x−y)</span>
+                        <span style="background:#f0f7fe;padding:0.05rem 0.6rem;border-radius:12px;font-size:0.75rem;">提取后剩 2m 和 −3n</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 底部 ===== -->
+        <div class="footer">
+            📚 八年级数学 · 提公因式法 &nbsp;|&nbsp; 预习课程 · 互动学习
+        </div>
+
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- JavaScript -->
+    <script>
+        // =============================================================
+        // 工具函数
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+        }
+
+        // =============================================================
+        // 游戏1：拖拽配对
+        // =============================================================
+        const pairData = [
+            { id: 'p1', left: 'x² + x', right: 'x(x+1)', pairId: 0 },
+            { id: 'p2', left: '4a²b + 10ab', right: '2ab(2a+5)', pairId: 1 },
+            { id: 'p3', left: '3y² − 6y', right: '3y(y−2)', pairId: 2 },
+            { id: 'p4', left: 'ab + ac', right: 'a(b+c)', pairId: 3 }
+        ];
+
+        const pairDisplay = {
+            'x² + x': 'x<sup>2</sup> + x',
+            'x(x+1)': 'x(x+1)',
+            '4a²b + 10ab': '4a<sup>2</sup>b + 10ab',
+            '2ab(2a+5)': '2ab(2a+5)',
+            '3y² − 6y': '3y<sup>2</sup> − 6y',
+            '3y(y−2)': '3y(y−2)',
+            'ab + ac': 'ab + ac',
+            'a(b+c)': 'a(b+c)'
+        };
+
+        let pairState = {};
+        let pairGhost = null;
+        let pairDragEl = null;
+        let pairDragId = null;
+        let pairDragOffsetX = 0,
+            pairDragOffsetY = 0;
+        let pairMatches = 0;
+
+        function buildPair() {
+            const leftCol = document.getElementById('pairLeft');
+            const rightCol = document.getElementById('pairRight');
+            leftCol.innerHTML = '<div class="pair-col-title">📝 多项式</div>';
+            rightCol.innerHTML = '<div class="pair-col-title">✅ 因式分解结果</div>';
+
+            pairState = {};
+            pairMatches = 0;
+            pairDragId = null;
+
+            const leftItems = [...pairData];
+            const rightItems = [...pairData];
+            shuffleArray(leftItems);
+            shuffleArray(rightItems);
+
+            leftItems.forEach((item, idx) => {
+                const div = document.createElement('div');
+                div.className = 'pair-item';
+                div.dataset.id = item.id;
+                div.dataset.pairId = item.pairId;
+                div.dataset.type = 'left';
+                div.innerHTML = `<span class="math">${pairDisplay[item.left] || item.left}</span>`;
+                div.draggable = false;
+                div.addEventListener('mousedown', (e) => onPairItemMouseDown(e, div, item.id));
+                div.addEventListener('touchstart', (e) => onPairItemTouchStart(e, div, item.id), { passive: false });
+                leftCol.appendChild(div);
+                pairState[item.id] = { left: div, right: null, matched: false, pairId: item.pairId };
+            });
+
+            rightItems.forEach((item) => {
+                const div = document.createElement('div');
+                div.className = 'pair-item';
+                div.dataset.id = item.id;
+                div.dataset.pairId = item.pairId;
+                div.dataset.type = 'right';
+                div.innerHTML = `<span class="math">${pairDisplay[item.right] || item.right}</span>`;
+                div.draggable = false;
+                rightCol.appendChild(div);
+                if (pairState[item.id]) {
+                    pairState[item.id].right = div;
+                }
+            });
+
+            document.getElementById('pairFeedback').textContent = '💡 拖拽左侧卡片到右侧匹配';
+            document.getElementById('pairFeedback').style.color = '#1f3a5f';
+            document.querySelectorAll('.pair-item').forEach(el => {
+                el.classList.remove('matched', 'wrong', 'drop-target');
+            });
+        }
+
+        function onPairItemMouseDown(e, el, id) {
+            if (el.classList.contains('matched')) return;
+            e.preventDefault();
+            const item = pairState[id];
+            if (!item || item.matched) return;
+            pairDragId = id;
+            startPairDrag(el, e.clientX, e.clientY);
+            document.addEventListener('mousemove', onPairMouseMove);
+            document.addEventListener('mouseup', onPairMouseUp);
+        }
+
+        function onPairMouseMove(e) {
+            e.preventDefault();
+            movePairDrag(e.clientX, e.clientY);
+        }
+
+        function onPairMouseUp(e) {
+            document.removeEventListener('mousemove', onPairMouseMove);
+            document.removeEventListener('mouseup', onPairMouseUp);
+            endPairDrag(e.clientX, e.clientY);
+        }
+
+        function onPairItemTouchStart(e, el, id) {
+            if (el.classList.contains('matched')) return;
+            e.preventDefault();
+            const touch = e.touches[0];
+            const item = pairState[id];
+            if (!item || item.matched) return;
+            pairDragId = id;
+            startPairDrag(el, touch.clientX, touch.clientY);
+            document.addEventListener('touchmove', onPairTouchMove, { passive: false });
+            document.addEventListener('touchend', onPairTouchEnd, { passive: false });
+        }
+
+        function onPairTouchMove(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            movePairDrag(touch.clientX, touch.clientY);
+        }
+
+        function onPairTouchEnd(e) {
+            document.removeEventListener('touchmove', onPairTouchMove);
+            document.removeEventListener('touchend', onPairTouchEnd);
+            const touch = e.changedTouches[0];
+            endPairDrag(touch.clientX, touch.clientY);
+        }
+
+        function startPairDrag(el, clientX, clientY) {
+            const rect = el.getBoundingClientRect();
+            pairDragOffsetX = clientX - rect.left;
+            pairDragOffsetY = clientY - rect.top;
+            pairDragEl = el;
+            el.classList.add('dragging');
+            pairGhost = document.createElement('div');
+            pairGhost.className = 'drag-ghost';
+            pairGhost.innerHTML = el.innerHTML;
+            pairGhost.style.left = (clientX - pairDragOffsetX) + 'px';
+            pairGhost.style.top = (clientY - pairDragOffsetY) + 'px';
+            document.body.appendChild(pairGhost);
+            document.querySelectorAll('#pairRight .pair-item:not(.matched)').forEach(el => {
+                el.classList.add('drop-target');
+            });
+        }
+
+        function movePairDrag(clientX, clientY) {
+            if (pairGhost) {
+                pairGhost.style.left = (clientX - pairDragOffsetX) + 'px';
+                pairGhost.style.top = (clientY - pairDragOffsetY) + 'px';
+            }
+        }
+
+        function endPairDrag(clientX, clientY) {
+            if (pairGhost) {
+                pairGhost.remove();
+                pairGhost = null;
+            }
+            document.querySelectorAll('#pairRight .pair-item').forEach(el => {
+                el.classList.remove('drop-target');
+            });
+            if (pairDragEl) {
+                pairDragEl.classList.remove('dragging');
+            }
+
+            let targetEl = null;
+            document.querySelectorAll('#pairRight .pair-item:not(.matched)').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (clientX >= rect.left && clientX <= rect.right &&
+                    clientY >= rect.top && clientY <= rect.bottom) {
+                    targetEl = el;
+                }
+            });
+
+            if (targetEl && pairDragId !== null) {
+                const leftId = pairDragId;
+                const rightId = targetEl.dataset.id;
+                const leftItem = pairState[leftId];
+                const rightItem = pairState[rightId];
+                if (leftItem && rightItem && !leftItem.matched && !rightItem.matched) {
+                    if (leftItem.pairId === rightItem.pairId) {
+                        leftItem.matched = true;
+                        rightItem.matched = true;
+                        leftItem.left.classList.add('matched');
+                        rightItem.right.classList.add('matched');
+                        pairMatches++;
+                        document.getElementById('pairFeedback').textContent =
+                            `✅ 配对成功！${pairData.find(d=>d.id===leftId).left} = ${pairData.find(d=>d.id===rightId).right}`;
+                        document.getElementById('pairFeedback').style.color = '#16a34a';
+                        if (pairMatches === pairData.length) {
+                            document.getElementById('pairFeedback').textContent = '🎉 全部配对完成！太棒啦！';
+                            document.getElementById('pairFeedback').style.color = '#2563eb';
+                        }
+                    } else {
+                        targetEl.classList.add('wrong');
+                        setTimeout(() => targetEl.classList.remove('wrong'), 500);
+                        document.getElementById('pairFeedback').textContent =
+                            `❌ 配对错误！请再试试`;
+                        document.getElementById('pairFeedback').style.color = '#b91c1c';
+                    }
+                }
+            }
+            pairDragId = null;
+            pairDragEl = null;
+        }
+
+        function checkPair() {
+            const total = pairData.length;
+            const matched = Object.values(pairState).filter(s => s.matched).length / 2;
+            document.getElementById('pairFeedback').textContent = `📊 已配对 ${matched} / ${total}`;
+            document.getElementById('pairFeedback').style.color = '#1f3a5f';
+        }
+
+        function resetPair() {
+            buildPair();
+        }
+
+        // =============================================================
+        // 游戏2：超市购物车分类
+        // =============================================================
+        const cartData = [{
+            id: 'r1',
+            category: 'x',
+            label: 'x² + 3x',
+            icon: '📐'
+        }, {
+            id: 'r2',
+            category: '2x',
+            label: '2x² + 4x',
+            icon: '📐'
+        }, {
+            id: 'r3',
+            category: '2x',
+            label: '6x − 2x²',
+            icon: '📐'
+        }, {
+            id: 'r4',
+            category: '3y',
+            label: '3y² + 6y',
+            icon: '📐'
+        }, {
+            id: 'r5',
+            category: '3y',
+            label: '9y − 3y²',
+            icon: '📐'
+        }, {
+            id: 'r6',
+            category: 'ab',
+            label: 'a²b + ab²',
+            icon: '📐'
+        }, {
+            id: 'r7',
+            category: 'ab',
+            label: 'ab − 2a²b',
+            icon: '📐'
+        }, {
+            id: 'r8',
+            category: 'x',
+            label: 'x² − 5x',
+            icon: '📐'
+        }];
+
+        let cartItems = [];
+        let cartGhost = null;
+        let cartDragEl = null;
+        let cartDragId = null;
+        let cartDragOffsetX = 0,
+            cartDragOffsetY = 0;
+
+        function buildCart() {
+            cartItems = cartData.map(item => ({
+                ...item,
+                placed: false,
+                placedIn: null
+            }));
+            renderCart();
+            document.getElementById('cartFeedback').textContent = '💡 拖拽多项式到对应的公因式购物车';
+            document.getElementById('cartFeedback').style.color = '#1f3a5f';
+            document.querySelectorAll('.cart-bin').forEach(b => {
+                b.classList.remove('correct-highlight', 'wrong-highlight');
+            });
+        }
+
+        function renderCart() {
+            document.querySelectorAll('.bin-items').forEach(el => el.innerHTML = '');
+            const pool = document.getElementById('cartPool');
+            pool.innerHTML = '';
+
+            const unplaced = cartItems.filter(item => !item.placed);
+            unplaced.forEach(item => {
+                const el = createCartItemElement(item, false);
+                pool.appendChild(el);
+            });
+
+            cartItems.filter(item => item.placed).forEach(item => {
+                const bin = document.getElementById(`bin-${item.placedIn}`);
+                if (bin) {
+                    const el = createCartItemElement(item, true);
+                    bin.appendChild(el);
+                }
+            });
+        }
+
+        function createCartItemElement(item, placed) {
+            const div = document.createElement('div');
+            div.className = `cart-item ${placed ? 'placed' : ''}`;
+            div.dataset.id = item.id;
+            div.dataset.category = item.category;
+            div.innerHTML = `<span class="item-icon">${item.icon}</span> ${item.label}`;
+            if (!placed) {
+                div.draggable = false;
+                div.addEventListener('mousedown', (e) => onCartItemMouseDown(e, div, item.id));
+                div.addEventListener('touchstart', (e) => onCartItemTouchStart(e, div, item.id), { passive: false });
+            }
+            return div;
+        }
+
+        function onCartItemMouseDown(e, el, id) {
+            if (el.classList.contains('placed')) return;
+            e.preventDefault();
+            const item = cartItems.find(i => i.id === id);
+            if (!item || item.placed) return;
+            cartDragId = id;
+            startCartDrag(el, e.clientX, e.clientY);
+            document.addEventListener('mousemove', onCartMouseMove);
+            document.addEventListener('mouseup', onCartMouseUp);
+        }
+
+        function onCartMouseMove(e) {
+            e.preventDefault();
+            moveCartDrag(e.clientX, e.clientY);
+        }
+
+        function onCartMouseUp(e) {
+            document.removeEventListener('mousemove', onCartMouseMove);
+            document.removeEventListener('mouseup', onCartMouseUp);
+            endCartDrag(e.clientX, e.clientY);
+        }
+
+        function onCartItemTouchStart(e, el, id) {
+            if (el.classList.contains('placed')) return;
+            e.preventDefault();
+            const touch = e.touches[0];
+            const item = cartItems.find(i => i.id === id);
+            if (!item || item.placed) return;
+            cartDragId = id;
+            startCartDrag(el, touch.clientX, touch.clientY);
+            document.addEventListener('touchmove', onCartTouchMove, { passive: false });
+            document.addEventListener('touchend', onCartTouchEnd, { passive: false });
+        }
+
+        function onCartTouchMove(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            moveCartDrag(touch.clientX, touch.clientY);
+        }
+
+        function onCartTouchEnd(e) {
+            document.removeEventListener('touchmove', onCartTouchMove);
+            document.removeEventListener('touchend', onCartTouchEnd);
+            const touch = e.changedTouches[0];
+            endCartDrag(touch.clientX, touch.clientY);
+        }
+
+        function startCartDrag(el, clientX, clientY) {
+            const rect = el.getBoundingClientRect();
+            cartDragOffsetX = clientX - rect.left;
+            cartDragOffsetY = clientY - rect.top;
+            cartDragEl = el;
+            el.classList.add('dragging');
+            cartGhost = document.createElement('div');
+            cartGhost.className = 'drag-ghost';
+            cartGhost.textContent = el.textContent;
+            cartGhost.style.left = (clientX - cartDragOffsetX) + 'px';
+            cartGhost.style.top = (clientY - cartDragOffsetY) + 'px';
+            document.body.appendChild(cartGhost);
+            document.querySelectorAll('.cart-bin').forEach(b => b.classList.add('drag-over'));
+        }
+
+        function moveCartDrag(clientX, clientY) {
+            if (cartGhost) {
+                cartGhost.style.left = (clientX - cartDragOffsetX) + 'px';
+                cartGhost.style.top = (clientY - cartDragOffsetY) + 'px';
+            }
+            document.querySelectorAll('.cart-bin').forEach(b => {
+                const rect = b.getBoundingClientRect();
+                if (clientX >= rect.left && clientX <= rect.right &&
+                    clientY >= rect.top && clientY <= rect.bottom) {
+                    b.classList.add('drag-over');
+                } else {
+                    b.classList.remove('drag-over');
+                }
+            });
+        }
+
+        function endCartDrag(clientX, clientY) {
+            if (cartGhost) {
+                cartGhost.remove();
+                cartGhost = null;
+            }
+            document.querySelectorAll('.cart-bin').forEach(b => b.classList.remove('drag-over'));
+            if (cartDragEl) {
+                cartDragEl.classList.remove('dragging');
+            }
+
+            let targetBin = null;
+            document.querySelectorAll('.cart-bin').forEach(b => {
+                const rect = b.getBoundingClientRect();
+                if (clientX >= rect.left && clientX <= rect.right &&
+                    clientY >= rect.top && clientY <= rect.bottom) {
+                    targetBin = b;
+                }
+            });
+
+            if (targetBin && cartDragId !== null) {
+                const category = targetBin.dataset.category;
+                const item = cartItems.find(i => i.id === cartDragId);
+                if (item && !item.placed) {
+                    const correct = (item.category === category);
+                    if (correct) {
+                        item.placed = true;
+                        item.placedIn = category;
+                        targetBin.classList.add('correct-highlight');
+                        setTimeout(() => targetBin.classList.remove('correct-highlight'), 500);
+                        document.getElementById('cartFeedback').textContent =
+                            `✅ 正确！“${item.label}” 放入 “公因式 = ${category}”`;
+                        document.getElementById('cartFeedback').style.color = '#16a34a';
+                    } else {
+                        targetBin.classList.add('wrong-highlight');
+                        setTimeout(() => targetBin.classList.remove('wrong-highlight'), 500);
+                        document.getElementById('cartFeedback').textContent =
+                            `❌ 再想想！“${item.label}” 的公因式不是 ${category}`;
+                        document.getElementById('cartFeedback').style.color = '#b91c1c';
+                    }
+                    renderCart();
+                    checkAllCartPlaced();
+                }
+            }
+            cartDragId = null;
+            cartDragEl = null;
+        }
+
+        function checkAllCartPlaced() {
+            const allPlaced = cartItems.every(item => item.placed);
+            if (allPlaced) {
+                document.getElementById('cartFeedback').textContent = '🎉 所有卡片已分类！点击“检查答案”查看正确率。';
+                document.getElementById('cartFeedback').style.color = '#2563eb';
+            }
+        }
+
+        function checkCart() {
+            const total = cartItems.length;
+            let correct = 0;
+            cartItems.forEach(item => {
+                if (item.placed && item.category === item.placedIn) correct++;
+            });
+            document.getElementById('cartFeedback').textContent =
+                `📊 正确率：${correct} / ${total}  (${Math.round(correct/total*100)}%)`;
+            document.getElementById('cartFeedback').style.color = '#1f3a5f';
+            document.querySelectorAll('.cart-bin').forEach(bin => {
+                bin.classList.remove('correct-highlight', 'wrong-highlight');
+                const cat = bin.dataset.category;
+                const itemsInBin = cartItems.filter(item => item.placed && item.placedIn === cat);
+                let allCorrect = itemsInBin.every(item => item.category === cat);
+                if (itemsInBin.length > 0 && allCorrect) {
+                    bin.classList.add('correct-highlight');
+                } else if (itemsInBin.length > 0) {
+                    bin.classList.add('wrong-highlight');
+                }
+            });
+        }
+
+        function resetCart() {
+            buildCart();
+        }
+
+        // =============================================================
+        // 显示答案
+        // =============================================================
+        function toggleAnswer(id) {
+            const el = document.getElementById(id);
+            if (el.style.display === 'none' || el.style.display === '') {
+                el.style.display = 'block';
+            } else {
+                el.style.display = 'none';
+            }
+        }
+
+        // =============================================================
+        // 导航
+        // =============================================================
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // =============================================================
+        // 初始化
+        // =============================================================
+        buildPair();
+        buildCart();
+        console.log('📐 提公因式法 课程已加载！');
+    </script>
+</body>
+</html>

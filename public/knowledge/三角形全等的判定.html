@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>三角形全等的判定 · 初二数学预习</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', system-ui, sans-serif;
+            background: #f5f9fe;
+            color: #1e293b;
+            padding: 1rem;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 60px rgba(0, 20, 40, 0.06);
+            padding: 1.8rem 2rem 2.8rem;
+            transition: 0.2s;
+        }
+        @media (max-width: 640px) {
+            .container {
+                padding: 1rem 1rem 2rem;
+                border-radius: 20px;
+            }
+        }
+
+        .page-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 3px solid #e6f0fa;
+            padding-bottom: 0.8rem;
+            margin-bottom: 1.6rem;
+        }
+        .page-header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1a4b8c, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .page-header h1 small {
+            font-size: 0.9rem;
+            font-weight: 400;
+            -webkit-text-fill-color: #5f7d9c;
+            color: #5f7d9c;
+            background: none;
+        }
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem 0.5rem;
+        }
+        .nav-links a {
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            background: #f1f5f9;
+            color: #2c3e50;
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: 0.2s;
+            border: 1px solid transparent;
+        }
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: #2563eb;
+            color: #fff;
+            border-color: #2563eb;
+        }
+        @media (max-width: 600px) {
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.4rem;
+            }
+            .page-header h1 {
+                font-size: 1.4rem;
+            }
+            .nav-links a {
+                font-size: 0.65rem;
+                padding: 0.1rem 0.6rem;
+            }
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 1.8rem;
+            align-items: start;
+        }
+        @media (max-width: 920px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 1rem 1.2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+            border: 1px solid #edf2f7;
+            margin-bottom: 1rem;
+            transition: 0.2s;
+        }
+        .card-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #0b2b4a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 0.5rem;
+            border-left: 5px solid #3b82f6;
+            padding-left: 12px;
+        }
+        .card-title .badge {
+            font-size: 0.6rem;
+            background: #dbeafe;
+            color: #1e4b8a;
+            padding: 0.05rem 0.7rem;
+            border-radius: 40px;
+            font-weight: 500;
+        }
+
+        .tri-flex {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem 0.8rem;
+            padding: 0.2rem 0;
+        }
+        .tri-item {
+            text-align: center;
+            background: #fafcff;
+            border-radius: 14px;
+            padding: 0.3rem 0.5rem 0.2rem;
+            border: 1px solid #e9edf4;
+            min-width: 60px;
+            transition: 0.2s;
+        }
+        .tri-item:hover {
+            border-color: #b3cef0;
+        }
+        .tri-item svg {
+            display: block;
+            margin: 0 auto;
+            width: 64px;
+            height: 46px;
+        }
+        .tri-item .label {
+            font-size: 0.62rem;
+            font-weight: 600;
+            color: #1f3a5f;
+            margin-top: 1px;
+        }
+
+        .formula-box {
+            background: #f0f7fe;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border-left: 4px solid #3b82f6;
+            margin: 0.3rem 0;
+            font-size: 0.85rem;
+        }
+        .tip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.5rem;
+        }
+        .tip-item {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 0.4rem 0.7rem;
+            border: 1px solid #e2eaf2;
+            font-size: 0.76rem;
+        }
+        .tip-item strong {
+            color: #1e4b8a;
+        }
+        .tip-item .sub {
+            font-size: 0.7rem;
+            color: #4a617c;
+        }
+
+        .example-box {
+            background: #fcf9f0;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border-left: 4px solid #eab308;
+            margin: 0.3rem 0;
+            font-size: 0.85rem;
+        }
+        .example-box .ex-title {
+            font-weight: 700;
+            color: #8a6d1b;
+        }
+        .error-box {
+            background: #fef2f2;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border-left: 4px solid #ef4444;
+            margin: 0.3rem 0;
+            font-size: 0.85rem;
+        }
+        .error-box .err-title {
+            font-weight: 700;
+            color: #b91c1c;
+        }
+        .highlight {
+            background: #fef9e7;
+            padding: 0.05rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .tag {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e4b8a;
+            padding: 0.05rem 0.6rem;
+            border-radius: 40px;
+            font-size: 0.65rem;
+            font-weight: 500;
+        }
+
+        .game-area {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .game-card {
+            background: #fafcff;
+            border-radius: 18px;
+            padding: 0.8rem 1rem 1rem;
+            border: 1px solid #e2ecf9;
+        }
+        .game-card .game-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #0b2b4a;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 0.3rem;
+        }
+        .game-card .game-title .g-badge {
+            font-size: 0.55rem;
+            background: #dbeafe;
+            padding: 0.05rem 0.6rem;
+            border-radius: 40px;
+            font-weight: 500;
+            color: #1e4b8a;
+        }
+        .game-card .game-desc {
+            font-size: 0.75rem;
+            color: #4a617c;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ===== 游戏1：连连看拖拽配对 ===== */
+        .match-area {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        .match-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem 0.8rem;
+        }
+        .match-left {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.4rem;
+            flex: 1;
+            min-width: 140px;
+        }
+        .match-right {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.4rem;
+            flex: 1;
+            min-width: 140px;
+        }
+        .match-item {
+            background: #ffffff;
+            border: 2px solid #dbeafe;
+            border-radius: 12px;
+            padding: 0.3rem 0.7rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: pointer;
+            transition: 0.2s;
+            user-select: none;
+            text-align: center;
+            min-width: 56px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+        }
+        .match-item svg {
+            display: block;
+            margin: 0 auto 2px;
+            width: 32px;
+            height: 24px;
+        }
+        .match-item.selected {
+            border-color: #2563eb;
+            background: #e5effa;
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+        }
+        .match-item.matched {
+            border-color: #22c55e;
+            background: #e8f8ee;
+            opacity: 0.6;
+            cursor: default;
+            pointer-events: none;
+            transform: scale(0.95);
+        }
+        .match-item.wrong {
+            border-color: #ef4444;
+            background: #fde8e8;
+            animation: shake 0.4s ease;
+        }
+        @keyframes shake {
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-8px);
+            }
+            75% {
+                transform: translateX(8px);
+            }
+        }
+        .match-arrow {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            font-weight: 300;
+            padding: 0 0.2rem;
+        }
+        .match-feedback {
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.82rem;
+            min-height: 24px;
+            margin-top: 0.2rem;
+        }
+        .btn-reset {
+            background: #eef4fa;
+            border: none;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.72rem;
+            margin: 2px 3px;
+        }
+        .btn-reset:hover {
+            background: #dbeafe;
+        }
+        .btn-check {
+            background: #dbeafe;
+            border: none;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.72rem;
+            margin: 2px 3px;
+        }
+        .btn-check:hover {
+            background: #b7d6f7;
+        }
+        @media (max-width: 480px) {
+            .match-item {
+                font-size: 0.65rem;
+                padding: 0.2rem 0.5rem;
+                min-width: 44px;
+            }
+            .match-item svg {
+                width: 26px;
+                height: 20px;
+            }
+        }
+
+        /* ===== 游戏2：拖拽分类 ===== */
+        .sort-area {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+        .sort-bins {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+        }
+        .sort-bin {
+            background: #f5f9ff;
+            border: 2px dashed #b7cee8;
+            border-radius: 14px;
+            padding: 0.4rem 0.2rem;
+            min-height: 64px;
+            text-align: center;
+            transition: 0.2s;
+            position: relative;
+        }
+        .sort-bin.drag-over {
+            border-color: #2563eb;
+            background: #e5effa;
+        }
+        .sort-bin.correct-highlight {
+            border-color: #22c55e;
+            background: #e8f8ee;
+        }
+        .sort-bin.wrong-highlight {
+            border-color: #ef4444;
+            background: #fde8e8;
+        }
+        .sort-bin .bin-title {
+            font-weight: 700;
+            font-size: 0.68rem;
+            color: #1f3a5f;
+            margin-bottom: 2px;
+        }
+        .sort-bin .bin-items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 4px;
+            min-height: 26px;
+        }
+        .sort-item {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 2px 6px 2px 4px;
+            border: 2px solid #dbeafe;
+            cursor: grab;
+            transition: 0.15s;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+            font-size: 0.55rem;
+            font-weight: 500;
+            user-select: none;
+            touch-action: none;
+        }
+        .sort-item svg {
+            width: 26px;
+            height: 20px;
+            display: block;
+        }
+        .sort-item.selected {
+            border-color: #2563eb;
+            background: #e5effa;
+            transform: scale(1.04);
+        }
+        .sort-item.placed {
+            opacity: 0.7;
+            pointer-events: none;
+            border-color: #94a3b8;
+        }
+        .sort-item.dragging {
+            opacity: 0.6;
+            transform: scale(0.95);
+            z-index: 1000;
+            position: fixed;
+            pointer-events: none;
+        }
+        .sort-pool {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px;
+            padding: 0.4rem 0;
+            background: #f8fafc;
+            border-radius: 14px;
+            min-height: 48px;
+            border: 1px solid #e2eaf2;
+        }
+        .sort-pool .sort-item {
+            cursor: grab;
+        }
+        .sort-feedback {
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.78rem;
+            min-height: 22px;
+            margin-top: 2px;
+        }
+        @media (max-width: 600px) {
+            .sort-bins {
+                grid-template-columns: 1fr 1fr;
+                gap: 6px;
+            }
+        }
+        @media (max-width: 400px) {
+            .sort-bins {
+                grid-template-columns: 1fr;
+                gap: 6px;
+            }
+        }
+
+        /* ===== 复习题 ===== */
+        .quiz-item {
+            background: #fafcff;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border: 1px solid #e9eff6;
+            margin-bottom: 0.5rem;
+        }
+        .quiz-item .q {
+            font-weight: 600;
+            color: #0b2b4a;
+            font-size: 0.86rem;
+        }
+        .quiz-item .a {
+            color: #1f4b7a;
+            margin-top: 2px;
+            padding-left: 0.6rem;
+            border-left: 3px solid #b3cef0;
+            font-size: 0.82rem;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #8ba0b8;
+            border-top: 1px solid #e9eff6;
+            padding-top: 0.8rem;
+            margin-top: 1rem;
+        }
+        @media (max-width: 480px) {
+            .card {
+                padding: 0.7rem;
+            }
+            .card-title {
+                font-size: 0.95rem;
+            }
+            .formula-box {
+                font-size: 0.76rem;
+                padding: 0.4rem 0.7rem;
+            }
+            .tri-item svg {
+                width: 50px;
+                height: 38px;
+            }
+        }
+
+        .drag-ghost {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.85;
+            transform: scale(1.08);
+            background: #ffffff;
+            border-radius: 12px;
+            border: 2px solid #2563eb;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+            padding: 4px 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #0b2b4a;
+        }
+        .drag-ghost svg {
+            width: 28px;
+            height: 22px;
+        }
+
+        .congruent-badge {
+            display: inline-block;
+            background: #dbeafe;
+            padding: 0.1rem 0.6rem;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: #1e4b8a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- ===== 头部 ===== -->
+        <header class="page-header">
+            <h1>
+                📐 三角形全等的判定
+                <small>八年级 · 上册</small>
+            </h1>
+            <div class="nav-links">
+                <a href="#concept">核心概念</a>
+                <a href="#formula">锦囊</a>
+                <a href="#examples">举例</a>
+                <a href="#errors">易错</a>
+                <a href="#games">🎮 游戏</a>
+                <a href="#quiz">复习</a>
+            </div>
+        </header>
+
+        <!-- ============================================================ -->
+        <div class="main-grid">
+
+            <!-- ===== 左侧：知识点 ===== -->
+            <div class="knowledge-area">
+
+                <!-- 核心概念 -->
+                <div class="card" id="concept">
+                    <div class="card-title">
+                        🔍 核心概念大解析
+                        <span class="badge">判定方法 · 条件</span>
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; align-items:start;">
+                        <div>
+                            <div style="background:#f0f7fe; border-radius:10px; padding:0.3rem 0.6rem; margin-bottom:0.3rem;">
+                                <strong style="color:#1e4b8a; font-size:0.82rem;">📌 全等判定基本事实</strong>
+                                <p style="font-size:0.78rem; margin:0;"><span class="congruent-badge">SAS</span> 两边夹角</p>
+                                <p style="font-size:0.78rem; margin:0;"><span class="congruent-badge">ASA</span> 两角夹边</p>
+                                <p style="font-size:0.78rem; margin:0;"><span class="congruent-badge">SSS</span> 三边</p>
+                            </div>
+                            <div style="background:#f0f7fe; border-radius:10px; padding:0.3rem 0.6rem; margin-bottom:0.3rem;">
+                                <strong style="color:#1e4b8a; font-size:0.82rem;">📌 推论</strong>
+                                <p style="font-size:0.78rem; margin:0;"><span class="congruent-badge">AAS</span> 两角及对边</p>
+                            </div>
+                            <div style="background:#f0f7fe; border-radius:10px; padding:0.3rem 0.6rem;">
+                                <strong style="color:#1e4b8a; font-size:0.82rem;">📌 直角三角形</strong>
+                                <p style="font-size:0.78rem; margin:0;"><span class="congruent-badge">HL</span> 斜边+直角边</p>
+                            </div>
+                        </div>
+                        <div class="tri-flex" style="gap:0.2rem; padding:0;">
+                            <div class="tri-item">
+                                <svg viewBox="0 0 60 42"><polygon points="30,3 6,39 54,39" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><text x="22" y="16" font-size="7" fill="#1f3a5f">边</text><text x="6" y="36" font-size="7" fill="#1f3a5f">角</text><text x="42" y="36" font-size="7" fill="#1f3a5f">边</text></svg>
+                                <div class="label">SAS</div>
+                            </div>
+                            <div class="tri-item">
+                                <svg viewBox="0 0 60 42"><polygon points="30,3 6,39 54,39" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><text x="22" y="16" font-size="7" fill="#1f3a5f">角</text><text x="6" y="36" font-size="7" fill="#1f3a5f">边</text><text x="42" y="36" font-size="7" fill="#1f3a5f">角</text></svg>
+                                <div class="label">ASA</div>
+                            </div>
+                            <div class="tri-item">
+                                <svg viewBox="0 0 60 42"><polygon points="30,3 6,39 54,39" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><text x="18" y="16" font-size="7" fill="#1f3a5f">边</text><text x="2" y="36" font-size="7" fill="#1f3a5f">边</text><text x="38" y="36" font-size="7" fill="#1f3a5f">边</text></svg>
+                                <div class="label">SSS</div>
+                            </div>
+                            <div class="tri-item">
+                                <svg viewBox="0 0 60 42"><polygon points="30,3 6,39 54,39" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><text x="22" y="16" font-size="7" fill="#1f3a5f">角</text><text x="6" y="36" font-size="7" fill="#1f3a5f">角</text><text x="42" y="36" font-size="7" fill="#1f3a5f">边</text></svg>
+                                <div class="label">AAS</div>
+                            </div>
+                            <div class="tri-item">
+                                <svg viewBox="0 0 60 42"><polygon points="30,3 6,39 54,39" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><rect x="4" y="35" width="4" height="4" fill="none" stroke="#dc2626" stroke-width="1.5"/><text x="22" y="16" font-size="7" fill="#1f3a5f">HL</text></svg>
+                                <div class="label">HL</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top:0.3rem; background:#f8faff; border-radius:12px; padding:0.3rem 0.7rem; border:1px solid #e2ecf9; font-size:0.75rem; display:flex; flex-wrap:wrap; gap:0.1rem 0.6rem;">
+                        <span>🔹 判定条件 <strong>至少三个</strong> 元素</span>
+                        <span>🔹 注意 <strong>对应</strong> 关系</span>
+                        <span>🔹 HL 只适用于 <strong>Rt△</strong></span>
+                    </div>
+                </div>
+
+                <!-- 锦囊 -->
+                <div class="card" id="formula">
+                    <div class="card-title">
+                        🧠 数学锦囊 · 判定方法
+                        <span class="badge">速查表</span>
+                    </div>
+                    <div class="tip-grid">
+                        <div class="tip-item"><strong>SAS</strong><br>两边 + 夹角<br><span class="sub">边角边</span></div>
+                        <div class="tip-item"><strong>ASA</strong><br>两角 + 夹边<br><span class="sub">角边角</span></div>
+                        <div class="tip-item"><strong>SSS</strong><br>三边对应相等<br><span class="sub">边边边</span></div>
+                        <div class="tip-item"><strong>AAS</strong><br>两角 + 对边<br><span class="sub">角角边</span></div>
+                        <div class="tip-item"><strong>HL</strong><br>斜边 + 直角边<br><span class="sub">仅Rt△</span></div>
+                    </div>
+                    <div class="formula-box" style="margin-top:0.3rem;">
+                        💡 <strong>记忆口诀：</strong> SAS、ASA、SSS、AAS、HL —— 条件对应要记牢！
+                    </div>
+                </div>
+
+                <!-- 举例 -->
+                <div class="card" id="examples">
+                    <div class="card-title">
+                        ✏️ 典型举例
+                        <span class="badge">图形结合</span>
+                    </div>
+                    <div class="example-box">
+                        <div class="ex-title">例1 如图，AC=AD，AB平分∠CAD，求证∠C=∠D。</div>
+                        <p style="margin-top:2px; font-size:0.82rem;"><strong>证：</strong>∵ AB平分∠CAD ∴ ∠CAB=∠DAB<br>又 AC=AD，AB=AB（公共边）<br>∴ △ABC ≌ △ABD (<span class="highlight">SAS</span>)<br>∴ ∠C=∠D</p>
+                        <svg viewBox="0 0 100 44" width="80" height="36" style="margin-top:2px;"><polygon points="50,4 12,40 88,40" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><line x1="50" y1="4" x2="50" y2="40" stroke="#dc2626" stroke-width="1" stroke-dasharray="3,3"/><text x="44" y="18" font-size="8" fill="#1f3a5f">A</text><text x="6" y="38" font-size="8" fill="#1f3a5f">C</text><text x="78" y="38" font-size="8" fill="#1f3a5f">D</text><text x="48" y="36" font-size="7" fill="#6b7f96">B</text></svg>
+                    </div>
+                    <div class="example-box" style="border-left-color:#8b5cf6;">
+                        <div class="ex-title">例2 如图，AB=AC，点D、E在BC上，AD=AE，求证BD=CE。</div>
+                        <p style="margin-top:2px; font-size:0.82rem;"><strong>证：</strong>∵ AB=AC ∴ ∠B=∠C<br>又 AD=AE ∴ ∠ADE=∠AED<br>∴ ∠ADB=∠AEC<br>∴ △ABD ≌ △ACE (<span class="highlight">AAS</span>)<br>∴ BD=CE</p>
+                        <svg viewBox="0 0 100 44" width="80" height="36" style="margin-top:2px;"><polygon points="50,4 10,40 90,40" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><text x="44" y="18" font-size="8" fill="#1f3a5f">A</text><text x="4" y="38" font-size="7" fill="#6b7f96">B</text><text x="36" y="38" font-size="7" fill="#6b7f96">D</text><text x="56" y="38" font-size="7" fill="#6b7f96">E</text><text x="80" y="38" font-size="7" fill="#6b7f96">C</text></svg>
+                    </div>
+                </div>
+
+                <!-- 易错 -->
+                <div class="card" id="errors">
+                    <div class="card-title">
+                        ⚠️ 易错题型
+                        <span class="badge">避坑指南</span>
+                    </div>
+                    <div class="error-box">
+                        <div class="err-title">❌ 易错1：SSA 不能判定全等</div>
+                        <p style="font-size:0.82rem;">两边和其中一边的对角分别相等 → <strong>不一定全等</strong>（SSA不成立）</p>
+                        <svg viewBox="0 0 120 40" width="100" height="34" style="margin-top:2px;"><polygon points="30,3 6,37 54,37" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/><polygon points="90,3 66,37 114,37" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/><text x="16" y="34" font-size="7" fill="#b91c1c">SSA ✗</text><text x="76" y="34" font-size="7" fill="#b91c1c">不全等</text></svg>
+                    </div>
+                    <div class="error-box" style="border-left-color:#eab308;">
+                        <div class="err-title">❌ 易错2：对应关系混淆</div>
+                        <p style="font-size:0.82rem;">全等判定中，<strong>对应边、对应角</strong>必须严格匹配。<br>例如：△ABC≌△DEF，则AB↔DE，∠A↔∠D</p>
+                        <svg viewBox="0 0 120 40" width="100" height="34" style="margin-top:2px;"><polygon points="30,3 6,37 54,37" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><text x="22" y="16" font-size="8" fill="#1f3a5f">A</text><text x="6" y="34" font-size="8" fill="#1f3a5f">B</text><text x="46" y="34" font-size="8" fill="#1f3a5f">C</text><polygon points="90,3 66,37 114,37" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><text x="82" y="16" font-size="8" fill="#1f3a5f">D</text><text x="66" y="34" font-size="8" fill="#1f3a5f">E</text><text x="106" y="34" font-size="8" fill="#1f3a5f">F</text></svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== 右侧：游戏 ===== -->
+            <div class="game-area" id="games">
+
+                <!-- 游戏1：连连看拖拽配对 -->
+                <div class="game-card">
+                    <div class="game-title">
+                        🔗 连连看 · 判定配对
+                        <span class="g-badge">拖拽匹配</span>
+                    </div>
+                    <div class="game-desc">点击左侧 <strong>判定方法</strong>，再点击右侧对应的 <strong>条件描述</strong> 完成配对。</div>
+                    <div class="match-area">
+                        <div class="match-row" id="matchRowLeft">
+                            <div class="match-left" id="matchLeft"></div>
+                            <div class="match-arrow">⟷</div>
+                            <div class="match-right" id="matchRight"></div>
+                        </div>
+                        <div class="match-feedback" id="matchFeedback">💡 点击左边的方法，再点击右边的条件</div>
+                        <div style="display:flex; justify-content:center; gap:0.3rem; flex-wrap:wrap;">
+                            <button class="btn-reset" onclick="resetMatch()">🔄 重新配对</button>
+                            <button class="btn-check" onclick="checkMatch()">✅ 检查答案</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 游戏2：拖拽分类 -->
+                <div class="game-card">
+                    <div class="game-title">
+                        📦 分类拼图 · 判定归类
+                        <span class="g-badge">拖拽</span>
+                    </div>
+                    <div class="game-desc">将下方的 <strong>条件卡片</strong> 拖拽到对应的判定方法分类框中。</div>
+                    <div class="sort-area">
+                        <div class="sort-bins" id="sortBins">
+                            <div class="sort-bin" data-category="sas">
+                                <div class="bin-title">🔹 SAS</div>
+                                <div class="bin-items" id="bin-sas"></div>
+                            </div>
+                            <div class="sort-bin" data-category="asa">
+                                <div class="bin-title">🔹 ASA</div>
+                                <div class="bin-items" id="bin-asa"></div>
+                            </div>
+                            <div class="sort-bin" data-category="aas">
+                                <div class="bin-title">🔹 AAS</div>
+                                <div class="bin-items" id="bin-aas"></div>
+                            </div>
+                            <div class="sort-bin" data-category="sss">
+                                <div class="bin-title">🔹 SSS</div>
+                                <div class="bin-items" id="bin-sss"></div>
+                            </div>
+                            <div class="sort-bin" data-category="hl">
+                                <div class="bin-title">🔹 HL</div>
+                                <div class="bin-items" id="bin-hl"></div>
+                            </div>
+                        </div>
+                        <div class="sort-pool" id="sortPool"></div>
+                        <div class="sort-feedback" id="sortFeedback">💡 拖拽卡片到对应的分类框</div>
+                        <div style="display:flex; justify-content:center; gap:0.3rem; flex-wrap:wrap;">
+                            <button class="btn-reset" onclick="resetSort()">🔄 重新分类</button>
+                            <button class="btn-check" onclick="checkSort()">✅ 检查答案</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 复习巩固题 -->
+        <section id="quiz" style="margin-top:1.2rem;">
+            <div class="card">
+                <div class="card-title">
+                    📝 复习巩固题
+                    <span class="badge">小测验</span>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="q">1. 如图，AB=AC，AD=AE，∠BAC=∠DAE，求证：△ABD ≌ △ACE。</div>
+                    <div class="a">∵ ∠BAC=∠DAE ∴ ∠BAD=∠CAE<br>又 AB=AC，AD=AE<br>∴ △ABD ≌ △ACE (<span class="highlight">SAS</span>)</div>
+                    <svg viewBox="0 0 100 44" width="90" height="40" style="margin-top:4px;"><polygon points="50,4 12,40 88,40" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><text x="44" y="18" font-size="8" fill="#1f3a5f">A</text><text x="6" y="38" font-size="7" fill="#6b7f96">B</text><text x="78" y="38" font-size="7" fill="#6b7f96">C</text><circle cx="50" cy="4" r="3" fill="#eab308"/></svg>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="q">2. 如图，∠B=∠E，∠C=∠F，BC=EF，求证：△ABC ≌ △DEF。</div>
+                    <div class="a">∵ ∠B=∠E，∠C=∠F，BC=EF（夹边）<br>∴ △ABC ≌ △DEF (<span class="highlight">ASA</span>)</div>
+                    <svg viewBox="0 0 120 44" width="100" height="40" style="margin-top:4px;"><polygon points="30,3 6,39 54,39" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><text x="22" y="16" font-size="8" fill="#1f3a5f">B</text><text x="6" y="36" font-size="8" fill="#1f3a5f">C</text><text x="46" y="36" font-size="8" fill="#1f3a5f">A</text><polygon points="90,3 66,39 114,39" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><text x="82" y="16" font-size="8" fill="#1f3a5f">E</text><text x="66" y="36" font-size="8" fill="#1f3a5f">F</text><text x="106" y="36" font-size="8" fill="#1f3a5f">D</text></svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 底部 ===== -->
+        <div class="footer">
+            📚 八年级数学 · 三角形全等的判定 &nbsp;|&nbsp; 预习课程 · 互动学习
+        </div>
+
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- JavaScript -->
+    <script>
+        // =============================================================
+        // 游戏1：连连看配对 (点击匹配)
+        // =============================================================
+        const matchData = [
+            { id: 'm1', left: 'SAS', leftLabel: 'SAS', right: '两边 + 夹角', rightLabel: '两边 + 夹角' },
+            { id: 'm2', left: 'ASA', leftLabel: 'ASA', right: '两角 + 夹边', rightLabel: '两角 + 夹边' },
+            { id: 'm3', left: 'AAS', leftLabel: 'AAS', right: '两角 + 对边', rightLabel: '两角 + 对边' },
+            { id: 'm4', left: 'SSS', leftLabel: 'SSS', right: '三边对应相等', rightLabel: '三边对应相等' },
+            { id: 'm5', left: 'HL', leftLabel: 'HL', right: '斜边 + 直角边', rightLabel: '斜边 + 直角边' }
+        ];
+
+        let matchState = {};
+        let selectedLeft = null;
+        let matchPairs = 0;
+
+        function buildMatch() {
+            const leftContainer = document.getElementById('matchLeft');
+            const rightContainer = document.getElementById('matchRight');
+            leftContainer.innerHTML = '';
+            rightContainer.innerHTML = '';
+            matchState = {};
+            matchPairs = 0;
+            selectedLeft = null;
+
+            // 打乱左右顺序
+            const leftItems = [...matchData];
+            const rightItems = [...matchData];
+            shuffleArray(leftItems);
+            shuffleArray(rightItems);
+
+            leftItems.forEach((item, idx) => {
+                const div = document.createElement('div');
+                div.className = 'match-item';
+                div.dataset.id = item.id;
+                div.dataset.pairId = item.id;
+                div.textContent = item.leftLabel;
+                div.addEventListener('click', () => onMatchLeftClick(div, item.id));
+                leftContainer.appendChild(div);
+                matchState[item.id] = { left: div, right: null, matched: false };
+            });
+
+            rightItems.forEach((item) => {
+                const div = document.createElement('div');
+                div.className = 'match-item';
+                div.dataset.id = item.id;
+                div.dataset.pairId = item.id;
+                div.textContent = item.rightLabel;
+                div.addEventListener('click', () => onMatchRightClick(div, item.id));
+                rightContainer.appendChild(div);
+                if (matchState[item.id]) {
+                    matchState[item.id].right = div;
+                }
+            });
+
+            document.getElementById('matchFeedback').textContent = '💡 点击左边的方法，再点击右边的条件';
+            document.getElementById('matchFeedback').style.color = '#1f3a5f';
+            // 清除高亮
+            document.querySelectorAll('.match-item').forEach(el => {
+                el.classList.remove('selected', 'matched', 'wrong');
+            });
+        }
+
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+        }
+
+        function onMatchLeftClick(el, id) {
+            if (matchState[id].matched) return;
+            // 清除之前的选择
+            document.querySelectorAll('.match-item.selected').forEach(e => e.classList.remove('selected'));
+            el.classList.add('selected');
+            selectedLeft = id;
+            document.getElementById('matchFeedback').textContent = `✅ 已选 “${el.textContent}”，请点击右侧对应的条件`;
+            document.getElementById('matchFeedback').style.color = '#1f3a5f';
+        }
+
+        function onMatchRightClick(el, id) {
+            if (matchState[id].matched) return;
+            if (selectedLeft === null) {
+                document.getElementById('matchFeedback').textContent = '⚠️ 请先在左侧点击选择一个判定方法！';
+                document.getElementById('matchFeedback').style.color = '#b91c1c';
+                return;
+            }
+            const leftId = selectedLeft;
+            if (leftId === id) {
+                // 配对成功
+                matchState[id].matched = true;
+                matchState[id].left.classList.add('matched');
+                matchState[id].right.classList.add('matched');
+                matchState[id].left.classList.remove('selected');
+                matchPairs++;
+                document.getElementById('matchFeedback').textContent = `✅ 配对成功！${matchState[id].left.textContent} ↔ ${matchState[id].right.textContent}`;
+                document.getElementById('matchFeedback').style.color = '#16a34a';
+                selectedLeft = null;
+                if (matchPairs === matchData.length) {
+                    document.getElementById('matchFeedback').textContent = '🎉 全部配对完成！太棒啦！';
+                    document.getElementById('matchFeedback').style.color = '#2563eb';
+                }
+            } else {
+                // 配对失败
+                el.classList.add('wrong');
+                setTimeout(() => el.classList.remove('wrong'), 500);
+                document.getElementById('matchFeedback').textContent = `❌ 配对错误！“${matchState[leftId].left.textContent}” 不对应 “${el.textContent}”`;
+                document.getElementById('matchFeedback').style.color = '#b91c1c';
+                // 清除左侧选中
+                matchState[leftId].left.classList.remove('selected');
+                selectedLeft = null;
+            }
+        }
+
+        function checkMatch() {
+            const total = matchData.length;
+            const matched = Object.values(matchState).filter(s => s.matched).length;
+            document.getElementById('matchFeedback').textContent = `📊 已配对 ${matched} / ${total}`;
+            document.getElementById('matchFeedback').style.color = '#1f3a5f';
+        }
+
+        function resetMatch() {
+            buildMatch();
+        }
+
+        // =============================================================
+        // 游戏2：拖拽分类
+        // =============================================================
+        const sortData = [
+            { id: 'c1', category: 'sas', label: '两边夹角',
+            svg: '<svg viewBox="0 0 36 28"><polygon points="18,2 4,26 32,26" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><text x="12" y="12" font-size="6" fill="#1f3a5f">边</text><text x="4" y="24" font-size="6" fill="#1f3a5f">角</text><text x="22" y="24" font-size="6" fill="#1f3a5f">边</text></svg>' },
+            { id: 'c2', category: 'sas', label: 'AB=DE, AC=DF, ∠A=∠D',
+            svg: '' },
+            { id: 'c3', category: 'asa', label: '两角夹边',
+            svg: '<svg viewBox="0 0 36 28"><polygon points="18,2 4,26 32,26" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><text x="12" y="12" font-size="6" fill="#1f3a5f">角</text><text x="4" y="24" font-size="6" fill="#1f3a5f">边</text><text x="22" y="24" font-size="6" fill="#1f3a5f">角</text></svg>' },
+            { id: 'c4', category: 'asa', label: '∠B=∠E, ∠C=∠F, BC=EF',
+            svg: '' },
+            { id: 'c5', category: 'aas', label: '两角对边',
+            svg: '<svg viewBox="0 0 36 28"><polygon points="18,2 4,26 32,26" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><text x="12" y="12" font-size="6" fill="#1f3a5f">角</text><text x="4" y="24" font-size="6" fill="#1f3a5f">角</text><text x="22" y="24" font-size="6" fill="#1f3a5f">边</text></svg>' },
+            { id: 'c6', category: 'aas', label: '∠A=∠D, ∠B=∠E, BC=EF',
+            svg: '' },
+            { id: 'c7', category: 'sss', label: '三边相等',
+            svg: '<svg viewBox="0 0 36 28"><polygon points="18,2 4,26 32,26" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><text x="12" y="12" font-size="6" fill="#1f3a5f">边</text><text x="2" y="24" font-size="6" fill="#1f3a5f">边</text><text x="22" y="24" font-size="6" fill="#1f3a5f">边</text></svg>' },
+            { id: 'c8', category: 'sss', label: 'AB=DE, BC=EF, AC=DF',
+            svg: '' },
+            { id: 'c9', category: 'hl', label: '斜边+直角边',
+            svg: '<svg viewBox="0 0 36 28"><polygon points="18,2 4,26 32,26" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><rect x="3" y="23" width="3" height="3" fill="none" stroke="#dc2626" stroke-width="1"/><text x="14" y="12" font-size="6" fill="#1f3a5f">HL</text></svg>' },
+            { id: 'c10', category: 'hl', label: 'Rt△中斜边+一直角边',
+            svg: '' }
+        ];
+
+        let sortItems = [];
+
+        function buildSort() {
+            sortItems = sortData.map(item => ({
+                ...item,
+                placed: false,
+                placedIn: null
+            }));
+            renderSort();
+            document.getElementById('sortFeedback').textContent = '💡 拖拽卡片到对应的分类框';
+            document.getElementById('sortFeedback').style.color = '#1f3a5f';
+            document.querySelectorAll('.sort-bin').forEach(b => {
+                b.classList.remove('correct-highlight', 'wrong-highlight');
+            });
+        }
+
+        function renderSort() {
+            document.querySelectorAll('.bin-items').forEach(el => el.innerHTML = '');
+            const pool = document.getElementById('sortPool');
+            pool.innerHTML = '';
+
+            const unplaced = sortItems.filter(item => !item.placed);
+            unplaced.forEach(item => {
+                const el = createSortItemElement(item, false);
+                pool.appendChild(el);
+            });
+
+            sortItems.filter(item => item.placed).forEach(item => {
+                const bin = document.getElementById(`bin-${item.placedIn}`);
+                if (bin) {
+                    const el = createSortItemElement(item, true);
+                    bin.appendChild(el);
+                }
+            });
+        }
+
+        function createSortItemElement(item, placed) {
+            const div = document.createElement('div');
+            div.className = `sort-item ${placed ? 'placed' : ''}`;
+            div.dataset.id = item.id;
+            div.dataset.category = item.category;
+            if (item.svg) {
+                div.innerHTML = `${item.svg} <span style="font-size:0.5rem;color:#4a617c;">${item.label}</span>`;
+            } else {
+                div.innerHTML =
+                `<span style="font-size:0.6rem;font-weight:600;color:#1f3a5f;padding:2px 4px;">${item.label}</span>`;
+            }
+            if (!placed) {
+                div.draggable = false;
+                div.addEventListener('mousedown', onSortItemMouseDown);
+                div.addEventListener('touchstart', onSortItemTouchStart, { passive: false });
+            }
+            return div;
+        }
+
+        // ---- 鼠标拖拽 ----
+        function onSortItemMouseDown(e) {
+            e.preventDefault();
+            const el = e.currentTarget;
+            const id = el.dataset.id;
+            const item = sortItems.find(i => i.id === id);
+            if (!item || item.placed) return;
+            startDrag(el, e.clientX, e.clientY);
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', onMouseUp);
+        }
+
+        function onMouseMove(e) {
+            e.preventDefault();
+            moveDrag(e.clientX, e.clientY);
+        }
+
+        function onMouseUp(e) {
+            document.removeEventListener('mousemove', onMouseMove);
+            document.removeEventListener('mouseup', onMouseUp);
+            endDrag(e.clientX, e.clientY);
+        }
+
+        // ---- 触摸拖拽 ----
+        function onSortItemTouchStart(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const el = e.currentTarget;
+            const id = el.dataset.id;
+            const item = sortItems.find(i => i.id === id);
+            if (!item || item.placed) return;
+            startDrag(el, touch.clientX, touch.clientY);
+            document.addEventListener('touchmove', onTouchMove, { passive: false });
+            document.addEventListener('touchend', onTouchEnd, { passive: false });
+        }
+
+        function onTouchMove(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            moveDrag(touch.clientX, touch.clientY);
+        }
+
+        function onTouchEnd(e) {
+            document.removeEventListener('touchmove', onTouchMove);
+            document.removeEventListener('touchend', onTouchEnd);
+            const touch = e.changedTouches[0];
+            endDrag(touch.clientX, touch.clientY);
+        }
+
+        // ---- 拖拽核心 ----
+        let ghostEl = null;
+        let dragItemId = null;
+        let dragOffsetX = 0,
+            dragOffsetY = 0;
+
+        function startDrag(el, clientX, clientY) {
+            const rect = el.getBoundingClientRect();
+            dragOffsetX = clientX - rect.left;
+            dragOffsetY = clientY - rect.top;
+            dragItemId = el.dataset.id;
+            ghostEl = document.createElement('div');
+            ghostEl.className = 'drag-ghost';
+            ghostEl.innerHTML = el.innerHTML;
+            ghostEl.style.left = (clientX - dragOffsetX) + 'px';
+            ghostEl.style.top = (clientY - dragOffsetY) + 'px';
+            document.body.appendChild(ghostEl);
+            el.classList.add('dragging');
+            document.querySelectorAll('.sort-bin').forEach(b => b.classList.add('drag-over'));
+        }
+
+        function moveDrag(clientX, clientY) {
+            if (ghostEl) {
+                ghostEl.style.left = (clientX - dragOffsetX) + 'px';
+                ghostEl.style.top = (clientY - dragOffsetY) + 'px';
+            }
+            document.querySelectorAll('.sort-bin').forEach(b => {
+                const rect = b.getBoundingClientRect();
+                if (clientX >= rect.left && clientX <= rect.right &&
+                    clientY >= rect.top && clientY <= rect.bottom) {
+                    b.classList.add('drag-over');
+                } else {
+                    b.classList.remove('drag-over');
+                }
+            });
+        }
+
+        function endDrag(clientX, clientY) {
+            if (ghostEl) {
+                ghostEl.remove();
+                ghostEl = null;
+            }
+            document.querySelectorAll('.sort-bin').forEach(b => b.classList.remove('drag-over'));
+            let targetBin = null;
+            document.querySelectorAll('.sort-bin').forEach(b => {
+                const rect = b.getBoundingClientRect();
+                if (clientX >= rect.left && clientX <= rect.right &&
+                    clientY >= rect.top && clientY <= rect.bottom) {
+                    targetBin = b;
+                }
+            });
+            document.querySelectorAll('.sort-item.dragging').forEach(el => el.classList.remove('dragging'));
+
+            if (targetBin && dragItemId) {
+                const category = targetBin.dataset.category;
+                const item = sortItems.find(i => i.id === dragItemId);
+                if (item && !item.placed) {
+                    const correct = (item.category === category);
+                    if (correct) {
+                        item.placed = true;
+                        item.placedIn = category;
+                        targetBin.classList.add('correct-highlight');
+                        setTimeout(() => targetBin.classList.remove('correct-highlight'), 500);
+                        document.getElementById('sortFeedback').textContent = `✅ 正确！放入 “${getCategoryLabel(category)}”`;
+                        document.getElementById('sortFeedback').style.color = '#16a34a';
+                    } else {
+                        targetBin.classList.add('wrong-highlight');
+                        setTimeout(() => targetBin.classList.remove('wrong-highlight'), 500);
+                        document.getElementById('sortFeedback').textContent = `❌ 再想想！“${item.label}” 不属于 “${getCategoryLabel(category)}”`;
+                        document.getElementById('sortFeedback').style.color = '#b91c1c';
+                    }
+                    renderSort();
+                    checkAllPlaced();
+                }
+            }
+            dragItemId = null;
+        }
+
+        function getCategoryLabel(cat) {
+            const map = { sas: 'SAS', asa: 'ASA', aas: 'AAS', sss: 'SSS', hl: 'HL' };
+            return map[cat] || cat;
+        }
+
+        function checkAllPlaced() {
+            const allPlaced = sortItems.every(item => item.placed);
+            if (allPlaced) {
+                document.getElementById('sortFeedback').textContent = '🎉 所有卡片已分类！点击“检查答案”查看正确率。';
+                document.getElementById('sortFeedback').style.color = '#2563eb';
+            }
+        }
+
+        function checkSort() {
+            const total = sortItems.length;
+            let correct = 0;
+            sortItems.forEach(item => {
+                if (item.placed && item.category === item.placedIn) correct++;
+            });
+            document.getElementById('sortFeedback').textContent = `📊 正确率：${correct} / ${total}  (${Math.round(correct/total*100)}%)`;
+            document.getElementById('sortFeedback').style.color = '#1f3a5f';
+            document.querySelectorAll('.sort-bin').forEach(bin => {
+                bin.classList.remove('correct-highlight', 'wrong-highlight');
+                const cat = bin.dataset.category;
+                const itemsInBin = sortItems.filter(item => item.placed && item.placedIn === cat);
+                let allCorrect = itemsInBin.every(item => item.category === cat);
+                if (itemsInBin.length > 0 && allCorrect) {
+                    bin.classList.add('correct-highlight');
+                } else if (itemsInBin.length > 0) {
+                    bin.classList.add('wrong-highlight');
+                }
+            });
+        }
+
+        function resetSort() {
+            buildSort();
+        }
+
+        // =============================================================
+        // 导航
+        // =============================================================
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // =============================================================
+        // 初始化
+        // =============================================================
+        buildMatch();
+        buildSort();
+        console.log('📐 三角形全等的判定 课程已加载！');
+    </script>
+</body>
+</html>

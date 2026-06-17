@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>幂的乘方与积的乘方 · 初二数学预习</title>
+    <style>
+        /* ===== 全局重置 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', system-ui, sans-serif;
+            background: #f5f9fe;
+            color: #1e293b;
+            padding: 1rem;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 60px rgba(0, 20, 40, 0.06);
+            padding: 1.8rem 2rem 2.8rem;
+            transition: 0.2s;
+        }
+        @media (max-width: 640px) {
+            .container {
+                padding: 1rem 1rem 2rem;
+                border-radius: 20px;
+            }
+        }
+
+        /* ===== 头部 ===== */
+        .page-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 3px solid #e6f0fa;
+            padding-bottom: 0.8rem;
+            margin-bottom: 1.6rem;
+        }
+        .page-header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1a4b8c, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .page-header h1 small {
+            font-size: 0.9rem;
+            font-weight: 400;
+            -webkit-text-fill-color: #5f7d9c;
+            color: #5f7d9c;
+            background: none;
+        }
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem 0.5rem;
+        }
+        .nav-links a {
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            background: #f1f5f9;
+            color: #2c3e50;
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: 0.2s;
+            border: 1px solid transparent;
+        }
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: #2563eb;
+            color: #fff;
+            border-color: #2563eb;
+        }
+        @media (max-width: 600px) {
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.4rem;
+            }
+            .page-header h1 {
+                font-size: 1.4rem;
+            }
+            .nav-links a {
+                font-size: 0.65rem;
+                padding: 0.1rem 0.6rem;
+            }
+        }
+
+        /* ===== 主布局 ===== */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 1.8rem;
+            align-items: start;
+        }
+        @media (max-width: 920px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        /* ===== 卡片 ===== */
+        .card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 1rem 1.2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+            border: 1px solid #edf2f7;
+            margin-bottom: 1rem;
+            transition: 0.2s;
+        }
+        .card-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #0b2b4a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 0.5rem;
+            border-left: 5px solid #3b82f6;
+            padding-left: 12px;
+        }
+        .card-title .badge {
+            font-size: 0.6rem;
+            background: #dbeafe;
+            color: #1e4b8a;
+            padding: 0.05rem 0.7rem;
+            border-radius: 40px;
+            font-weight: 500;
+        }
+
+        /* ===== 幂的展示 ===== */
+        .power-display {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 0.3rem 0.6rem;
+            padding: 0.3rem 0;
+        }
+        .power-box {
+            background: #f0f7fe;
+            border-radius: 12px;
+            padding: 0.8rem 1rem;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1e4b8a;
+            border: 2px solid #3b82f6;
+            min-width: 100px;
+        }
+        .power-box .hl-red {
+            color: #dc2626;
+        }
+        .power-box .hl-green {
+            color: #16a34a;
+        }
+        .power-arrow {
+            font-size: 1.4rem;
+            color: #94a3b8;
+        }
+        .power-note {
+            font-size: 0.82rem;
+            color: #4a617c;
+            text-align: center;
+            margin-top: 0.2rem;
+        }
+
+        .formula-box {
+            background: #f0f7fe;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border-left: 4px solid #3b82f6;
+            margin: 0.3rem 0;
+            font-size: 0.85rem;
+        }
+        .tip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.5rem;
+        }
+        .tip-item {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 0.4rem 0.7rem;
+            border: 1px solid #e2eaf2;
+            font-size: 0.8rem;
+        }
+        .tip-item strong {
+            color: #1e4b8a;
+        }
+        .tip-item .math-example {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #0b2b4a;
+            margin-top: 2px;
+        }
+
+        .example-box {
+            background: #fcf9f0;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border-left: 4px solid #eab308;
+            margin: 0.3rem 0;
+            font-size: 0.88rem;
+        }
+        .example-box .ex-title {
+            font-weight: 700;
+            color: #8a6d1b;
+        }
+        .example-box .step {
+            display: inline-block;
+            background: #fef9e7;
+            padding: 0.05rem 0.5rem;
+            border-radius: 12px;
+            margin: 2px 2px;
+            font-size: 0.8rem;
+        }
+        .error-box {
+            background: #fef2f2;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border-left: 4px solid #ef4444;
+            margin: 0.3rem 0;
+            font-size: 0.85rem;
+        }
+        .error-box .err-title {
+            font-weight: 700;
+            color: #b91c1c;
+        }
+        .highlight {
+            background: #fef9e7;
+            padding: 0.05rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .tag {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e4b8a;
+            padding: 0.05rem 0.6rem;
+            border-radius: 40px;
+            font-size: 0.65rem;
+            font-weight: 500;
+        }
+
+        /* ===== 游戏区 ===== */
+        .game-area {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .game-card {
+            background: #fafcff;
+            border-radius: 18px;
+            padding: 0.8rem 1rem 1rem;
+            border: 1px solid #e2ecf9;
+        }
+        .game-card .game-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #0b2b4a;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 0.3rem;
+        }
+        .game-card .game-title .g-badge {
+            font-size: 0.55rem;
+            background: #dbeafe;
+            padding: 0.05rem 0.6rem;
+            border-radius: 40px;
+            font-weight: 500;
+            color: #1e4b8a;
+        }
+        .game-card .game-desc {
+            font-size: 0.75rem;
+            color: #4a617c;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ===== 游戏1：拖拽配对 ===== */
+        .pair-area {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+        .pair-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: stretch;
+            gap: 0.3rem 0.6rem;
+        }
+        .pair-col {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            flex: 1;
+            min-width: 80px;
+        }
+        .pair-col-title {
+            font-size: 0.68rem;
+            font-weight: 600;
+            color: #4a617c;
+            text-align: center;
+            padding: 0.1rem 0;
+            border-bottom: 2px solid #e2ecf9;
+        }
+        .pair-item {
+            background: #ffffff;
+            border: 2px solid #dbeafe;
+            border-radius: 12px;
+            padding: 0.3rem 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: grab;
+            transition: 0.2s;
+            user-select: none;
+            text-align: center;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+            touch-action: none;
+            gap: 4px;
+        }
+        .pair-item .math {
+            font-size: 1rem;
+        }
+        .pair-item .sup {
+            font-size: 0.7rem;
+            vertical-align: super;
+            color: #dc2626;
+        }
+        .pair-item.dragging {
+            opacity: 0.5;
+            transform: scale(0.95);
+        }
+        .pair-item.drop-target {
+            border-color: #3b82f6;
+            background: #e5effa;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+        .pair-item.matched {
+            border-color: #22c55e;
+            background: #e8f8ee;
+            opacity: 0.8;
+            cursor: default;
+            pointer-events: none;
+            transform: scale(0.96);
+        }
+        .pair-item.wrong {
+            border-color: #ef4444;
+            background: #fde8e8;
+            animation: shake 0.4s ease;
+        }
+        .pair-arrow {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            font-weight: 300;
+            display: flex;
+            align-items: center;
+            padding: 0 0.2rem;
+        }
+        @keyframes shake {
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-6px);
+            }
+            75% {
+                transform: translateX(6px);
+            }
+        }
+        .pair-feedback {
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.78rem;
+            min-height: 22px;
+            margin-top: 0.2rem;
+        }
+        .btn-reset {
+            background: #eef4fa;
+            border: none;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.7rem;
+            margin: 2px 3px;
+        }
+        .btn-reset:hover {
+            background: #dbeafe;
+        }
+        .btn-check {
+            background: #dbeafe;
+            border: none;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.7rem;
+            margin: 2px 3px;
+        }
+        .btn-check:hover {
+            background: #b7d6f7;
+        }
+        @media (max-width: 480px) {
+            .pair-item {
+                font-size: 0.75rem;
+                padding: 0.2rem 0.3rem;
+                min-height: 36px;
+            }
+            .pair-item .math {
+                font-size: 0.85rem;
+            }
+            .pair-col {
+                min-width: 60px;
+            }
+        }
+
+        /* ===== 游戏2：转盘 ===== */
+        .wheel-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .wheel-container {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            max-width: 100%;
+            aspect-ratio: 1/1;
+        }
+        .wheel-container canvas {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+            touch-action: manipulation;
+            transition: 0.2s;
+        }
+        .wheel-container canvas:hover {
+            box-shadow: 0 6px 28px rgba(0, 0, 0, 0.12);
+        }
+        .wheel-container canvas:active {
+            transform: scale(0.97);
+        }
+        .wheel-pointer {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.8rem;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+            z-index: 2;
+            line-height: 1;
+            pointer-events: none;
+        }
+        .wheel-question {
+            background: #f8fafc;
+            border-radius: 14px;
+            padding: 0.6rem 1rem;
+            min-height: 50px;
+            width: 100%;
+            max-width: 380px;
+            border: 2px solid #e2ecf9;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            transition: 0.2s;
+        }
+        .wheel-question .q-text {
+            font-weight: 600;
+            color: #0b2b4a;
+            font-size: 0.95rem;
+        }
+        .wheel-question .q-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 4px;
+        }
+        .wheel-question .q-options button {
+            background: #eef4fa;
+            border: 2px solid #dbeafe;
+            border-radius: 30px;
+            padding: 0.2rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: pointer;
+            transition: 0.2s;
+            touch-action: manipulation;
+        }
+        .wheel-question .q-options button:hover {
+            background: #dbeafe;
+            border-color: #3b82f6;
+        }
+        .wheel-question .q-options button.correct-answer {
+            background: #e8f8ee;
+            border-color: #22c55e;
+            color: #16a34a;
+        }
+        .wheel-question .q-options button.wrong-answer {
+            background: #fde8e8;
+            border-color: #ef4444;
+            color: #b91c1c;
+        }
+        .wheel-question .q-options button:disabled {
+            opacity: 0.6;
+            cursor: default;
+        }
+        .wheel-score {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #4a617c;
+            margin-top: 2px;
+        }
+        .wheel-feedback {
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.78rem;
+            min-height: 22px;
+            margin-top: 2px;
+        }
+        @media (max-width: 480px) {
+            .wheel-container {
+                width: 150px;
+                height: 150px;
+            }
+            .wheel-pointer {
+                font-size: 1.4rem;
+                top: -8px;
+            }
+            .wheel-question {
+                font-size: 0.78rem;
+                padding: 0.4rem 0.6rem;
+                min-height: 44px;
+            }
+            .wheel-question .q-options button {
+                font-size: 0.7rem;
+                padding: 0.15rem 0.7rem;
+            }
+        }
+
+        /* ===== 复习题 ===== */
+        .quiz-item {
+            background: #fafcff;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border: 1px solid #e9eff6;
+            margin-bottom: 0.5rem;
+        }
+        .quiz-item .q {
+            font-weight: 600;
+            color: #0b2b4a;
+            font-size: 0.9rem;
+        }
+        .quiz-item .q .math {
+            font-size: 1rem;
+        }
+        .quiz-item .a {
+            color: #1f4b7a;
+            margin-top: 2px;
+            padding-left: 0.6rem;
+            border-left: 3px solid #b3cef0;
+            font-size: 0.85rem;
+        }
+        .quiz-item .a .highlight {
+            background: #fef9e7;
+            padding: 0.05rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .quiz-item .answer-btn {
+            background: #eef4fa;
+            border: none;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.7rem;
+            margin-top: 4px;
+        }
+        .quiz-item .answer-btn:hover {
+            background: #dbeafe;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #8ba0b8;
+            border-top: 1px solid #e9eff6;
+            padding-top: 0.8rem;
+            margin-top: 1rem;
+        }
+        @media (max-width: 480px) {
+            .card {
+                padding: 0.7rem;
+            }
+            .card-title {
+                font-size: 0.95rem;
+            }
+            .formula-box {
+                font-size: 0.78rem;
+                padding: 0.4rem 0.7rem;
+            }
+            .power-box {
+                font-size: 1rem;
+                padding: 0.4rem 0.6rem;
+                min-width: 70px;
+            }
+            .power-arrow {
+                font-size: 1.1rem;
+            }
+        }
+
+        .drag-ghost {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.9;
+            transform: scale(1.05);
+            background: #ffffff;
+            border-radius: 12px;
+            border: 2px solid #2563eb;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+            padding: 4px 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #0b2b4a;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .rule-highlight {
+            color: #dc2626;
+            font-weight: 700;
+        }
+        .rule-highlight-green {
+            color: #16a34a;
+            font-weight: 700;
+        }
+
+        .sup {
+            font-size: 0.7em;
+            vertical-align: super;
+            color: #dc2626;
+            font-weight: 600;
+        }
+        .sup-green {
+            font-size: 0.7em;
+            vertical-align: super;
+            color: #16a34a;
+            font-weight: 600;
+        }
+        .math-display {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        .math-display .sup {
+            font-size: 0.75em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- ===== 头部 ===== -->
+        <header class="page-header">
+            <h1>
+                📐 幂的乘方与积的乘方
+                <small>八年级 · 上册</small>
+            </h1>
+            <div class="nav-links">
+                <a href="#concept">核心概念</a>
+                <a href="#formula">锦囊</a>
+                <a href="#examples">举例</a>
+                <a href="#errors">易错</a>
+                <a href="#games">🎮 游戏</a>
+                <a href="#quiz">复习</a>
+            </div>
+        </header>
+
+        <!-- ============================================================ -->
+        <div class="main-grid">
+
+            <!-- ===== 左侧：知识点 ===== -->
+            <div class="knowledge-area">
+
+                <!-- 核心概念 -->
+                <div class="card" id="concept">
+                    <div class="card-title">
+                        🔍 核心概念大解析
+                        <span class="badge">幂的乘方 · 积的乘方</span>
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1.1fr; gap:0.5rem; align-items:start;">
+                        <div>
+                            <div style="background:#f0f7fe; border-radius:10px; padding:0.3rem 0.6rem; margin-bottom:0.3rem;">
+                                <strong style="color:#1e4b8a; font-size:0.82rem;">📌 幂的乘方</strong>
+                                <p style="font-size:0.82rem; margin:0;">(a<sup>m</sup>)<sup>n</sup> = a<sup>m×n</sup></p>
+                                <p style="font-size:0.75rem; color:#4a617c; margin:0;">底数<strong>不变</strong>，指数<strong>相乘</strong>。</p>
+                                <p style="font-size:0.7rem; color:#6b7f96; margin-top:2px;">例：(10<sup>3</sup>)<sup>5</sup> = 10<sup>15</sup></p>
+                            </div>
+                            <div style="background:#f0f7fe; border-radius:10px; padding:0.3rem 0.6rem;">
+                                <strong style="color:#1e4b8a; font-size:0.82rem;">📌 积的乘方</strong>
+                                <p style="font-size:0.82rem; margin:0;">(ab)<sup>n</sup> = a<sup>n</sup> · b<sup>n</sup></p>
+                                <p style="font-size:0.75rem; color:#4a617c; margin:0;">把积的每一个因式分别<strong>乘方</strong>，再把所得的幂<strong>相乘</strong>。</p>
+                                <p style="font-size:0.7rem; color:#6b7f96; margin-top:2px;">例：(2a)<sup>3</sup> = 8a<sup>3</sup></p>
+                            </div>
+                        </div>
+                        <div style="display:flex; flex-direction:column; gap:0.6rem;">
+                            <div style="background:#f8faff; border-radius:14px; padding:0.6rem 0.8rem; border:1px solid #e2ecf9; text-align:center;">
+                                <div style="font-size:1.1rem; font-weight:700; color:#1e4b8a;">
+                                    (a<sup>m</sup>)<sup>n</sup> <span style="color:#94a3b8;font-weight:400;">=</span> a<sup style="color:#16a34a;font-size:0.9rem;">mn</sup>
+                                </div>
+                                <div style="display:flex; gap:0.5rem; flex-wrap:wrap; justify-content:center; font-size:0.75rem; margin-top:0.2rem;">
+                                    <span style="background:#dbeafe;padding:0.05rem 0.6rem;border-radius:20px;">底数 <strong>不变</strong></span>
+                                    <span style="background:#dbeafe;padding:0.05rem 0.6rem;border-radius:20px;">指数 <strong>相乘</strong></span>
+                                </div>
+                            </div>
+                            <div style="background:#f8faff; border-radius:14px; padding:0.6rem 0.8rem; border:1px solid #e2ecf9; text-align:center;">
+                                <div style="font-size:1.1rem; font-weight:700; color:#1e4b8a;">
+                                    (ab)<sup>n</sup> <span style="color:#94a3b8;font-weight:400;">=</span> a<sup style="color:#16a34a;font-size:0.9rem;">n</sup> · b<sup style="color:#16a34a;font-size:0.9rem;">n</sup>
+                                </div>
+                                <div style="display:flex; gap:0.5rem; flex-wrap:wrap; justify-content:center; font-size:0.75rem; margin-top:0.2rem;">
+                                    <span style="background:#dbeafe;padding:0.05rem 0.6rem;border-radius:20px;">各因式 <strong>分别乘方</strong></span>
+                                    <span style="background:#dbeafe;padding:0.05rem 0.6rem;border-radius:20px;">幂 <strong>相乘</strong></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top:0.3rem; background:#f8faff; border-radius:12px; padding:0.3rem 0.7rem; border:1px solid #e2ecf9; font-size:0.78rem; display:flex; flex-wrap:wrap; gap:0.1rem 0.6rem;">
+                        <span>🔹 幂的乘方：底数 <strong>不变</strong>，指数 <strong>相乘</strong></span>
+                        <span>🔹 积的乘方：各因式 <strong>分别乘方</strong></span>
+                        <span>🔹 注意：<strong>不要</strong>与同底数幂乘法混淆</span>
+                    </div>
+                </div>
+
+                <!-- 锦囊 -->
+                <div class="card" id="formula">
+                    <div class="card-title">
+                        🧠 数学锦囊 · 公式
+                        <span class="badge">核心法则</span>
+                    </div>
+                    <div class="tip-grid">
+                        <div class="tip-item">
+                            <strong>幂的乘方</strong>
+                            <div class="math-example">(a<sup>m</sup>)<sup>n</sup> = a<sup>mn</sup></div>
+                        </div>
+                        <div class="tip-item">
+                            <strong>积的乘方</strong>
+                            <div class="math-example">(ab)<sup>n</sup> = a<sup>n</sup>b<sup>n</sup></div>
+                        </div>
+                        <div class="tip-item">
+                            <strong>推广</strong>
+                            <div class="math-example">(abc)<sup>n</sup> = a<sup>n</sup>b<sup>n</sup>c<sup>n</sup></div>
+                        </div>
+                        <div class="tip-item">
+                            <strong>易混淆</strong>
+                            <div class="math-example">a<sup>m</sup>·a<sup>n</sup> = a<sup>m+n</sup> ← 指数<strong>加</strong></div>
+                            <div class="math-example" style="margin-top:2px;">(a<sup>m</sup>)<sup>n</sup> = a<sup>mn</sup> ← 指数<strong>乘</strong></div>
+                        </div>
+                    </div>
+                    <div class="formula-box" style="margin-top:0.3rem;">
+                        💡 <strong>口诀：</strong>幂的乘方，底不变，指数乘；积的乘方，各因式分别乘方再相乘。
+                    </div>
+                </div>
+
+                <!-- 举例 -->
+                <div class="card" id="examples">
+                    <div class="card-title">
+                        ✏️ 典型举例
+                        <span class="badge">步骤演示</span>
+                    </div>
+                    <div class="example-box">
+                        <div class="ex-title">例1 计算：(10<sup>3</sup>)<sup>5</sup></div>
+                        <p style="margin-top:2px; font-size:0.88rem;"><strong>解：</strong> (10<sup>3</sup>)<sup>5</sup> = 10<sup>3×5</sup> = <span class="highlight">10<sup>15</sup></span></p>
+                        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center;padding:0.2rem 0;">
+                            <span class="step">底数 10 不变</span>
+                            <span class="step">指数 3×5=15</span>
+                        </div>
+                    </div>
+                    <div class="example-box" style="border-left-color:#8b5cf6;">
+                        <div class="ex-title">例2 计算：(2a)<sup>3</sup></div>
+                        <p style="margin-top:2px; font-size:0.88rem;"><strong>解：</strong> (2a)<sup>3</sup> = 2<sup>3</sup> · a<sup>3</sup> = <span class="highlight">8a<sup>3</sup></span></p>
+                        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center;padding:0.2rem 0;">
+                            <span class="step">2 和 a 分别乘方</span>
+                            <span class="step">2³=8，a³=a³</span>
+                            <span class="step">结果相乘：8a³</span>
+                        </div>
+                    </div>
+                    <div class="example-box" style="border-left-color:#3b82f6;">
+                        <div class="ex-title">例3 计算：(−2x<sup>3</sup>y)<sup>4</sup></div>
+                        <p style="margin-top:2px; font-size:0.88rem;"><strong>解：</strong> (−2x<sup>3</sup>y)<sup>4</sup> = (−2)<sup>4</sup> · (x<sup>3</sup>)<sup>4</sup> · y<sup>4</sup> = 16 · x<sup>12</sup> · y<sup>4</sup> = <span class="highlight">16x<sup>12</sup>y<sup>4</sup></span></p>
+                        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center;padding:0.2rem 0;">
+                            <span class="step">(−2)⁴=16</span>
+                            <span class="step">(x³)⁴=x¹²</span>
+                            <span class="step">y⁴=y⁴</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 易错 -->
+                <div class="card" id="errors">
+                    <div class="card-title">
+                        ⚠️ 易错题型
+                        <span class="badge">避坑指南</span>
+                    </div>
+                    <div class="error-box">
+                        <div class="err-title">❌ 易错1：混淆幂的乘方与同底数幂乘法</div>
+                        <p style="font-size:0.85rem;">幂的乘方：<strong>指数相乘</strong> (a<sup>m</sup>)<sup>n</sup> = a<sup>mn</sup><br>同底数幂乘法：<strong>指数相加</strong> a<sup>m</sup> · a<sup>n</sup> = a<sup>m+n</sup></p>
+                        <div style="background:#fef2f2;padding:0.2rem 0.6rem;border-radius:8px;font-size:0.8rem;display:inline-block;margin-top:4px;">
+                            ✗ (a²)³ = a⁵ &nbsp;&nbsp; ✓ (a²)³ = a⁶ &nbsp;&nbsp; ✓ a²·a³ = a⁵
+                        </div>
+                    </div>
+                    <div class="error-box" style="border-left-color:#eab308;">
+                        <div class="err-title">❌ 易错2：积的乘方漏乘系数或符号</div>
+                        <p style="font-size:0.85rem;">积的乘方要<strong>每一项</strong>都乘方，包括系数和符号。<br>注意：(−a)<sup>n</sup>，当n为奇数时结果为负，n为偶数时为正。</p>
+                        <div style="display:flex;gap:0.4rem;flex-wrap:wrap;margin-top:4px;">
+                            <span style="background:#fef2f2;padding:0.1rem 0.6rem;border-radius:12px;font-size:0.75rem;">(−2a)² = 4a² ✓</span>
+                            <span style="background:#fef2f2;padding:0.1rem 0.6rem;border-radius:12px;font-size:0.75rem;">(−2a)³ = −8a³ ✓</span>
+                            <span style="background:#fef2f2;padding:0.1rem 0.6rem;border-radius:12px;font-size:0.75rem;">✗ (−2a)² = −4a²</span>
+                        </div>
+                    </div>
+                    <div class="error-box" style="border-left-color:#8b5cf6;">
+                        <div class="err-title">❌ 易错3：指数相乘时忘记乘</div>
+                        <p style="font-size:0.85rem;">(a<sup>m</sup>)<sup>n</sup> = a<sup>m×n</sup>，指数<strong>必须相乘</strong>，不能相加。</p>
+                        <div style="background:#fef2f2;padding:0.2rem 0.6rem;border-radius:8px;font-size:0.8rem;display:inline-block;margin-top:4px;">
+                            ✗ (x²)³ = x⁵ &nbsp;&nbsp; ✓ (x²)³ = x⁶
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== 右侧：游戏 ===== -->
+            <div class="game-area" id="games">
+
+                <!-- 游戏1：拖拽配对 -->
+                <div class="game-card">
+                    <div class="game-title">
+                        🧩 拖拽配对 · 幂的乘方与积的乘方
+                        <span class="g-badge">拖拽匹配</span>
+                    </div>
+                    <div class="game-desc">将左侧的 <strong>幂的表达式</strong> 拖拽到右侧对应的 <strong>结果</strong> 位置。</div>
+                    <div class="pair-area">
+                        <div class="pair-row" id="pairRow">
+                            <div class="pair-col" id="pairLeft">
+                                <div class="pair-col-title">📝 幂的表达式</div>
+                            </div>
+                            <div class="pair-arrow">⟷</div>
+                            <div class="pair-col" id="pairRight">
+                                <div class="pair-col-title">✅ 化简结果</div>
+                            </div>
+                        </div>
+                        <div class="pair-feedback" id="pairFeedback">💡 拖拽左侧卡片到右侧匹配</div>
+                        <div style="display:flex; justify-content:center; gap:0.3rem; flex-wrap:wrap;">
+                            <button class="btn-reset" onclick="resetPair()">🔄 重新配对</button>
+                            <button class="btn-check" onclick="checkPair()">✅ 检查答案</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 游戏2：转盘 -->
+                <div class="game-card">
+                    <div class="game-title">
+                        🎡 转盘 · 幂的挑战
+                        <span class="g-badge">点击旋转</span>
+                    </div>
+                    <div class="game-desc">点击转盘抽题，选择正确答案，答对得1分！</div>
+                    <div class="wheel-area">
+                        <div class="wheel-container">
+                            <div class="wheel-pointer">▼</div>
+                            <canvas id="wheelCanvas" width="360" height="360"></canvas>
+                        </div>
+                        <div class="wheel-question" id="wheelQuestion">
+                            <div class="q-text">💡 点击转盘开始挑战！</div>
+                        </div>
+                        <div class="wheel-score" id="wheelScore">🏆 得分：0</div>
+                        <div class="wheel-feedback" id="wheelFeedback"></div>
+                        <div style="display:flex; justify-content:center; gap:0.3rem; flex-wrap:wrap;">
+                            <button class="btn-reset" onclick="resetWheel()">🔄 重新开始</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 复习巩固题 -->
+        <section id="quiz" style="margin-top:1.2rem;">
+            <div class="card">
+                <div class="card-title">
+                    📝 复习巩固题
+                    <span class="badge">小测验</span>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="q">1. 计算：(x<sup>3</sup>)<sup>4</sup></div>
+                    <button class="answer-btn" onclick="toggleAnswer('ans1')">显示答案</button>
+                    <div class="a" id="ans1" style="display:none;">(x<sup>3</sup>)<sup>4</sup> = x<sup>3×4</sup> = <span class="highlight">x<sup>12</sup></span></div>
+                    <div style="display:flex;gap:0.3rem;flex-wrap:wrap;margin-top:2px;">
+                        <span style="background:#f0f7fe;padding:0.05rem 0.6rem;border-radius:12px;font-size:0.75rem;">底数 x 不变</span>
+                        <span style="background:#f0f7fe;padding:0.05rem 0.6rem;border-radius:12px;font-size:0.75rem;">指数 3×4=12</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="q">2. 计算：(−3x<sup>2</sup>)<sup>3</sup></div>
+                    <button class="answer-btn" onclick="toggleAnswer('ans2')">显示答案</button>
+                    <div class="a" id="ans2" style="display:none;">(−3x<sup>2</sup>)<sup>3</sup> = (−3)<sup>3</sup> · (x<sup>2</sup>)<sup>3</sup> = −27 · x<sup>6</sup> = <span class="highlight">−27x<sup>6</sup></span></div>
+                    <div style="display:flex;gap:0.3rem;flex-wrap:wrap;margin-top:2px;">
+                        <span style="background:#f0f7fe;padding:0.05rem 0.6rem;border-radius:12px;font-size:0.75rem;">(−3)³=−27</span>
+                        <span style="background:#f0f7fe;padding:0.05rem 0.6rem;border-radius:12px;font-size:0.75rem;">(x²)³=x⁶</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 底部 ===== -->
+        <div class="footer">
+            📚 八年级数学 · 幂的乘方与积的乘方 &nbsp;|&nbsp; 预习课程 · 互动学习
+        </div>
+
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- JavaScript -->
+    <script>
+        // =============================================================
+        // 工具函数
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+        }
+
+        // =============================================================
+        // 游戏1：拖拽配对
+        // =============================================================
+        const pairData = [
+            { id: 'p1', left: '(x²)³', right: 'x⁶', pairId: 0 },
+            { id: 'p2', left: '(a⁴)⁵', right: 'a²⁰', pairId: 1 },
+            { id: 'p3', left: '(2a)³', right: '8a³', pairId: 2 },
+            { id: 'p4', left: '(−3x)²', right: '9x²', pairId: 3 },
+            { id: 'p5', left: '(xy²)²', right: 'x²y⁴', pairId: 4 },
+            { id: 'p6', left: '(−2x³y)⁴', right: '16x¹²y⁴', pairId: 5 }
+        ];
+
+        // 显示映射
+        const pairDisplay = {
+            '(x²)³': '(x<sup>2</sup>)<sup>3</sup>',
+            'x⁶': 'x<sup>6</sup>',
+            '(a⁴)⁵': '(a<sup>4</sup>)<sup>5</sup>',
+            'a²⁰': 'a<sup>20</sup>',
+            '(2a)³': '(2a)<sup>3</sup>',
+            '8a³': '8a<sup>3</sup>',
+            '(−3x)²': '(−3x)<sup>2</sup>',
+            '9x²': '9x<sup>2</sup>',
+            '(xy²)²': '(xy<sup>2</sup>)<sup>2</sup>',
+            'x²y⁴': 'x<sup>2</sup>y<sup>4</sup>',
+            '(−2x³y)⁴': '(−2x<sup>3</sup>y)<sup>4</sup>',
+            '16x¹²y⁴': '16x<sup>12</sup>y<sup>4</sup>'
+        };
+
+        let pairState = {};
+        let pairGhost = null;
+        let pairDragEl = null;
+        let pairDragId = null;
+        let pairDragOffsetX = 0,
+            pairDragOffsetY = 0;
+        let pairMatches = 0;
+
+        function buildPair() {
+            const leftCol = document.getElementById('pairLeft');
+            const rightCol = document.getElementById('pairRight');
+            leftCol.innerHTML = '<div class="pair-col-title">📝 幂的表达式</div>';
+            rightCol.innerHTML = '<div class="pair-col-title">✅ 化简结果</div>';
+
+            pairState = {};
+            pairMatches = 0;
+            pairDragId = null;
+
+            const leftItems = [...pairData];
+            const rightItems = [...pairData];
+            shuffleArray(leftItems);
+            shuffleArray(rightItems);
+
+            leftItems.forEach((item, idx) => {
+                const div = document.createElement('div');
+                div.className = 'pair-item';
+                div.dataset.id = item.id;
+                div.dataset.pairId = item.pairId;
+                div.dataset.type = 'left';
+                div.innerHTML = `<span class="math">${pairDisplay[item.left] || item.left}</span>`;
+                div.draggable = false;
+                div.addEventListener('mousedown', (e) => onPairItemMouseDown(e, div, item.id));
+                div.addEventListener('touchstart', (e) => onPairItemTouchStart(e, div, item.id), { passive: false });
+                leftCol.appendChild(div);
+                pairState[item.id] = { left: div, right: null, matched: false, pairId: item.pairId };
+            });
+
+            rightItems.forEach((item) => {
+                const div = document.createElement('div');
+                div.className = 'pair-item';
+                div.dataset.id = item.id;
+                div.dataset.pairId = item.pairId;
+                div.dataset.type = 'right';
+                div.innerHTML = `<span class="math">${pairDisplay[item.right] || item.right}</span>`;
+                div.draggable = false;
+                rightCol.appendChild(div);
+                if (pairState[item.id]) {
+                    pairState[item.id].right = div;
+                }
+            });
+
+            document.getElementById('pairFeedback').textContent = '💡 拖拽左侧卡片到右侧匹配';
+            document.getElementById('pairFeedback').style.color = '#1f3a5f';
+            document.querySelectorAll('.pair-item').forEach(el => {
+                el.classList.remove('matched', 'wrong', 'drop-target');
+            });
+        }
+
+        // ---- 鼠标拖拽 ----
+        function onPairItemMouseDown(e, el, id) {
+            if (el.classList.contains('matched')) return;
+            e.preventDefault();
+            const item = pairState[id];
+            if (!item || item.matched) return;
+            pairDragId = id;
+            startPairDrag(el, e.clientX, e.clientY);
+            document.addEventListener('mousemove', onPairMouseMove);
+            document.addEventListener('mouseup', onPairMouseUp);
+        }
+
+        function onPairMouseMove(e) {
+            e.preventDefault();
+            movePairDrag(e.clientX, e.clientY);
+        }
+
+        function onPairMouseUp(e) {
+            document.removeEventListener('mousemove', onPairMouseMove);
+            document.removeEventListener('mouseup', onPairMouseUp);
+            endPairDrag(e.clientX, e.clientY);
+        }
+
+        // ---- 触摸拖拽 ----
+        function onPairItemTouchStart(e, el, id) {
+            if (el.classList.contains('matched')) return;
+            e.preventDefault();
+            const touch = e.touches[0];
+            const item = pairState[id];
+            if (!item || item.matched) return;
+            pairDragId = id;
+            startPairDrag(el, touch.clientX, touch.clientY);
+            document.addEventListener('touchmove', onPairTouchMove, { passive: false });
+            document.addEventListener('touchend', onPairTouchEnd, { passive: false });
+        }
+
+        function onPairTouchMove(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            movePairDrag(touch.clientX, touch.clientY);
+        }
+
+        function onPairTouchEnd(e) {
+            document.removeEventListener('touchmove', onPairTouchMove);
+            document.removeEventListener('touchend', onPairTouchEnd);
+            const touch = e.changedTouches[0];
+            endPairDrag(touch.clientX, touch.clientY);
+        }
+
+        // ---- 拖拽核心 ----
+        function startPairDrag(el, clientX, clientY) {
+            const rect = el.getBoundingClientRect();
+            pairDragOffsetX = clientX - rect.left;
+            pairDragOffsetY = clientY - rect.top;
+            pairDragEl = el;
+            el.classList.add('dragging');
+            pairGhost = document.createElement('div');
+            pairGhost.className = 'drag-ghost';
+            pairGhost.innerHTML = el.innerHTML;
+            pairGhost.style.left = (clientX - pairDragOffsetX) + 'px';
+            pairGhost.style.top = (clientY - pairDragOffsetY) + 'px';
+            document.body.appendChild(pairGhost);
+            document.querySelectorAll('#pairRight .pair-item:not(.matched)').forEach(el => {
+                el.classList.add('drop-target');
+            });
+        }
+
+        function movePairDrag(clientX, clientY) {
+            if (pairGhost) {
+                pairGhost.style.left = (clientX - pairDragOffsetX) + 'px';
+                pairGhost.style.top = (clientY - pairDragOffsetY) + 'px';
+            }
+        }
+
+        function endPairDrag(clientX, clientY) {
+            if (pairGhost) {
+                pairGhost.remove();
+                pairGhost = null;
+            }
+            document.querySelectorAll('#pairRight .pair-item').forEach(el => {
+                el.classList.remove('drop-target');
+            });
+            if (pairDragEl) {
+                pairDragEl.classList.remove('dragging');
+            }
+
+            let targetEl = null;
+            document.querySelectorAll('#pairRight .pair-item:not(.matched)').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (clientX >= rect.left && clientX <= rect.right &&
+                    clientY >= rect.top && clientY <= rect.bottom) {
+                    targetEl = el;
+                }
+            });
+
+            if (targetEl && pairDragId !== null) {
+                const leftId = pairDragId;
+                const rightId = targetEl.dataset.id;
+                const leftItem = pairState[leftId];
+                const rightItem = pairState[rightId];
+                if (leftItem && rightItem && !leftItem.matched && !rightItem.matched) {
+                    if (leftItem.pairId === rightItem.pairId) {
+                        leftItem.matched = true;
+                        rightItem.matched = true;
+                        leftItem.left.classList.add('matched');
+                        rightItem.right.classList.add('matched');
+                        pairMatches++;
+                        document.getElementById('pairFeedback').textContent =
+                            `✅ 配对成功！${pairData.find(d=>d.id===leftId).left} = ${pairData.find(d=>d.id===rightId).right}`;
+                        document.getElementById('pairFeedback').style.color = '#16a34a';
+                        if (pairMatches === pairData.length) {
+                            document.getElementById('pairFeedback').textContent = '🎉 全部配对完成！太棒啦！';
+                            document.getElementById('pairFeedback').style.color = '#2563eb';
+                        }
+                    } else {
+                        targetEl.classList.add('wrong');
+                        setTimeout(() => targetEl.classList.remove('wrong'), 500);
+                        document.getElementById('pairFeedback').textContent =
+                            `❌ 配对错误！请再试试`;
+                        document.getElementById('pairFeedback').style.color = '#b91c1c';
+                    }
+                }
+            }
+            pairDragId = null;
+            pairDragEl = null;
+        }
+
+        function checkPair() {
+            const total = pairData.length;
+            const matched = Object.values(pairState).filter(s => s.matched).length / 2;
+            document.getElementById('pairFeedback').textContent = `📊 已配对 ${matched} / ${total}`;
+            document.getElementById('pairFeedback').style.color = '#1f3a5f';
+        }
+
+        function resetPair() {
+            buildPair();
+        }
+
+        // =============================================================
+        // 游戏2：转盘
+        // =============================================================
+        const wheelQuestions = [{
+            id: 0,
+            question: '(x²)³ = ？',
+            options: ['x⁵', 'x⁶', 'x⁸', 'x⁹'],
+            correct: 1
+        }, {
+            id: 1,
+            question: '(a⁴)⁵ = ？',
+            options: ['a⁹', 'a¹⁰', 'a²⁰', 'a⁴⁵'],
+            correct: 2
+        }, {
+            id: 2,
+            question: '(2a)³ = ？',
+            options: ['6a³', '8a³', '2a³', '8a⁶'],
+            correct: 1
+        }, {
+            id: 3,
+            question: '(−3x)² = ？',
+            options: ['−9x²', '9x²', '−6x²', '6x²'],
+            correct: 1
+        }, {
+            id: 4,
+            question: '(xy²)² = ？',
+            options: ['x²y⁴', 'xy⁴', 'x²y²', 'x⁴y⁴'],
+            correct: 0
+        }, {
+            id: 5,
+            question: '(−2x³y)⁴ = ？',
+            options: ['−16x⁷y⁴', '16x⁷y⁴', '−16x¹²y⁴', '16x¹²y⁴'],
+            correct: 3
+        }, {
+            id: 6,
+            question: '(10³)⁵ = ？',
+            options: ['10⁸', '10¹⁵', '10⁵', '10³⁰'],
+            correct: 1
+        }, {
+            id: 7,
+            question: '(a²b³)² = ？',
+            options: ['a⁴b⁵', 'a⁴b⁶', 'a²b⁶', 'a⁴b⁹'],
+            correct: 1
+        }];
+
+        // 显示映射
+        const wheelDisplay = {
+            'x⁵': 'x⁵',
+            'x⁶': 'x⁶',
+            'x⁸': 'x⁸',
+            'x⁹': 'x⁹',
+            'a⁹': 'a⁹',
+            'a¹⁰': 'a¹⁰',
+            'a²⁰': 'a²⁰',
+            'a⁴⁵': 'a⁴⁵',
+            '6a³': '6a³',
+            '8a³': '8a³',
+            '2a³': '2a³',
+            '8a⁶': '8a⁶',
+            '−9x²': '−9x²',
+            '9x²': '9x²',
+            '−6x²': '−6x²',
+            '6x²': '6x²',
+            'x²y⁴': 'x²y⁴',
+            'xy⁴': 'xy⁴',
+            'x²y²': 'x²y²',
+            'x⁴y⁴': 'x⁴y⁴',
+            '−16x⁷y⁴': '−16x⁷y⁴',
+            '16x⁷y⁴': '16x⁷y⁴',
+            '−16x¹²y⁴': '−16x¹²y⁴',
+            '16x¹²y⁴': '16x¹²y⁴',
+            '10⁸': '10⁸',
+            '10¹⁵': '10¹⁵',
+            '10⁵': '10⁵',
+            '10³⁰': '10³⁰',
+            'a⁴b⁵': 'a⁴b⁵',
+            'a⁴b⁶': 'a⁴b⁶',
+            'a²b⁶': 'a²b⁶',
+            'a⁴b⁹': 'a⁴b⁹'
+        };
+
+        let wheelScore = 0;
+        let wheelAnswered = false;
+        let wheelUsed = [];
+        let wheelCurrentQ = null;
+        let wheelRotation = 0;
+        let wheelSpinning = false;
+
+        function buildWheel() {
+            wheelScore = 0;
+            wheelUsed = [];
+            wheelAnswered = false;
+            wheelCurrentQ = null;
+            document.getElementById('wheelScore').textContent = '🏆 得分：0';
+            document.getElementById('wheelQuestion').innerHTML = '<div class="q-text">💡 点击转盘开始挑战！</div>';
+            document.getElementById('wheelFeedback').textContent = '';
+            drawWheel();
+        }
+
+        function drawWheel() {
+            const canvas = document.getElementById('wheelCanvas');
+            const ctx = canvas.getContext('2d');
+            const cx = 180,
+                cy = 180,
+                r = 160;
+
+            const segments = wheelQuestions.length;
+            const colors = [
+                '#fcd34d', '#93c5fd', '#fca5a5', '#a7f3d0',
+                '#f9a8d4', '#d8b4fe', '#fdba74', '#6ee7b7'
+            ];
+            const segmentAngle = (2 * Math.PI) / segments;
+
+            ctx.clearRect(0, 0, 360, 360);
+
+            for (let i = 0; i < segments; i++) {
+                const startAngle = i * segmentAngle + wheelRotation;
+                const endAngle = startAngle + segmentAngle;
+
+                ctx.beginPath();
+                ctx.moveTo(cx, cy);
+                ctx.arc(cx, cy, r, startAngle, endAngle);
+                ctx.closePath();
+                ctx.fillStyle = colors[i % colors.length];
+                ctx.fill();
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                const midAngle = startAngle + segmentAngle / 2;
+                const labelR = r * 0.7;
+                const x = cx + labelR * Math.cos(midAngle);
+                const y = cy + labelR * Math.sin(midAngle);
+                ctx.fillStyle = '#1e293b';
+                ctx.font = 'bold 20px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(`${i+1}`, x, y);
+            }
+
+            ctx.beginPath();
+            ctx.arc(cx, cy, 24, 0, 2 * Math.PI);
+            ctx.fillStyle = '#ffffff';
+            ctx.fill();
+            ctx.strokeStyle = '#3b82f6';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+            ctx.fillStyle = '#1e4b8a';
+            ctx.font = 'bold 16px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('GO', cx, cy);
+        }
+
+        function spinWheel() {
+            if (wheelSpinning) return;
+            if (wheelUsed.length >= wheelQuestions.length) {
+                document.getElementById('wheelFeedback').textContent = '🎉 所有题目已答完！点击"重新开始"继续挑战。';
+                document.getElementById('wheelFeedback').style.color = '#2563eb';
+                return;
+            }
+
+            wheelSpinning = true;
+            const canvas = document.getElementById('wheelCanvas');
+
+            const available = wheelQuestions.filter((_, i) => !wheelUsed.includes(i));
+            const chosenIdx = available[Math.floor(Math.random() * available.length)].id;
+            const targetSegment = chosenIdx;
+
+            const segmentAngle = (2 * Math.PI) / wheelQuestions.length;
+            const targetAngle = -targetSegment * segmentAngle - segmentAngle / 2 + Math.PI / 2;
+
+            const extraSpins = 3 + Math.random() * 2;
+            const totalRotation = targetAngle + extraSpins * 2 * Math.PI;
+
+            const startRotation = wheelRotation;
+            const duration = 1500 + Math.random() * 800;
+            const startTime = performance.now();
+
+            function animateSpin(time) {
+                const elapsed = time - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const ease = 1 - Math.pow(1 - progress, 3);
+                const currentRotation = startRotation + (totalRotation - startRotation) * ease;
+                wheelRotation = currentRotation;
+                drawWheel();
+
+                if (progress < 1) {
+                    requestAnimationFrame(animateSpin);
+                } else {
+                    wheelRotation = totalRotation;
+                    drawWheel();
+                    wheelSpinning = false;
+                    showWheelQuestion(chosenIdx);
+                }
+            }
+            requestAnimationFrame(animateSpin);
+        }
+
+        function showWheelQuestion(index) {
+            if (wheelUsed.includes(index)) {
+                spinWheel();
+                return;
+            }
+
+            const q = wheelQuestions[index];
+            wheelCurrentQ = q;
+            wheelAnswered = false;
+
+            const container = document.getElementById('wheelQuestion');
+            let html = `<div class="q-text">🎯 ${q.question}</div>`;
+            html += `<div class="q-options">`;
+            q.options.forEach((opt, oi) => {
+                const displayText = wheelDisplay[opt] || opt;
+                html += `<button data-optindex="${oi}" data-qid="${index}" onclick="answerWheel(${index}, ${oi})">${displayText}</button>`;
+            });
+            html += `</div>`;
+            container.innerHTML = html;
+            document.getElementById('wheelFeedback').textContent = '🤔 选择一个选项...';
+            document.getElementById('wheelFeedback').style.color = '#1f3a5f';
+        }
+
+        function answerWheel(qIndex, optIndex) {
+            if (wheelAnswered) return;
+            if (wheelUsed.includes(qIndex)) return;
+            wheelAnswered = true;
+
+            const q = wheelQuestions[qIndex];
+            const isCorrect = (optIndex === q.correct);
+            const buttons = document.querySelectorAll('#wheelQuestion .q-options button');
+            buttons.forEach((btn, idx) => {
+                btn.disabled = true;
+                if (idx === q.correct) btn.classList.add('correct-answer');
+                if (idx === optIndex && !isCorrect) btn.classList.add('wrong-answer');
+            });
+
+            if (isCorrect) {
+                wheelScore++;
+                document.getElementById('wheelScore').textContent = `🏆 得分：${wheelScore}`;
+                document.getElementById('wheelFeedback').textContent = '✅ 回答正确！继续点击转盘吧！';
+                document.getElementById('wheelFeedback').style.color = '#16a34a';
+            } else {
+                document.getElementById('wheelFeedback').textContent = '❌ 再想想哦！继续学习吧！';
+                document.getElementById('wheelFeedback').style.color = '#b91c1c';
+            }
+
+            wheelUsed.push(qIndex);
+
+            if (wheelUsed.length === wheelQuestions.length) {
+                document.getElementById('wheelFeedback').textContent = `🎉 全部完成！最终得分：${wheelScore} / ${wheelQuestions.length}`;
+                document.getElementById('wheelFeedback').style.color = '#2563eb';
+            }
+        }
+
+        function resetWheel() {
+            buildWheel();
+        }
+
+        // 转盘点击事件
+        document.addEventListener('DOMContentLoaded', function() {
+            const canvas = document.getElementById('wheelCanvas');
+            canvas.addEventListener('click', spinWheel);
+            canvas.addEventListener('touchend', function(e) {
+                e.preventDefault();
+                spinWheel();
+            });
+        });
+
+        // =============================================================
+        // 显示答案
+        // =============================================================
+        function toggleAnswer(id) {
+            const el = document.getElementById(id);
+            if (el.style.display === 'none' || el.style.display === '') {
+                el.style.display = 'block';
+            } else {
+                el.style.display = 'none';
+            }
+        }
+
+        // =============================================================
+        // 导航
+        // =============================================================
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // =============================================================
+        // 初始化
+        // =============================================================
+        buildPair();
+        buildWheel();
+        console.log('📐 幂的乘方与积的乘方 课程已加载！');
+    </script>
+</body>
+</html>

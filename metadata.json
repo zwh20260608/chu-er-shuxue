@@ -1,0 +1,6 @@
+{
+  "name": "初二数学提前学",
+  "description": "初二上学期数学知识点提前学软件，设计精美。支持三角形、全等三角形、轴对称、整式的乘法、因式分解、分式等六大核心模块的学习，配备精美公式说明、三级树形结构导航、进度持久化及课程表导出功能。",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>等腰三角形 · 初二数学预习</title>
+    <style>
+        /* ===== 全局重置 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', system-ui, sans-serif;
+            background: #f5f9fe;
+            color: #1e293b;
+            padding: 1rem;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 60px rgba(0, 20, 40, 0.06);
+            padding: 1.8rem 2rem 2.8rem;
+            transition: 0.2s;
+        }
+        @media (max-width: 640px) {
+            .container {
+                padding: 1rem 1rem 2rem;
+                border-radius: 20px;
+            }
+        }
+
+        /* ===== 头部 ===== */
+        .page-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 3px solid #e6f0fa;
+            padding-bottom: 0.8rem;
+            margin-bottom: 1.6rem;
+        }
+        .page-header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1a4b8c, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .page-header h1 small {
+            font-size: 0.9rem;
+            font-weight: 400;
+            -webkit-text-fill-color: #5f7d9c;
+            color: #5f7d9c;
+            background: none;
+        }
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem 0.5rem;
+        }
+        .nav-links a {
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            background: #f1f5f9;
+            color: #2c3e50;
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: 0.2s;
+            border: 1px solid transparent;
+        }
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: #2563eb;
+            color: #fff;
+            border-color: #2563eb;
+        }
+        @media (max-width: 600px) {
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.4rem;
+            }
+            .page-header h1 {
+                font-size: 1.4rem;
+            }
+            .nav-links a {
+                font-size: 0.65rem;
+                padding: 0.1rem 0.6rem;
+            }
+        }
+
+        /* ===== 主布局 ===== */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 1.8rem;
+            align-items: start;
+        }
+        @media (max-width: 920px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        /* ===== 卡片 ===== */
+        .card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 1rem 1.2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+            border: 1px solid #edf2f7;
+            margin-bottom: 1rem;
+            transition: 0.2s;
+        }
+        .card-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #0b2b4a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 0.5rem;
+            border-left: 5px solid #3b82f6;
+            padding-left: 12px;
+        }
+        .card-title .badge {
+            font-size: 0.6rem;
+            background: #dbeafe;
+            color: #1e4b8a;
+            padding: 0.05rem 0.7rem;
+            border-radius: 40px;
+            font-weight: 500;
+        }
+
+        /* ===== 图形展示 ===== */
+        .tri-flex {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem 0.8rem;
+            padding: 0.2rem 0;
+        }
+        .tri-item {
+            text-align: center;
+            background: #fafcff;
+            border-radius: 14px;
+            padding: 0.3rem 0.5rem 0.2rem;
+            border: 1px solid #e9edf4;
+            min-width: 60px;
+            transition: 0.2s;
+        }
+        .tri-item:hover {
+            border-color: #b3cef0;
+        }
+        .tri-item svg {
+            display: block;
+            margin: 0 auto;
+            width: 64px;
+            height: 46px;
+        }
+        .tri-item .label {
+            font-size: 0.62rem;
+            font-weight: 600;
+            color: #1f3a5f;
+            margin-top: 1px;
+        }
+
+        .formula-box {
+            background: #f0f7fe;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border-left: 4px solid #3b82f6;
+            margin: 0.3rem 0;
+            font-size: 0.85rem;
+        }
+        .tip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 0.5rem;
+        }
+        .tip-item {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 0.4rem 0.7rem;
+            border: 1px solid #e2eaf2;
+            font-size: 0.76rem;
+        }
+        .tip-item strong {
+            color: #1e4b8a;
+        }
+
+        .example-box {
+            background: #fcf9f0;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border-left: 4px solid #eab308;
+            margin: 0.3rem 0;
+            font-size: 0.85rem;
+        }
+        .example-box .ex-title {
+            font-weight: 700;
+            color: #8a6d1b;
+        }
+        .error-box {
+            background: #fef2f2;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border-left: 4px solid #ef4444;
+            margin: 0.3rem 0;
+            font-size: 0.85rem;
+        }
+        .error-box .err-title {
+            font-weight: 700;
+            color: #b91c1c;
+        }
+        .highlight {
+            background: #fef9e7;
+            padding: 0.05rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .tag {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e4b8a;
+            padding: 0.05rem 0.6rem;
+            border-radius: 40px;
+            font-size: 0.65rem;
+            font-weight: 500;
+        }
+
+        /* ===== 游戏区 ===== */
+        .game-area {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .game-card {
+            background: #fafcff;
+            border-radius: 18px;
+            padding: 0.8rem 1rem 1rem;
+            border: 1px solid #e2ecf9;
+        }
+        .game-card .game-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #0b2b4a;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 0.3rem;
+        }
+        .game-card .game-title .g-badge {
+            font-size: 0.55rem;
+            background: #dbeafe;
+            padding: 0.05rem 0.6rem;
+            border-radius: 40px;
+            font-weight: 500;
+            color: #1e4b8a;
+        }
+        .game-card .game-desc {
+            font-size: 0.75rem;
+            color: #4a617c;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ===== 游戏1：抓娃娃机 ===== */
+        .claw-area {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            align-items: center;
+        }
+        .claw-machine {
+            position: relative;
+            background: #f0f7fe;
+            border-radius: 18px;
+            border: 3px solid #b7cee8;
+            padding: 0.8rem;
+            width: 100%;
+            max-width: 420px;
+            min-height: 200px;
+            touch-action: none;
+            overflow: hidden;
+        }
+        .claw-machine .claw-bg {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            padding: 0.4rem;
+        }
+        .claw-item {
+            background: #ffffff;
+            border: 2px solid #dbeafe;
+            border-radius: 14px;
+            padding: 0.4rem 0.6rem;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #1f3a5f;
+            text-align: center;
+            min-width: 80px;
+            flex: 1 0 auto;
+            max-width: 120px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            transition: 0.2s;
+            cursor: default;
+            user-select: none;
+        }
+        .claw-item .claw-icon {
+            font-size: 1.4rem;
+            display: block;
+            margin-bottom: 2px;
+        }
+        .claw-item .claw-label {
+            font-size: 0.6rem;
+            color: #4a617c;
+            font-weight: 400;
+        }
+        .claw-item.correct-catch {
+            border-color: #22c55e;
+            background: #e8f8ee;
+            transform: scale(1.04);
+            box-shadow: 0 4px 16px rgba(34, 197, 94, 0.2);
+        }
+        .claw-item.wrong-catch {
+            border-color: #ef4444;
+            background: #fde8e8;
+            animation: shake 0.4s ease;
+        }
+        .claw-item.caught {
+            opacity: 0.5;
+            pointer-events: none;
+            filter: grayscale(0.6);
+            transform: scale(0.92);
+        }
+        .claw-grabber {
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            cursor: grab;
+            transition: 0.15s;
+            touch-action: none;
+            z-index: 5;
+            user-select: none;
+        }
+        .claw-grabber.dragging {
+            opacity: 0.7;
+            transform: translateX(-50%) scale(1.15);
+        }
+        .claw-grabber .claw-rope {
+            display: block;
+            width: 4px;
+            height: 24px;
+            background: #94a3b8;
+            margin: 0 auto 2px;
+            border-radius: 2px;
+        }
+        .claw-pool {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            padding: 0.4rem 0;
+            background: #f8fafc;
+            border-radius: 14px;
+            min-height: 44px;
+            border: 1px solid #e2eaf2;
+            width: 100%;
+            max-width: 420px;
+        }
+        .claw-pool .claw-draggable {
+            background: #ffffff;
+            border: 2px solid #dbeafe;
+            border-radius: 12px;
+            padding: 0.3rem 0.8rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: grab;
+            user-select: none;
+            touch-action: none;
+            transition: 0.15s;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+            min-width: 44px;
+            text-align: center;
+        }
+        .claw-pool .claw-draggable.dragging {
+            opacity: 0.5;
+            transform: scale(0.92);
+        }
+        .claw-pool .claw-draggable.placed {
+            opacity: 0.4;
+            pointer-events: none;
+            border-color: #94a3b8;
+            transform: scale(0.92);
+        }
+        .claw-feedback {
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.78rem;
+            min-height: 22px;
+            margin-top: 2px;
+        }
+        .btn-reset {
+            background: #eef4fa;
+            border: none;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.7rem;
+            margin: 2px 3px;
+        }
+        .btn-reset:hover {
+            background: #dbeafe;
+        }
+        .btn-check {
+            background: #dbeafe;
+            border: none;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.7rem;
+            margin: 2px 3px;
+        }
+        .btn-check:hover {
+            background: #b7d6f7;
+        }
+        @keyframes shake {
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-6px);
+            }
+            75% {
+                transform: translateX(6px);
+            }
+        }
+        @keyframes clawDrop {
+            0% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(60px);
+            }
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+        .claw-grabber.drop-anim {
+            animation: clawDrop 0.5s ease forwards;
+        }
+        @media (max-width: 480px) {
+            .claw-machine {
+                min-height: 160px;
+                padding: 0.5rem;
+            }
+            .claw-item {
+                min-width: 60px;
+                font-size: 0.65rem;
+                padding: 0.3rem 0.4rem;
+            }
+            .claw-item .claw-icon {
+                font-size: 1.1rem;
+            }
+            .claw-grabber {
+                font-size: 1.6rem;
+            }
+            .claw-pool .claw-draggable {
+                font-size: 0.6rem;
+                padding: 0.2rem 0.5rem;
+                min-width: 34px;
+            }
+        }
+
+        /* ===== 游戏2：超市购物车分类 ===== */
+        .cart-area {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+        .cart-bins {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 6px;
+        }
+        .cart-bin {
+            background: #f5f9ff;
+            border: 2px dashed #b7cee8;
+            border-radius: 14px;
+            padding: 0.4rem 0.2rem;
+            min-height: 70px;
+            text-align: center;
+            transition: 0.2s;
+            position: relative;
+        }
+        .cart-bin.drag-over {
+            border-color: #2563eb;
+            background: #e5effa;
+        }
+        .cart-bin.correct-highlight {
+            border-color: #22c55e;
+            background: #e8f8ee;
+        }
+        .cart-bin.wrong-highlight {
+            border-color: #ef4444;
+            background: #fde8e8;
+        }
+        .cart-bin .bin-title {
+            font-weight: 700;
+            font-size: 0.7rem;
+            color: #1f3a5f;
+            margin-bottom: 3px;
+        }
+        .cart-bin .bin-title .emoji {
+            font-size: 0.9rem;
+        }
+        .cart-bin .bin-items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 4px;
+            min-height: 26px;
+        }
+        .cart-item {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 3px 8px;
+            border: 2px solid #dbeafe;
+            cursor: grab;
+            transition: 0.15s;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+            font-size: 0.6rem;
+            font-weight: 500;
+            user-select: none;
+            touch-action: none;
+            text-align: center;
+            min-height: 32px;
+            justify-content: center;
+        }
+        .cart-item.dragging {
+            opacity: 0.5;
+            transform: scale(0.92);
+        }
+        .cart-item.placed {
+            opacity: 0.6;
+            pointer-events: none;
+            border-color: #94a3b8;
+            transform: scale(0.94);
+        }
+        .cart-pool {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px;
+            padding: 0.4rem 0;
+            background: #f8fafc;
+            border-radius: 14px;
+            min-height: 44px;
+            border: 1px solid #e2eaf2;
+        }
+        .cart-pool .cart-item {
+            cursor: grab;
+        }
+        .cart-feedback {
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.78rem;
+            min-height: 22px;
+            margin-top: 2px;
+        }
+        @media (max-width: 600px) {
+            .cart-bins {
+                grid-template-columns: 1fr 1fr;
+                gap: 6px;
+            }
+        }
+        @media (max-width: 400px) {
+            .cart-bins {
+                grid-template-columns: 1fr;
+                gap: 6px;
+            }
+            .cart-item {
+                font-size: 0.55rem;
+                padding: 2px 5px;
+            }
+        }
+
+        /* ===== 复习题 ===== */
+        .quiz-item {
+            background: #fafcff;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border: 1px solid #e9eff6;
+            margin-bottom: 0.5rem;
+        }
+        .quiz-item .q {
+            font-weight: 600;
+            color: #0b2b4a;
+            font-size: 0.86rem;
+        }
+        .quiz-item .a {
+            color: #1f4b7a;
+            margin-top: 2px;
+            padding-left: 0.6rem;
+            border-left: 3px solid #b3cef0;
+            font-size: 0.82rem;
+        }
+        .quiz-item .a .highlight {
+            background: #fef9e7;
+            padding: 0.05rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .quiz-item .answer-btn {
+            background: #eef4fa;
+            border: none;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.7rem;
+            margin-top: 4px;
+        }
+        .quiz-item .answer-btn:hover {
+            background: #dbeafe;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #8ba0b8;
+            border-top: 1px solid #e9eff6;
+            padding-top: 0.8rem;
+            margin-top: 1rem;
+        }
+        @media (max-width: 480px) {
+            .card {
+                padding: 0.7rem;
+            }
+            .card-title {
+                font-size: 0.95rem;
+            }
+            .formula-box {
+                font-size: 0.76rem;
+                padding: 0.4rem 0.7rem;
+            }
+            .tri-item svg {
+                width: 50px;
+                height: 38px;
+            }
+        }
+
+        .drag-ghost {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.9;
+            transform: scale(1.05);
+            background: #ffffff;
+            border-radius: 12px;
+            border: 2px solid #2563eb;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+            padding: 4px 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #0b2b4a;
+        }
+        .drag-ghost svg {
+            width: 28px;
+            height: 22px;
+        }
+        .axis-line {
+            stroke-dasharray: 5, 4;
+            stroke: #dc2626;
+            stroke-width: 2;
+        }
+        .axis-label {
+            fill: #dc2626;
+            font-size: 8px;
+            font-weight: 600;
+        }
+        .coord-text {
+            font-size: 8px;
+            font-weight: 600;
+            fill: #1f3a5f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- ===== 头部 ===== -->
+        <header class="page-header">
+            <h1>
+                📐 等腰三角形
+                <small>八年级 · 上册</small>
+            </h1>
+            <div class="nav-links">
+                <a href="#concept">核心概念</a>
+                <a href="#formula">锦囊</a>
+                <a href="#examples">举例</a>
+                <a href="#errors">易错</a>
+                <a href="#games">🎮 游戏</a>
+                <a href="#quiz">复习</a>
+            </div>
+        </header>
+
+        <!-- ============================================================ -->
+        <div class="main-grid">
+
+            <!-- ===== 左侧：知识点 ===== -->
+            <div class="knowledge-area">
+
+                <!-- 核心概念 -->
+                <div class="card" id="concept">
+                    <div class="card-title">
+                        🔍 核心概念大解析
+                        <span class="badge">性质 · 判定 · 三线合一</span>
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; align-items:start;">
+                        <div>
+                            <div style="background:#f0f7fe; border-radius:10px; padding:0.3rem 0.6rem; margin-bottom:0.3rem;">
+                                <strong style="color:#1e4b8a; font-size:0.82rem;">📌 定义</strong>
+                                <p style="font-size:0.78rem; margin:0;">有<strong>两边相等</strong>的三角形叫等腰三角形。</p>
+                                <p style="font-size:0.7rem; color:#4a617c;">相等的两边叫<strong>腰</strong>，第三边叫<strong>底边</strong>。</p>
+                            </div>
+                            <div style="background:#f0f7fe; border-radius:10px; padding:0.3rem 0.6rem; margin-bottom:0.3rem;">
+                                <strong style="color:#1e4b8a; font-size:0.82rem;">📌 性质1</strong>
+                                <p style="font-size:0.78rem; margin:0;"><strong>等边对等角</strong>：两底角相等。</p>
+                                <p style="font-size:0.7rem; color:#4a617c;">在△ABC中，AB=AC → ∠B=∠C</p>
+                            </div>
+                            <div style="background:#f0f7fe; border-radius:10px; padding:0.3rem 0.6rem; margin-bottom:0.3rem;">
+                                <strong style="color:#1e4b8a; font-size:0.82rem;">📌 性质2</strong>
+                                <p style="font-size:0.78rem; margin:0;"><strong>三线合一</strong>：底边上的中线、高、顶角平分线互相重合。</p>
+                            </div>
+                            <div style="background:#f0f7fe; border-radius:10px; padding:0.3rem 0.6rem;">
+                                <strong style="color:#1e4b8a; font-size:0.82rem;">📌 判定</strong>
+                                <p style="font-size:0.78rem; margin:0;"><strong>等角对等边</strong>：有两个角相等的三角形是等腰三角形。</p>
+                            </div>
+                        </div>
+                        <div class="tri-flex" style="gap:0.2rem; padding:0;">
+                            <div class="tri-item">
+                                <svg viewBox="0 0 64 46"><polygon points="32,4 10,42 54,42" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><line x1="32" y1="4" x2="32" y2="42" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3,3"/><text x="24" y="18" font-size="7" fill="#1f3a5f">A</text><text x="8" y="40" font-size="7" fill="#1f3a5f">B</text><text x="48" y="40" font-size="7" fill="#1f3a5f">C</text><text x="12" y="30" font-size="6" fill="#6b7f96">腰</text><text x="44" y="30" font-size="6" fill="#6b7f96">腰</text></svg>
+                                <div class="label">等腰△</div>
+                            </div>
+                            <div class="tri-item">
+                                <svg viewBox="0 0 64 46"><polygon points="32,4 10,42 54,42" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><text x="24" y="18" font-size="7" fill="#1f3a5f">A</text><text x="8" y="40" font-size="7" fill="#1f3a5f">B</text><text x="48" y="40" font-size="7" fill="#1f3a5f">C</text><text x="14" y="38" font-size="8" fill="#eab308">∠B</text><text x="44" y="38" font-size="8" fill="#eab308">∠C</text></svg>
+                                <div class="label">等边对等角</div>
+                            </div>
+                            <div class="tri-item">
+                                <svg viewBox="0 0 64 46"><polygon points="32,4 10,42 54,42" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><line x1="32" y1="4" x2="32" y2="42" stroke="#8b5cf6" stroke-width="2"/><text x="24" y="18" font-size="7" fill="#1f3a5f">A</text><text x="8" y="40" font-size="7" fill="#1f3a5f">B</text><text x="48" y="40" font-size="7" fill="#1f3a5f">C</text><text x="34" y="24" font-size="6" fill="#8b5cf6">中线·高·角平分线</text></svg>
+                                <div class="label">三线合一</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top:0.3rem; background:#f8faff; border-radius:12px; padding:0.3rem 0.7rem; border:1px solid #e2ecf9; font-size:0.75rem; display:flex; flex-wrap:wrap; gap:0.1rem 0.6rem;">
+                        <span>🔹 等边对等角 ↔ <strong>等角对等边</strong></span>
+                        <span>🔹 等腰三角形是 <strong>轴对称</strong> 图形</span>
+                        <span>🔹 对称轴：底边的 <strong>垂直平分线</strong></span>
+                    </div>
+                </div>
+
+                <!-- 锦囊 -->
+                <div class="card" id="formula">
+                    <div class="card-title">
+                        🧠 数学锦囊 · 公式
+                        <span class="badge">核心结论</span>
+                    </div>
+                    <div class="tip-grid">
+                        <div class="tip-item"><strong>等边对等角</strong><br>AB=AC → ∠B=∠C</div>
+                        <div class="tip-item"><strong>等角对等边</strong><br>∠B=∠C → AB=AC</div>
+                        <div class="tip-item"><strong>三线合一</strong><br>中线=高=角平分线</div>
+                        <div class="tip-item"><strong>轴对称</strong><br>对称轴是底边垂直平分线</div>
+                    </div>
+                    <div class="formula-box" style="margin-top:0.3rem;">
+                        💡 <strong>口诀：</strong>等腰三角形，两腰相等两底角；三线合一真奇妙，等角对边也成立。
+                    </div>
+                </div>
+
+                <!-- 举例 -->
+                <div class="card" id="examples">
+                    <div class="card-title">
+                        ✏️ 典型举例
+                        <span class="badge">图形结合</span>
+                    </div>
+                    <div class="example-box">
+                        <div class="ex-title">例1 如图，AB=AC，∠A=40°，求∠B、∠C。</div>
+                        <p style="margin-top:2px; font-size:0.82rem;"><strong>解：</strong>∵ AB=AC ∴ ∠B=∠C<br>∠B+∠C=180°−40°=140°<br>∴ ∠B=∠C=<span class="highlight">70°</span></p>
+                        <svg viewBox="0 0 100 46" width="80" height="38" style="margin-top:2px;"><polygon points="50,4 12,42 88,42" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><text x="42" y="18" font-size="9" fill="#1f3a5f">40°</text><text x="14" y="38" font-size="9" fill="#1f3a5f">70°</text><text x="68" y="38" font-size="9" fill="#1f3a5f">70°</text><text x="44" y="40" font-size="8" fill="#6b7f96">A</text><text x="6" y="40" font-size="8" fill="#6b7f96">B</text><text x="80" y="40" font-size="8" fill="#6b7f96">C</text></svg>
+                    </div>
+                    <div class="example-box" style="border-left-color:#8b5cf6;">
+                        <div class="ex-title">例2 如图，AD是等腰△ABC底边BC上的中线，∠BAD=25°，求∠BAC。</div>
+                        <p style="margin-top:2px; font-size:0.82rem;"><strong>解：</strong>∵ AD是三线合一中的角平分线<br>∴ ∠BAC = 2∠BAD = 2×25° = <span class="highlight">50°</span></p>
+                        <svg viewBox="0 0 100 46" width="80" height="38" style="margin-top:2px;"><polygon points="50,4 12,42 88,42" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><line x1="50" y1="4" x2="50" y2="42" stroke="#8b5cf6" stroke-width="1.5" stroke-dasharray="3,3"/><text x="44" y="18" font-size="9" fill="#1f3a5f">25°</text><text x="44" y="40" font-size="8" fill="#6b7f96">A</text><text x="6" y="40" font-size="8" fill="#6b7f96">B</text><text x="80" y="40" font-size="8" fill="#6b7f96">C</text><text x="48" y="24" font-size="8" fill="#8b5cf6">D</text></svg>
+                    </div>
+                </div>
+
+                <!-- 易错 -->
+                <div class="card" id="errors">
+                    <div class="card-title">
+                        ⚠️ 易错题型
+                        <span class="badge">避坑指南</span>
+                    </div>
+                    <div class="error-box">
+                        <div class="err-title">❌ 易错1：混淆"等边对等角"与"等角对等边"</div>
+                        <p style="font-size:0.82rem;">等边对等角：<strong>边相等</strong> → 角相等<br>等角对等边：<strong>角相等</strong> → 边相等<br><span style="color:#b91c1c;">⚠️ 注意方向！</span></p>
+                        <svg viewBox="0 0 120 30" width="100" height="26" style="margin-top:2px;"><text x="4" y="12" font-size="7" fill="#2563eb">AB=AC → ∠B=∠C</text><text x="4" y="24" font-size="7" fill="#2563eb">∠B=∠C → AB=AC</text></svg>
+                    </div>
+                    <div class="error-box" style="border-left-color:#eab308;">
+                        <div class="err-title">❌ 易错2："三线合一"适用范围</div>
+                        <p style="font-size:0.82rem;">"三线合一"只适用于等腰三角形<strong>底边</strong>上的中线、高和顶角平分线。<br>腰上的线不一定重合。</p>
+                        <svg viewBox="0 0 120 30" width="100" height="26" style="margin-top:2px;"><text x="4" y="12" font-size="7" fill="#22c55e">✓ 底边上的三线合一</text><text x="4" y="24" font-size="7" fill="#b91c1c">✗ 腰上的线不一定</text></svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== 右侧：游戏 ===== -->
+            <div class="game-area" id="games">
+
+                <!-- 游戏1：抓娃娃机 -->
+                <div class="game-card">
+                    <div class="game-title">
+                        🧸 抓娃娃机 · 等腰三角形
+                        <span class="g-badge">拖拽抓取</span>
+                    </div>
+                    <div class="game-desc">将下方的 <strong>知识卡片</strong> 拖拽到娃娃机中对应的 <strong>正确位置</strong>（抓取正确选项）。</div>
+                    <div class="claw-area">
+                        <div class="claw-machine" id="clawMachine">
+                            <div class="claw-grabber" id="clawGrabber">
+                                <div class="claw-rope"></div>
+                                🦀
+                            </div>
+                            <div class="claw-bg" id="clawBg">
+                                <!-- 由JS生成 -->
+                            </div>
+                        </div>
+                        <div class="claw-pool" id="clawPool"></div>
+                        <div class="claw-feedback" id="clawFeedback">💡 拖拽下方卡片到娃娃机中对应的正确位置</div>
+                        <div style="display:flex; justify-content:center; gap:0.3rem; flex-wrap:wrap;">
+                            <button class="btn-reset" onclick="resetClaw()">🔄 重新开始</button>
+                            <button class="btn-check" onclick="checkClaw()">✅ 检查答案</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 游戏2：超市购物车分类 -->
+                <div class="game-card">
+                    <div class="game-title">
+                        🛒 超市购物车 · 分类
+                        <span class="g-badge">拖拽归类</span>
+                    </div>
+                    <div class="game-desc">将下方的 <strong>陈述卡片</strong> 拖拽到对应的购物车中（性质 / 判定 / 定义）。</div>
+                    <div class="cart-area">
+                        <div class="cart-bins" id="cartBins">
+                            <div class="cart-bin" data-category="property">
+                                <div class="bin-title"><span class="emoji">📐</span> 性质</div>
+                                <div class="bin-items" id="bin-property"></div>
+                            </div>
+                            <div class="cart-bin" data-category="judgment">
+                                <div class="bin-title"><span class="emoji">🔍</span> 判定</div>
+                                <div class="bin-items" id="bin-judgment"></div>
+                            </div>
+                            <div class="cart-bin" data-category="definition">
+                                <div class="bin-title"><span class="emoji">📖</span> 定义</div>
+                                <div class="bin-items" id="bin-definition"></div>
+                            </div>
+                        </div>
+                        <div class="cart-pool" id="cartPool"></div>
+                        <div class="cart-feedback" id="cartFeedback">💡 拖拽卡片到对应的购物车</div>
+                        <div style="display:flex; justify-content:center; gap:0.3rem; flex-wrap:wrap;">
+                            <button class="btn-reset" onclick="resetCart()">🔄 重新分类</button>
+                            <button class="btn-check" onclick="checkCart()">✅ 检查答案</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 复习巩固题 -->
+        <section id="quiz" style="margin-top:1.2rem;">
+            <div class="card">
+                <div class="card-title">
+                    📝 复习巩固题
+                    <span class="badge">小测验</span>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="q">1. 在△ABC中，AB=AC，∠B=50°，求∠A和∠C的度数。</div>
+                    <button class="answer-btn" onclick="toggleAnswer('ans1')">显示答案</button>
+                    <div class="a" id="ans1" style="display:none;">∵ AB=AC ∴ ∠C=∠B=50°<br>∠A=180°−50°−50°=<span class="highlight">80°</span></div>
+                    <svg viewBox="0 0 100 46" width="80" height="38" style="margin-top:4px;"><polygon points="50,4 12,42 88,42" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><text x="14" y="38" font-size="9" fill="#1f3a5f">50°</text><text x="68" y="38" font-size="9" fill="#1f3a5f">?</text><text x="42" y="18" font-size="9" fill="#1f3a5f">?</text><text x="44" y="40" font-size="8" fill="#6b7f96">A</text><text x="6" y="40" font-size="8" fill="#6b7f96">B</text><text x="80" y="40" font-size="8" fill="#6b7f96">C</text></svg>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="q">2. 如图，在△ABC中，∠B=∠C，AB=6，求AC的长。</div>
+                    <button class="answer-btn" onclick="toggleAnswer('ans2')">显示答案</button>
+                    <div class="a" id="ans2" style="display:none;">∵ ∠B=∠C ∴ AB=AC（等角对等边）<br>∴ AC = AB = <span class="highlight">6</span></div>
+                    <svg viewBox="0 0 100 46" width="80" height="38" style="margin-top:4px;"><polygon points="50,4 12,42 88,42" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><text x="14" y="38" font-size="9" fill="#1f3a5f">∠B</text><text x="68" y="38" font-size="9" fill="#1f3a5f">∠C</text><text x="44" y="40" font-size="8" fill="#6b7f96">A</text><text x="6" y="40" font-size="8" fill="#6b7f96">B</text><text x="80" y="40" font-size="8" fill="#6b7f96">C</text><text x="16" y="28" font-size="8" fill="#2563eb">AB=6</text><text x="70" y="28" font-size="8" fill="#22c55e">AC=?</text></svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 底部 ===== -->
+        <div class="footer">
+            📚 八年级数学 · 等腰三角形 &nbsp;|&nbsp; 预习课程 · 互动学习
+        </div>
+
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- JavaScript -->
+    <script>
+        // =============================================================
+        // 工具函数
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+        }
+
+        // =============================================================
+        // 游戏1：抓娃娃机
+        // =============================================================
+        const clawData = [{
+            id: 'c1',
+            target: 'property',
+            label: '等边对等角',
+            icon: '📐',
+            desc: 'AB=AC → ∠B=∠C'
+        }, {
+            id: 'c2',
+            target: 'property',
+            label: '三线合一',
+            icon: '📏',
+            desc: '中线=高=角平分线'
+        }, {
+            id: 'c3',
+            target: 'judgment',
+            label: '等角对等边',
+            icon: '🔍',
+            desc: '∠B=∠C → AB=AC'
+        }, {
+            id: 'c4',
+            target: 'definition',
+            label: '有两边相等',
+            icon: '📖',
+            desc: '有两条边相等的三角形'
+        }];
+
+        const clawTargets = [
+            { id: 't1', target: 'property', label: '性质', icon: '📐' },
+            { id: 't2', target: 'judgment', label: '判定', icon: '🔍' },
+            { id: 't3', target: 'definition', label: '定义', icon: '📖' }
+        ];
+
+        let clawItems = [];
+        let clawGhost = null;
+        let clawDragEl = null;
+        let clawDragId = null;
+        let clawDragOffsetX = 0,
+            clawDragOffsetY = 0;
+        let clawCaughtCount = 0;
+
+        function buildClaw() {
+            const bg = document.getElementById('clawBg');
+            bg.innerHTML = '';
+            clawItems = clawData.map(item => ({
+                ...item,
+                caught: false,
+                caughtIn: null
+            }));
+            clawCaughtCount = 0;
+
+            // 生成目标槽
+            clawTargets.forEach(target => {
+                const div = document.createElement('div');
+                div.className = 'claw-item';
+                div.dataset.target = target.target;
+                div.innerHTML = `
+                    <span class="claw-icon">${target.icon}</span>
+                    <div>${target.label}</div>
+                    <span class="claw-label">拖拽到此</span>
+                `;
+                bg.appendChild(div);
+            });
+
+            renderClawPool();
+            document.getElementById('clawFeedback').textContent = '💡 拖拽下方卡片到娃娃机中对应的正确位置';
+            document.getElementById('clawFeedback').style.color = '#1f3a5f';
+            document.querySelectorAll('.claw-item').forEach(el => {
+                el.classList.remove('correct-catch', 'wrong-catch', 'caught');
+            });
+            // 重置抓娃娃机动画
+            const grabber = document.getElementById('clawGrabber');
+            grabber.classList.remove('drop-anim');
+            // 移除任何已存在的ghost
+            if (clawGhost) {
+                clawGhost.remove();
+                clawGhost = null;
+            }
+        }
+
+        function renderClawPool() {
+            const pool = document.getElementById('clawPool');
+            pool.innerHTML = '';
+            const uncaught = clawItems.filter(item => !item.caught);
+            uncaught.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'claw-draggable';
+                div.dataset.id = item.id;
+                div.dataset.target = item.target;
+                div.innerHTML = `${item.icon} ${item.label}`;
+                div.draggable = false;
+                div.addEventListener('mousedown', (e) => onClawItemMouseDown(e, div, item.id));
+                div.addEventListener('touchstart', (e) => onClawItemTouchStart(e, div, item.id), { passive: false });
+                pool.appendChild(div);
+            });
+        }
+
+        // ---- 鼠标拖拽 ----
+        function onClawItemMouseDown(e, el, id) {
+            if (el.classList.contains('placed')) return;
+            e.preventDefault();
+            const item = clawItems.find(i => i.id === id);
+            if (!item || item.caught) return;
+            clawDragId = id;
+            startClawDrag(el, e.clientX, e.clientY);
+            document.addEventListener('mousemove', onClawMouseMove);
+            document.addEventListener('mouseup', onClawMouseUp);
+        }
+
+        function onClawMouseMove(e) {
+            e.preventDefault();
+            moveClawDrag(e.clientX, e.clientY);
+        }
+
+        function onClawMouseUp(e) {
+            document.removeEventListener('mousemove', onClawMouseMove);
+            document.removeEventListener('mouseup', onClawMouseUp);
+            endClawDrag(e.clientX, e.clientY);
+        }
+
+        // ---- 触摸拖拽 ----
+        function onClawItemTouchStart(e, el, id) {
+            if (el.classList.contains('placed')) return;
+            e.preventDefault();
+            const touch = e.touches[0];
+            const item = clawItems.find(i => i.id === id);
+            if (!item || item.caught) return;
+            clawDragId = id;
+            startClawDrag(el, touch.clientX, touch.clientY);
+            document.addEventListener('touchmove', onClawTouchMove, { passive: false });
+            document.addEventListener('touchend', onClawTouchEnd, { passive: false });
+        }
+
+        function onClawTouchMove(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            moveClawDrag(touch.clientX, touch.clientY);
+        }
+
+        function onClawTouchEnd(e) {
+            document.removeEventListener('touchmove', onClawTouchMove);
+            document.removeEventListener('touchend', onClawTouchEnd);
+            const touch = e.changedTouches[0];
+            endClawDrag(touch.clientX, touch.clientY);
+        }
+
+        // ---- 拖拽核心 ----
+        function startClawDrag(el, clientX, clientY) {
+            const rect = el.getBoundingClientRect();
+            clawDragOffsetX = clientX - rect.left;
+            clawDragOffsetY = clientY - rect.top;
+            clawDragEl = el;
+            el.classList.add('dragging');
+            clawGhost = document.createElement('div');
+            clawGhost.className = 'drag-ghost';
+            clawGhost.textContent = el.textContent;
+            clawGhost.style.left = (clientX - clawDragOffsetX) + 'px';
+            clawGhost.style.top = (clientY - clawDragOffsetY) + 'px';
+            document.body.appendChild(clawGhost);
+            // 高亮所有claw-item
+            document.querySelectorAll('.claw-item:not(.caught)').forEach(el => {
+                el.style.borderColor = '#3b82f6';
+                el.style.background = '#e5effa';
+            });
+        }
+
+        function moveClawDrag(clientX, clientY) {
+            if (clawGhost) {
+                clawGhost.style.left = (clientX - clawDragOffsetX) + 'px';
+                clawGhost.style.top = (clientY - clawDragOffsetY) + 'px';
+            }
+        }
+
+        function endClawDrag(clientX, clientY) {
+            if (clawGhost) {
+                clawGhost.remove();
+                clawGhost = null;
+            }
+            document.querySelectorAll('.claw-item').forEach(el => {
+                el.style.borderColor = '';
+                el.style.background = '';
+            });
+            if (clawDragEl) {
+                clawDragEl.classList.remove('dragging');
+            }
+
+            // 检测是否放在claw-item上
+            let targetEl = null;
+            document.querySelectorAll('.claw-item:not(.caught)').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (clientX >= rect.left && clientX <= rect.right &&
+                    clientY >= rect.top && clientY <= rect.bottom) {
+                    targetEl = el;
+                }
+            });
+
+            if (targetEl && clawDragId !== null) {
+                const target = targetEl.dataset.target;
+                const item = clawItems.find(i => i.id === clawDragId);
+                if (item && !item.caught) {
+                    if (item.target === target) {
+                        item.caught = true;
+                        item.caughtIn = target;
+                        targetEl.classList.add('correct-catch');
+                        clawCaughtCount++;
+                        document.getElementById('clawFeedback').textContent =
+                            `✅ 抓取成功！${item.icon} ${item.label} 正确！`;
+                        document.getElementById('clawFeedback').style.color = '#16a34a';
+                        renderClawPool();
+                        // 标记已抓取
+                        targetEl.classList.add('caught');
+                        // 动画：爪子下降
+                        const grabber = document.getElementById('clawGrabber');
+                        grabber.classList.remove('drop-anim');
+                        void grabber.offsetWidth;
+                        grabber.classList.add('drop-anim');
+                        setTimeout(() => grabber.classList.remove('drop-anim'), 500);
+
+                        if (clawCaughtCount === clawData.length) {
+                            document.getElementById('clawFeedback').textContent = '🎉 全部抓取完成！太棒啦！';
+                            document.getElementById('clawFeedback').style.color = '#2563eb';
+                        }
+                    } else {
+                        targetEl.classList.add('wrong-catch');
+                        setTimeout(() => targetEl.classList.remove('wrong-catch'), 500);
+                        document.getElementById('clawFeedback').textContent =
+                            `❌ 抓取错误！${item.label} 不属于 ${targetEl.querySelector('div')?.textContent || ''}`;
+                        document.getElementById('clawFeedback').style.color = '#b91c1c';
+                    }
+                }
+            }
+            clawDragId = null;
+            clawDragEl = null;
+        }
+
+        function checkClaw() {
+            const total = clawData.length;
+            const caught = clawItems.filter(item => item.caught).length;
+            document.getElementById('clawFeedback').textContent = `📊 已抓取 ${caught} / ${total}`;
+            document.getElementById('clawFeedback').style.color = '#1f3a5f';
+        }
+
+        function resetClaw() {
+            buildClaw();
+        }
+
+        // =============================================================
+        // 游戏2：超市购物车分类
+        // =============================================================
+        const cartData = [{
+            id: 'r1',
+            category: 'property',
+            label: '等边对等角'
+        }, {
+            id: 'r2',
+            category: 'property',
+            label: '三线合一'
+        }, {
+            id: 'r3',
+            category: 'property',
+            label: '底边上的中线=高=角平分线'
+        }, {
+            id: 'r4',
+            category: 'judgment',
+            label: '等角对等边'
+        }, {
+            id: 'r5',
+            category: 'judgment',
+            label: '两个角相等 → 等腰三角形'
+        }, {
+            id: 'r6',
+            category: 'definition',
+            label: '有两边相等'
+        }, {
+            id: 'r7',
+            category: 'definition',
+            label: '有两条腰的三角形'
+        }];
+
+        let cartItems = [];
+        let cartGhost = null;
+        let cartDragEl = null;
+        let cartDragId = null;
+        let cartDragOffsetX = 0,
+            cartDragOffsetY = 0;
+
+        function buildCart() {
+            cartItems = cartData.map(item => ({
+                ...item,
+                placed: false,
+                placedIn: null
+            }));
+            renderCart();
+            document.getElementById('cartFeedback').textContent = '💡 拖拽卡片到对应的购物车';
+            document.getElementById('cartFeedback').style.color = '#1f3a5f';
+            document.querySelectorAll('.cart-bin').forEach(b => {
+                b.classList.remove('correct-highlight', 'wrong-highlight');
+            });
+        }
+
+        function renderCart() {
+            document.querySelectorAll('.bin-items').forEach(el => el.innerHTML = '');
+            const pool = document.getElementById('cartPool');
+            pool.innerHTML = '';
+
+            const unplaced = cartItems.filter(item => !item.placed);
+            unplaced.forEach(item => {
+                const el = createCartItemElement(item, false);
+                pool.appendChild(el);
+            });
+
+            cartItems.filter(item => item.placed).forEach(item => {
+                const bin = document.getElementById(`bin-${item.placedIn}`);
+                if (bin) {
+                    const el = createCartItemElement(item, true);
+                    bin.appendChild(el);
+                }
+            });
+        }
+
+        function createCartItemElement(item, placed) {
+            const div = document.createElement('div');
+            div.className = `cart-item ${placed ? 'placed' : ''}`;
+            div.dataset.id = item.id;
+            div.dataset.category = item.category;
+            div.textContent = item.label;
+            if (!placed) {
+                div.draggable = false;
+                div.addEventListener('mousedown', (e) => onCartItemMouseDown(e, div, item.id));
+                div.addEventListener('touchstart', (e) => onCartItemTouchStart(e, div, item.id), { passive: false });
+            }
+            return div;
+        }
+
+        // ---- 鼠标拖拽 ----
+        function onCartItemMouseDown(e, el, id) {
+            if (el.classList.contains('placed')) return;
+            e.preventDefault();
+            const item = cartItems.find(i => i.id === id);
+            if (!item || item.placed) return;
+            cartDragId = id;
+            startCartDrag(el, e.clientX, e.clientY);
+            document.addEventListener('mousemove', onCartMouseMove);
+            document.addEventListener('mouseup', onCartMouseUp);
+        }
+
+        function onCartMouseMove(e) {
+            e.preventDefault();
+            moveCartDrag(e.clientX, e.clientY);
+        }
+
+        function onCartMouseUp(e) {
+            document.removeEventListener('mousemove', onCartMouseMove);
+            document.removeEventListener('mouseup', onCartMouseUp);
+            endCartDrag(e.clientX, e.clientY);
+        }
+
+        // ---- 触摸拖拽 ----
+        function onCartItemTouchStart(e, el, id) {
+            if (el.classList.contains('placed')) return;
+            e.preventDefault();
+            const touch = e.touches[0];
+            const item = cartItems.find(i => i.id === id);
+            if (!item || item.placed) return;
+            cartDragId = id;
+            startCartDrag(el, touch.clientX, touch.clientY);
+            document.addEventListener('touchmove', onCartTouchMove, { passive: false });
+            document.addEventListener('touchend', onCartTouchEnd, { passive: false });
+        }
+
+        function onCartTouchMove(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            moveCartDrag(touch.clientX, touch.clientY);
+        }
+
+        function onCartTouchEnd(e) {
+            document.removeEventListener('touchmove', onCartTouchMove);
+            document.removeEventListener('touchend', onCartTouchEnd);
+            const touch = e.changedTouches[0];
+            endCartDrag(touch.clientX, touch.clientY);
+        }
+
+        // ---- 拖拽核心 ----
+        function startCartDrag(el, clientX, clientY) {
+            const rect = el.getBoundingClientRect();
+            cartDragOffsetX = clientX - rect.left;
+            cartDragOffsetY = clientY - rect.top;
+            cartDragEl = el;
+            el.classList.add('dragging');
+            cartGhost = document.createElement('div');
+            cartGhost.className = 'drag-ghost';
+            cartGhost.textContent = el.textContent;
+            cartGhost.style.left = (clientX - cartDragOffsetX) + 'px';
+            cartGhost.style.top = (clientY - cartDragOffsetY) + 'px';
+            document.body.appendChild(cartGhost);
+            document.querySelectorAll('.cart-bin').forEach(b => b.classList.add('drag-over'));
+        }
+
+        function moveCartDrag(clientX, clientY) {
+            if (cartGhost) {
+                cartGhost.style.left = (clientX - cartDragOffsetX) + 'px';
+                cartGhost.style.top = (clientY - cartDragOffsetY) + 'px';
+            }
+            document.querySelectorAll('.cart-bin').forEach(b => {
+                const rect = b.getBoundingClientRect();
+                if (clientX >= rect.left && clientX <= rect.right &&
+                    clientY >= rect.top && clientY <= rect.bottom) {
+                    b.classList.add('drag-over');
+                } else {
+                    b.classList.remove('drag-over');
+                }
+            });
+        }
+
+        function endCartDrag(clientX, clientY) {
+            if (cartGhost) {
+                cartGhost.remove();
+                cartGhost = null;
+            }
+            document.querySelectorAll('.cart-bin').forEach(b => b.classList.remove('drag-over'));
+            if (cartDragEl) {
+                cartDragEl.classList.remove('dragging');
+            }
+
+            let targetBin = null;
+            document.querySelectorAll('.cart-bin').forEach(b => {
+                const rect = b.getBoundingClientRect();
+                if (clientX >= rect.left && clientX <= rect.right &&
+                    clientY >= rect.top && clientY <= rect.bottom) {
+                    targetBin = b;
+                }
+            });
+
+            if (targetBin && cartDragId !== null) {
+                const category = targetBin.dataset.category;
+                const item = cartItems.find(i => i.id === cartDragId);
+                if (item && !item.placed) {
+                    const correct = (item.category === category);
+                    if (correct) {
+                        item.placed = true;
+                        item.placedIn = category;
+                        targetBin.classList.add('correct-highlight');
+                        setTimeout(() => targetBin.classList.remove('correct-highlight'), 500);
+                        document.getElementById('cartFeedback').textContent =
+                            `✅ 正确！“${item.label}” 放入 “${getCartCategoryLabel(category)}”`;
+                        document.getElementById('cartFeedback').style.color = '#16a34a';
+                    } else {
+                        targetBin.classList.add('wrong-highlight');
+                        setTimeout(() => targetBin.classList.remove('wrong-highlight'), 500);
+                        document.getElementById('cartFeedback').textContent =
+                            `❌ 再想想！“${item.label}” 不属于 “${getCartCategoryLabel(category)}”`;
+                        document.getElementById('cartFeedback').style.color = '#b91c1c';
+                    }
+                    renderCart();
+                    checkAllCartPlaced();
+                }
+            }
+            cartDragId = null;
+            cartDragEl = null;
+        }
+
+        function getCartCategoryLabel(cat) {
+            const map = { property: '性质', judgment: '判定', definition: '定义' };
+            return map[cat] || cat;
+        }
+
+        function checkAllCartPlaced() {
+            const allPlaced = cartItems.every(item => item.placed);
+            if (allPlaced) {
+                document.getElementById('cartFeedback').textContent = '🎉 所有卡片已分类！点击“检查答案”查看正确率。';
+                document.getElementById('cartFeedback').style.color = '#2563eb';
+            }
+        }
+
+        function checkCart() {
+            const total = cartItems.length;
+            let correct = 0;
+            cartItems.forEach(item => {
+                if (item.placed && item.category === item.placedIn) correct++;
+            });
+            document.getElementById('cartFeedback').textContent =
+                `📊 正确率：${correct} / ${total}  (${Math.round(correct/total*100)}%)`;
+            document.getElementById('cartFeedback').style.color = '#1f3a5f';
+            document.querySelectorAll('.cart-bin').forEach(bin => {
+                bin.classList.remove('correct-highlight', 'wrong-highlight');
+                const cat = bin.dataset.category;
+                const itemsInBin = cartItems.filter(item => item.placed && item.placedIn === cat);
+                let allCorrect = itemsInBin.every(item => item.category === cat);
+                if (itemsInBin.length > 0 && allCorrect) {
+                    bin.classList.add('correct-highlight');
+                } else if (itemsInBin.length > 0) {
+                    bin.classList.add('wrong-highlight');
+                }
+            });
+        }
+
+        function resetCart() {
+            buildCart();
+        }
+
+        // =============================================================
+        // 显示答案
+        // =============================================================
+        function toggleAnswer(id) {
+            const el = document.getElementById(id);
+            if (el.style.display === 'none' || el.style.display === '') {
+                el.style.display = 'block';
+            } else {
+                el.style.display = 'none';
+            }
+        }
+
+        // =============================================================
+        // 导航
+        // =============================================================
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // =============================================================
+        // 初始化
+        // =============================================================
+        buildClaw();
+        buildCart();
+        console.log('📐 等腰三角形 课程已加载！');
+    </script>
+</body>
+</html>

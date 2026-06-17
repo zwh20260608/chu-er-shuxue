@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>三角形的中线·角平分线·高 · 初二数学</title>
+    <style>
+        /* ===== 全局 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', system-ui, sans-serif;
+            background: #f5f9fe;
+            color: #1e293b;
+            padding: 1rem;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 60px rgba(0, 20, 40, 0.06);
+            padding: 1.8rem 2rem 2.8rem;
+            transition: 0.2s;
+        }
+        @media (max-width: 640px) {
+            .container {
+                padding: 1rem 1rem 2rem;
+                border-radius: 20px;
+            }
+        }
+
+        /* ===== 头部 ===== */
+        .page-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 3px solid #e6f0fa;
+            padding-bottom: 0.8rem;
+            margin-bottom: 1.6rem;
+        }
+        .page-header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1a4b8c, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .page-header h1 small {
+            font-size: 0.95rem;
+            font-weight: 400;
+            -webkit-text-fill-color: #5f7d9c;
+            color: #5f7d9c;
+            background: none;
+        }
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem 0.5rem;
+        }
+        .nav-links a {
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            background: #f1f5f9;
+            color: #2c3e50;
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: 0.2s;
+            border: 1px solid transparent;
+        }
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: #2563eb;
+            color: #fff;
+            border-color: #2563eb;
+        }
+        @media (max-width: 600px) {
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.4rem;
+            }
+            .page-header h1 {
+                font-size: 1.4rem;
+            }
+            .nav-links a {
+                font-size: 0.65rem;
+                padding: 0.1rem 0.6rem;
+            }
+        }
+
+        /* ===== 主布局 ===== */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 1.8rem;
+            align-items: start;
+        }
+        @media (max-width: 920px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        /* ===== 卡片 ===== */
+        .card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 1rem 1.2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+            border: 1px solid #edf2f7;
+            margin-bottom: 1rem;
+            transition: 0.2s;
+        }
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0b2b4a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 0.5rem;
+            border-left: 5px solid #3b82f6;
+            padding-left: 12px;
+        }
+        .card-title .badge {
+            font-size: 0.6rem;
+            background: #dbeafe;
+            color: #1e4b8a;
+            padding: 0.05rem 0.7rem;
+            border-radius: 40px;
+            font-weight: 500;
+        }
+        .card-sub {
+            font-size: 0.82rem;
+            color: #4a617c;
+            margin-bottom: 0.3rem;
+        }
+
+        /* ===== 图形展示 ===== */
+        .tri-flex {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 0.6rem 1.2rem;
+            padding: 0.2rem 0;
+        }
+        .tri-item {
+            text-align: center;
+            background: #fafcff;
+            border-radius: 14px;
+            padding: 0.3rem 0.5rem 0.2rem;
+            border: 1px solid #e9edf4;
+            min-width: 70px;
+            transition: 0.2s;
+        }
+        .tri-item:hover {
+            border-color: #b3cef0;
+        }
+        .tri-item svg {
+            display: block;
+            margin: 0 auto;
+            width: 64px;
+            height: 50px;
+        }
+        .tri-item .label {
+            font-size: 0.68rem;
+            font-weight: 600;
+            color: #1f3a5f;
+            margin-top: 1px;
+        }
+        .tri-item .sub {
+            font-size: 0.55rem;
+            color: #6b7f96;
+        }
+
+        /* ===== 锦囊 ===== */
+        .formula-box {
+            background: #f0f7fe;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border-left: 4px solid #3b82f6;
+            margin: 0.3rem 0;
+            font-size: 0.9rem;
+        }
+        .tip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 0.5rem;
+        }
+        .tip-item {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 0.4rem 0.7rem;
+            border: 1px solid #e2eaf2;
+            font-size: 0.8rem;
+        }
+        .tip-item strong {
+            color: #1e4b8a;
+        }
+
+        /* ===== 举例 & 易错 ===== */
+        .example-box {
+            background: #fcf9f0;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border-left: 4px solid #eab308;
+            margin: 0.3rem 0;
+            font-size: 0.88rem;
+        }
+        .example-box .ex-title {
+            font-weight: 700;
+            color: #8a6d1b;
+        }
+        .error-box {
+            background: #fef2f2;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border-left: 4px solid #ef4444;
+            margin: 0.3rem 0;
+            font-size: 0.88rem;
+        }
+        .error-box .err-title {
+            font-weight: 700;
+            color: #b91c1c;
+        }
+        .highlight {
+            background: #fef9e7;
+            padding: 0.05rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .tag {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e4b8a;
+            padding: 0.05rem 0.6rem;
+            border-radius: 40px;
+            font-size: 0.65rem;
+            font-weight: 500;
+        }
+
+        /* ===== 游戏区 ===== */
+        .game-area {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .game-card {
+            background: #fafcff;
+            border-radius: 18px;
+            padding: 0.8rem 1rem 1rem;
+            border: 1px solid #e2ecf9;
+        }
+        .game-card .game-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #0b2b4a;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 0.4rem;
+        }
+        .game-card .game-title .g-badge {
+            font-size: 0.55rem;
+            background: #dbeafe;
+            padding: 0.05rem 0.6rem;
+            border-radius: 40px;
+            font-weight: 500;
+            color: #1e4b8a;
+        }
+        .game-card .game-desc {
+            font-size: 0.75rem;
+            color: #4a617c;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ===== 翻翻乐 ===== */
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            max-width: 380px;
+            margin: 0 auto;
+        }
+        .memory-card {
+            aspect-ratio: 1/1;
+            background: #dbeafe;
+            border-radius: 12px;
+            cursor: pointer;
+            perspective: 600px;
+            position: relative;
+            transition: 0.15s;
+            border: 2px solid transparent;
+            min-height: 64px;
+        }
+        .memory-card.flipped {
+            border-color: #3b82f6;
+        }
+        .memory-card.matched {
+            opacity: 0.5;
+            pointer-events: none;
+            border-color: #22c55e;
+            transform: scale(0.93);
+        }
+        .memory-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.4s;
+            transform-style: preserve-3d;
+            border-radius: 12px;
+        }
+        .memory-card.flipped .memory-card-inner {
+            transform: rotateY(180deg);
+        }
+        .memory-card-front,
+        .memory-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-align: center;
+            padding: 2px;
+            background: #ffffff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+        }
+        .memory-card-front {
+            transform: rotateY(180deg);
+            background: #f8fcff;
+            border: 2px solid #dbeafe;
+        }
+        .memory-card-back {
+            background: linear-gradient(145deg, #b7d6f7, #8cb4e8);
+            color: #fff;
+            font-size: 1.2rem;
+            border: 2px solid #8cb4e8;
+        }
+        .memory-card-back span {
+            font-size: 0.55rem;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+        .memory-card-front svg {
+            width: 40px;
+            height: 32px;
+            display: block;
+        }
+        .memory-card-front .card-label {
+            font-size: 0.55rem;
+            color: #1f3a5f;
+            margin-top: 1px;
+        }
+        @media (max-width: 480px) {
+            .memory-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 6px;
+            }
+            .memory-card-front svg {
+                width: 32px;
+                height: 26px;
+            }
+        }
+
+        /* ===== 拖拽分类 ===== */
+        .sort-area {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+        .sort-bins {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+        }
+        .sort-bin {
+            background: #f5f9ff;
+            border: 2px dashed #b7cee8;
+            border-radius: 14px;
+            padding: 0.4rem 0.2rem;
+            min-height: 70px;
+            text-align: center;
+            transition: 0.2s;
+            position: relative;
+        }
+        .sort-bin.drag-over {
+            border-color: #2563eb;
+            background: #e5effa;
+        }
+        .sort-bin.correct-highlight {
+            border-color: #22c55e;
+            background: #e8f8ee;
+        }
+        .sort-bin.wrong-highlight {
+            border-color: #ef4444;
+            background: #fde8e8;
+        }
+        .sort-bin .bin-title {
+            font-weight: 700;
+            font-size: 0.7rem;
+            color: #1f3a5f;
+            margin-bottom: 3px;
+        }
+        .sort-bin .bin-items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 4px;
+            min-height: 28px;
+        }
+        .sort-item {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 2px 6px 2px 4px;
+            border: 2px solid #dbeafe;
+            cursor: grab;
+            transition: 0.15s;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+            font-size: 0.55rem;
+            font-weight: 500;
+            user-select: none;
+            touch-action: none;
+        }
+        .sort-item svg {
+            width: 28px;
+            height: 22px;
+            display: block;
+        }
+        .sort-item.selected {
+            border-color: #2563eb;
+            background: #e5effa;
+            transform: scale(1.04);
+        }
+        .sort-item.placed {
+            opacity: 0.7;
+            pointer-events: none;
+            border-color: #94a3b8;
+        }
+        .sort-item.dragging {
+            opacity: 0.6;
+            transform: scale(0.95);
+            z-index: 1000;
+            position: fixed;
+            pointer-events: none;
+        }
+        .sort-pool {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px;
+            padding: 0.4rem 0;
+            background: #f8fafc;
+            border-radius: 14px;
+            min-height: 50px;
+            border: 1px solid #e2eaf2;
+        }
+        .sort-pool .sort-item {
+            cursor: grab;
+        }
+        .sort-feedback {
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.8rem;
+            min-height: 24px;
+            margin-top: 2px;
+        }
+        .btn-reset {
+            background: #eef4fa;
+            border: none;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.72rem;
+            margin: 2px 3px;
+        }
+        .btn-reset:hover {
+            background: #dbeafe;
+        }
+        .btn-check {
+            background: #dbeafe;
+            border: none;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.72rem;
+            margin: 2px 3px;
+        }
+        .btn-check:hover {
+            background: #b7d6f7;
+        }
+        @media (max-width: 600px) {
+            .sort-bins {
+                grid-template-columns: 1fr;
+                gap: 6px;
+            }
+            .sort-bin {
+                min-height: 54px;
+            }
+        }
+
+        /* ===== 复习题 ===== */
+        .quiz-item {
+            background: #fafcff;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border: 1px solid #e9eff6;
+            margin-bottom: 0.5rem;
+        }
+        .quiz-item .q {
+            font-weight: 600;
+            color: #0b2b4a;
+            font-size: 0.88rem;
+        }
+        .quiz-item .a {
+            color: #1f4b7a;
+            margin-top: 2px;
+            padding-left: 0.6rem;
+            border-left: 3px solid #b3cef0;
+            font-size: 0.84rem;
+        }
+
+        /* ===== 通用 ===== */
+        .text-muted {
+            color: #6b7f96;
+            font-size: 0.78rem;
+        }
+        .mt-1 {
+            margin-top: 0.4rem;
+        }
+        .mb-1 {
+            margin-bottom: 0.3rem;
+        }
+        .flex-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+        .footer {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #8ba0b8;
+            border-top: 1px solid #e9eff6;
+            padding-top: 0.8rem;
+            margin-top: 1rem;
+        }
+        @media (max-width: 480px) {
+            .card {
+                padding: 0.7rem;
+            }
+            .card-title {
+                font-size: 0.95rem;
+            }
+            .formula-box {
+                font-size: 0.78rem;
+                padding: 0.4rem 0.7rem;
+            }
+            .tri-item svg {
+                width: 50px;
+                height: 40px;
+            }
+        }
+
+        /* ===== 拖拽幽灵 ===== */
+        .drag-ghost {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.85;
+            transform: scale(1.08);
+            background: #ffffff;
+            border-radius: 12px;
+            border: 2px solid #2563eb;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+            padding: 4px 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #0b2b4a;
+        }
+        .drag-ghost svg {
+            width: 32px;
+            height: 26px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- ===== 头部 ===== -->
+        <header class="page-header">
+            <h1>
+                📐 中线 · 角平分线 · 高
+                <small>八年级 · 上册</small>
+            </h1>
+            <div class="nav-links">
+                <a href="#concept">核心概念</a>
+                <a href="#formula">锦囊</a>
+                <a href="#examples">举例</a>
+                <a href="#errors">易错</a>
+                <a href="#games">🎮 游戏</a>
+                <a href="#quiz">复习</a>
+            </div>
+        </header>
+
+        <!-- ============================================================ -->
+        <div class="main-grid">
+
+            <!-- ===== 左侧：知识点 ===== -->
+            <div class="knowledge-area">
+
+                <!-- 核心概念 -->
+                <div class="card" id="concept">
+                    <div class="card-title">
+                        🔍 核心概念大解析
+                        <span class="badge">中线 · 角平分线 · 高</span>
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.6rem; align-items:start;">
+                        <div>
+                            <div style="background:#f0f7fe; border-radius:10px; padding:0.4rem 0.7rem; margin-bottom:0.4rem;">
+                                <strong style="color:#1e4b8a;">📌 中线</strong>
+                                <p style="font-size:0.82rem; margin:0;">连接顶点与对边中点的线段。<br>三条中线交于一点（<span class="highlight">重心</span>）。</p>
+                            </div>
+                            <div style="background:#f0f7fe; border-radius:10px; padding:0.4rem 0.7rem; margin-bottom:0.4rem;">
+                                <strong style="color:#1e4b8a;">📌 角平分线</strong>
+                                <p style="font-size:0.82rem; margin:0;">平分一个内角的线段。<br>三条角平分线交于一点。</p>
+                            </div>
+                            <div style="background:#f0f7fe; border-radius:10px; padding:0.4rem 0.7rem;">
+                                <strong style="color:#1e4b8a;">📌 高</strong>
+                                <p style="font-size:0.82rem; margin:0;">从顶点向对边所在直线作垂线。<br>锐角△在内部；直角△两条是直角边；钝角△两条在外部。</p>
+                            </div>
+                        </div>
+                        <div class="tri-flex" style="gap:0.3rem; padding:0;">
+                            <div class="tri-item"><svg viewBox="0 0 64 48"><polygon points="32,4 6,44 58,44" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><line x1="32" y1="4" x2="32" y2="44" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3,3"/><circle cx="32" cy="44" r="3" fill="#dc2626"/><text x="10" y="40" font-size="6" fill="#1f3a5f">中线</text></svg><div class="label">中线</div></div>
+                            <div class="tri-item"><svg viewBox="0 0 64 48"><polygon points="32,4 6,44 58,44" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><line x1="32" y1="4" x2="52" y2="44" stroke="#eab308" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M32,4 L38,12 L30,12 Z" fill="#eab308" transform="rotate(-15,32,4)"/><text x="10" y="40" font-size="6" fill="#1f3a5f">角平分线</text></svg><div class="label">角平分线</div></div>
+                            <div class="tri-item"><svg viewBox="0 0 64 48"><polygon points="32,4 6,44 58,44" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><line x1="32" y1="4" x2="32" y2="4" stroke="#8b5cf6" stroke-width="1.5"/><line x1="32" y1="4" x2="6" y2="44" stroke="#8b5cf6" stroke-width="1.5" stroke-dasharray="3,3"/><rect x="4" y="40" width="5" height="5" fill="none" stroke="#8b5cf6" stroke-width="1"/><text x="10" y="40" font-size="6" fill="#1f3a5f">高</text></svg><div class="label">高</div></div>
+                        </div>
+                    </div>
+                    <div style="margin-top:0.4rem; background:#f8faff; border-radius:12px; padding:0.4rem 0.8rem; border:1px solid #e2ecf9; font-size:0.8rem; display:flex; flex-wrap:wrap; gap:0.2rem 0.8rem;">
+                        <span>🔹 中线 → <strong>重心</strong></span>
+                        <span>🔹 角平分线 → <strong>内心</strong></span>
+                        <span>🔹 高 → <strong>垂心</strong></span>
+                    </div>
+                </div>
+
+                <!-- 锦囊 -->
+                <div class="card" id="formula">
+                    <div class="card-title">
+                        🧠 数学锦囊 · 公式
+                        <span class="badge">关键性质</span>
+                    </div>
+                    <div class="tip-grid">
+                        <div class="tip-item"><strong>中线</strong><br>BD = DC<br>重心分中线 2:1</div>
+                        <div class="tip-item"><strong>角平分线</strong><br>∠BAD = ∠CAD<br>三条交于一点</div>
+                        <div class="tip-item"><strong>高</strong><br>AD ⊥ BC<br>锐角△ 内部；钝角△ 外部</div>
+                    </div>
+                    <div class="formula-box" style="margin-top:0.3rem;">
+                        💡 三条中线交于 <strong>重心</strong> · 三条角平分线交于 <strong>内心</strong> · 三条高交于 <strong>垂心</strong>
+                    </div>
+                </div>
+
+                <!-- 举例 -->
+                <div class="card" id="examples">
+                    <div class="card-title">
+                        ✏️ 典型举例
+                        <span class="badge">图形结合</span>
+                    </div>
+                    <div class="example-box">
+                        <div class="ex-title">例1 如图，AD是△ABC的中线，BD=3，求BC。</div>
+                        <p style="margin-top:2px; font-size:0.85rem;"><strong>解：</strong>∵ AD是中线 ∴ BD=DC=3，BC=BD+DC=<span class="highlight">6</span></p>
+                        <svg viewBox="0 0 100 50" width="90" height="44" style="margin-top:2px;"><polygon points="50,6 10,44 90,44" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><line x1="50" y1="6" x2="50" y2="44" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3,3"/><text x="40" y="40" font-size="8" fill="#1f3a5f">3</text><text x="52" y="40" font-size="8" fill="#1f3a5f">3</text><text x="16" y="40" font-size="7" fill="#6b7f96">B</text><text x="74" y="40" font-size="7" fill="#6b7f96">C</text><text x="44" y="18" font-size="7" fill="#6b7f96">A</text></svg>
+                    </div>
+                    <div class="example-box" style="border-left-color:#8b5cf6;">
+                        <div class="ex-title">例2 如图，AD是△ABC的高，∠ADB=90°，求∠ADC。</div>
+                        <p style="margin-top:2px; font-size:0.85rem;"><strong>解：</strong>∵ AD是高 ∴ AD⊥BC，∠ADB=∠ADC=<span class="highlight">90°</span></p>
+                        <svg viewBox="0 0 100 50" width="90" height="44" style="margin-top:2px;"><polygon points="50,6 10,44 90,44" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><line x1="50" y1="6" x2="50" y2="44" stroke="#8b5cf6" stroke-width="1.5" stroke-dasharray="3,3"/><rect x="46" y="38" width="5" height="5" fill="none" stroke="#8b5cf6" stroke-width="1"/><text x="44" y="18" font-size="7" fill="#6b7f96">A</text><text x="16" y="40" font-size="7" fill="#6b7f96">B</text><text x="74" y="40" font-size="7" fill="#6b7f96">C</text></svg>
+                    </div>
+                </div>
+
+                <!-- 易错 -->
+                <div class="card" id="errors">
+                    <div class="card-title">
+                        ⚠️ 易错题型
+                        <span class="badge">避坑指南</span>
+                    </div>
+                    <div class="error-box">
+                        <div class="err-title">❌ 易错1：混淆中线与角平分线</div>
+                        <p style="font-size:0.85rem;">中线：连接顶点与<strong>对边中点</strong><br>角平分线：<strong>平分角</strong>的线段</p>
+                        <svg viewBox="0 0 120 44" width="100" height="38" style="margin-top:2px;"><polygon points="60,4 16,40 104,40" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/><line x1="60" y1="4" x2="60" y2="40" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3,3"/><text x="36" y="36" font-size="7" fill="#b91c1c">中点</text><text x="60" y="36" font-size="7" fill="#b91c1c">✗</text><text x="72" y="36" font-size="7" fill="#b91c1c">不是角平分线</text></svg>
+                    </div>
+                    <div class="error-box" style="border-left-color:#eab308;">
+                        <div class="err-title">❌ 易错2：高的位置判断</div>
+                        <p style="font-size:0.85rem;">钝角三角形有两条高在<strong>外部</strong>，垂足在边的延长线上。</p>
+                        <svg viewBox="0 0 120 44" width="100" height="38" style="margin-top:2px;"><polygon points="60,4 14,40 106,40" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/><line x1="14" y1="40" x2="14" y2="4" stroke="#8b5cf6" stroke-width="1.5" stroke-dasharray="3,3"/><text x="2" y="24" font-size="7" fill="#8b5cf6">高在外部</text></svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== 右侧：游戏 ===== -->
+            <div class="game-area" id="games">
+
+                <!-- 游戏1：翻翻乐 -->
+                <div class="game-card">
+                    <div class="game-title">
+                        🃏 翻翻乐 · 配对
+                        <span class="g-badge">记忆</span>
+                    </div>
+                    <div class="game-desc">点击卡片翻转，配对 <strong>线段名称</strong> 与对应的 <strong>图形</strong>。</div>
+                    <div id="memory-grid" class="memory-grid"></div>
+                    <div style="text-align:center; margin-top:0.4rem;">
+                        <span id="memory-status" style="font-weight:600; color:#1f3a5f; font-size:0.8rem;">已配对 0 / 3</span>
+                        <button class="btn-reset" onclick="resetMemory()">🔄 洗牌</button>
+                    </div>
+                </div>
+
+                <!-- 游戏2：拖拽分类 -->
+                <div class="game-card">
+                    <div class="game-title">
+                        📦 拖拽分类 · 线段识别
+                        <span class="g-badge">拖拽</span>
+                    </div>
+                    <div class="game-desc">将下方的卡片 <strong>拖拽</strong> 到对应的分类框中（中线 · 角平分线 · 高）。</div>
+                    <div class="sort-area">
+                        <div class="sort-bins" id="sortBins">
+                            <div class="sort-bin" data-category="median">
+                                <div class="bin-title">📐 中线</div>
+                                <div class="bin-items" id="bin-median"></div>
+                            </div>
+                            <div class="sort-bin" data-category="anglebisector">
+                                <div class="bin-title">📐 角平分线</div>
+                                <div class="bin-items" id="bin-anglebisector"></div>
+                            </div>
+                            <div class="sort-bin" data-category="altitude">
+                                <div class="bin-title">📐 高</div>
+                                <div class="bin-items" id="bin-altitude"></div>
+                            </div>
+                        </div>
+                        <div class="sort-pool" id="sortPool"></div>
+                        <div class="sort-feedback" id="sortFeedback">💡 拖拽卡片到对应的分类框</div>
+                        <div style="display:flex; justify-content:center; gap:0.3rem; flex-wrap:wrap;">
+                            <button class="btn-reset" onclick="resetSort()">🔄 重新分类</button>
+                            <button class="btn-check" onclick="checkSort()">✅ 检查答案</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 复习巩固题 -->
+        <section id="quiz" style="margin-top:1.2rem;">
+            <div class="card">
+                <div class="card-title">
+                    📝 复习巩固题
+                    <span class="badge">小测验</span>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="q">1. 如图，AD是△ABC的中线，E是AD的中点，连接BE并延长交AC于F，则AF与FC的比是？</div>
+                    <div class="a">利用重心性质：中线交点分中线为2:1，AF:FC = <span class="highlight">1:2</span>（重心定理）</div>
+                    <svg viewBox="0 0 120 48" width="100" height="40" style="margin-top:2px;"><polygon points="60,4 12,44 108,44" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><line x1="60" y1="4" x2="60" y2="44" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3,3"/><circle cx="60" cy="24" r="3" fill="#dc2626"/><text x="48" y="40" font-size="8" fill="#1f3a5f">D</text><text x="64" y="40" font-size="8" fill="#1f3a5f">C</text></svg>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="q">2. 在△ABC中，∠A=50°，∠B=70°，AD是角平分线，求∠BAD的度数。</div>
+                    <div class="a">∠BAD = ½∠A = ½ × 50° = <span class="highlight">25°</span></div>
+                    <svg viewBox="0 0 120 48" width="100" height="40" style="margin-top:2px;"><polygon points="60,4 12,44 108,44" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><line x1="60" y1="4" x2="88" y2="44" stroke="#eab308" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M60,4 L66,12 L54,12 Z" fill="#eab308" transform="rotate(-20,60,4)"/><text x="48" y="18" font-size="8" fill="#1f3a5f">50°</text></svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 底部 ===== -->
+        <div class="footer">
+            📚 八年级数学 · 三角形的中线、角平分线、高 &nbsp;|&nbsp; 预习课程 · 互动学习
+        </div>
+
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- JavaScript -->
+    <script>
+        // =============================================================
+        // 1. 翻翻乐 (配对)
+        // =============================================================
+        const memoryPairs = [{
+            id: 0,
+            name: '中线',
+            svg: '<svg viewBox="0 0 56 40"><polygon points="28,3 6,37 50,37" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><line x1="28" y1="3" x2="28" y2="37" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3,3"/><circle cx="28" cy="37" r="3" fill="#dc2626"/></svg>'
+        }, {
+            id: 1,
+            name: '角平分线',
+            svg: '<svg viewBox="0 0 56 40"><polygon points="28,3 6,37 50,37" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><line x1="28" y1="3" x2="46" y2="37" stroke="#eab308" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M28,3 L34,10 L22,10 Z" fill="#eab308" transform="rotate(-15,28,3)"/></svg>'
+        }, {
+            id: 2,
+            name: '高',
+            svg: '<svg viewBox="0 0 56 40"><polygon points="28,3 6,37 50,37" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><line x1="28" y1="3" x2="28" y2="37" stroke="#8b5cf6" stroke-width="1.5" stroke-dasharray="3,3"/><rect x="26" y="33" width="4" height="4" fill="none" stroke="#8b5cf6" stroke-width="1"/></svg>'
+        }];
+
+        let memoryCards = [];
+        let flippedIndices = [];
+        let matchedPairs = 0;
+        let lockBoard = false;
+
+        function buildMemory() {
+            const grid = document.getElementById('memory-grid');
+            memoryCards = [];
+            memoryPairs.forEach((p, idx) => {
+                memoryCards.push({ pairId: idx, type: 'name', label: p.name, svg: '' });
+                memoryCards.push({ pairId: idx, type: 'graphic', label: p.name, svg: p.svg });
+            });
+            shuffleArray(memoryCards);
+            renderMemory();
+            matchedPairs = 0;
+            flippedIndices = [];
+            lockBoard = false;
+            updateMemoryStatus();
+        }
+
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+        }
+
+        function renderMemory() {
+            const grid = document.getElementById('memory-grid');
+            grid.innerHTML = '';
+            memoryCards.forEach((card, index) => {
+                const div = document.createElement('div');
+                div.className = 'memory-card';
+                div.dataset.index = index;
+                div.dataset.pairId = card.pairId;
+                div.innerHTML = `
+                    <div class="memory-card-inner">
+                        <div class="memory-card-front">
+                            ${card.type === 'graphic' ? card.svg : `<span style="font-size:0.8rem;font-weight:700;color:#1f3a5f;">${card.label}</span>`}
+                            <div class="card-label">${card.type === 'graphic' ? card.label : ''}</div>
+                        </div>
+                        <div class="memory-card-back">▲<span>△</span></div>
+                    </div>
+                `;
+                div.addEventListener('click', () => flipCard(index));
+                grid.appendChild(div);
+            });
+        }
+
+        function flipCard(index) {
+            if (lockBoard) return;
+            const cards = document.querySelectorAll('.memory-card');
+            const card = cards[index];
+            if (card.classList.contains('flipped') || card.classList.contains('matched')) return;
+            if (flippedIndices.length >= 2) return;
+
+            card.classList.add('flipped');
+            flippedIndices.push(index);
+
+            if (flippedIndices.length === 2) {
+                lockBoard = true;
+                const i1 = flippedIndices[0];
+                const i2 = flippedIndices[1];
+                const c1 = memoryCards[i1];
+                const c2 = memoryCards[i2];
+                const pairMatch = (c1.pairId === c2.pairId) && (c1.type !== c2.type);
+                if (pairMatch) {
+                    setTimeout(() => {
+                        cards[i1].classList.add('matched');
+                        cards[i2].classList.add('matched');
+                        matchedPairs++;
+                        updateMemoryStatus();
+                        flippedIndices = [];
+                        lockBoard = false;
+                        if (matchedPairs === memoryPairs.length) {
+                            document.getElementById('memory-status').innerHTML = '🎉 全部配对成功！';
+                        }
+                    }, 400);
+                } else {
+                    setTimeout(() => {
+                        cards[i1].classList.remove('flipped');
+                        cards[i2].classList.remove('flipped');
+                        flippedIndices = [];
+                        lockBoard = false;
+                    }, 700);
+                }
+            } else {
+                lockBoard = false;
+            }
+        }
+
+        function updateMemoryStatus() {
+            document.getElementById('memory-status').textContent = `已配对 ${matchedPairs} / ${memoryPairs.length}`;
+        }
+
+        function resetMemory() {
+            buildMemory();
+        }
+
+        // =============================================================
+        // 2. 拖拽分类 (纯鼠标+触摸)
+        // =============================================================
+        const sortData = [
+            { id: 's1', category: 'median', label: '中线', svg: '<svg viewBox="0 0 44 32"><polygon points="22,2 4,30 40,30" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><line x1="22" y1="2" x2="22" y2="30" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3,3"/><circle cx="22" cy="30" r="2.5" fill="#dc2626"/></svg>' },
+            { id: 's2', category: 'median', label: '连接顶点与中点', svg: '' },
+            { id: 's3', category: 'anglebisector', label: '角平分线', svg: '<svg viewBox="0 0 44 32"><polygon points="22,2 4,30 40,30" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><line x1="22" y1="2" x2="38" y2="30" stroke="#eab308" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M22,2 L27,8 L17,8 Z" fill="#eab308" transform="rotate(-12,22,2)"/></svg>' },
+            { id: 's4', category: 'anglebisector', label: '平分一个内角', svg: '' },
+            { id: 's5', category: 'altitude', label: '高', svg: '<svg viewBox="0 0 44 32"><polygon points="22,2 4,30 40,30" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><line x1="22" y1="2" x2="22" y2="30" stroke="#8b5cf6" stroke-width="1.5" stroke-dasharray="3,3"/><rect x="20" y="27" width="4" height="3" fill="none" stroke="#8b5cf6" stroke-width="1"/></svg>' },
+            { id: 's6', category: 'altitude', label: '从顶点向对边作垂线', svg: '' }
+        ];
+
+        let sortItems = [];
+        let dragData = null; // 拖拽状态
+
+        function buildSort() {
+            sortItems = sortData.map(item => ({
+                ...item,
+                placed: false,
+                placedIn: null
+            }));
+            renderSort();
+            document.getElementById('sortFeedback').textContent = '💡 拖拽卡片到对应的分类框';
+            document.getElementById('sortFeedback').style.color = '#1f3a5f';
+            // 清除所有高亮
+            document.querySelectorAll('.sort-bin').forEach(b => {
+                b.classList.remove('correct-highlight', 'wrong-highlight');
+            });
+        }
+
+        function renderSort() {
+            document.querySelectorAll('.bin-items').forEach(el => el.innerHTML = '');
+            const pool = document.getElementById('sortPool');
+            pool.innerHTML = '';
+
+            const unplaced = sortItems.filter(item => !item.placed);
+            unplaced.forEach(item => {
+                const el = createSortItemElement(item, false);
+                pool.appendChild(el);
+            });
+
+            sortItems.filter(item => item.placed).forEach(item => {
+                const bin = document.getElementById(`bin-${item.placedIn}`);
+                if (bin) {
+                    const el = createSortItemElement(item, true);
+                    bin.appendChild(el);
+                }
+            });
+        }
+
+        function createSortItemElement(item, placed) {
+            const div = document.createElement('div');
+            div.className = `sort-item ${placed ? 'placed' : ''}`;
+            div.dataset.id = item.id;
+            div.dataset.category = item.category;
+            if (item.svg) {
+                div.innerHTML = `${item.svg} <span style="font-size:0.5rem;color:#4a617c;">${item.label}</span>`;
+            } else {
+                div.innerHTML = `<span style="font-size:0.65rem;font-weight:600;color:#1f3a5f;padding:4px 2px;">${item.label}</span>`;
+            }
+            if (!placed) {
+                // 拖拽事件
+                div.draggable = false;
+                div.addEventListener('mousedown', onSortItemMouseDown);
+                div.addEventListener('touchstart', onSortItemTouchStart, { passive: false });
+            }
+            return div;
+        }
+
+        // ---- 鼠标拖拽 ----
+        function onSortItemMouseDown(e) {
+            e.preventDefault();
+            const el = e.currentTarget;
+            const id = el.dataset.id;
+            const item = sortItems.find(i => i.id === id);
+            if (!item || item.placed) return;
+            startDrag(el, e.clientX, e.clientY, e);
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', onMouseUp);
+        }
+
+        function onMouseMove(e) {
+            e.preventDefault();
+            moveDrag(e.clientX, e.clientY);
+        }
+
+        function onMouseUp(e) {
+            document.removeEventListener('mousemove', onMouseMove);
+            document.removeEventListener('mouseup', onMouseUp);
+            endDrag(e.clientX, e.clientY);
+        }
+
+        // ---- 触摸拖拽 ----
+        function onSortItemTouchStart(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const el = e.currentTarget;
+            const id = el.dataset.id;
+            const item = sortItems.find(i => i.id === id);
+            if (!item || item.placed) return;
+            startDrag(el, touch.clientX, touch.clientY, e);
+            document.addEventListener('touchmove', onTouchMove, { passive: false });
+            document.addEventListener('touchend', onTouchEnd, { passive: false });
+        }
+
+        function onTouchMove(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            moveDrag(touch.clientX, touch.clientY);
+        }
+
+        function onTouchEnd(e) {
+            document.removeEventListener('touchmove', onTouchMove);
+            document.removeEventListener('touchend', onTouchEnd);
+            const touch = e.changedTouches[0];
+            endDrag(touch.clientX, touch.clientY);
+        }
+
+        // ---- 拖拽核心 ----
+        let ghostEl = null;
+        let dragItemId = null;
+        let dragOffsetX = 0,
+            dragOffsetY = 0;
+
+        function startDrag(el, clientX, clientY, e) {
+            const rect = el.getBoundingClientRect();
+            dragOffsetX = clientX - rect.left;
+            dragOffsetY = clientY - rect.top;
+            dragItemId = el.dataset.id;
+            // 创建幽灵
+            ghostEl = document.createElement('div');
+            ghostEl.className = 'drag-ghost';
+            ghostEl.innerHTML = el.innerHTML;
+            ghostEl.style.left = (clientX - dragOffsetX) + 'px';
+            ghostEl.style.top = (clientY - dragOffsetY) + 'px';
+            document.body.appendChild(ghostEl);
+            el.classList.add('dragging');
+            // 高亮分类区
+            document.querySelectorAll('.sort-bin').forEach(b => b.classList.add('drag-over'));
+        }
+
+        function moveDrag(clientX, clientY) {
+            if (ghostEl) {
+                ghostEl.style.left = (clientX - dragOffsetX) + 'px';
+                ghostEl.style.top = (clientY - dragOffsetY) + 'px';
+            }
+            // 检测悬停
+            document.querySelectorAll('.sort-bin').forEach(b => {
+                const rect = b.getBoundingClientRect();
+                if (clientX >= rect.left && clientX <= rect.right &&
+                    clientY >= rect.top && clientY <= rect.bottom) {
+                    b.classList.add('drag-over');
+                } else {
+                    b.classList.remove('drag-over');
+                }
+            });
+        }
+
+        function endDrag(clientX, clientY) {
+            // 移除幽灵
+            if (ghostEl) {
+                ghostEl.remove();
+                ghostEl = null;
+            }
+            document.querySelectorAll('.sort-bin').forEach(b => b.classList.remove('drag-over'));
+            // 找到放置的bin
+            let targetBin = null;
+            document.querySelectorAll('.sort-bin').forEach(b => {
+                const rect = b.getBoundingClientRect();
+                if (clientX >= rect.left && clientX <= rect.right &&
+                    clientY >= rect.top && clientY <= rect.bottom) {
+                    targetBin = b;
+                }
+            });
+            // 移除dragging样式
+            document.querySelectorAll('.sort-item.dragging').forEach(el => el.classList.remove('dragging'));
+
+            if (targetBin && dragItemId) {
+                const category = targetBin.dataset.category;
+                const item = sortItems.find(i => i.id === dragItemId);
+                if (item && !item.placed) {
+                    const correct = (item.category === category);
+                    if (correct) {
+                        item.placed = true;
+                        item.placedIn = category;
+                        targetBin.classList.add('correct-highlight');
+                        setTimeout(() => targetBin.classList.remove('correct-highlight'), 500);
+                        document.getElementById('sortFeedback').textContent = `✅ 正确！放入 “${getCategoryName(category)}”`;
+                        document.getElementById('sortFeedback').style.color = '#16a34a';
+                    } else {
+                        targetBin.classList.add('wrong-highlight');
+                        setTimeout(() => targetBin.classList.remove('wrong-highlight'), 500);
+                        document.getElementById('sortFeedback').textContent = `❌ 再想想！“${item.label}” 不属于 “${getCategoryName(category)}”`;
+                        document.getElementById('sortFeedback').style.color = '#b91c1c';
+                    }
+                    renderSort();
+                    checkAllPlaced();
+                }
+            }
+            dragItemId = null;
+        }
+
+        function getCategoryName(cat) {
+            const map = { median: '中线', anglebisector: '角平分线', altitude: '高' };
+            return map[cat] || cat;
+        }
+
+        function checkAllPlaced() {
+            const allPlaced = sortItems.every(item => item.placed);
+            if (allPlaced) {
+                document.getElementById('sortFeedback').textContent = '🎉 所有卡片已分类！点击“检查答案”查看正确率。';
+                document.getElementById('sortFeedback').style.color = '#2563eb';
+            }
+        }
+
+        function checkSort() {
+            const total = sortItems.length;
+            let correct = 0;
+            sortItems.forEach(item => {
+                if (item.placed && item.category === item.placedIn) correct++;
+            });
+            document.getElementById('sortFeedback').textContent = `📊 正确率：${correct} / ${total}  (${Math.round(correct/total*100)}%)`;
+            document.getElementById('sortFeedback').style.color = '#1f3a5f';
+            document.querySelectorAll('.sort-bin').forEach(bin => {
+                bin.classList.remove('correct-highlight', 'wrong-highlight');
+                const cat = bin.dataset.category;
+                const itemsInBin = sortItems.filter(item => item.placed && item.placedIn === cat);
+                let allCorrect = itemsInBin.every(item => item.category === cat);
+                if (itemsInBin.length > 0 && allCorrect) {
+                    bin.classList.add('correct-highlight');
+                } else if (itemsInBin.length > 0) {
+                    bin.classList.add('wrong-highlight');
+                }
+            });
+        }
+
+        function resetSort() {
+            buildSort();
+        }
+
+        // =============================================================
+        // 3. 导航
+        // =============================================================
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // =============================================================
+        // 4. 初始化
+        // =============================================================
+        buildMemory();
+        buildSort();
+        console.log('📐 三角形的中线·角平分线·高 课程已加载！');
+    </script>
+</body>
+</html>

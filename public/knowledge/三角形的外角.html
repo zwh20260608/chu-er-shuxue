@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>三角形的外角 · 初二数学预习</title>
+    <style>
+        /* ===== 全局重置 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', system-ui, sans-serif;
+            background: #f5f9fe;
+            color: #1e293b;
+            padding: 1rem;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 60px rgba(0, 20, 40, 0.06);
+            padding: 1.8rem 2rem 2.8rem;
+            transition: 0.2s;
+        }
+        @media (max-width: 640px) {
+            .container {
+                padding: 1rem 1rem 2rem;
+                border-radius: 20px;
+            }
+        }
+
+        /* ===== 头部 ===== */
+        .page-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 3px solid #e6f0fa;
+            padding-bottom: 0.8rem;
+            margin-bottom: 1.6rem;
+        }
+        .page-header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1a4b8c, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .page-header h1 small {
+            font-size: 0.9rem;
+            font-weight: 400;
+            -webkit-text-fill-color: #5f7d9c;
+            color: #5f7d9c;
+            background: none;
+        }
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem 0.5rem;
+        }
+        .nav-links a {
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            background: #f1f5f9;
+            color: #2c3e50;
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: 0.2s;
+            border: 1px solid transparent;
+        }
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: #2563eb;
+            color: #fff;
+            border-color: #2563eb;
+        }
+        @media (max-width: 600px) {
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.4rem;
+            }
+            .page-header h1 {
+                font-size: 1.4rem;
+            }
+            .nav-links a {
+                font-size: 0.65rem;
+                padding: 0.1rem 0.6rem;
+            }
+        }
+
+        /* ===== 主布局 ===== */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 1.8rem;
+            align-items: start;
+        }
+        @media (max-width: 920px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        /* ===== 卡片 ===== */
+        .card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 1rem 1.2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+            border: 1px solid #edf2f7;
+            margin-bottom: 1rem;
+            transition: 0.2s;
+        }
+        .card-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #0b2b4a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 0.5rem;
+            border-left: 5px solid #3b82f6;
+            padding-left: 12px;
+        }
+        .card-title .badge {
+            font-size: 0.6rem;
+            background: #dbeafe;
+            color: #1e4b8a;
+            padding: 0.05rem 0.7rem;
+            border-radius: 40px;
+            font-weight: 500;
+        }
+        .card-sub {
+            font-size: 0.82rem;
+            color: #4a617c;
+            margin-bottom: 0.3rem;
+        }
+
+        /* ===== 图形展示 ===== */
+        .tri-flex {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem 1rem;
+            padding: 0.2rem 0;
+        }
+        .tri-item {
+            text-align: center;
+            background: #fafcff;
+            border-radius: 14px;
+            padding: 0.3rem 0.5rem 0.2rem;
+            border: 1px solid #e9edf4;
+            min-width: 60px;
+            transition: 0.2s;
+        }
+        .tri-item:hover {
+            border-color: #b3cef0;
+        }
+        .tri-item svg {
+            display: block;
+            margin: 0 auto;
+            width: 68px;
+            height: 50px;
+        }
+        .tri-item .label {
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #1f3a5f;
+            margin-top: 1px;
+        }
+        .tri-item .sub {
+            font-size: 0.55rem;
+            color: #6b7f96;
+        }
+
+        /* ===== 锦囊 ===== */
+        .formula-box {
+            background: #f0f7fe;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border-left: 4px solid #3b82f6;
+            margin: 0.3rem 0;
+            font-size: 0.88rem;
+        }
+        .tip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 0.5rem;
+        }
+        .tip-item {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 0.4rem 0.7rem;
+            border: 1px solid #e2eaf2;
+            font-size: 0.78rem;
+        }
+        .tip-item strong {
+            color: #1e4b8a;
+        }
+
+        /* ===== 举例 & 易错 ===== */
+        .example-box {
+            background: #fcf9f0;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border-left: 4px solid #eab308;
+            margin: 0.3rem 0;
+            font-size: 0.86rem;
+        }
+        .example-box .ex-title {
+            font-weight: 700;
+            color: #8a6d1b;
+        }
+        .error-box {
+            background: #fef2f2;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border-left: 4px solid #ef4444;
+            margin: 0.3rem 0;
+            font-size: 0.86rem;
+        }
+        .error-box .err-title {
+            font-weight: 700;
+            color: #b91c1c;
+        }
+        .highlight {
+            background: #fef9e7;
+            padding: 0.05rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .tag {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e4b8a;
+            padding: 0.05rem 0.6rem;
+            border-radius: 40px;
+            font-size: 0.65rem;
+            font-weight: 500;
+        }
+
+        /* ===== 游戏区 ===== */
+        .game-area {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .game-card {
+            background: #fafcff;
+            border-radius: 18px;
+            padding: 0.8rem 1rem 1rem;
+            border: 1px solid #e2ecf9;
+        }
+        .game-card .game-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #0b2b4a;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 0.4rem;
+        }
+        .game-card .game-title .g-badge {
+            font-size: 0.55rem;
+            background: #dbeafe;
+            padding: 0.05rem 0.6rem;
+            border-radius: 40px;
+            font-weight: 500;
+            color: #1e4b8a;
+        }
+        .game-card .game-desc {
+            font-size: 0.75rem;
+            color: #4a617c;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ===== 翻翻乐 ===== */
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            max-width: 440px;
+            margin: 0 auto;
+        }
+        .memory-card {
+            aspect-ratio: 1/1;
+            background: #dbeafe;
+            border-radius: 12px;
+            cursor: pointer;
+            perspective: 600px;
+            position: relative;
+            transition: 0.15s;
+            border: 2px solid transparent;
+            min-height: 60px;
+        }
+        .memory-card.flipped {
+            border-color: #3b82f6;
+        }
+        .memory-card.matched {
+            opacity: 0.45;
+            pointer-events: none;
+            border-color: #22c55e;
+            transform: scale(0.93);
+        }
+        .memory-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.4s;
+            transform-style: preserve-3d;
+            border-radius: 12px;
+        }
+        .memory-card.flipped .memory-card-inner {
+            transform: rotateY(180deg);
+        }
+        .memory-card-front,
+        .memory-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-align: center;
+            padding: 2px;
+            background: #ffffff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+        }
+        .memory-card-front {
+            transform: rotateY(180deg);
+            background: #f8fcff;
+            border: 2px solid #dbeafe;
+        }
+        .memory-card-back {
+            background: linear-gradient(145deg, #b7d6f7, #8cb4e8);
+            color: #fff;
+            font-size: 1.1rem;
+            border: 2px solid #8cb4e8;
+        }
+        .memory-card-back span {
+            font-size: 0.5rem;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+        .memory-card-front svg {
+            width: 38px;
+            height: 30px;
+            display: block;
+        }
+        .memory-card-front .card-label {
+            font-size: 0.5rem;
+            color: #1f3a5f;
+            margin-top: 1px;
+        }
+        @media (max-width: 500px) {
+            .memory-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 6px;
+            }
+            .memory-card-front svg {
+                width: 30px;
+                height: 24px;
+            }
+        }
+        @media (max-width: 400px) {
+            .memory-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* ===== 分类拖拽 ===== */
+        .sort-area {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+        .sort-bins {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px;
+        }
+        .sort-bin {
+            background: #f5f9ff;
+            border: 2px dashed #b7cee8;
+            border-radius: 14px;
+            padding: 0.4rem 0.2rem;
+            min-height: 70px;
+            text-align: center;
+            transition: 0.2s;
+            position: relative;
+        }
+        .sort-bin.drag-over {
+            border-color: #2563eb;
+            background: #e5effa;
+        }
+        .sort-bin.correct-highlight {
+            border-color: #22c55e;
+            background: #e8f8ee;
+        }
+        .sort-bin.wrong-highlight {
+            border-color: #ef4444;
+            background: #fde8e8;
+        }
+        .sort-bin .bin-title {
+            font-weight: 700;
+            font-size: 0.7rem;
+            color: #1f3a5f;
+            margin-bottom: 3px;
+        }
+        .sort-bin .bin-items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 4px;
+            min-height: 28px;
+        }
+        .sort-item {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 2px 6px 2px 4px;
+            border: 2px solid #dbeafe;
+            cursor: grab;
+            transition: 0.15s;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+            font-size: 0.55rem;
+            font-weight: 500;
+            user-select: none;
+            touch-action: none;
+        }
+        .sort-item svg {
+            width: 28px;
+            height: 22px;
+            display: block;
+        }
+        .sort-item.selected {
+            border-color: #2563eb;
+            background: #e5effa;
+            transform: scale(1.04);
+        }
+        .sort-item.placed {
+            opacity: 0.7;
+            pointer-events: none;
+            border-color: #94a3b8;
+        }
+        .sort-item.dragging {
+            opacity: 0.6;
+            transform: scale(0.95);
+            z-index: 1000;
+            position: fixed;
+            pointer-events: none;
+        }
+        .sort-pool {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px;
+            padding: 0.4rem 0;
+            background: #f8fafc;
+            border-radius: 14px;
+            min-height: 50px;
+            border: 1px solid #e2eaf2;
+        }
+        .sort-pool .sort-item {
+            cursor: grab;
+        }
+        .sort-feedback {
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.8rem;
+            min-height: 24px;
+            margin-top: 2px;
+        }
+        .btn-reset {
+            background: #eef4fa;
+            border: none;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.72rem;
+            margin: 2px 3px;
+        }
+        .btn-reset:hover {
+            background: #dbeafe;
+        }
+        .btn-check {
+            background: #dbeafe;
+            border: none;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.72rem;
+            margin: 2px 3px;
+        }
+        .btn-check:hover {
+            background: #b7d6f7;
+        }
+        @media (max-width: 600px) {
+            .sort-bins {
+                grid-template-columns: 1fr;
+                gap: 6px;
+            }
+            .sort-bin {
+                min-height: 54px;
+            }
+        }
+
+        /* ===== 复习题 ===== */
+        .quiz-item {
+            background: #fafcff;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border: 1px solid #e9eff6;
+            margin-bottom: 0.5rem;
+        }
+        .quiz-item .q {
+            font-weight: 600;
+            color: #0b2b4a;
+            font-size: 0.86rem;
+        }
+        .quiz-item .a {
+            color: #1f4b7a;
+            margin-top: 2px;
+            padding-left: 0.6rem;
+            border-left: 3px solid #b3cef0;
+            font-size: 0.82rem;
+        }
+
+        /* ===== 通用 ===== */
+        .text-muted {
+            color: #6b7f96;
+            font-size: 0.78rem;
+        }
+        .mt-1 {
+            margin-top: 0.4rem;
+        }
+        .mb-1 {
+            margin-bottom: 0.3rem;
+        }
+        .flex-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+        .footer {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #8ba0b8;
+            border-top: 1px solid #e9eff6;
+            padding-top: 0.8rem;
+            margin-top: 1rem;
+        }
+        @media (max-width: 480px) {
+            .card {
+                padding: 0.7rem;
+            }
+            .card-title {
+                font-size: 0.95rem;
+            }
+            .formula-box {
+                font-size: 0.78rem;
+                padding: 0.4rem 0.7rem;
+            }
+            .tri-item svg {
+                width: 52px;
+                height: 40px;
+            }
+        }
+
+        /* ===== 拖拽幽灵 ===== */
+        .drag-ghost {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.85;
+            transform: scale(1.08);
+            background: #ffffff;
+            border-radius: 12px;
+            border: 2px solid #2563eb;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+            padding: 4px 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #0b2b4a;
+        }
+        .drag-ghost svg {
+            width: 30px;
+            height: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- ===== 头部 ===== -->
+        <header class="page-header">
+            <h1>
+                📐 三角形的外角
+                <small>八年级 · 上册</small>
+            </h1>
+            <div class="nav-links">
+                <a href="#concept">核心概念</a>
+                <a href="#formula">锦囊</a>
+                <a href="#examples">举例</a>
+                <a href="#errors">易错</a>
+                <a href="#games">🎮 游戏</a>
+                <a href="#quiz">复习</a>
+            </div>
+        </header>
+
+        <!-- ============================================================ -->
+        <div class="main-grid">
+
+            <!-- ===== 左侧：知识点 ===== -->
+            <div class="knowledge-area">
+
+                <!-- 核心概念 -->
+                <div class="card" id="concept">
+                    <div class="card-title">
+                        🔍 核心概念大解析
+                        <span class="badge">外角定义 · 外角定理</span>
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.6rem; align-items:start;">
+                        <div>
+                            <div style="background:#f0f7fe; border-radius:10px; padding:0.4rem 0.7rem; margin-bottom:0.4rem;">
+                                <strong style="color:#1e4b8a;">📌 外角的定义</strong>
+                                <p style="font-size:0.82rem; margin:0;">三角形的一边与<strong>另一边的延长线</strong>组成的角。</p>
+                                <p style="font-size:0.75rem; color:#4a617c; margin:0;">如图，∠ACD 是△ABC 的外角。</p>
+                            </div>
+                            <div style="background:#f0f7fe; border-radius:10px; padding:0.4rem 0.7rem;">
+                                <strong style="color:#1e4b8a;">📌 外角定理</strong>
+                                <p style="font-size:0.82rem; margin:0;">三角形的外角等于<strong>与它不相邻</strong>的两个内角的和。</p>
+                                <p style="font-size:0.78rem; color:#4a617c; margin:0; font-weight:600;">∠ACD = ∠A + ∠B</p>
+                                <p style="font-size:0.72rem; color:#6b7f96; margin:0;">推论：三角形的外角大于任何一个与它不相邻的内角。</p>
+                            </div>
+                            <div style="margin-top:0.3rem; background:#f8faff; border-radius:10px; padding:0.3rem 0.7rem; border:1px solid #e2ecf9; font-size:0.75rem;">
+                                <span>🔹 三角形三个外角的和 = <strong>360°</strong></span>
+                            </div>
+                        </div>
+                        <div class="tri-flex" style="gap:0.3rem; padding:0;">
+                            <div class="tri-item">
+                                <svg viewBox="0 0 70 50"><polygon points="35,4 6,46 64,46" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><line x1="64" y1="46" x2="84" y2="32" stroke="#8b5cf6" stroke-width="2"/><text x="30" y="20" font-size="8" fill="#1f3a5f">∠A</text><text x="8" y="42" font-size="8" fill="#1f3a5f">∠B</text><text x="52" y="42" font-size="8" fill="#1f3a5f">∠C</text><text x="68" y="34" font-size="7" fill="#8b5cf6">外角</text></svg>
+                                <div class="label">外角定义</div>
+                            </div>
+                            <div class="tri-item">
+                                <svg viewBox="0 0 70 50"><polygon points="35,4 6,46 64,46" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><line x1="64" y1="46" x2="84" y2="32" stroke="#8b5cf6" stroke-width="2"/><text x="30" y="20" font-size="8" fill="#1f3a5f">50°</text><text x="8" y="42" font-size="8" fill="#1f3a5f">60°</text><text x="52" y="42" font-size="8" fill="#1f3a5f">70°</text><text x="68" y="34" font-size="7" fill="#8b5cf6">110°</text></svg>
+                                <div class="label">外角定理</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 锦囊 -->
+                <div class="card" id="formula">
+                    <div class="card-title">
+                        🧠 数学锦囊 · 公式
+                        <span class="badge">核心定理</span>
+                    </div>
+                    <div class="tip-grid">
+                        <div class="tip-item"><strong>外角定理</strong><br>∠ACD = ∠A + ∠B</div>
+                        <div class="tip-item"><strong>外角 > 内角</strong><br>外角 > 任一不相邻内角</div>
+                        <div class="tip-item"><strong>外角和</strong><br>三个外角和 = 360°</div>
+                        <div class="tip-item"><strong>邻补角</strong><br>∠ACB + ∠ACD = 180°</div>
+                    </div>
+                    <div class="formula-box" style="margin-top:0.3rem;">
+                        💡 外角定理是内角和定理的推论，<strong>已知两内角求外角</strong>直接相加即可。
+                    </div>
+                </div>
+
+                <!-- 举例 -->
+                <div class="card" id="examples">
+                    <div class="card-title">
+                        ✏️ 典型举例
+                        <span class="badge">图形结合</span>
+                    </div>
+                    <div class="example-box">
+                        <div class="ex-title">例1 如图，∠A=50°，∠B=60°，求∠ACD。</div>
+                        <p style="margin-top:2px; font-size:0.85rem;"><strong>解：</strong>∠ACD = ∠A + ∠B = 50° + 60° = <span class="highlight">110°</span></p>
+                        <svg viewBox="0 0 120 48" width="100" height="42" style="margin-top:2px;"><polygon points="50,4 10,44 90,44" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><line x1="90" y1="44" x2="116" y2="28" stroke="#8b5cf6" stroke-width="2"/><text x="42" y="22" font-size="10" fill="#1f3a5f">50°</text><text x="14" y="40" font-size="10" fill="#1f3a5f">60°</text><text x="96" y="30" font-size="9" fill="#8b5cf6">110°</text></svg>
+                    </div>
+                    <div class="example-box" style="border-left-color:#8b5cf6;">
+                        <div class="ex-title">例2 如图，∠BAE，∠CBF，∠ACD是△ABC的三个外角，求它们的和。</div>
+                        <p style="margin-top:2px; font-size:0.85rem;"><strong>解：</strong>∠BAE+∠CBF+∠ACD = 2(∠A+∠B+∠C) = 2×180° = <span class="highlight">360°</span></p>
+                        <svg viewBox="0 0 130 48" width="110" height="42" style="margin-top:2px;"><polygon points="50,4 10,44 90,44" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><line x1="10" y1="44" x2="-6" y2="28" stroke="#eab308" stroke-width="1.5"/><line x1="90" y1="44" x2="116" y2="28" stroke="#eab308" stroke-width="1.5"/><line x1="50" y1="4" x2="50" y2="-12" stroke="#eab308" stroke-width="1.5"/><text x="-8" y="30" font-size="7" fill="#eab308">∠BAE</text><text x="96" y="30" font-size="7" fill="#eab308">∠CBF</text><text x="44" y="-6" font-size="7" fill="#eab308">∠ACD</text></svg>
+                    </div>
+                </div>
+
+                <!-- 易错 -->
+                <div class="card" id="errors">
+                    <div class="card-title">
+                        ⚠️ 易错题型
+                        <span class="badge">避坑指南</span>
+                    </div>
+                    <div class="error-box">
+                        <div class="err-title">❌ 易错1：外角与内角混淆</div>
+                        <p style="font-size:0.85rem;">外角是<strong>一边与另一边的延长线</strong>组成的角，不是内角的补角（邻补角）。</p>
+                        <svg viewBox="0 0 120 44" width="100" height="38" style="margin-top:2px;"><polygon points="50,4 10,40 90,40" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/><line x1="90" y1="40" x2="114" y2="26" stroke="#8b5cf6" stroke-width="1.5"/><text x="92" y="28" font-size="7" fill="#8b5cf6">外角</text><text x="40" y="20" font-size="7" fill="#b91c1c">✗ 不是内角</text></svg>
+                    </div>
+                    <div class="error-box" style="border-left-color:#eab308;">
+                        <div class="err-title">❌ 易错2：外角定理用错内角</div>
+                        <p style="font-size:0.85rem;">外角等于 <strong>不相邻</strong> 的两个内角之和，<span style="color:#b91c1c;">不能</span>包含与它相邻的内角。</p>
+                        <svg viewBox="0 0 120 44" width="100" height="38" style="margin-top:2px;"><polygon points="50,4 10,40 90,40" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/><line x1="90" y1="40" x2="114" y2="26" stroke="#8b5cf6" stroke-width="1.5"/><text x="42" y="20" font-size="8" fill="#1f3a5f">∠A</text><text x="14" y="36" font-size="8" fill="#1f3a5f">∠B</text><text x="72" y="36" font-size="8" fill="#dc2626">✗</text><text x="92" y="28" font-size="7" fill="#8b5cf6">∠C+∠B?</text></svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== 右侧：游戏 ===== -->
+            <div class="game-area" id="games">
+
+                <!-- 游戏1：翻翻乐 -->
+                <div class="game-card">
+                    <div class="game-title">
+                        🃏 翻翻乐 · 外角配对
+                        <span class="g-badge">记忆</span>
+                    </div>
+                    <div class="game-desc">点击卡片翻转，配对 <strong>外角图形</strong> 与对应的 <strong>角度关系</strong>。</div>
+                    <div id="memory-grid" class="memory-grid"></div>
+                    <div style="text-align:center; margin-top:0.4rem;">
+                        <span id="memory-status" style="font-weight:600; color:#1f3a5f; font-size:0.8rem;">已配对 0 / 4</span>
+                        <button class="btn-reset" onclick="resetMemory()">🔄 洗牌</button>
+                    </div>
+                </div>
+
+                <!-- 游戏2：拖拽分类 -->
+                <div class="game-card">
+                    <div class="game-title">
+                        📦 拖拽分类 · 外角定理应用
+                        <span class="g-badge">拖拽</span>
+                    </div>
+                    <div class="game-desc">将下方的 <strong>外角</strong> 拖拽到对应的 <strong>内角和</strong> 旁边。</div>
+                    <div class="sort-area">
+                        <div class="sort-bins" id="sortBins">
+                            <div class="sort-bin" data-category="pair1">
+                                <div class="bin-title">🔹 ∠A = 40°, ∠B = 70°</div>
+                                <div class="bin-items" id="bin-pair1"></div>
+                            </div>
+                            <div class="sort-bin" data-category="pair2">
+                                <div class="bin-title">🔹 ∠A = 30°, ∠B = 50°</div>
+                                <div class="bin-items" id="bin-pair2"></div>
+                            </div>
+                            <div class="sort-bin" data-category="pair3">
+                                <div class="bin-title">🔹 ∠A = 55°, ∠B = 65°</div>
+                                <div class="bin-items" id="bin-pair3"></div>
+                            </div>
+                            <div class="sort-bin" data-category="pair4">
+                                <div class="bin-title">🔹 ∠A = 80°, ∠B = 40°</div>
+                                <div class="bin-items" id="bin-pair4"></div>
+                            </div>
+                        </div>
+                        <div class="sort-pool" id="sortPool"></div>
+                        <div class="sort-feedback" id="sortFeedback">💡 拖拽外角卡片到对应的内角和分类框</div>
+                        <div style="display:flex; justify-content:center; gap:0.3rem; flex-wrap:wrap;">
+                            <button class="btn-reset" onclick="resetSort()">🔄 重新分类</button>
+                            <button class="btn-check" onclick="checkSort()">✅ 检查答案</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 复习巩固题 -->
+        <section id="quiz" style="margin-top:1.2rem;">
+            <div class="card">
+                <div class="card-title">
+                    📝 复习巩固题
+                    <span class="badge">小测验</span>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="q">1. 如图，∠A = 45°，∠B = 75°，求∠ACD 的度数。</div>
+                    <div class="a">∠ACD = ∠A + ∠B = 45° + 75° = <span class="highlight">120°</span></div>
+                    <svg viewBox="0 0 120 48" width="100" height="42" style="margin-top:4px;"><polygon points="50,4 10,44 90,44" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><line x1="90" y1="44" x2="116" y2="28" stroke="#8b5cf6" stroke-width="2"/><text x="42" y="22" font-size="10" fill="#1f3a5f">45°</text><text x="14" y="40" font-size="10" fill="#1f3a5f">75°</text><text x="96" y="30" font-size="9" fill="#8b5cf6">120°</text></svg>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="q">2. 如图，∠ACD = 130°，∠A = 60°，求∠B 的度数。</div>
+                    <div class="a">∠B = ∠ACD − ∠A = 130° − 60° = <span class="highlight">70°</span></div>
+                    <svg viewBox="0 0 120 48" width="100" height="42" style="margin-top:4px;"><polygon points="50,4 10,44 90,44" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><line x1="90" y1="44" x2="116" y2="28" stroke="#8b5cf6" stroke-width="2"/><text x="42" y="22" font-size="10" fill="#1f3a5f">60°</text><text x="68" y="40" font-size="9" fill="#1f3a5f">∠B?</text><text x="92" y="30" font-size="9" fill="#8b5cf6">130°</text></svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 底部 ===== -->
+        <div class="footer">
+            📚 八年级数学 · 三角形的外角 &nbsp;|&nbsp; 预习课程 · 互动学习
+        </div>
+
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- JavaScript -->
+    <script>
+        // =============================================================
+        // 1. 翻翻乐 (配对)
+        // =============================================================
+        const memoryPairs = [{
+            id: 0,
+            name: '外角定理',
+            svg: '<svg viewBox="0 0 50 38"><polygon points="25,3 5,35 45,35" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><line x1="45" y1="35" x2="62" y2="24" stroke="#8b5cf6" stroke-width="2"/><text x="18" y="16" font-size="7" fill="#1f3a5f">∠A</text><text x="6" y="32" font-size="7" fill="#1f3a5f">∠B</text><text x="46" y="26" font-size="6" fill="#8b5cf6">外角</text></svg>',
+            value: '∠A + ∠B'
+        }, {
+            id: 1,
+            name: '外角定义',
+            svg: '<svg viewBox="0 0 50 38"><polygon points="25,3 5,35 45,35" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><line x1="45" y1="35" x2="58" y2="24" stroke="#8b5cf6" stroke-width="2"/><text x="18" y="16" font-size="7" fill="#1f3a5f">∠C</text><text x="46" y="26" font-size="6" fill="#8b5cf6">延长线</text></svg>',
+            value: '一边 + 延长线'
+        }, {
+            id: 2,
+            name: '外角和',
+            svg: '<svg viewBox="0 0 50 38"><polygon points="25,3 5,35 45,35" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><line x1="5" y1="35" x2="-10" y2="24" stroke="#eab308" stroke-width="1.5"/><line x1="45" y1="35" x2="60" y2="24" stroke="#eab308" stroke-width="1.5"/><line x1="25" y1="3" x2="25" y2="-10" stroke="#eab308" stroke-width="1.5"/></svg>',
+            value: '360°'
+        }, {
+            id: 3,
+            name: '邻补角',
+            svg: '<svg viewBox="0 0 50 38"><polygon points="25,3 5,35 45,35" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><line x1="45" y1="35" x2="60" y2="24" stroke="#8b5cf6" stroke-width="2"/><text x="36" y="32" font-size="7" fill="#1f3a5f">∠C</text><text x="48" y="26" font-size="6" fill="#8b5cf6">外角</text></svg>',
+            value: '∠C + 外角 = 180°'
+        }];
+
+        let memoryCards = [];
+        let flippedIndices = [];
+        let matchedPairs = 0;
+        let lockBoard = false;
+
+        function buildMemory() {
+            const grid = document.getElementById('memory-grid');
+            memoryCards = [];
+            memoryPairs.forEach((p, idx) => {
+                memoryCards.push({ pairId: idx, type: 'graphic', label: p.name, svg: p.svg });
+                memoryCards.push({ pairId: idx, type: 'value', label: p.value, svg: '' });
+            });
+            shuffleArray(memoryCards);
+            renderMemory();
+            matchedPairs = 0;
+            flippedIndices = [];
+            lockBoard = false;
+            updateMemoryStatus();
+        }
+
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+        }
+
+        function renderMemory() {
+            const grid = document.getElementById('memory-grid');
+            grid.innerHTML = '';
+            memoryCards.forEach((card, index) => {
+                const div = document.createElement('div');
+                div.className = 'memory-card';
+                div.dataset.index = index;
+                div.dataset.pairId = card.pairId;
+                div.innerHTML = `
+                    <div class="memory-card-inner">
+                        <div class="memory-card-front">
+                            ${card.type === 'graphic' ? card.svg : `<span style="font-size:0.85rem;font-weight:700;color:#1f3a5f;">${card.label}</span>`}
+                            <div class="card-label">${card.type === 'graphic' ? card.label : ''}</div>
+                        </div>
+                        <div class="memory-card-back">△<span>外角</span></div>
+                    </div>
+                `;
+                div.addEventListener('click', () => flipCard(index));
+                grid.appendChild(div);
+            });
+        }
+
+        function flipCard(index) {
+            if (lockBoard) return;
+            const cards = document.querySelectorAll('.memory-card');
+            const card = cards[index];
+            if (card.classList.contains('flipped') || card.classList.contains('matched')) return;
+            if (flippedIndices.length >= 2) return;
+
+            card.classList.add('flipped');
+            flippedIndices.push(index);
+
+            if (flippedIndices.length === 2) {
+                lockBoard = true;
+                const i1 = flippedIndices[0];
+                const i2 = flippedIndices[1];
+                const c1 = memoryCards[i1];
+                const c2 = memoryCards[i2];
+                const pairMatch = (c1.pairId === c2.pairId) && (c1.type !== c2.type);
+                if (pairMatch) {
+                    setTimeout(() => {
+                        cards[i1].classList.add('matched');
+                        cards[i2].classList.add('matched');
+                        matchedPairs++;
+                        updateMemoryStatus();
+                        flippedIndices = [];
+                        lockBoard = false;
+                        if (matchedPairs === memoryPairs.length) {
+                            document.getElementById('memory-status').innerHTML = '🎉 全部配对成功！';
+                        }
+                    }, 400);
+                } else {
+                    setTimeout(() => {
+                        cards[i1].classList.remove('flipped');
+                        cards[i2].classList.remove('flipped');
+                        flippedIndices = [];
+                        lockBoard = false;
+                    }, 700);
+                }
+            } else {
+                lockBoard = false;
+            }
+        }
+
+        function updateMemoryStatus() {
+            document.getElementById('memory-status').textContent = `已配对 ${matchedPairs} / ${memoryPairs.length}`;
+        }
+
+        function resetMemory() {
+            buildMemory();
+        }
+
+        // =============================================================
+        // 2. 拖拽分类 (外角→内角和)
+        // =============================================================
+        const sortData = [
+            { id: 's1', category: 'pair1', label: '110°',
+            svg: '<svg viewBox="0 0 44 32"><polygon points="22,2 4,30 40,30" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><line x1="40" y1="30" x2="54" y2="20" stroke="#8b5cf6" stroke-width="1.5"/><text x="40" y="22" font-size="7" fill="#8b5cf6">110°</text></svg>' },
+            { id: 's2', category: 'pair2', label: '80°',
+            svg: '<svg viewBox="0 0 44 32"><polygon points="22,2 4,30 40,30" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><line x1="40" y1="30" x2="52" y2="20" stroke="#8b5cf6" stroke-width="1.5"/><text x="40" y="22" font-size="7" fill="#8b5cf6">80°</text></svg>' },
+            { id: 's3', category: 'pair3', label: '120°',
+            svg: '<svg viewBox="0 0 44 32"><polygon points="22,2 4,30 40,30" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><line x1="40" y1="30" x2="54" y2="18" stroke="#8b5cf6" stroke-width="1.5"/><text x="40" y="20" font-size="7" fill="#8b5cf6">120°</text></svg>' },
+            { id: 's4', category: 'pair4', label: '120°',
+            svg: '<svg viewBox="0 0 44 32"><polygon points="22,2 4,30 40,30" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><line x1="40" y1="30" x2="54" y2="18" stroke="#8b5cf6" stroke-width="1.5"/><text x="40" y="20" font-size="7" fill="#8b5cf6">120°</text></svg>' }
+        ];
+
+        let sortItems = [];
+
+        function buildSort() {
+            sortItems = sortData.map(item => ({
+                ...item,
+                placed: false,
+                placedIn: null
+            }));
+            renderSort();
+            document.getElementById('sortFeedback').textContent = '💡 拖拽外角卡片到对应的内角和分类框';
+            document.getElementById('sortFeedback').style.color = '#1f3a5f';
+            document.querySelectorAll('.sort-bin').forEach(b => {
+                b.classList.remove('correct-highlight', 'wrong-highlight');
+            });
+        }
+
+        function renderSort() {
+            document.querySelectorAll('.bin-items').forEach(el => el.innerHTML = '');
+            const pool = document.getElementById('sortPool');
+            pool.innerHTML = '';
+
+            const unplaced = sortItems.filter(item => !item.placed);
+            unplaced.forEach(item => {
+                const el = createSortItemElement(item, false);
+                pool.appendChild(el);
+            });
+
+            sortItems.filter(item => item.placed).forEach(item => {
+                const bin = document.getElementById(`bin-${item.placedIn}`);
+                if (bin) {
+                    const el = createSortItemElement(item, true);
+                    bin.appendChild(el);
+                }
+            });
+        }
+
+        function createSortItemElement(item, placed) {
+            const div = document.createElement('div');
+            div.className = `sort-item ${placed ? 'placed' : ''}`;
+            div.dataset.id = item.id;
+            div.dataset.category = item.category;
+            div.innerHTML = `${item.svg} <span style="font-size:0.55rem;color:#4a617c;">${item.label}</span>`;
+            if (!placed) {
+                div.draggable = false;
+                div.addEventListener('mousedown', onSortItemMouseDown);
+                div.addEventListener('touchstart', onSortItemTouchStart, { passive: false });
+            }
+            return div;
+        }
+
+        // ---- 鼠标拖拽 ----
+        function onSortItemMouseDown(e) {
+            e.preventDefault();
+            const el = e.currentTarget;
+            const id = el.dataset.id;
+            const item = sortItems.find(i => i.id === id);
+            if (!item || item.placed) return;
+            startDrag(el, e.clientX, e.clientY);
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', onMouseUp);
+        }
+
+        function onMouseMove(e) {
+            e.preventDefault();
+            moveDrag(e.clientX, e.clientY);
+        }
+
+        function onMouseUp(e) {
+            document.removeEventListener('mousemove', onMouseMove);
+            document.removeEventListener('mouseup', onMouseUp);
+            endDrag(e.clientX, e.clientY);
+        }
+
+        // ---- 触摸拖拽 ----
+        function onSortItemTouchStart(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const el = e.currentTarget;
+            const id = el.dataset.id;
+            const item = sortItems.find(i => i.id === id);
+            if (!item || item.placed) return;
+            startDrag(el, touch.clientX, touch.clientY);
+            document.addEventListener('touchmove', onTouchMove, { passive: false });
+            document.addEventListener('touchend', onTouchEnd, { passive: false });
+        }
+
+        function onTouchMove(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            moveDrag(touch.clientX, touch.clientY);
+        }
+
+        function onTouchEnd(e) {
+            document.removeEventListener('touchmove', onTouchMove);
+            document.removeEventListener('touchend', onTouchEnd);
+            const touch = e.changedTouches[0];
+            endDrag(touch.clientX, touch.clientY);
+        }
+
+        // ---- 拖拽核心 ----
+        let ghostEl = null;
+        let dragItemId = null;
+        let dragOffsetX = 0,
+            dragOffsetY = 0;
+
+        function startDrag(el, clientX, clientY) {
+            const rect = el.getBoundingClientRect();
+            dragOffsetX = clientX - rect.left;
+            dragOffsetY = clientY - rect.top;
+            dragItemId = el.dataset.id;
+            ghostEl = document.createElement('div');
+            ghostEl.className = 'drag-ghost';
+            ghostEl.innerHTML = el.innerHTML;
+            ghostEl.style.left = (clientX - dragOffsetX) + 'px';
+            ghostEl.style.top = (clientY - dragOffsetY) + 'px';
+            document.body.appendChild(ghostEl);
+            el.classList.add('dragging');
+            document.querySelectorAll('.sort-bin').forEach(b => b.classList.add('drag-over'));
+        }
+
+        function moveDrag(clientX, clientY) {
+            if (ghostEl) {
+                ghostEl.style.left = (clientX - dragOffsetX) + 'px';
+                ghostEl.style.top = (clientY - dragOffsetY) + 'px';
+            }
+            document.querySelectorAll('.sort-bin').forEach(b => {
+                const rect = b.getBoundingClientRect();
+                if (clientX >= rect.left && clientX <= rect.right &&
+                    clientY >= rect.top && clientY <= rect.bottom) {
+                    b.classList.add('drag-over');
+                } else {
+                    b.classList.remove('drag-over');
+                }
+            });
+        }
+
+        function endDrag(clientX, clientY) {
+            if (ghostEl) {
+                ghostEl.remove();
+                ghostEl = null;
+            }
+            document.querySelectorAll('.sort-bin').forEach(b => b.classList.remove('drag-over'));
+            let targetBin = null;
+            document.querySelectorAll('.sort-bin').forEach(b => {
+                const rect = b.getBoundingClientRect();
+                if (clientX >= rect.left && clientX <= rect.right &&
+                    clientY >= rect.top && clientY <= rect.bottom) {
+                    targetBin = b;
+                }
+            });
+            document.querySelectorAll('.sort-item.dragging').forEach(el => el.classList.remove('dragging'));
+
+            if (targetBin && dragItemId) {
+                const category = targetBin.dataset.category;
+                const item = sortItems.find(i => i.id === dragItemId);
+                if (item && !item.placed) {
+                    const correct = (item.category === category);
+                    if (correct) {
+                        item.placed = true;
+                        item.placedIn = category;
+                        targetBin.classList.add('correct-highlight');
+                        setTimeout(() => targetBin.classList.remove('correct-highlight'), 500);
+                        document.getElementById('sortFeedback').textContent = `✅ 正确！外角 ${item.label} 对应内角和 ${getCategoryLabel(category)}`;
+                        document.getElementById('sortFeedback').style.color = '#16a34a';
+                    } else {
+                        targetBin.classList.add('wrong-highlight');
+                        setTimeout(() => targetBin.classList.remove('wrong-highlight'), 500);
+                        document.getElementById('sortFeedback').textContent = `❌ 再想想！外角 ${item.label} 不属于 ${getCategoryLabel(category)}`;
+                        document.getElementById('sortFeedback').style.color = '#b91c1c';
+                    }
+                    renderSort();
+                    checkAllPlaced();
+                }
+            }
+            dragItemId = null;
+        }
+
+        function getCategoryLabel(cat) {
+            const map = {
+                pair1: '∠A=40°, ∠B=70° → 110°',
+                pair2: '∠A=30°, ∠B=50° → 80°',
+                pair3: '∠A=55°, ∠B=65° → 120°',
+                pair4: '∠A=80°, ∠B=40° → 120°'
+            };
+            return map[cat] || cat;
+        }
+
+        function checkAllPlaced() {
+            const allPlaced = sortItems.every(item => item.placed);
+            if (allPlaced) {
+                document.getElementById('sortFeedback').textContent = '🎉 所有外角已分类！点击“检查答案”查看正确率。';
+                document.getElementById('sortFeedback').style.color = '#2563eb';
+            }
+        }
+
+        function checkSort() {
+            const total = sortItems.length;
+            let correct = 0;
+            sortItems.forEach(item => {
+                if (item.placed && item.category === item.placedIn) correct++;
+            });
+            document.getElementById('sortFeedback').textContent = `📊 正确率：${correct} / ${total}  (${Math.round(correct/total*100)}%)`;
+            document.getElementById('sortFeedback').style.color = '#1f3a5f';
+            document.querySelectorAll('.sort-bin').forEach(bin => {
+                bin.classList.remove('correct-highlight', 'wrong-highlight');
+                const cat = bin.dataset.category;
+                const itemsInBin = sortItems.filter(item => item.placed && item.placedIn === cat);
+                let allCorrect = itemsInBin.every(item => item.category === cat);
+                if (itemsInBin.length > 0 && allCorrect) {
+                    bin.classList.add('correct-highlight');
+                } else if (itemsInBin.length > 0) {
+                    bin.classList.add('wrong-highlight');
+                }
+            });
+        }
+
+        function resetSort() {
+            buildSort();
+        }
+
+        // =============================================================
+        // 3. 导航
+        // =============================================================
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // =============================================================
+        // 4. 初始化
+        // =============================================================
+        buildMemory();
+        buildSort();
+        console.log('📐 三角形的外角 课程已加载！');
+    </script>
+</body>
+</html>

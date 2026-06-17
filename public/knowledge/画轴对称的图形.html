@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>画轴对称的图形 · 初二数学预习</title>
+    <style>
+        /* ===== 全局重置 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', system-ui, sans-serif;
+            background: #f5f9fe;
+            color: #1e293b;
+            padding: 1rem;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 60px rgba(0, 20, 40, 0.06);
+            padding: 1.8rem 2rem 2.8rem;
+            transition: 0.2s;
+        }
+        @media (max-width: 640px) {
+            .container {
+                padding: 1rem 1rem 2rem;
+                border-radius: 20px;
+            }
+        }
+
+        /* ===== 头部 ===== */
+        .page-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 3px solid #e6f0fa;
+            padding-bottom: 0.8rem;
+            margin-bottom: 1.6rem;
+        }
+        .page-header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1a4b8c, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .page-header h1 small {
+            font-size: 0.9rem;
+            font-weight: 400;
+            -webkit-text-fill-color: #5f7d9c;
+            color: #5f7d9c;
+            background: none;
+        }
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem 0.5rem;
+        }
+        .nav-links a {
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            background: #f1f5f9;
+            color: #2c3e50;
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: 0.2s;
+            border: 1px solid transparent;
+        }
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: #2563eb;
+            color: #fff;
+            border-color: #2563eb;
+        }
+        @media (max-width: 600px) {
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.4rem;
+            }
+            .page-header h1 {
+                font-size: 1.4rem;
+            }
+            .nav-links a {
+                font-size: 0.65rem;
+                padding: 0.1rem 0.6rem;
+            }
+        }
+
+        /* ===== 主布局 ===== */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 1.8rem;
+            align-items: start;
+        }
+        @media (max-width: 920px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        /* ===== 卡片 ===== */
+        .card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 1rem 1.2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+            border: 1px solid #edf2f7;
+            margin-bottom: 1rem;
+            transition: 0.2s;
+        }
+        .card-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #0b2b4a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 0.5rem;
+            border-left: 5px solid #3b82f6;
+            padding-left: 12px;
+        }
+        .card-title .badge {
+            font-size: 0.6rem;
+            background: #dbeafe;
+            color: #1e4b8a;
+            padding: 0.05rem 0.7rem;
+            border-radius: 40px;
+            font-weight: 500;
+        }
+
+        /* ===== 图形展示 ===== */
+        .tri-flex {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem 0.8rem;
+            padding: 0.2rem 0;
+        }
+        .tri-item {
+            text-align: center;
+            background: #fafcff;
+            border-radius: 14px;
+            padding: 0.3rem 0.5rem 0.2rem;
+            border: 1px solid #e9edf4;
+            min-width: 60px;
+            transition: 0.2s;
+        }
+        .tri-item:hover {
+            border-color: #b3cef0;
+        }
+        .tri-item svg {
+            display: block;
+            margin: 0 auto;
+            width: 64px;
+            height: 46px;
+        }
+        .tri-item .label {
+            font-size: 0.62rem;
+            font-weight: 600;
+            color: #1f3a5f;
+            margin-top: 1px;
+        }
+
+        .formula-box {
+            background: #f0f7fe;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border-left: 4px solid #3b82f6;
+            margin: 0.3rem 0;
+            font-size: 0.85rem;
+        }
+        .tip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 0.5rem;
+        }
+        .tip-item {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 0.4rem 0.7rem;
+            border: 1px solid #e2eaf2;
+            font-size: 0.76rem;
+        }
+        .tip-item strong {
+            color: #1e4b8a;
+        }
+
+        .example-box {
+            background: #fcf9f0;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border-left: 4px solid #eab308;
+            margin: 0.3rem 0;
+            font-size: 0.85rem;
+        }
+        .example-box .ex-title {
+            font-weight: 700;
+            color: #8a6d1b;
+        }
+        .error-box {
+            background: #fef2f2;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border-left: 4px solid #ef4444;
+            margin: 0.3rem 0;
+            font-size: 0.85rem;
+        }
+        .error-box .err-title {
+            font-weight: 700;
+            color: #b91c1c;
+        }
+        .highlight {
+            background: #fef9e7;
+            padding: 0.05rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .tag {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e4b8a;
+            padding: 0.05rem 0.6rem;
+            border-radius: 40px;
+            font-size: 0.65rem;
+            font-weight: 500;
+        }
+
+        /* ===== 游戏区 ===== */
+        .game-area {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .game-card {
+            background: #fafcff;
+            border-radius: 18px;
+            padding: 0.8rem 1rem 1rem;
+            border: 1px solid #e2ecf9;
+        }
+        .game-card .game-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #0b2b4a;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 0.3rem;
+        }
+        .game-card .game-title .g-badge {
+            font-size: 0.55rem;
+            background: #dbeafe;
+            padding: 0.05rem 0.6rem;
+            border-radius: 40px;
+            font-weight: 500;
+            color: #1e4b8a;
+        }
+        .game-card .game-desc {
+            font-size: 0.75rem;
+            color: #4a617c;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ===== 游戏1：对称点坐标匹配（连连看风格） ===== */
+        .match-area {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+        .match-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: stretch;
+            gap: 0.3rem 0.6rem;
+        }
+        .match-col {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            flex: 1;
+            min-width: 90px;
+        }
+        .match-col-title {
+            font-size: 0.68rem;
+            font-weight: 600;
+            color: #4a617c;
+            text-align: center;
+            padding: 0.1rem 0;
+            border-bottom: 2px solid #e2ecf9;
+        }
+        .match-item {
+            background: #ffffff;
+            border: 2px solid #dbeafe;
+            border-radius: 12px;
+            padding: 0.3rem 0.5rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: grab;
+            transition: 0.2s;
+            user-select: none;
+            text-align: center;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+            touch-action: none;
+            gap: 4px;
+        }
+        .match-item .coord-badge {
+            display: inline-block;
+            background: #e6f0fa;
+            padding: 0.05rem 0.5rem;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: #1e4b8a;
+        }
+        .match-item.dragging {
+            opacity: 0.5;
+            transform: scale(0.95);
+        }
+        .match-item.drop-target {
+            border-color: #3b82f6;
+            background: #e5effa;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+        .match-item.matched {
+            border-color: #22c55e;
+            background: #e8f8ee;
+            opacity: 0.8;
+            cursor: default;
+            pointer-events: none;
+            transform: scale(0.96);
+        }
+        .match-item.wrong {
+            border-color: #ef4444;
+            background: #fde8e8;
+            animation: shake 0.4s ease;
+        }
+        .match-arrow {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            font-weight: 300;
+            display: flex;
+            align-items: center;
+            padding: 0 0.2rem;
+        }
+        @keyframes shake {
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-6px);
+            }
+            75% {
+                transform: translateX(6px);
+            }
+        }
+        .match-feedback {
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.78rem;
+            min-height: 22px;
+            margin-top: 0.2rem;
+        }
+        .btn-reset {
+            background: #eef4fa;
+            border: none;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.7rem;
+            margin: 2px 3px;
+        }
+        .btn-reset:hover {
+            background: #dbeafe;
+        }
+        .btn-check {
+            background: #dbeafe;
+            border: none;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.7rem;
+            margin: 2px 3px;
+        }
+        .btn-check:hover {
+            background: #b7d6f7;
+        }
+        @media (max-width: 480px) {
+            .match-item {
+                font-size: 0.6rem;
+                padding: 0.2rem 0.3rem;
+                min-height: 32px;
+            }
+            .match-col {
+                min-width: 60px;
+            }
+            .match-item .coord-badge {
+                font-size: 0.55rem;
+                padding: 0.02rem 0.3rem;
+            }
+        }
+
+        /* ===== 游戏2：拖拽拼图 - 画对称点 ===== */
+        .puzzle-area {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+        .puzzle-canvas {
+            position: relative;
+            background: #f8faff;
+            border-radius: 14px;
+            border: 2px solid #e2ecf9;
+            padding: 0.6rem;
+            min-height: 180px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            touch-action: none;
+        }
+        .puzzle-canvas svg {
+            width: 100%;
+            height: auto;
+            max-height: 180px;
+            display: block;
+        }
+        .puzzle-droppable {
+            fill: rgba(59, 130, 246, 0.08);
+            stroke: #3b82f6;
+            stroke-width: 2;
+            stroke-dasharray: 6, 4;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .puzzle-droppable.drag-over {
+            fill: rgba(59, 130, 246, 0.25);
+            stroke: #2563eb;
+            stroke-width: 3;
+        }
+        .puzzle-droppable.correct {
+            fill: rgba(34, 197, 94, 0.2);
+            stroke: #22c55e;
+            stroke-width: 3;
+        }
+        .puzzle-droppable.wrong {
+            fill: rgba(239, 68, 68, 0.2);
+            stroke: #ef4444;
+            stroke-width: 3;
+            animation: shake 0.4s ease;
+        }
+        .puzzle-draggable {
+            cursor: grab;
+            transition: 0.15s;
+            touch-action: none;
+        }
+        .puzzle-draggable.dragging {
+            opacity: 0.6;
+            transform: scale(0.92);
+        }
+        .puzzle-draggable.placed {
+            opacity: 0.9;
+            pointer-events: none;
+        }
+        .puzzle-pool {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            padding: 0.4rem 0;
+            background: #f8fafc;
+            border-radius: 14px;
+            min-height: 44px;
+            border: 1px solid #e2eaf2;
+        }
+        .puzzle-pool .puzzle-draggable {
+            cursor: grab;
+        }
+        .puzzle-item {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 3px 10px;
+            border: 2px solid #dbeafe;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #1f3a5f;
+            user-select: none;
+            touch-action: none;
+            min-width: 40px;
+        }
+        .puzzle-item .puzzle-label {
+            font-size: 0.6rem;
+            color: #4a617c;
+            font-weight: 400;
+        }
+        .puzzle-item.dragging {
+            opacity: 0.5;
+            transform: scale(0.92);
+        }
+        .puzzle-item.placed {
+            opacity: 0.7;
+            pointer-events: none;
+            border-color: #94a3b8;
+            transform: scale(0.96);
+        }
+        .puzzle-feedback {
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.78rem;
+            min-height: 22px;
+            margin-top: 2px;
+        }
+        @media (max-width: 480px) {
+            .puzzle-canvas {
+                min-height: 140px;
+                padding: 0.3rem;
+            }
+            .puzzle-canvas svg {
+                max-height: 140px;
+            }
+            .puzzle-item {
+                font-size: 0.6rem;
+                padding: 2px 6px;
+                min-width: 32px;
+            }
+        }
+
+        /* ===== 复习题 ===== */
+        .quiz-item {
+            background: #fafcff;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border: 1px solid #e9eff6;
+            margin-bottom: 0.5rem;
+        }
+        .quiz-item .q {
+            font-weight: 600;
+            color: #0b2b4a;
+            font-size: 0.86rem;
+        }
+        .quiz-item .a {
+            color: #1f4b7a;
+            margin-top: 2px;
+            padding-left: 0.6rem;
+            border-left: 3px solid #b3cef0;
+            font-size: 0.82rem;
+        }
+        .quiz-item .a .highlight {
+            background: #fef9e7;
+            padding: 0.05rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .quiz-item .answer-btn {
+            background: #eef4fa;
+            border: none;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.7rem;
+            margin-top: 4px;
+        }
+        .quiz-item .answer-btn:hover {
+            background: #dbeafe;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #8ba0b8;
+            border-top: 1px solid #e9eff6;
+            padding-top: 0.8rem;
+            margin-top: 1rem;
+        }
+        @media (max-width: 480px) {
+            .card {
+                padding: 0.7rem;
+            }
+            .card-title {
+                font-size: 0.95rem;
+            }
+            .formula-box {
+                font-size: 0.76rem;
+                padding: 0.4rem 0.7rem;
+            }
+            .tri-item svg {
+                width: 50px;
+                height: 38px;
+            }
+        }
+
+        .drag-ghost {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.9;
+            transform: scale(1.05);
+            background: #ffffff;
+            border-radius: 12px;
+            border: 2px solid #2563eb;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+            padding: 4px 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #0b2b4a;
+        }
+        .drag-ghost svg {
+            width: 28px;
+            height: 22px;
+        }
+        .axis-line {
+            stroke-dasharray: 5, 4;
+            stroke: #dc2626;
+            stroke-width: 2;
+        }
+        .axis-label {
+            fill: #dc2626;
+            font-size: 8px;
+            font-weight: 600;
+        }
+        .coord-text {
+            font-size: 8px;
+            font-weight: 600;
+            fill: #1f3a5f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- ===== 头部 ===== -->
+        <header class="page-header">
+            <h1>
+                📐 画轴对称的图形
+                <small>八年级 · 上册</small>
+            </h1>
+            <div class="nav-links">
+                <a href="#concept">核心概念</a>
+                <a href="#formula">锦囊</a>
+                <a href="#examples">举例</a>
+                <a href="#errors">易错</a>
+                <a href="#games">🎮 游戏</a>
+                <a href="#quiz">复习</a>
+            </div>
+        </header>
+
+        <!-- ============================================================ -->
+        <div class="main-grid">
+
+            <!-- ===== 左侧：知识点 ===== -->
+            <div class="knowledge-area">
+
+                <!-- 核心概念 -->
+                <div class="card" id="concept">
+                    <div class="card-title">
+                        🔍 核心概念大解析
+                        <span class="badge">作图 · 坐标对称</span>
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; align-items:start;">
+                        <div>
+                            <div style="background:#f0f7fe; border-radius:10px; padding:0.3rem 0.6rem; margin-bottom:0.3rem;">
+                                <strong style="color:#1e4b8a; font-size:0.82rem;">📌 画对称点的方法</strong>
+                                <p style="font-size:0.78rem; margin:0;">过点作对称轴的<strong>垂线</strong>，垂足为O，<br>在垂线上截取 <strong>OA' = OA</strong>，A'即为对称点。</p>
+                            </div>
+                            <div style="background:#f0f7fe; border-radius:10px; padding:0.3rem 0.6rem; margin-bottom:0.3rem;">
+                                <strong style="color:#1e4b8a; font-size:0.82rem;">📌 画对称图形</strong>
+                                <p style="font-size:0.78rem; margin:0;">画出图形中<strong>关键点</strong>（如顶点）的对称点，<br>再<strong>连接</strong>这些对称点即可。</p>
+                            </div>
+                            <div style="background:#f0f7fe; border-radius:10px; padding:0.3rem 0.6rem;">
+                                <strong style="color:#1e4b8a; font-size:0.82rem;">📌 坐标对称规律</strong>
+                                <p style="font-size:0.78rem; margin:0;">关于x轴对称：<strong>(x,y)→(x,-y)</strong><br>关于y轴对称：<strong>(x,y)→(-x,y)</strong></p>
+                            </div>
+                        </div>
+                        <div class="tri-flex" style="gap:0.2rem; padding:0;">
+                            <div class="tri-item">
+                                <svg viewBox="0 0 64 46"><line x1="8" y1="40" x2="56" y2="4" stroke="#dc2626" stroke-width="2" stroke-dasharray="5,4"/><circle cx="20" cy="18" r="3" fill="#2563eb"/><line x1="20" y1="18" x2="32" y2="24" stroke="#8b5cf6" stroke-width="1.5"/><circle cx="32" cy="24" r="2.5" fill="none" stroke="#8b5cf6" stroke-width="1.5"/><text x="26" y="26" font-size="6" fill="#8b5cf6">O</text><text x="36" y="24" font-size="6" fill="#2563eb">A'</text><text x="12" y="16" font-size="6" fill="#2563eb">A</text></svg>
+                                <div class="label">作对称点</div>
+                            </div>
+                            <div class="tri-item">
+                                <svg viewBox="0 0 64 46"><line x1="8" y1="40" x2="56" y2="4" stroke="#dc2626" stroke-width="2" stroke-dasharray="5,4"/><polygon points="28,10 12,38 44,38" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><polygon points="42,10 26,38 58,38" fill="none" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="3,3"/><text x="18" y="34" font-size="6" fill="#1f3a5f">△</text><text x="44" y="34" font-size="6" fill="#1f3a5f">△'</text></svg>
+                                <div class="label">画对称图形</div>
+                            </div>
+                            <div class="tri-item">
+                                <svg viewBox="0 0 64 46"><line x1="32" y1="2" x2="32" y2="44" stroke="#dc2626" stroke-width="2" stroke-dasharray="5,4"/><circle cx="20" cy="12" r="3" fill="#2563eb"/><circle cx="44" cy="12" r="3" fill="#22c55e"/><text x="12" y="10" font-size="6" fill="#2563eb">(2,3)</text><text x="36" y="10" font-size="6" fill="#22c55e">(-2,3)</text></svg>
+                                <div class="label">坐标对称</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top:0.3rem; background:#f8faff; border-radius:12px; padding:0.3rem 0.7rem; border:1px solid #e2ecf9; font-size:0.75rem; display:flex; flex-wrap:wrap; gap:0.1rem 0.6rem;">
+                        <span>🔹 关键点 → <strong>对称点</strong></span>
+                        <span>🔹 关于x轴：<strong>y变号</strong></span>
+                        <span>🔹 关于y轴：<strong>x变号</strong></span>
+                    </div>
+                </div>
+
+                <!-- 锦囊 -->
+                <div class="card" id="formula">
+                    <div class="card-title">
+                        🧠 数学锦囊 · 公式
+                        <span class="badge">规律 · 步骤</span>
+                    </div>
+                    <div class="tip-grid">
+                        <div class="tip-item"><strong>关于x轴对称</strong><br>(x, y) → (x, −y)<br><span class="sub">横坐标不变，纵坐标相反</span></div>
+                        <div class="tip-item"><strong>关于y轴对称</strong><br>(x, y) → (−x, y)<br><span class="sub">纵坐标不变，横坐标相反</span></div>
+                        <div class="tip-item"><strong>作图步骤</strong><br>① 找关键点<br>② 作对称点<br>③ 连线成图</div>
+                        <div class="tip-item"><strong>对称性质</strong><br>对称点连线被对称轴<strong>垂直平分</strong></div>
+                    </div>
+                    <div class="formula-box" style="margin-top:0.3rem;">
+                        💡 <strong>口诀：</strong>关于x轴，y变号；关于y轴，x变号；关键点，对称连。
+                    </div>
+                </div>
+
+                <!-- 举例 -->
+                <div class="card" id="examples">
+                    <div class="card-title">
+                        ✏️ 典型举例
+                        <span class="badge">图形结合</span>
+                    </div>
+                    <div class="example-box">
+                        <div class="ex-title">例1 已知△ABC，画出关于直线l对称的△A'B'C'。</div>
+                        <p style="margin-top:2px; font-size:0.82rem;"><strong>解：</strong>分别作A、B、C关于l的对称点A'、B'、C'，<br>连接A'B'、B'C'、C'A'，△A'B'C'即为所求。</p>
+                        <svg viewBox="0 0 120 48" width="100" height="40" style="margin-top:2px;"><line x1="60" y1="4" x2="60" y2="44" stroke="#dc2626" stroke-width="2" stroke-dasharray="5,4"/><polygon points="30,8 12,42 48,42" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><text x="22" y="22" font-size="8" fill="#1f3a5f">A</text><text x="10" y="40" font-size="8" fill="#1f3a5f">B</text><text x="40" y="40" font-size="8" fill="#1f3a5f">C</text><polygon points="78,8 60,42 96,42" fill="none" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="3,3"/><text x="70" y="22" font-size="8" fill="#1f3a5f">A'</text><text x="58" y="40" font-size="8" fill="#1f3a5f">B'</text><text x="88" y="40" font-size="8" fill="#1f3a5f">C'</text></svg>
+                    </div>
+                    <div class="example-box" style="border-left-color:#8b5cf6;">
+                        <div class="ex-title">例2 点A(3,-2)关于x轴对称的点的坐标是？</div>
+                        <p style="margin-top:2px; font-size:0.82rem;"><strong>解：</strong>关于x轴对称 → y变号<br>∴ A' = <span class="highlight">(3, 2)</span></p>
+                        <svg viewBox="0 0 120 48" width="100" height="40" style="margin-top:2px;"><line x1="10" y1="24" x2="110" y2="24" stroke="#94a3b8" stroke-width="1"/><line x1="60" y1="4" x2="60" y2="44" stroke="#94a3b8" stroke-width="1"/><circle cx="80" cy="16" r="4" fill="#2563eb"/><text x="72" y="14" font-size="8" fill="#2563eb">A(3,-2)</text><circle cx="80" cy="32" r="4" fill="#22c55e"/><text x="72" y="34" font-size="8" fill="#22c55e">A'(3,2)</text><text x="58" y="26" font-size="7" fill="#dc2626">x轴</text></svg>
+                    </div>
+                </div>
+
+                <!-- 易错 -->
+                <div class="card" id="errors">
+                    <div class="card-title">
+                        ⚠️ 易错题型
+                        <span class="badge">避坑指南</span>
+                    </div>
+                    <div class="error-box">
+                        <div class="err-title">❌ 易错1：混淆x轴和y轴对称规律</div>
+                        <p style="font-size:0.82rem;">关于x轴：<span style="color:#b91c1c;">横坐标不变，纵坐标变号</span><br>关于y轴：<span style="color:#b91c1c;">纵坐标不变，横坐标变号</span></p>
+                        <svg viewBox="0 0 120 30" width="100" height="26" style="margin-top:2px;"><text x="4" y="12" font-size="7" fill="#b91c1c">(x,y)→(x,-y)</text><text x="60" y="12" font-size="7" fill="#2563eb">x轴对称</text><text x="4" y="24" font-size="7" fill="#b91c1c">(x,y)→(-x,y)</text><text x="60" y="24" font-size="7" fill="#2563eb">y轴对称</text></svg>
+                    </div>
+                    <div class="error-box" style="border-left-color:#eab308;">
+                        <div class="err-title">❌ 易错2：作图时只画一个关键点</div>
+                        <p style="font-size:0.82rem;">画对称图形需要画出<strong>所有关键点</strong>的对称点，<br>再连线。只画一个点无法确定图形。</p>
+                        <svg viewBox="0 0 120 30" width="100" height="26" style="margin-top:2px;"><text x="4" y="12" font-size="7" fill="#b91c1c">✗ 只画一个对称点</text><text x="60" y="12" font-size="7" fill="#22c55e">✓ 画所有关键点</text></svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== 右侧：游戏 ===== -->
+            <div class="game-area" id="games">
+
+                <!-- 游戏1：坐标对称连连看 -->
+                <div class="game-card">
+                    <div class="game-title">
+                        🔗 坐标对称连连看
+                        <span class="g-badge">拖拽配对</span>
+                    </div>
+                    <div class="game-desc">将左侧的 <strong>原始点</strong> 拖拽到右侧对应的 <strong>对称点</strong> 位置。</div>
+                    <div class="match-area">
+                        <div class="match-row" id="matchRow">
+                            <div class="match-col" id="matchLeft">
+                                <div class="match-col-title">🔵 原始点</div>
+                            </div>
+                            <div class="match-arrow">⟷</div>
+                            <div class="match-col" id="matchRight">
+                                <div class="match-col-title">🟢 对称点</div>
+                            </div>
+                        </div>
+                        <div class="match-feedback" id="matchFeedback">💡 拖拽左侧卡片到右侧匹配</div>
+                        <div style="display:flex; justify-content:center; gap:0.3rem; flex-wrap:wrap;">
+                            <button class="btn-reset" onclick="resetMatch()">🔄 重新配对</button>
+                            <button class="btn-check" onclick="checkMatch()">✅ 检查答案</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 游戏2：拼图 - 画对称点 -->
+                <div class="game-card">
+                    <div class="game-title">
+                        🧩 拼图 · 画对称点
+                        <span class="g-badge">拖拽放置</span>
+                    </div>
+                    <div class="game-desc">将下方的 <strong>对称点</strong> 拖拽到图形中对应的 <strong>虚线圆</strong> 位置。</div>
+                    <div class="puzzle-area">
+                        <div class="puzzle-canvas" id="puzzleCanvas">
+                            <svg viewBox="0 0 240 160" id="puzzleSvg">
+                                <!-- 坐标轴 -->
+                                <line x1="20" y1="140" x2="220" y2="140" stroke="#94a3b8" stroke-width="1.5"/>
+                                <line x1="120" y1="20" x2="120" y2="140" stroke="#94a3b8" stroke-width="1.5"/>
+                                <!-- 对称轴 (y轴) -->
+                                <line x1="120" y1="20" x2="120" y2="140" stroke="#dc2626" stroke-width="2.5" stroke-dasharray="6,5"/>
+                                <text x="122" y="18" font-size="9" fill="#dc2626" font-weight="600">对称轴</text>
+                                <!-- 原始三角形 -->
+                                <polygon points="60,40 30,120 100,120" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+                                <text x="52" y="50" font-size="9" fill="#1f3a5f" font-weight="600">A</text>
+                                <text x="22" y="118" font-size="9" fill="#1f3a5f" font-weight="600">B</text>
+                                <text x="92" y="118" font-size="9" fill="#1f3a5f" font-weight="600">C</text>
+                                <!-- 虚线目标圆 (对称点位置) -->
+                                <circle cx="180" cy="40" r="12" fill="rgba(59,130,246,0.1)" stroke="#3b82f6" stroke-width="2" stroke-dasharray="5,4" class="puzzle-droppable" data-target="A'"/>
+                                <text x="176" y="36" font-size="8" fill="#3b82f6" font-weight="600">A'</text>
+                                <circle cx="210" cy="120" r="12" fill="rgba(59,130,246,0.1)" stroke="#3b82f6" stroke-width="2" stroke-dasharray="5,4" class="puzzle-droppable" data-target="B'"/>
+                                <text x="206" y="116" font-size="8" fill="#3b82f6" font-weight="600">B'</text>
+                                <circle cx="140" cy="120" r="12" fill="rgba(59,130,246,0.1)" stroke="#3b82f6" stroke-width="2" stroke-dasharray="5,4" class="puzzle-droppable" data-target="C'"/>
+                                <text x="136" y="116" font-size="8" fill="#3b82f6" font-weight="600">C'</text>
+                            </svg>
+                        </div>
+                        <div class="puzzle-pool" id="puzzlePool"></div>
+                        <div class="puzzle-feedback" id="puzzleFeedback">💡 拖拽下方标签到对应的虚线圆位置</div>
+                        <div style="display:flex; justify-content:center; gap:0.3rem; flex-wrap:wrap;">
+                            <button class="btn-reset" onclick="resetPuzzle()">🔄 重新开始</button>
+                            <button class="btn-check" onclick="checkPuzzle()">✅ 检查答案</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 复习巩固题 -->
+        <section id="quiz" style="margin-top:1.2rem;">
+            <div class="card">
+                <div class="card-title">
+                    📝 复习巩固题
+                    <span class="badge">小测验</span>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="q">1. 点P(4, -5)关于y轴对称的点的坐标是？</div>
+                    <button class="answer-btn" onclick="toggleAnswer('ans1')">显示答案</button>
+                    <div class="a" id="ans1" style="display:none;">关于y轴对称 → x变号，y不变<br>∴ P' = <span class="highlight">(-4, -5)</span></div>
+                    <svg viewBox="0 0 120 44" width="100" height="38" style="margin-top:4px;"><line x1="10" y1="22" x2="110" y2="22" stroke="#94a3b8" stroke-width="1"/><line x1="60" y1="4" x2="60" y2="40" stroke="#94a3b8" stroke-width="1"/><line x1="60" y1="4" x2="60" y2="40" stroke="#dc2626" stroke-width="2" stroke-dasharray="5,4"/><circle cx="80" cy="16" r="4" fill="#2563eb"/><text x="72" y="14" font-size="8" fill="#2563eb">P(4,-5)</text><circle cx="40" cy="16" r="4" fill="#22c55e"/><text x="30" y="14" font-size="8" fill="#22c55e">P'(-4,-5)</text><text x="58" y="26" font-size="7" fill="#dc2626">y轴</text></svg>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="q">2. 如图，△ABC关于直线l对称，A的对称点为A'，已知A(2,3)，A'的坐标为(-2,3)，求对称轴的位置。</div>
+                    <button class="answer-btn" onclick="toggleAnswer('ans2')">显示答案</button>
+                    <div class="a" id="ans2" style="display:none;">∵ A(2,3) 和 A'(-2,3) 关于对称轴对称<br>对称轴垂直平分AA'，AA'∥x轴<br>∴ 对称轴为 <span class="highlight">y轴 (x=0)</span></div>
+                    <svg viewBox="0 0 120 44" width="100" height="38" style="margin-top:4px;"><line x1="10" y1="22" x2="110" y2="22" stroke="#94a3b8" stroke-width="1"/><line x1="60" y1="4" x2="60" y2="40" stroke="#94a3b8" stroke-width="1"/><line x1="60" y1="4" x2="60" y2="40" stroke="#dc2626" stroke-width="2.5" stroke-dasharray="5,4"/><circle cx="80" cy="14" r="4" fill="#2563eb"/><text x="72" y="12" font-size="8" fill="#2563eb">A(2,3)</text><circle cx="40" cy="14" r="4" fill="#22c55e"/><text x="30" y="12" font-size="8" fill="#22c55e">A'(-2,3)</text></svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 底部 ===== -->
+        <div class="footer">
+            📚 八年级数学 · 画轴对称的图形 &nbsp;|&nbsp; 预习课程 · 互动学习
+        </div>
+
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- JavaScript -->
+    <script>
+        // =============================================================
+        // 工具函数
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+        }
+
+        // =============================================================
+        // 游戏1：坐标对称连连看 (拖拽匹配)
+        // =============================================================
+        const matchData = [{
+            id: 'm1',
+            pairId: 0,
+            leftLabel: '(2, 3)',
+            rightLabel: '(2, -3)',
+            leftSvg: '',
+            rightSvg: ''
+        }, {
+            id: 'm2',
+            pairId: 1,
+            leftLabel: '(-4, 5)',
+            rightLabel: '(-4, -5)',
+            leftSvg: '',
+            rightSvg: ''
+        }, {
+            id: 'm3',
+            pairId: 2,
+            leftLabel: '(1, -2)',
+            rightLabel: '(-1, -2)',
+            leftSvg: '',
+            rightSvg: ''
+        }, {
+            id: 'm4',
+            pairId: 3,
+            leftLabel: '(-3, -4)',
+            rightLabel: '(-3, 4)',
+            leftSvg: '',
+            rightSvg: ''
+        }];
+
+        // 补充显示: 关于x轴还是y轴
+        const matchHints = {
+            0: '关于x轴',
+            1: '关于x轴',
+            2: '关于y轴',
+            3: '关于x轴'
+        };
+
+        let matchState = {};
+        let matchGhost = null;
+        let matchDragEl = null;
+        let matchDragId = null;
+        let matchDragOffsetX = 0,
+            matchDragOffsetY = 0;
+        let matchPairs = 0;
+
+        function buildMatch() {
+            const leftCol = document.getElementById('matchLeft');
+            const rightCol = document.getElementById('matchRight');
+            leftCol.innerHTML = '<div class="match-col-title">🔵 原始点</div>';
+            rightCol.innerHTML = '<div class="match-col-title">🟢 对称点</div>';
+
+            matchState = {};
+            matchPairs = 0;
+            matchDragId = null;
+
+            const leftItems = [...matchData];
+            const rightItems = [...matchData];
+            shuffleArray(leftItems);
+            shuffleArray(rightItems);
+
+            leftItems.forEach((item, idx) => {
+                const div = document.createElement('div');
+                div.className = 'match-item';
+                div.dataset.id = item.id;
+                div.dataset.pairId = item.pairId;
+                div.dataset.type = 'left';
+                div.innerHTML =
+                    `<span class="coord-badge">${item.leftLabel}</span> <span style="font-size:0.55rem;color:#6b7f96;">${matchHints[item.pairId]||''}</span>`;
+                div.draggable = false;
+                div.addEventListener('mousedown', (e) => onMatchItemMouseDown(e, div, item.id));
+                div.addEventListener('touchstart', (e) => onMatchItemTouchStart(e, div, item.id), { passive: false });
+                leftCol.appendChild(div);
+                matchState[item.id] = { left: div, right: null, matched: false, pairId: item.pairId };
+            });
+
+            rightItems.forEach((item) => {
+                const div = document.createElement('div');
+                div.className = 'match-item';
+                div.dataset.id = item.id;
+                div.dataset.pairId = item.pairId;
+                div.dataset.type = 'right';
+                div.innerHTML = `<span class="coord-badge">${item.rightLabel}</span>`;
+                div.draggable = false;
+                rightCol.appendChild(div);
+                if (matchState[item.id]) {
+                    matchState[item.id].right = div;
+                }
+            });
+
+            document.getElementById('matchFeedback').textContent = '💡 拖拽左侧卡片到右侧匹配';
+            document.getElementById('matchFeedback').style.color = '#1f3a5f';
+            document.querySelectorAll('.match-item').forEach(el => {
+                el.classList.remove('matched', 'wrong', 'drop-target');
+            });
+        }
+
+        // ---- 鼠标拖拽 ----
+        function onMatchItemMouseDown(e, el, id) {
+            if (el.classList.contains('matched')) return;
+            e.preventDefault();
+            const item = matchState[id];
+            if (!item || item.matched) return;
+            matchDragId = id;
+            startMatchDrag(el, e.clientX, e.clientY);
+            document.addEventListener('mousemove', onMatchMouseMove);
+            document.addEventListener('mouseup', onMatchMouseUp);
+        }
+
+        function onMatchMouseMove(e) {
+            e.preventDefault();
+            moveMatchDrag(e.clientX, e.clientY);
+        }
+
+        function onMatchMouseUp(e) {
+            document.removeEventListener('mousemove', onMatchMouseMove);
+            document.removeEventListener('mouseup', onMatchMouseUp);
+            endMatchDrag(e.clientX, e.clientY);
+        }
+
+        // ---- 触摸拖拽 ----
+        function onMatchItemTouchStart(e, el, id) {
+            if (el.classList.contains('matched')) return;
+            e.preventDefault();
+            const touch = e.touches[0];
+            const item = matchState[id];
+            if (!item || item.matched) return;
+            matchDragId = id;
+            startMatchDrag(el, touch.clientX, touch.clientY);
+            document.addEventListener('touchmove', onMatchTouchMove, { passive: false });
+            document.addEventListener('touchend', onMatchTouchEnd, { passive: false });
+        }
+
+        function onMatchTouchMove(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            moveMatchDrag(touch.clientX, touch.clientY);
+        }
+
+        function onMatchTouchEnd(e) {
+            document.removeEventListener('touchmove', onMatchTouchMove);
+            document.removeEventListener('touchend', onMatchTouchEnd);
+            const touch = e.changedTouches[0];
+            endMatchDrag(touch.clientX, touch.clientY);
+        }
+
+        // ---- 拖拽核心 ----
+        function startMatchDrag(el, clientX, clientY) {
+            const rect = el.getBoundingClientRect();
+            matchDragOffsetX = clientX - rect.left;
+            matchDragOffsetY = clientY - rect.top;
+            matchDragEl = el;
+            el.classList.add('dragging');
+            matchGhost = document.createElement('div');
+            matchGhost.className = 'drag-ghost';
+            matchGhost.innerHTML = el.innerHTML;
+            matchGhost.style.left = (clientX - matchDragOffsetX) + 'px';
+            matchGhost.style.top = (clientY - matchDragOffsetY) + 'px';
+            document.body.appendChild(matchGhost);
+            document.querySelectorAll('#matchRight .match-item:not(.matched)').forEach(el => {
+                el.classList.add('drop-target');
+            });
+        }
+
+        function moveMatchDrag(clientX, clientY) {
+            if (matchGhost) {
+                matchGhost.style.left = (clientX - matchDragOffsetX) + 'px';
+                matchGhost.style.top = (clientY - matchDragOffsetY) + 'px';
+            }
+        }
+
+        function endMatchDrag(clientX, clientY) {
+            if (matchGhost) {
+                matchGhost.remove();
+                matchGhost = null;
+            }
+            document.querySelectorAll('#matchRight .match-item').forEach(el => {
+                el.classList.remove('drop-target');
+            });
+            if (matchDragEl) {
+                matchDragEl.classList.remove('dragging');
+            }
+
+            let targetEl = null;
+            document.querySelectorAll('#matchRight .match-item:not(.matched)').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (clientX >= rect.left && clientX <= rect.right &&
+                    clientY >= rect.top && clientY <= rect.bottom) {
+                    targetEl = el;
+                }
+            });
+
+            if (targetEl && matchDragId !== null) {
+                const leftId = matchDragId;
+                const rightId = targetEl.dataset.id;
+                const leftItem = matchState[leftId];
+                const rightItem = matchState[rightId];
+                if (leftItem && rightItem && !leftItem.matched && !rightItem.matched) {
+                    if (leftItem.pairId === rightItem.pairId) {
+                        leftItem.matched = true;
+                        rightItem.matched = true;
+                        leftItem.left.classList.add('matched');
+                        rightItem.right.classList.add('matched');
+                        matchPairs++;
+                        document.getElementById('matchFeedback').textContent =
+                            `✅ 配对成功！${matchData.find(d=>d.id===leftId).leftLabel} ↔ ${matchData.find(d=>d.id===rightId).rightLabel}`;
+                        document.getElementById('matchFeedback').style.color = '#16a34a';
+                        if (matchPairs === matchData.length) {
+                            document.getElementById('matchFeedback').textContent = '🎉 全部配对完成！太棒啦！';
+                            document.getElementById('matchFeedback').style.color = '#2563eb';
+                        }
+                    } else {
+                        targetEl.classList.add('wrong');
+                        setTimeout(() => targetEl.classList.remove('wrong'), 500);
+                        document.getElementById('matchFeedback').textContent =
+                            `❌ 配对错误！请再试试`;
+                        document.getElementById('matchFeedback').style.color = '#b91c1c';
+                    }
+                }
+            }
+            matchDragId = null;
+            matchDragEl = null;
+        }
+
+        function checkMatch() {
+            const total = matchData.length;
+            const matched = Object.values(matchState).filter(s => s.matched).length;
+            document.getElementById('matchFeedback').textContent = `📊 已配对 ${matched} / ${total}`;
+            document.getElementById('matchFeedback').style.color = '#1f3a5f';
+        }
+
+        function resetMatch() {
+            buildMatch();
+        }
+
+        // =============================================================
+        // 游戏2：拼图 - 画对称点 (拖拽放置)
+        // =============================================================
+        const puzzleData = [
+            { id: 'p1', target: "A'", label: "A'", x: 180, y: 40 },
+            { id: 'p2', target: "B'", label: "B'", x: 210, y: 120 },
+            { id: 'p3', target: "C'", label: "C'", x: 140, y: 120 }
+        ];
+
+        let puzzleItems = [];
+        let puzzleGhost = null;
+        let puzzleDragEl = null;
+        let puzzleDragId = null;
+        let puzzleDragOffsetX = 0,
+            puzzleDragOffsetY = 0;
+        let puzzlePlacedCount = 0;
+
+        function buildPuzzle() {
+            puzzleItems = puzzleData.map(item => ({
+                ...item,
+                placed: false,
+                placedIn: null
+            }));
+            puzzlePlacedCount = 0;
+            renderPuzzle();
+            document.getElementById('puzzleFeedback').textContent = '💡 拖拽下方标签到对应的虚线圆位置';
+            document.getElementById('puzzleFeedback').style.color = '#1f3a5f';
+            // 重置所有droppable样式
+            document.querySelectorAll('.puzzle-droppable').forEach(el => {
+                el.classList.remove('correct', 'wrong', 'drag-over');
+            });
+        }
+
+        function renderPuzzle() {
+            const pool = document.getElementById('puzzlePool');
+            pool.innerHTML = '';
+
+            const unplaced = puzzleItems.filter(item => !item.placed);
+            unplaced.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'puzzle-item puzzle-draggable';
+                div.dataset.id = item.id;
+                div.dataset.target = item.target;
+                div.textContent = item.label;
+                div.draggable = false;
+                div.addEventListener('mousedown', (e) => onPuzzleItemMouseDown(e, div, item.id));
+                div.addEventListener('touchstart', (e) => onPuzzleItemTouchStart(e, div, item.id), { passive: false });
+                pool.appendChild(div);
+            });
+
+            // 更新已放置的标签显示
+            document.querySelectorAll('.puzzle-droppable').forEach(el => {
+                const target = el.dataset.target;
+                const placedItem = puzzleItems.find(item => item.placed && item.target === target);
+                // 清除之前添加的文字
+                const existingText = el.parentElement.querySelector(`.placed-label-${target}`);
+                if (existingText) existingText.remove();
+                if (placedItem) {
+                    const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    text.setAttribute('x', parseFloat(el.getAttribute('cx')) - 8);
+                    text.setAttribute('y', parseFloat(el.getAttribute('cy')) + 4);
+                    text.setAttribute('font-size', '11');
+                    text.setAttribute('font-weight', '700');
+                    text.setAttribute('fill', '#22c55e');
+                    text.setAttribute('class', `placed-label-${target}`);
+                    text.textContent = placedItem.label;
+                    el.parentElement.appendChild(text);
+                    el.classList.add('correct');
+                } else {
+                    el.classList.remove('correct');
+                }
+            });
+        }
+
+        // ---- 鼠标拖拽 ----
+        function onPuzzleItemMouseDown(e, el, id) {
+            if (el.classList.contains('placed')) return;
+            e.preventDefault();
+            const item = puzzleItems.find(i => i.id === id);
+            if (!item || item.placed) return;
+            puzzleDragId = id;
+            startPuzzleDrag(el, e.clientX, e.clientY);
+            document.addEventListener('mousemove', onPuzzleMouseMove);
+            document.addEventListener('mouseup', onPuzzleMouseUp);
+        }
+
+        function onPuzzleMouseMove(e) {
+            e.preventDefault();
+            movePuzzleDrag(e.clientX, e.clientY);
+        }
+
+        function onPuzzleMouseUp(e) {
+            document.removeEventListener('mousemove', onPuzzleMouseMove);
+            document.removeEventListener('mouseup', onPuzzleMouseUp);
+            endPuzzleDrag(e.clientX, e.clientY);
+        }
+
+        // ---- 触摸拖拽 ----
+        function onPuzzleItemTouchStart(e, el, id) {
+            if (el.classList.contains('placed')) return;
+            e.preventDefault();
+            const touch = e.touches[0];
+            const item = puzzleItems.find(i => i.id === id);
+            if (!item || item.placed) return;
+            puzzleDragId = id;
+            startPuzzleDrag(el, touch.clientX, touch.clientY);
+            document.addEventListener('touchmove', onPuzzleTouchMove, { passive: false });
+            document.addEventListener('touchend', onPuzzleTouchEnd, { passive: false });
+        }
+
+        function onPuzzleTouchMove(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            movePuzzleDrag(touch.clientX, touch.clientY);
+        }
+
+        function onPuzzleTouchEnd(e) {
+            document.removeEventListener('touchmove', onPuzzleTouchMove);
+            document.removeEventListener('touchend', onPuzzleTouchEnd);
+            const touch = e.changedTouches[0];
+            endPuzzleDrag(touch.clientX, touch.clientY);
+        }
+
+        // ---- 拖拽核心 ----
+        function startPuzzleDrag(el, clientX, clientY) {
+            const rect = el.getBoundingClientRect();
+            puzzleDragOffsetX = clientX - rect.left;
+            puzzleDragOffsetY = clientY - rect.top;
+            puzzleDragEl = el;
+            el.classList.add('dragging');
+            puzzleGhost = document.createElement('div');
+            puzzleGhost.className = 'drag-ghost';
+            puzzleGhost.textContent = el.textContent;
+            puzzleGhost.style.left = (clientX - puzzleDragOffsetX) + 'px';
+            puzzleGhost.style.top = (clientY - puzzleDragOffsetY) + 'px';
+            document.body.appendChild(puzzleGhost);
+            // 高亮所有droppable
+            document.querySelectorAll('.puzzle-droppable').forEach(el => {
+                if (!el.classList.contains('correct')) {
+                    el.classList.add('drag-over');
+                }
+            });
+        }
+
+        function movePuzzleDrag(clientX, clientY) {
+            if (puzzleGhost) {
+                puzzleGhost.style.left = (clientX - puzzleDragOffsetX) + 'px';
+                puzzleGhost.style.top = (clientY - puzzleDragOffsetY) + 'px';
+            }
+        }
+
+        function endPuzzleDrag(clientX, clientY) {
+            if (puzzleGhost) {
+                puzzleGhost.remove();
+                puzzleGhost = null;
+            }
+            document.querySelectorAll('.puzzle-droppable').forEach(el => {
+                el.classList.remove('drag-over');
+            });
+            if (puzzleDragEl) {
+                puzzleDragEl.classList.remove('dragging');
+            }
+
+            // 找到目标droppable
+            let targetEl = null;
+            const svg = document.getElementById('puzzleSvg');
+            const svgRect = svg.getBoundingClientRect();
+            // 用鼠标位置检测哪个droppable被击中
+            document.querySelectorAll('.puzzle-droppable:not(.correct)').forEach(el => {
+                const cx = parseFloat(el.getAttribute('cx'));
+                const cy = parseFloat(el.getAttribute('cy'));
+                // 获取svg坐标系中的位置
+                const scaleX = svgRect.width / 240;
+                const scaleY = svgRect.height / 160;
+                const centerX = svgRect.left + cx * scaleX;
+                const centerY = svgRect.top + cy * scaleY;
+                const radius = 16 * Math.min(scaleX, scaleY);
+                const dist = Math.sqrt((clientX - centerX) ** 2 + (clientY - centerY) ** 2);
+                if (dist < radius + 20) {
+                    targetEl = el;
+                }
+            });
+
+            if (targetEl && puzzleDragId !== null) {
+                const target = targetEl.dataset.target;
+                const item = puzzleItems.find(i => i.id === puzzleDragId);
+                if (item && !item.placed) {
+                    if (item.target === target) {
+                        item.placed = true;
+                        item.placedIn = target;
+                        targetEl.classList.add('correct');
+                        puzzlePlacedCount++;
+                        document.getElementById('puzzleFeedback').textContent =
+                            `✅ 正确！${item.label} 放置成功！`;
+                        document.getElementById('puzzleFeedback').style.color = '#16a34a';
+                        renderPuzzle();
+                        if (puzzlePlacedCount === puzzleData.length) {
+                            document.getElementById('puzzleFeedback').textContent = '🎉 全部放置完成！太棒啦！';
+                            document.getElementById('puzzleFeedback').style.color = '#2563eb';
+                        }
+                    } else {
+                        targetEl.classList.add('wrong');
+                        setTimeout(() => targetEl.classList.remove('wrong'), 500);
+                        document.getElementById('puzzleFeedback').textContent =
+                            `❌ 再想想！${item.label} 应该放在对应位置`;
+                        document.getElementById('puzzleFeedback').style.color = '#b91c1c';
+                    }
+                }
+            }
+            puzzleDragId = null;
+            puzzleDragEl = null;
+        }
+
+        function checkPuzzle() {
+            const total = puzzleData.length;
+            const placed = puzzleItems.filter(item => item.placed).length;
+            document.getElementById('puzzleFeedback').textContent = `📊 已放置 ${placed} / ${total}`;
+            document.getElementById('puzzleFeedback').style.color = '#1f3a5f';
+            // 高亮未放置的
+            document.querySelectorAll('.puzzle-droppable').forEach(el => {
+                const target = el.dataset.target;
+                const placedItem = puzzleItems.find(item => item.placed && item.target === target);
+                if (!placedItem) {
+                    el.classList.add('drag-over');
+                    setTimeout(() => el.classList.remove('drag-over'), 1000);
+                }
+            });
+        }
+
+        function resetPuzzle() {
+            buildPuzzle();
+        }
+
+        // =============================================================
+        // 显示答案
+        // =============================================================
+        function toggleAnswer(id) {
+            const el = document.getElementById(id);
+            if (el.style.display === 'none' || el.style.display === '') {
+                el.style.display = 'block';
+            } else {
+                el.style.display = 'none';
+            }
+        }
+
+        // =============================================================
+        // 导航
+        // =============================================================
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // =============================================================
+        // 初始化
+        // =============================================================
+        buildMatch();
+        buildPuzzle();
+        console.log('📐 画轴对称的图形 课程已加载！');
+    </script>
+</body>
+</html>

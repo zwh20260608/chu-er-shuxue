@@ -1,0 +1,1611 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>分式方程 · 初二数学预习</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', system-ui, sans-serif;
+            background: #f5f9fe;
+            color: #1e293b;
+            padding: 1rem;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 60px rgba(0, 20, 40, 0.06);
+            padding: 1.8rem 2rem 2.8rem;
+            transition: 0.2s;
+        }
+        @media (max-width: 640px) {
+            .container {
+                padding: 1rem 1rem 2rem;
+                border-radius: 20px;
+            }
+        }
+        .page-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 3px solid #e6f0fa;
+            padding-bottom: 0.8rem;
+            margin-bottom: 1.6rem;
+        }
+        .page-header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1a4b8c, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .page-header h1 small {
+            font-size: 0.9rem;
+            font-weight: 400;
+            -webkit-text-fill-color: #5f7d9c;
+            color: #5f7d9c;
+            background: none;
+        }
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem 0.5rem;
+        }
+        .nav-links a {
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            background: #f1f5f9;
+            color: #2c3e50;
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: 0.2s;
+            border: 1px solid transparent;
+        }
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: #2563eb;
+            color: #fff;
+            border-color: #2563eb;
+        }
+        @media (max-width: 600px) {
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.4rem;
+            }
+            .page-header h1 {
+                font-size: 1.4rem;
+            }
+            .nav-links a {
+                font-size: 0.65rem;
+                padding: 0.1rem 0.6rem;
+            }
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 1.8rem;
+            align-items: start;
+        }
+        @media (max-width: 920px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 1rem 1.2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+            border: 1px solid #edf2f7;
+            margin-bottom: 1rem;
+            transition: 0.2s;
+        }
+        .card-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #0b2b4a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 0.5rem;
+            border-left: 5px solid #3b82f6;
+            padding-left: 12px;
+        }
+        .card-title .badge {
+            font-size: 0.6rem;
+            background: #dbeafe;
+            color: #1e4b8a;
+            padding: 0.05rem 0.7rem;
+            border-radius: 40px;
+            font-weight: 500;
+        }
+
+        /* ===== 分数显示 ===== */
+        .frac {
+            display: inline-block;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+        .frac .num {
+            display: block;
+            border-bottom: 2px solid #1e293b;
+            padding: 0 0.3rem;
+        }
+        .frac .den {
+            display: block;
+            padding: 0 0.3rem;
+        }
+        .frac-sm {
+            font-size: 0.8rem;
+        }
+        .frac-sm .num,
+        .frac-sm .den {
+            padding: 0 0.2rem;
+        }
+        .frac-lg {
+            font-size: 1.2rem;
+        }
+
+        .formula-hero {
+            background: linear-gradient(135deg, #eef4fa, #dbeafe);
+            border-radius: 16px;
+            padding: 0.8rem 1rem;
+            text-align: center;
+            border: 2px solid #3b82f6;
+            margin: 0.3rem 0;
+        }
+        .formula-hero .formula-main {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #1e4b8a;
+            line-height: 2;
+        }
+        .formula-hero .formula-main .hl-red {
+            color: #dc2626;
+        }
+        .formula-hero .formula-main .hl-green {
+            color: #16a34a;
+        }
+        .formula-hero .formula-desc {
+            font-size: 0.82rem;
+            color: #4a617c;
+            margin-top: 0.2rem;
+        }
+
+        .rule-display {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            padding: 0.2rem 0;
+        }
+        .rule-item {
+            background: #f8faff;
+            border-radius: 12px;
+            padding: 0.5rem 0.8rem;
+            border: 1px solid #e2ecf9;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 0.3rem 0.6rem;
+        }
+        .rule-item .rule-math {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1e4b8a;
+        }
+        .rule-item .rule-desc {
+            font-size: 0.75rem;
+            color: #4a617c;
+            background: #dbeafe;
+            padding: 0.05rem 0.6rem;
+            border-radius: 20px;
+        }
+
+        .formula-box {
+            background: #f0f7fe;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border-left: 4px solid #3b82f6;
+            margin: 0.3rem 0;
+            font-size: 0.85rem;
+        }
+        .tip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.5rem;
+        }
+        .tip-item {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 0.4rem 0.7rem;
+            border: 1px solid #e2eaf2;
+            font-size: 0.78rem;
+        }
+        .tip-item strong {
+            color: #1e4b8a;
+        }
+        .tip-item .math-example {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #0b2b4a;
+            margin-top: 2px;
+        }
+
+        .example-box {
+            background: #fcf9f0;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border-left: 4px solid #eab308;
+            margin: 0.3rem 0;
+            font-size: 0.88rem;
+        }
+        .example-box .ex-title {
+            font-weight: 700;
+            color: #8a6d1b;
+        }
+        .example-box .step {
+            display: inline-block;
+            background: #fef9e7;
+            padding: 0.05rem 0.5rem;
+            border-radius: 12px;
+            margin: 2px 2px;
+            font-size: 0.8rem;
+        }
+        .error-box {
+            background: #fef2f2;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border-left: 4px solid #ef4444;
+            margin: 0.3rem 0;
+            font-size: 0.85rem;
+        }
+        .error-box .err-title {
+            font-weight: 700;
+            color: #b91c1c;
+        }
+        .highlight {
+            background: #fef9e7;
+            padding: 0.05rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .tag {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e4b8a;
+            padding: 0.05rem 0.6rem;
+            border-radius: 40px;
+            font-size: 0.65rem;
+            font-weight: 500;
+        }
+
+        /* ===== 流程图 ===== */
+        .flow-chart {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 0.3rem 0.6rem;
+            padding: 0.4rem 0;
+        }
+        .flow-step {
+            background: #f0f7fe;
+            border-radius: 12px;
+            padding: 0.4rem 0.8rem;
+            border: 2px solid #dbeafe;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #1e4b8a;
+            text-align: center;
+            min-width: 70px;
+            flex: 1 0 auto;
+            max-width: 120px;
+        }
+        .flow-step .step-num {
+            display: block;
+            font-size: 0.6rem;
+            color: #6b7f96;
+            font-weight: 400;
+        }
+        .flow-step .step-icon {
+            font-size: 1.2rem;
+        }
+        .flow-step.highlight {
+            background: #dbeafe;
+            border-color: #3b82f6;
+        }
+        .flow-step.success {
+            background: #e8f8ee;
+            border-color: #22c55e;
+        }
+        .flow-arrow {
+            font-size: 1.4rem;
+            color: #94a3b8;
+        }
+
+        /* ===== 游戏区 ===== */
+        .game-area {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .game-card {
+            background: #fafcff;
+            border-radius: 18px;
+            padding: 0.8rem 1rem 1rem;
+            border: 1px solid #e2ecf9;
+        }
+        .game-card .game-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #0b2b4a;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 0.3rem;
+        }
+        .game-card .game-title .g-badge {
+            font-size: 0.55rem;
+            background: #dbeafe;
+            padding: 0.05rem 0.6rem;
+            border-radius: 40px;
+            font-weight: 500;
+            color: #1e4b8a;
+        }
+        .game-card .game-desc {
+            font-size: 0.75rem;
+            color: #4a617c;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ===== 游戏1：扭蛋机 ===== */
+        .gacha-area {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            align-items: center;
+        }
+        .gacha-machine {
+            background: #f0f7fe;
+            border-radius: 20px;
+            border: 3px solid #b7cee8;
+            padding: 1rem;
+            width: 100%;
+            max-width: 400px;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .gacha-display {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            padding: 0.4rem;
+            width: 100%;
+        }
+        .gacha-ball {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #fcd34d, #f59e0b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #fff;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+            user-select: none;
+            touch-action: manipulation;
+            border: 2px solid #d97706;
+        }
+        .gacha-ball:hover {
+            transform: scale(1.06);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+        }
+        .gacha-ball:active {
+            transform: scale(0.94);
+        }
+        .gacha-ball.used {
+            opacity: 0.3;
+            cursor: default;
+            transform: scale(0.85);
+            pointer-events: none;
+            filter: grayscale(0.6);
+        }
+        .gacha-ball .ball-number {
+            font-size: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .gacha-result {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 0.6rem 1rem;
+            margin-top: 0.4rem;
+            min-height: 60px;
+            width: 100%;
+            max-width: 360px;
+            border: 2px solid #dbeafe;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            transition: 0.2s;
+        }
+        .gacha-result .result-question {
+            font-weight: 600;
+            color: #0b2b4a;
+            font-size: 0.95rem;
+        }
+        .gacha-result .result-question .math {
+            font-size: 1.05rem;
+        }
+        .gacha-result .result-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 4px;
+        }
+        .gacha-result .result-options button {
+            background: #eef4fa;
+            border: 2px solid #dbeafe;
+            border-radius: 30px;
+            padding: 0.2rem 1rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: pointer;
+            transition: 0.2s;
+            touch-action: manipulation;
+        }
+        .gacha-result .result-options button:hover {
+            background: #dbeafe;
+            border-color: #3b82f6;
+        }
+        .gacha-result .result-options button.correct-answer {
+            background: #e8f8ee;
+            border-color: #22c55e;
+            color: #16a34a;
+        }
+        .gacha-result .result-options button.wrong-answer {
+            background: #fde8e8;
+            border-color: #ef4444;
+            color: #b91c1c;
+        }
+        .gacha-result .result-options button:disabled {
+            opacity: 0.6;
+            cursor: default;
+        }
+        .gacha-score {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #4a617c;
+            margin-top: 2px;
+        }
+        .gacha-feedback {
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.78rem;
+            min-height: 22px;
+            margin-top: 2px;
+        }
+        @media (max-width: 480px) {
+            .gacha-ball {
+                width: 52px;
+                height: 52px;
+                font-size: 1.2rem;
+            }
+            .gacha-machine {
+                min-height: 150px;
+                padding: 0.6rem;
+            }
+            .gacha-result {
+                font-size: 0.78rem;
+                padding: 0.4rem 0.6rem;
+                min-height: 50px;
+            }
+            .gacha-result .result-options button {
+                font-size: 0.7rem;
+                padding: 0.15rem 0.7rem;
+            }
+        }
+
+        /* ===== 游戏2：超市购物车分类 ===== */
+        .cart-area {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+        .cart-bins {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+        .cart-bin {
+            background: #f5f9ff;
+            border: 2px dashed #b7cee8;
+            border-radius: 14px;
+            padding: 0.4rem 0.2rem;
+            min-height: 70px;
+            text-align: center;
+            transition: 0.2s;
+            position: relative;
+        }
+        .cart-bin.drag-over {
+            border-color: #2563eb;
+            background: #e5effa;
+        }
+        .cart-bin.correct-highlight {
+            border-color: #22c55e;
+            background: #e8f8ee;
+        }
+        .cart-bin.wrong-highlight {
+            border-color: #ef4444;
+            background: #fde8e8;
+        }
+        .cart-bin .bin-title {
+            font-weight: 700;
+            font-size: 0.78rem;
+            color: #1f3a5f;
+            margin-bottom: 3px;
+        }
+        .cart-bin .bin-title .emoji {
+            font-size: 1rem;
+        }
+        .cart-bin .bin-items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 4px;
+            min-height: 26px;
+            padding: 2px 0;
+        }
+        .cart-item {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 4px 8px;
+            border: 2px solid #dbeafe;
+            cursor: grab;
+            transition: 0.15s;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+            font-size: 0.7rem;
+            font-weight: 500;
+            user-select: none;
+            touch-action: none;
+            text-align: center;
+            min-height: 34px;
+            justify-content: center;
+        }
+        .cart-item .item-icon {
+            font-size: 0.8rem;
+            margin-right: 2px;
+        }
+        .cart-item.dragging {
+            opacity: 0.5;
+            transform: scale(0.92);
+        }
+        .cart-item.placed {
+            opacity: 0.6;
+            pointer-events: none;
+            border-color: #94a3b8;
+            transform: scale(0.94);
+        }
+        .cart-pool {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px;
+            padding: 0.4rem 0;
+            background: #f8fafc;
+            border-radius: 14px;
+            min-height: 44px;
+            border: 1px solid #e2eaf2;
+        }
+        .cart-pool .cart-item {
+            cursor: grab;
+        }
+        .cart-feedback {
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.78rem;
+            min-height: 22px;
+            margin-top: 2px;
+        }
+        .btn-reset {
+            background: #eef4fa;
+            border: none;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.7rem;
+            margin: 2px 3px;
+        }
+        .btn-reset:hover {
+            background: #dbeafe;
+        }
+        .btn-check {
+            background: #dbeafe;
+            border: none;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.7rem;
+            margin: 2px 3px;
+        }
+        .btn-check:hover {
+            background: #b7d6f7;
+        }
+        @media (max-width: 480px) {
+            .cart-bins {
+                grid-template-columns: 1fr;
+                gap: 6px;
+            }
+            .cart-bin {
+                min-height: 56px;
+            }
+            .cart-item {
+                font-size: 0.62rem;
+                padding: 3px 6px;
+            }
+        }
+
+        /* ===== 复习题 ===== */
+        .quiz-item {
+            background: #fafcff;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            border: 1px solid #e9eff6;
+            margin-bottom: 0.5rem;
+        }
+        .quiz-item .q {
+            font-weight: 600;
+            color: #0b2b4a;
+            font-size: 0.9rem;
+        }
+        .quiz-item .q .math {
+            font-size: 1rem;
+        }
+        .quiz-item .a {
+            color: #1f4b7a;
+            margin-top: 2px;
+            padding-left: 0.6rem;
+            border-left: 3px solid #b3cef0;
+            font-size: 0.85rem;
+        }
+        .quiz-item .a .highlight {
+            background: #fef9e7;
+            padding: 0.05rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .quiz-item .answer-btn {
+            background: #eef4fa;
+            border: none;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1f3a5f;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.7rem;
+            margin-top: 4px;
+        }
+        .quiz-item .answer-btn:hover {
+            background: #dbeafe;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #8ba0b8;
+            border-top: 1px solid #e9eff6;
+            padding-top: 0.8rem;
+            margin-top: 1rem;
+        }
+        @media (max-width: 480px) {
+            .card {
+                padding: 0.7rem;
+            }
+            .card-title {
+                font-size: 0.95rem;
+            }
+            .formula-box {
+                font-size: 0.78rem;
+                padding: 0.4rem 0.7rem;
+            }
+            .formula-hero .formula-main {
+                font-size: 0.9rem;
+            }
+            .frac {
+                font-size: 0.8rem;
+            }
+            .flow-step {
+                font-size: 0.65rem;
+                padding: 0.3rem 0.5rem;
+                min-width: 50px;
+            }
+            .flow-arrow {
+                font-size: 1rem;
+            }
+        }
+
+        .drag-ghost {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.9;
+            transform: scale(1.05);
+            background: #ffffff;
+            border-radius: 12px;
+            border: 2px solid #2563eb;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+            padding: 4px 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #0b2b4a;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .mt-1 {
+            margin-top: 0.4rem;
+        }
+        .mb-1 {
+            margin-bottom: 0.4rem;
+        }
+        .flex-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.3rem;
+            flex-wrap: wrap;
+        }
+        .frac-inline {
+            display: inline-block;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .frac-inline .num {
+            display: block;
+            border-bottom: 2px solid #1e293b;
+            padding: 0 0.2rem;
+        }
+        .frac-inline .den {
+            display: block;
+            padding: 0 0.2rem;
+        }
+        .equation {
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: 'Times New Roman', serif;
+            color: #1e4b8a;
+        }
+        .equation .sup {
+            font-size: 0.7em;
+            vertical-align: super;
+            color: #dc2626;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- ===== 头部 ===== -->
+        <header class="page-header">
+            <h1>
+                📐 分式方程
+                <small>八年级 · 上册</small>
+            </h1>
+            <div class="nav-links">
+                <a href="#concept">核心概念</a>
+                <a href="#formula">锦囊</a>
+                <a href="#examples">举例</a>
+                <a href="#errors">易错</a>
+                <a href="#games">🎮 游戏</a>
+                <a href="#quiz">复习</a>
+            </div>
+        </header>
+
+        <!-- ============================================================ -->
+        <div class="main-grid">
+
+            <!-- ===== 左侧：知识点 ===== -->
+            <div class="knowledge-area">
+
+                <!-- 核心概念 -->
+                <div class="card" id="concept">
+                    <div class="card-title">
+                        🔍 核心概念大解析
+                        <span class="badge">定义 · 解法 · 增根</span>
+                    </div>
+
+                    <!-- 定义 -->
+                    <div style="background:#f0f7fe;border-radius:12px;padding:0.5rem 0.8rem;margin:0.3rem 0;">
+                        <strong style="color:#1e4b8a;">📌 分式方程的定义</strong>
+                        <p style="font-size:0.88rem;margin:0;">分母中含有<strong>未知数</strong>的方程叫做分式方程。</p>
+                        <p style="font-size:0.82rem;color:#4a617c;margin:0;">如：<span class="equation"><span class="frac frac-sm"><span class="num">90</span><span class="den">30+v</span></span> = <span class="frac frac-sm"><span class="num">60</span><span class="den">30−v</span></span></span></p>
+                    </div>
+
+                    <!-- 解法流程图 -->
+                    <div style="margin:0.4rem 0;">
+                        <div style="font-size:0.8rem;font-weight:700;color:#1e4b8a;text-align:center;margin-bottom:0.2rem;">📌 解分式方程的步骤</div>
+                        <div class="flow-chart">
+                            <div class="flow-step highlight">
+                                <span class="step-icon">①</span>
+                                <span class="step-num">去分母</span>
+                                <span style="font-size:0.6rem;color:#4a617c;">乘最简公分母</span>
+                            </div>
+                            <span class="flow-arrow">→</span>
+                            <div class="flow-step">
+                                <span class="step-icon">②</span>
+                                <span class="step-num">解整式方程</span>
+                                <span style="font-size:0.6rem;color:#4a617c;">得解</span>
+                            </div>
+                            <span class="flow-arrow">→</span>
+                            <div class="flow-step success">
+                                <span class="step-icon">③</span>
+                                <span class="step-num">检验</span>
+                                <span style="font-size:0.6rem;color:#4a617c;">代入最简公分母</span>
+                            </div>
+                            <span class="flow-arrow">→</span>
+                            <div class="flow-step">
+                                <span class="step-icon">✅</span>
+                                <span class="step-num">写结论</span>
+                                <span style="font-size:0.6rem;color:#4a617c;">原方程的解</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 增根 -->
+                    <div style="background:#fef2f2;border-radius:12px;padding:0.4rem 0.8rem;margin:0.2rem 0;border-left:4px solid #ef4444;">
+                        <strong style="color:#b91c1c;font-size:0.85rem;">⚠️ 增根</strong>
+                        <p style="font-size:0.82rem;margin:0;">使最简公分母为<strong>0</strong>的根，不是原分式方程的解，<span style="color:#b91c1c;">必须舍去</span>。</p>
+                        <p style="font-size:0.78rem;color:#4a617c;margin:0;">检验：将解代入最简公分母，若为0则为增根。</p>
+                    </div>
+
+                    <div style="margin-top:0.3rem; background:#f8faff; border-radius:12px; padding:0.3rem 0.7rem; border:1px solid #e2ecf9; font-size:0.75rem; display:flex; flex-wrap:wrap; gap:0.1rem 0.6rem;">
+                        <span>🔹 分式方程 <strong>必须检验</strong></span>
+                        <span>🔹 增根 <strong>不是</strong> 原方程的解</span>
+                        <span>🔹 去分母时 <strong>不能漏乘</strong> 项</span>
+                    </div>
+                </div>
+
+                <!-- 锦囊 -->
+                <div class="card" id="formula">
+                    <div class="card-title">
+                        🧠 数学锦囊 · 公式
+                        <span class="badge">核心法则</span>
+                    </div>
+                    <div class="tip-grid">
+                        <div class="tip-item">
+                            <strong>解法步骤</strong>
+                            <div class="math-example">① 去分母（乘最简公分母）</div>
+                            <div class="math-example" style="font-size:0.78rem;font-weight:400;">② 解整式方程</div>
+                            <div class="math-example" style="font-size:0.78rem;font-weight:400;">③ 检验（最简公分母≠0）</div>
+                        </div>
+                        <div class="tip-item">
+                            <strong>增根</strong>
+                            <div class="math-example">使最简公分母 = 0</div>
+                            <div class="math-example" style="font-size:0.78rem;font-weight:400;">必须舍去</div>
+                        </div>
+                        <div class="tip-item">
+                            <strong>检验方法</strong>
+                            <div class="math-example">代入最简公分母</div>
+                            <div class="math-example" style="font-size:0.78rem;font-weight:400;">≠ 0 → 原方程的解</div>
+                            <div class="math-example" style="font-size:0.78rem;font-weight:400;">= 0 → 增根，舍去</div>
+                        </div>
+                        <div class="tip-item">
+                            <strong>注意</strong>
+                            <div class="math-example">去分母时</div>
+                            <div class="math-example" style="font-size:0.78rem;font-weight:400;">每一项都要乘</div>
+                            <div class="math-example" style="font-size:0.78rem;font-weight:400;">不能漏乘常数项</div>
+                        </div>
+                    </div>
+                    <div class="formula-box" style="margin-top:0.3rem;">
+                        💡 <strong>口诀：</strong>分式方程要解好，去分母是关键；整式方程解出来，检验增根不能忘。
+                    </div>
+                </div>
+
+                <!-- 举例 -->
+                <div class="card" id="examples">
+                    <div class="card-title">
+                        ✏️ 典型举例
+                        <span class="badge">步骤演示</span>
+                    </div>
+                    <div class="example-box">
+                        <div class="ex-title">例1 解方程：<span class="frac frac-sm"><span class="num">2</span><span class="den">x−3</span></span> = <span class="frac frac-sm"><span class="num">3</span><span class="den">x</span></span></div>
+                        <p style="margin-top:2px; font-size:0.88rem;">
+                            <strong>解：</strong> 最简公分母 = x(x−3)<br>
+                            两边乘 x(x−3)：2x = 3x − 9<br>
+                            解得：x = 9<br>
+                            检验：当 x=9 时，x(x−3) ≠ 0<br>
+                            ∴ 原方程的解为 <span class="highlight">x = 9</span>
+                        </p>
+                        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center;padding:0.2rem 0;">
+                            <span class="step">去分母</span>
+                            <span class="step">解整式方程</span>
+                            <span class="step">检验通过</span>
+                        </div>
+                    </div>
+                    <div class="example-box" style="border-left-color:#8b5cf6;">
+                        <div class="ex-title">例2 解方程：<span class="frac frac-sm"><span class="num">x</span><span class="den">x−1</span></span> − 1 = <span class="frac frac-sm"><span class="num">3</span><span class="den">(x−1)(x+2)</span></span></div>
+                        <p style="margin-top:2px; font-size:0.88rem;">
+                            <strong>解：</strong> 最简公分母 = (x−1)(x+2)<br>
+                            两边乘：x(x+2) − (x−1)(x+2) = 3<br>
+                            解得：x = 1<br>
+                            检验：当 x=1 时，(x−1)(x+2) = 0<br>
+                            ∴ x=1 是增根，<span class="highlight">原方程无解</span>
+                        </p>
+                        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center;padding:0.2rem 0;">
+                            <span class="step">去分母</span>
+                            <span class="step">解得 x=1</span>
+                            <span class="step">检验：最简公分母=0</span>
+                            <span class="step">❌ 增根，舍去</span>
+                        </div>
+                    </div>
+                    <div class="example-box" style="border-left-color:#3b82f6;">
+                        <div class="ex-title">例3 列分式方程解应用题</div>
+                        <p style="margin-top:2px; font-size:0.88rem;">
+                            <strong>问题：</strong>甲做90个零件与乙做60个零件所用时间相等，甲每小时比乙多做6个，求甲、乙每小时各做多少个？<br>
+                            <strong>解：</strong> 设乙每小时做 x 个，则甲每小时做 (x+6) 个<br>
+                            <span class="frac frac-sm"><span class="num">90</span><span class="den">x+6</span></span> = <span class="frac frac-sm"><span class="num">60</span><span class="den">x</span></span><br>
+                            解得：x = 12<br>
+                            检验：x=12 时，x(x+6) ≠ 0<br>
+                            ∴ 乙每小时做 <span class="highlight">12</span> 个，甲每小时做 <span class="highlight">18</span> 个
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 易错 -->
+                <div class="card" id="errors">
+                    <div class="card-title">
+                        ⚠️ 易错题型
+                        <span class="badge">避坑指南</span>
+                    </div>
+                    <div class="error-box">
+                        <div class="err-title">❌ 易错1：去分母时漏乘常数项</div>
+                        <p style="font-size:0.85rem;">
+                            例：<span class="frac frac-sm"><span class="num">x</span><span class="den">x−1</span></span> − 1 = <span class="frac frac-sm"><span class="num">3</span><span class="den">(x−1)(x+2)</span></span><br>
+                            去分母时，<span style="color:#b91c1c;">−1</span> 也要乘 (x−1)(x+2)！<br>
+                            ✗ 只乘左边分式 &nbsp;&nbsp; ✓ 每一项都乘
+                        </p>
+                        <div style="background:#fef2f2;padding:0.2rem 0.6rem;border-radius:8px;font-size:0.8rem;display:inline-block;margin-top:4px;">
+                            ✗ x = 3 &nbsp;&nbsp; ✓ x(x+2) − (x−1)(x+2) = 3
+                        </div>
+                    </div>
+                    <div class="error-box" style="border-left-color:#eab308;">
+                        <div class="err-title">❌ 易错2：忘记检验增根</div>
+                        <p style="font-size:0.85rem;">
+                            解分式方程 <span style="color:#b91c1c;">必须检验</span>！<br>
+                            例：<span class="frac frac-sm"><span class="num">1</span><span class="den">x−5</span></span> = <span class="frac frac-sm"><span class="num">10</span><span class="den">x²−25</span></span><br>
+                            解得 x=5，但 x=5 使分母为0，是增根，<span style="color:#b91c1c;">必须舍去</span>。
+                        </p>
+                        <div style="background:#fef2f2;padding:0.2rem 0.6rem;border-radius:8px;font-size:0.8rem;display:inline-block;margin-top:4px;">
+                            ✗ 直接写 x=5 &nbsp;&nbsp; ✓ 检验后舍去，无解
+                        </div>
+                    </div>
+                    <div class="error-box" style="border-left-color:#8b5cf6;">
+                        <div class="err-title">❌ 易错3：最简公分母找错</div>
+                        <p style="font-size:0.85rem;">
+                            例：<span class="frac frac-sm"><span class="num">3</span><span class="den">x²+2x</span></span> − <span class="frac frac-sm"><span class="num">1</span><span class="den">x²−2x</span></span> = 0<br>
+                            分解：x²+2x = x(x+2)，x²−2x = x(x−2)<br>
+                            最简公分母 = <span style="color:#16a34a;">x(x+2)(x−2)</span>
+                        </p>
+                        <div style="background:#fef2f2;padding:0.2rem 0.6rem;border-radius:8px;font-size:0.8rem;display:inline-block;margin-top:4px;">
+                            ✓ x(x+2)(x−2) &nbsp;&nbsp; ✗ x(x²−4) 不够完整
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== 右侧：游戏 ===== -->
+            <div class="game-area" id="games">
+
+                <!-- 游戏1：扭蛋机 -->
+                <div class="game-card">
+                    <div class="game-title">
+                        🥚 扭蛋机 · 分式方程挑战
+                        <span class="g-badge">点击抽题</span>
+                    </div>
+                    <div class="game-desc">点击扭蛋抽取题目，选择正确答案，答对积1分！</div>
+                    <div class="gacha-area">
+                        <div class="gacha-machine" id="gachaMachine">
+                            <div class="gacha-display" id="gachaDisplay"></div>
+                            <div class="gacha-result" id="gachaResult">
+                                <div class="result-question">💡 点击扭蛋开始答题！</div>
+                            </div>
+                            <div class="gacha-score" id="gachaScore">🏆 得分：0</div>
+                        </div>
+                        <div class="gacha-feedback" id="gachaFeedback"></div>
+                        <div style="display:flex; justify-content:center; gap:0.3rem; flex-wrap:wrap;">
+                            <button class="btn-reset" onclick="resetGacha()">🔄 重新开始</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 游戏2：超市购物车分类 -->
+                <div class="game-card">
+                    <div class="game-title">
+                        🛒 超市购物车 · 分类
+                        <span class="g-badge">拖拽归类</span>
+                    </div>
+                    <div class="game-desc">将下方的 <strong>方程</strong> 拖拽到对应的购物车中（整式方程 / 分式方程）。</div>
+                    <div class="cart-area">
+                        <div class="cart-bins" id="cartBins">
+                            <div class="cart-bin" data-category="polynomial">
+                                <div class="bin-title"><span class="emoji">📐</span> 整式方程</div>
+                                <div class="bin-items" id="bin-polynomial"></div>
+                            </div>
+                            <div class="cart-bin" data-category="fractional">
+                                <div class="bin-title"><span class="emoji">📐</span> 分式方程</div>
+                                <div class="bin-items" id="bin-fractional"></div>
+                            </div>
+                        </div>
+                        <div class="cart-pool" id="cartPool"></div>
+                        <div class="cart-feedback" id="cartFeedback">💡 拖拽方程到对应的购物车</div>
+                        <div style="display:flex; justify-content:center; gap:0.3rem; flex-wrap:wrap;">
+                            <button class="btn-reset" onclick="resetCart()">🔄 重新分类</button>
+                            <button class="btn-check" onclick="checkCart()">✅ 检查答案</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 复习巩固题 -->
+        <section id="quiz" style="margin-top:1.2rem;">
+            <div class="card">
+                <div class="card-title">
+                    📝 复习巩固题
+                    <span class="badge">小测验</span>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="q">1. 解方程：<span style="font-size:1rem;font-weight:600;"><span class="frac frac-sm"><span class="num">5</span><span class="den">x</span></span> = <span class="frac frac-sm"><span class="num">7</span><span class="den">x−2</span></span></span></div>
+                    <button class="answer-btn" onclick="toggleAnswer('ans1')">显示答案</button>
+                    <div class="a" id="ans1" style="display:none;">
+                        最简公分母 = x(x−2)<br>
+                        5(x−2) = 7x → 5x−10 = 7x → −2x = 10 → x = −5<br>
+                        检验：x=−5 时，x(x−2) ≠ 0<br>
+                        ∴ 原方程的解为 <span class="highlight">x = −5</span>
+                    </div>
+                    <div style="display:flex;gap:0.3rem;flex-wrap:wrap;margin-top:2px;">
+                        <span style="background:#f0f7fe;padding:0.05rem 0.6rem;border-radius:12px;font-size:0.75rem;">去分母</span>
+                        <span style="background:#f0f7fe;padding:0.05rem 0.6rem;border-radius:12px;font-size:0.75rem;">解整式方程</span>
+                        <span style="background:#f0f7fe;padding:0.05rem 0.6rem;border-radius:12px;font-size:0.75rem;">检验通过</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="q">2. 解方程：<span style="font-size:1rem;font-weight:600;"><span class="frac frac-sm"><span class="num">2</span><span class="den">x−1</span></span> = <span class="frac frac-sm"><span class="num">4</span><span class="den">x²−1</span></span></span></div>
+                    <button class="answer-btn" onclick="toggleAnswer('ans2')">显示答案</button>
+                    <div class="a" id="ans2" style="display:none;">
+                        x²−1 = (x−1)(x+1)，最简公分母 = (x−1)(x+1)<br>
+                        2(x+1) = 4 → 2x+2=4 → x=1<br>
+                        检验：x=1 时，(x−1)(x+1) = 0<br>
+                        ∴ x=1 是增根，<span class="highlight">原方程无解</span>
+                    </div>
+                    <div style="display:flex;gap:0.3rem;flex-wrap:wrap;margin-top:2px;">
+                        <span style="background:#f0f7fe;padding:0.05rem 0.6rem;border-radius:12px;font-size:0.75rem;">去分母</span>
+                        <span style="background:#f0f7fe;padding:0.05rem 0.6rem;border-radius:12px;font-size:0.75rem;">解得 x=1</span>
+                        <span style="background:#f0f7fe;padding:0.05rem 0.6rem;border-radius:12px;font-size:0.75rem;">增根，无解</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 底部 ===== -->
+        <div class="footer">
+            📚 八年级数学 · 分式方程 &nbsp;|&nbsp; 预习课程 · 互动学习
+        </div>
+
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- JavaScript -->
+    <script>
+        // =============================================================
+        // 工具函数
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+        }
+
+        // =============================================================
+        // 游戏1：扭蛋机
+        // =============================================================
+        const gachaQuestions = [{
+            id: 0,
+            question: '下列哪个是分式方程？',
+            options: ['x/3 = 5', '2x+1 = 0', '3/x = 6', 'x²−4=0'],
+            correct: 2
+        }, {
+            id: 1,
+            question: '解分式方程时，去分母的关键是？',
+            options: ['乘最简公分母', '乘任意数', '直接约分', '移项'],
+            correct: 0
+        }, {
+            id: 2,
+            question: '分式方程的增根是什么？',
+            options: ['使分母为0的根', '使分子为0的根', '任何根', '无解'],
+            correct: 0
+        }, {
+            id: 3,
+            question: '解方程 <span class="frac"><span class="num">2</span><span class="den">x−3</span></span> = <span class="frac"><span class="num">3</span><span class="den">x</span></span>，x = ？',
+            options: ['x=9', 'x=6', 'x=3', 'x=0'],
+            correct: 0
+        }, {
+            id: 4,
+            question: '解方程 <span class="frac"><span class="num">1</span><span class="den">x−5</span></span> = <span class="frac"><span class="num">10</span><span class="den">x²−25</span></span>，结果是？',
+            options: ['x=5', 'x=−5', '无解', 'x=0'],
+            correct: 2
+        }, {
+            id: 5,
+            question: '解分式方程时，检验应代入什么？',
+            options: ['最简公分母', '原方程左边', '原方程右边', '任意值'],
+            correct: 0
+        }, {
+            id: 6,
+            question: '甲做90个零件与乙做60个零件时间相等，甲每小时比乙多做6个，设乙每小时做x个，列方程为？',
+            options: ['<span class="frac"><span class="num">90</span><span class="den">x+6</span></span> = <span class="frac"><span class="num">60</span><span class="den">x</span></span>',
+                '<span class="frac"><span class="num">90</span><span class="den">x</span></span> = <span class="frac"><span class="num">60</span><span class="den">x+6</span></span>',
+                '90x = 60(x+6)', '90(x+6) = 60x'
+            ],
+            correct: 0
+        }, {
+            id: 7,
+            question: '解方程 <span class="frac"><span class="num">x</span><span class="den">x−1</span></span> − 1 = <span class="frac"><span class="num">3</span><span class="den">(x−1)(x+2)</span></span>，结果是？',
+            options: ['x=1', 'x=−2', '无解', 'x=2'],
+            correct: 2
+        }];
+
+        // 显示映射
+        const gachaDisplay = {
+            'x/3 = 5': 'x/3 = 5',
+            '2x+1 = 0': '2x+1 = 0',
+            '3/x = 6': '3/x = 6',
+            'x²−4=0': 'x²−4=0',
+            '乘最简公分母': '乘最简公分母',
+            '乘任意数': '乘任意数',
+            '直接约分': '直接约分',
+            '移项': '移项',
+            '使分母为0的根': '使分母为0的根',
+            '使分子为0的根': '使分子为0的根',
+            '任何根': '任何根',
+            '无解': '无解',
+            'x=9': 'x=9',
+            'x=6': 'x=6',
+            'x=3': 'x=3',
+            'x=0': 'x=0',
+            'x=5': 'x=5',
+            'x=−5': 'x=−5',
+            '无解': '无解',
+            'x=0': 'x=0',
+            '最简公分母': '最简公分母',
+            '原方程左边': '原方程左边',
+            '原方程右边': '原方程右边',
+            '任意值': '任意值',
+            '<span class="frac"><span class="num">90</span><span class="den">x+6</span></span> = <span class="frac"><span class="num">60</span><span class="den">x</span></span>': '<span class="frac"><span class="num">90</span><span class="den">x+6</span></span> = <span class="frac"><span class="num">60</span><span class="den">x</span></span>',
+            '<span class="frac"><span class="num">90</span><span class="den">x</span></span> = <span class="frac"><span class="num">60</span><span class="den">x+6</span></span>': '<span class="frac"><span class="num">90</span><span class="den">x</span></span> = <span class="frac"><span class="num">60</span><span class="den">x+6</span></span>',
+            '90x = 60(x+6)': '90x = 60(x+6)',
+            '90(x+6) = 60x': '90(x+6) = 60x',
+            'x=1': 'x=1',
+            'x=−2': 'x=−2',
+            '无解': '无解',
+            'x=2': 'x=2'
+        };
+
+        let gachaState = [];
+        let gachaScore = 0;
+        let gachaAnswered = false;
+        let gachaUsed = [];
+
+        function buildGacha() {
+            const display = document.getElementById('gachaDisplay');
+            display.innerHTML = '';
+            gachaState = gachaQuestions.map((q, idx) => ({
+                ...q,
+                used: false,
+                index: idx
+            }));
+            gachaUsed = [];
+            gachaScore = 0;
+            gachaAnswered = false;
+            document.getElementById('gachaScore').textContent = '🏆 得分：0';
+            document.getElementById('gachaResult').innerHTML = '<div class="result-question">💡 点击扭蛋开始答题！</div>';
+            document.getElementById('gachaFeedback').textContent = '';
+
+            for (let i = 0; i < 8; i++) {
+                const ball = document.createElement('div');
+                ball.className = 'gacha-ball';
+                ball.dataset.index = i;
+                ball.innerHTML = `<span class="ball-number">${i+1}</span>`;
+                ball.addEventListener('click', () => onGachaClick(i));
+                display.appendChild(ball);
+            }
+        }
+
+        function onGachaClick(index) {
+            if (gachaUsed.includes(index)) return;
+            if (gachaAnswered) return;
+
+            const q = gachaState[index];
+            if (!q || q.used) return;
+
+            q.used = true;
+            gachaUsed.push(index);
+            const balls = document.querySelectorAll('.gacha-ball');
+            balls[index].classList.add('used');
+
+            const result = document.getElementById('gachaResult');
+            let html = `<div class="result-question">🎯 ${q.question}</div>`;
+            html += `<div class="result-options">`;
+            q.options.forEach((opt, oi) => {
+                const displayText = gachaDisplay[opt] || opt;
+                html += `<button data-optindex="${oi}" data-qid="${index}" onclick="answerGacha(${index}, ${oi})">${displayText}</button>`;
+            });
+            html += `</div>`;
+            result.innerHTML = html;
+            gachaAnswered = false;
+            document.getElementById('gachaFeedback').textContent = '🤔 选择一个选项...';
+            document.getElementById('gachaFeedback').style.color = '#1f3a5f';
+        }
+
+        function answerGacha(qIndex, optIndex) {
+            if (gachaAnswered) return;
+            gachaAnswered = true;
+
+            const q = gachaState[qIndex];
+            const isCorrect = (optIndex === q.correct);
+            const buttons = document.querySelectorAll('#gachaResult .result-options button');
+            buttons.forEach((btn, idx) => {
+                btn.disabled = true;
+                if (idx === q.correct) btn.classList.add('correct-answer');
+                if (idx === optIndex && !isCorrect) btn.classList.add('wrong-answer');
+            });
+
+            if (isCorrect) {
+                gachaScore++;
+                document.getElementById('gachaScore').textContent = `🏆 得分：${gachaScore}`;
+                document.getElementById('gachaFeedback').textContent = '✅ 回答正确！继续点击其他扭蛋吧！';
+                document.getElementById('gachaFeedback').style.color = '#16a34a';
+            } else {
+                document.getElementById('gachaFeedback').textContent = '❌ 再想想哦！继续学习吧！';
+                document.getElementById('gachaFeedback').style.color = '#b91c1c';
+            }
+
+            if (gachaUsed.length === gachaState.length) {
+                document.getElementById('gachaFeedback').textContent = `🎉 全部完成！最终得分：${gachaScore} / ${gachaState.length}`;
+                document.getElementById('gachaFeedback').style.color = '#2563eb';
+            }
+        }
+
+        function resetGacha() {
+            buildGacha();
+        }
+
+        // =============================================================
+        // 游戏2：超市购物车分类
+        // =============================================================
+        const cartData = [
+            { id: 'r1', category: 'polynomial', label: '2x + 3 = 7', icon: '📐' },
+            { id: 'r2', category: 'fractional', label: '<span class="frac"><span class="num">3</span><span class="den">x</span></span> = 5', icon: '📐' },
+            { id: 'r3', category: 'polynomial', label: 'x² − 4 = 0', icon: '📐' },
+            { id: 'r4', category: 'fractional', label: '<span class="frac"><span class="num">x</span><span class="den">x−1</span></span> = 2', icon: '📐' },
+            { id: 'r5', category: 'polynomial', label: '3x + 1 = 2x − 5', icon: '📐' },
+            { id: 'r6', category: 'fractional', label: '<span class="frac"><span class="num">1</span><span class="den">x+2</span></span> + <span class="frac"><span class="num">1</span><span class="den">x−2</span></span> = 1',
+                icon: '📐' },
+            { id: 'r7', category: 'polynomial', label: '5 − 2x = 3x + 1', icon: '📐' },
+            { id: 'r8', category: 'fractional', label: '<span class="frac"><span class="num">2</span><span class="den">x−3</span></span> = <span class="frac"><span class="num">3</span><span class="den">x</span></span>',
+                icon: '📐' }
+        ];
+
+        let cartItems = [];
+        let cartGhost = null;
+        let cartDragEl = null;
+        let cartDragId = null;
+        let cartDragOffsetX = 0,
+            cartDragOffsetY = 0;
+
+        function buildCart() {
+            cartItems = cartData.map(item => ({
+                ...item,
+                placed: false,
+                placedIn: null
+            }));
+            renderCart();
+            document.getElementById('cartFeedback').textContent = '💡 拖拽方程到对应的购物车';
+            document.getElementById('cartFeedback').style.color = '#1f3a5f';
+            document.querySelectorAll('.cart-bin').forEach(b => {
+                b.classList.remove('correct-highlight', 'wrong-highlight');
+            });
+        }
+
+        function renderCart() {
+            document.querySelectorAll('.bin-items').forEach(el => el.innerHTML = '');
+            const pool = document.getElementById('cartPool');
+            pool.innerHTML = '';
+
+            const unplaced = cartItems.filter(item => !item.placed);
+            unplaced.forEach(item => {
+                const el = createCartItemElement(item, false);
+                pool.appendChild(el);
+            });
+
+            cartItems.filter(item => item.placed).forEach(item => {
+                const bin = document.getElementById(`bin-${item.placedIn}`);
+                if (bin) {
+                    const el = createCartItemElement(item, true);
+                    bin.appendChild(el);
+                }
+            });
+        }
+
+        function createCartItemElement(item, placed) {
+            const div = document.createElement('div');
+            div.className = `cart-item ${placed ? 'placed' : ''}`;
+            div.dataset.id = item.id;
+            div.dataset.category = item.category;
+            div.innerHTML = `<span class="item-icon">${item.icon}</span> ${item.label}`;
+            if (!placed) {
+                div.draggable = false;
+                div.addEventListener('mousedown', (e) => onCartItemMouseDown(e, div, item.id));
+                div.addEventListener('touchstart', (e) => onCartItemTouchStart(e, div, item.id), { passive: false });
+            }
+            return div;
+        }
+
+        function onCartItemMouseDown(e, el, id) {
+            if (el.classList.contains('placed')) return;
+            e.preventDefault();
+            const item = cartItems.find(i => i.id === id);
+            if (!item || item.placed) return;
+            cartDragId = id;
+            startCartDrag(el, e.clientX, e.clientY);
+            document.addEventListener('mousemove', onCartMouseMove);
+            document.addEventListener('mouseup', onCartMouseUp);
+        }
+
+        function onCartMouseMove(e) {
+            e.preventDefault();
+            moveCartDrag(e.clientX, e.clientY);
+        }
+
+        function onCartMouseUp(e) {
+            document.removeEventListener('mousemove', onCartMouseMove);
+            document.removeEventListener('mouseup', onCartMouseUp);
+            endCartDrag(e.clientX, e.clientY);
+        }
+
+        function onCartItemTouchStart(e, el, id) {
+            if (el.classList.contains('placed')) return;
+            e.preventDefault();
+            const touch = e.touches[0];
+            const item = cartItems.find(i => i.id === id);
+            if (!item || item.placed) return;
+            cartDragId = id;
+            startCartDrag(el, touch.clientX, touch.clientY);
+            document.addEventListener('touchmove', onCartTouchMove, { passive: false });
+            document.addEventListener('touchend', onCartTouchEnd, { passive: false });
+        }
+
+        function onCartTouchMove(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            moveCartDrag(touch.clientX, touch.clientY);
+        }
+
+        function onCartTouchEnd(e) {
+            document.removeEventListener('touchmove', onCartTouchMove);
+            document.removeEventListener('touchend', onCartTouchEnd);
+            const touch = e.changedTouches[0];
+            endCartDrag(touch.clientX, touch.clientY);
+        }
+
+        function startCartDrag(el, clientX, clientY) {
+            const rect = el.getBoundingClientRect();
+            cartDragOffsetX = clientX - rect.left;
+            cartDragOffsetY = clientY - rect.top;
+            cartDragEl = el;
+            el.classList.add('dragging');
+            cartGhost = document.createElement('div');
+            cartGhost.className = 'drag-ghost';
+            cartGhost.innerHTML = el.innerHTML;
+            cartGhost.style.left = (clientX - cartDragOffsetX) + 'px';
+            cartGhost.style.top = (clientY - cartDragOffsetY) + 'px';
+            document.body.appendChild(cartGhost);
+            document.querySelectorAll('.cart-bin').forEach(b => b.classList.add('drag-over'));
+        }
+
+        function moveCartDrag(clientX, clientY) {
+            if (cartGhost) {
+                cartGhost.style.left = (clientX - cartDragOffsetX) + 'px';
+                cartGhost.style.top = (clientY - cartDragOffsetY) + 'px';
+            }
+            document.querySelectorAll('.cart-bin').forEach(b => {
+                const rect = b.getBoundingClientRect();
+                if (clientX >= rect.left && clientX <= rect.right &&
+                    clientY >= rect.top && clientY <= rect.bottom) {
+                    b.classList.add('drag-over');
+                } else {
+                    b.classList.remove('drag-over');
+                }
+            });
+        }
+
+        function endCartDrag(clientX, clientY) {
+            if (cartGhost) {
+                cartGhost.remove();
+                cartGhost = null;
+            }
+            document.querySelectorAll('.cart-bin').forEach(b => b.classList.remove('drag-over'));
+            if (cartDragEl) {
+                cartDragEl.classList.remove('dragging');
+            }
+
+            let targetBin = null;
+            document.querySelectorAll('.cart-bin').forEach(b => {
+                const rect = b.getBoundingClientRect();
+                if (clientX >= rect.left && clientX <= rect.right &&
+                    clientY >= rect.top && clientY <= rect.bottom) {
+                    targetBin = b;
+                }
+            });
+
+            if (targetBin && cartDragId !== null) {
+                const category = targetBin.dataset.category;
+                const item = cartItems.find(i => i.id === cartDragId);
+                if (item && !item.placed) {
+                    const correct = (item.category === category);
+                    if (correct) {
+                        item.placed = true;
+                        item.placedIn = category;
+                        targetBin.classList.add('correct-highlight');
+                        setTimeout(() => targetBin.classList.remove('correct-highlight'), 500);
+                        document.getElementById('cartFeedback').textContent =
+                            `✅ 正确！“${item.label}” 放入 “${getCartCategoryLabel(category)}”`;
+                        document.getElementById('cartFeedback').style.color = '#16a34a';
+                    } else {
+                        targetBin.classList.add('wrong-highlight');
+                        setTimeout(() => targetBin.classList.remove('wrong-highlight'), 500);
+                        document.getElementById('cartFeedback').textContent =
+                            `❌ 再想想！“${item.label}” 不属于 “${getCartCategoryLabel(category)}”`;
+                        document.getElementById('cartFeedback').style.color = '#b91c1c';
+                    }
+                    renderCart();
+                    checkAllCartPlaced();
+                }
+            }
+            cartDragId = null;
+            cartDragEl = null;
+        }
+
+        function getCartCategoryLabel(cat) {
+            const map = { polynomial: '整式方程', fractional: '分式方程' };
+            return map[cat] || cat;
+        }
+
+        function checkAllCartPlaced() {
+            const allPlaced = cartItems.every(item => item.placed);
+            if (allPlaced) {
+                document.getElementById('cartFeedback').textContent = '🎉 所有方程已分类！点击“检查答案”查看正确率。';
+                document.getElementById('cartFeedback').style.color = '#2563eb';
+            }
+        }
+
+        function checkCart() {
+            const total = cartItems.length;
+            let correct = 0;
+            cartItems.forEach(item => {
+                if (item.placed && item.category === item.placedIn) correct++;
+            });
+            document.getElementById('cartFeedback').textContent =
+                `📊 正确率：${correct} / ${total}  (${Math.round(correct/total*100)}%)`;
+            document.getElementById('cartFeedback').style.color = '#1f3a5f';
+            document.querySelectorAll('.cart-bin').forEach(bin => {
+                bin.classList.remove('correct-highlight', 'wrong-highlight');
+                const cat = bin.dataset.category;
+                const itemsInBin = cartItems.filter(item => item.placed && item.placedIn === cat);
+                let allCorrect = itemsInBin.every(item => item.category === cat);
+                if (itemsInBin.length > 0 && allCorrect) {
+                    bin.classList.add('correct-highlight');
+                } else if (itemsInBin.length > 0) {
+                    bin.classList.add('wrong-highlight');
+                }
+            });
+        }
+
+        function resetCart() {
+            buildCart();
+        }
+
+        // =============================================================
+        // 显示答案
+        // =============================================================
+        function toggleAnswer(id) {
+            const el = document.getElementById(id);
+            if (el.style.display === 'none' || el.style.display === '') {
+                el.style.display = 'block';
+            } else {
+                el.style.display = 'none';
+            }
+        }
+
+        // =============================================================
+        // 导航
+        // =============================================================
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // =============================================================
+        // 初始化
+        // =============================================================
+        buildGacha();
+        buildCart();
+        console.log('📐 分式方程 课程已加载！');
+    </script>
+</body>
+</html>
